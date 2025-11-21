@@ -1,0 +1,15 @@
+﻿{
+  "nav": {
+    "home": "Hem",
+    "courses": "Kurser",
+    "schedule": "Schema",
+    "prices": "Priser",
+    "events": "Event",
+    "instructors": "Instruktörer",
+    "values": "Våra värderingar",
+    "faq": "FAQ",
+    "contact": "Kontakt"
+  },
+  "openMenu": "Öppna meny",
+  "closeMenu": "Stäng meny"
+}

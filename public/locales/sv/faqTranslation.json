@@ -1,0 +1,42 @@
+﻿{
+  "faqPageTitle": "Vanliga frågor",
+  "categories": [
+    {
+      "title": "Allmänt",
+      "questions": [
+        { "q": "Jag har aldrig dansat förut – passar era kurser för mig?", "a": "Absolut! Vi erbjuder nybörjarkurser som börjar från grunden. Vi rekommenderar att du börjar med Bachata Level 1." },
+        { "q": "Vad är Bachata Sensual?", "a": "Bachata Sensual är en modern variant av Bachata som lägger stor vikt vid kroppskontroll, musikalitet och flytande rörelser." },
+        { "q": "Är kurserna öppna för alla åldrar?", "a": "Våra kurser är designade för vuxna (16+). För yngre elever, vänligen kontakta oss direkt för specialarrangemang." },
+        { "q": "Erbjuder ni privatlektioner?", "a": "Ja, vi erbjuder privatlektioner med alla våra instruktörer. Kontakta oss för att boka tid och diskutera dina mål." }
+      ]
+    },
+    {
+      "title": "Praktiskt",
+      "questions": [
+        { "q": "Behöver jag ha en danspartner?", "a": "Nej, du behöver inte en partner. Vi roterar partners i klasserna för att främja inlärning och social dans. Du kan anmäla dig ensam." },
+        { "q": "Vilka kläder ska jag ha på mig?", "a": "Bekväma kläder som tillåter rörelse och skor med slät sula som inte fastnar på golvet är bäst. Många använder dansskor, men det är inget krav för nybörjare." }
+      ]
+    },
+    {
+      "title": "Kurser och tider",
+      "questions": [
+        { "q": "Hur vet jag vilken nivå jag ska gå?", "a": "Vi har detaljerade nivåbeskrivningar på vår kurssida. Om du är osäker, kontakta oss så hjälper vi dig att placera dig rätt." },
+        { "q": "Hur lång är en kursperiod?", "a": "En vanlig kursperiod är 8 veckor, men vi erbjuder även intensivkurser och workshops." }
+      ]
+    },
+    {
+      "title": "Priser och rabatter",
+      "questions": [
+        { "q": "Har ni studentrabatt?", "a": "Ja, vi erbjuder 10% rabatt för studenter mot uppvisande av giltigt student-ID." },
+        { "q": "Hur fungerar parrabatten?", "a": "När du anmäler dig som ett fast par (leader och follower) får ni 15% rabatt per person." }
+      ]
+    },
+    {
+      "title": "Anmälan",
+      "questions": [
+        { "q": "Hur gör jag för att anmäla mig?", "a": "Anmälan görs direkt via vårt bokningssystem Coursely, som du hittar under fliken 'Kurser'." },
+        { "q": "Är anmälan bindande?", "a": "Ja, din anmälan är bindande. Läs våra fullständiga villkor innan du betalar." }
+      ]
+    }
+  ]
+}

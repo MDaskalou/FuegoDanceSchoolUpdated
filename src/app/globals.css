@@ -1,26 +1,76 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* *** Här skulle Swiper CSS ligga (via en separat @import) om den inte togs bort: ***
+   @import url('@/styles/swiper-imports.css');
+*/
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --foreground-rgb: 255, 255, 255; /* Vit text som standard */
+
+  /* FIX: Uppdatera till mörkare, varmare färger från din Navbar-gradient */
+  --background-start-rgb: 31, 31, 31; /* Ungefär #1f1f1f (Dark Gray) */
+  --background-end-rgb: 58, 31, 29;   /* Ungefär #3a1f1d (Dark Brown/Red) */
+
+  --fuego-orange: #f26722; /* Din orangea färg */
+  --fuego-orange-darker: #c2521c;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
+/* Ta bort Next.js mörka tema-standard */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 31, 31, 31; /* Uppdaterad */
+    --background-end-rgb: 58, 31, 29;   /* Uppdaterad */
   }
 }
 
+/* STEG 4: Sätt dina globala body-stilar */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(var(--foreground-rgb));
+
+  /* FIX: Använd en fast gradient över hela sidan för att matcha Navbar */
+  background: linear-gradient(
+          to bottom right, /* Använd en riktning som ger djup */
+          rgb(var(--background-start-rgb)),
+          rgb(var(--background-end-rgb))
+  );
+
+  background-attachment: fixed; /* Förhindrar att gradienten skrollar med innehållet */
+  min-height: 100vh;
+
+  margin: 0;
+  padding: 0;
+  font-family: 'Playfair Display', serif; /* Sätt standardtypsnitt */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+@layer components {
+  .nav-link-base {
+    /* BAS-STILAR (Mobila stilar utan prefix + Desktop-stilar med md:prefix) */
+    @apply relative flex items-center gap-4 cursor-pointer border-none bg-transparent px-5 py-3
+    font-playfair text-lg font-normal no-underline transition-all duration-200 ease-in-out
+    hover:text-orange-500 hover:translate-x-2
+
+      /* FLYTTADE DESKTOP-STILAR HÄR (ALLT HAR MD: prefix) */
+    md:relative md:px-1 md:py-2 md:text-base md:font-medium md:hover:translate-x-0
+    md:hover:translate-y-[-2px] md:hover:text-white md:after:absolute md:after:bottom-[-4px]
+    md:after:left-0 md:after:right-0 md:after:h-0.5 md:after:origin-left md:after:scale-x-0
+    md:after:bg-current md:after:transition-transform md:after:duration-200;
+  }
+}
+
+/* --- FIX FÖR EXTERNA WIDGETS (Coursely) --- */
+/* Inverterar färgerna för att göra vit bakgrund svart */
+.invert-colors {
+  /* Invertera färgerna på själva containern */
+  filter: invert(100%);
+  /* Invertera innehållet inuti (för att text/bilder ska visas korrekt) */
+  /* filter: invert(100%); */
 }

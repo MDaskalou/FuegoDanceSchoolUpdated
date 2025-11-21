@@ -1,0 +1,38 @@
+﻿// footerTranslation.json (exempel för svenska)
+{
+  "contactTitle": "Kontakta Oss",
+  "contactIntroText": "Har du frågor? Fyll i formuläret nedan så återkommer vi snart!",
+  "formTitle": "Skicka ett meddelande",
+  "formNameLabel": "Namn",
+  "formNamePlaceholder": "Ditt namn",
+  "formEmailLabel": "E-post",
+  "formEmailPlaceholder": "din.epost@example.com",
+  "formMessageLabel": "Meddelande",
+  "formMessagePlaceholder": "Ditt meddelande här...",
+  "formSubmitButton": "Skicka meddelande",
+  "formSubmittedMessage": "Tack för ditt meddelande! Vi återkommer så snart vi kan.",
+
+  "findUsTitle": "Hitta oss",
+  "address": "Doktor Westrings Gata 14D",
+  "city": "413 24 Göteborg",
+  "email": "info@fuegoschool.se",
+  "phone": "+46 70 123 45 67",
+
+  "footerTitle": "Fuego Dance School",
+  "footerMotto": "Din plats för Bachata, gemenskap och utveckling.",
+  "navLinksTitle": "Snabbnavigering",
+  "familyCtaTitle": "Bli en del av familjen",
+  "familyCtaText": "Prenumerera på vårt nyhetsbrev för att få uppdateringar om nya kurser och sociala events.",
+  "copyright": "© {{year}} Fuego Dance School. All rights reserved.",
+
+  "nav": {
+    "home": "Hem",
+    "about": "Om oss",
+    "schedule": "Schema",
+    "prices": "Priser",
+    "instructors": "Instruktörer",
+    "events": "Evenemang",
+    "contact": "Kontakt",
+    "faq": "FAQ"
+  }
+}

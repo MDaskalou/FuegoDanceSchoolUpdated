@@ -1,0 +1,29 @@
+﻿{
+  "valuesPageTitle": "Våra Kärnvärden",
+  "valuesData": [
+    {
+      "key": "community",
+      "iconKey": "users",
+      "title": "Gemenskap",
+      "description": "Dans handlar om att mötas. Vi strävar efter att skapa en varm, inkluderande och respektfull miljö där alla känner sig välkomna och sedda – oavsett bakgrund eller nivå."
+    },
+    {
+      "key": "growth",
+      "iconKey": "lightbulb",
+      "title": "Utveckling",
+      "description": "Våra kurser är strukturerade för att ge dig en solid teknisk grund. Vi fokuserar på individuell progression och hjälper dig att bygga självförtroende på dansgolvet."
+    },
+    {
+      "key": "joy",
+      "iconKey": "smile",
+      "title": "Glädje & Passion",
+      "description": "Dans ska vara roligt! Våra instruktörer delar sin passion för Bachata och ser till att varje lektion är fylld med energi och positivitet. Det är din fristad."
+    },
+    {
+      "key": "technique",
+      "iconKey": "heart",
+      "title": "Kvalitet & Teknik",
+      "description": "Vi tror på att teknik är grunden till frihet i dansen. Våra klasser lägger stor vikt vid musikalitet, kroppskontroll och de grundläggande principerna för att göra dig till en bättre dansare."
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+﻿{
+  "instructorsTitle": "Möt Våra Huvudinstruktörer",
+  "helperInstructorsTitle": "Våra Hjälpinstruktörer",
+  "focusLabel": "Fokus:",
+  "instructorsData": [
+    {
+      "id": 1,
+      "name": "Mikael",
+      "focus": "Bachata Sensual, Teknik",
+      "bio": "Mikael har undervisat i över 8 år och är grundare av Fuego Dance School. Han har en passion för teknisk precision och att hjälpa elever bygga en stark grund.",
+      "imageSrc": "/img/Instructors/instruktörMikael.jpg",
+      "role": "main"
+    },
+    {
+      "id": 2,
+      "name": "Irina",
+      "focus": "Follower Styling, Koreografi",
+      "bio": "Med en bakgrund inom balett och modern dans, fokuserar Irina på att bygga musikalitet, flyt och självförtroende. Hon leder alla styling- och koreografiklasser.",
+      "imageSrc": "/img/Instructors/instruktörIrina.jpg",
+      "role": "main"
+    },
+    {
+      "id": 3,
+      "name": "Tomas & Jennifer",
+      "focus": "Bachata Nivå 2 & 3",
+      "bio": "Ett dynamiskt par kända för sin pedagogik och roliga klasser. De har specialiserat sig på att göra komplexa turer tillgängliga för mellannivån.",
+      "imageSrc": "/img/Instructors/instruktörJennifer.jpg",
+      "role": "main"
+    },
+    {
+      "id": 4,
+      "name": "Nora",
+      "focus": "Social Dans",
+      "bio": "Nora assisterar under klasser för att säkerställa att alla studenter får personlig uppmärksamhet och hjälper till att upprätthålla en hög energinivå under social dans.",
+      "imageSrc": "/img/Instructors/instruktörNora.jpg",
+      "role": "helper"
+    },
+    {
+      "id": 5,
+      "name": "Alex",
+      "focus": "Teknik & Drill",
+      "bio": "Alex är en engagerad hjälptränare som specialiserat sig på att leda teknik-drills och repetera kombinationer med studenter.",
+      "imageSrc": "/img/Instructors/instruktörAlex.jpg",
+      "role": "helper"
+    }
+  ]
+}

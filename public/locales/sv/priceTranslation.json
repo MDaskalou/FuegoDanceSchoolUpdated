@@ -1,0 +1,30 @@
+﻿{
+  "priceTitle": "Priser & Rabatter",
+  "priceHighlight": "Första gången är alltid gratis – kom och prova!",
+  "cardCourseTitle": "Kurser",
+  "cardDiscountTitle": "Rabatter",
+  "cardDropInTitle": "Drop-in på söndagar",
+  "tagPopular": "POPULÄRAST",
+  "discountStudent": "Studentrabatt: 10%",
+  "discountCouple": "Parrabatt: 15% per person",
+  "ctaBookNow": "Boka nu",
+
+  "courseLabelSingular": "kurs",
+  "courseLabelPlural": "kurser",
+  "dropInNote": "Väljer man minst en kurs så är socialen alltid inräknad.",
+  "socialDanceLabel": "Social dans",
+
+  "courses": [
+    { "count": 1, "price": 1600, "popular": false },
+    { "count": 2, "price": 2600, "popular": true },
+    { "count": 3, "price": 3600, "popular": false },
+    { "count": 4, "price": 4600, "popular": false },
+    { "count": 5, "price": 5600, "popular": false }
+  ],
+  "dropInItems": [
+    { "count": 1, "price": 120, "isSocial": false },
+    { "count": 2, "price": 200, "isSocial": false },
+    { "count": 3, "price": 300, "isSocial": false },
+    { "count": 0, "price": 80, "labelKey": "socialDanceLabel", "isSocial": true }
+  ]
+}
