@@ -4,92 +4,26 @@
 import { useTranslation } from "react-i18next";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-// Swiper imports (Swiper, SwiperSlide, Autoplay, EffectFade) ÄR BORTTAGNA
-// Swiper CSS imports ÄR BORTTAGNA
 
-// Konstanter för bilder
-const HERO_MAIN_IMAGE_SRC = "/img/Hero/Heromain.jpg"; // NYCKEL: Din enda huvudbild
+const HERO_MAIN_IMAGE_SRC = "/img/Hero/Heromain.jpg";
 
 export const Hero = () => {
     const { t, i18n } = useTranslation("heroTranslation");
     const currentLang = i18n.language;
-    const [isMounted, setIsMounted] = useState(false);
 
-    useEffect(() => {
-        // eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/set-state-in-effect
-        setIsMounted(true);
-    }, []);
-
-    // Den statiska bilden som visas under både SSR och Klient.
     const renderImage = (src: string) => (
         <div className="absolute inset-0 z-0">
             <Image
                 src={src}
-                alt="Dansskola bakgrundsbild"
+                alt={t("heroImageAlt", { defaultValue: "Dansskola bakgrundsbild" })}
                 fill
                 priority
                 sizes="100vw"
-                // FIX: Använd object-cover för att fylla hela Hero-sektionen
-                className="object-cover object-center opacity-70 md:opacity-60 lg:opacity-50"
+                className="object-cover object-center"
             />
         </div>
     );
 
-    // Fallback för Server Side Rendering (SSR)
-    if (!isMounted) {
-        return (
-            <section className="relative h-[calc(100vh-80px)] w-full overflow-hidden bg-black text-white">
-                {renderImage(HERO_MAIN_IMAGE_SRC)}
-                <div className="absolute inset-0 z-10 bg-black/50"></div>
-
-                {/* SSR INNEHÅLL - Animationer måste vara med för att säkerställa samma DOM */}
-                <div className="relative z-20 flex h-full w-full flex-col items-center justify-center px-6 text-center">
-                    <h1 className="
-                        text-4xl font-extrabold tracking-tight text-white drop-shadow-lg sm:text-5xl md:text-7xl lg:text-8xl
-                        font-greatvibes mb-6 animate-hero-title
-                    ">
-                        {t("heroTitle")}
-                    </h1>
-                    <p className="
-                        mb-12 max-w-3xl text-lg font-light text-gray-200 drop-shadow-md sm:text-xl md:text-2xl
-                        animate-hero-subtitle
-                    ">
-                        {t("heroSubtitle")}
-                    </p>
-
-                    {/* CTA GRUPPEN */}
-                    <div className="flex flex-col items-center justify-center space-y-6 animate-hero-cta">
-                        <Link
-                            href={`/${currentLang}/#courses`}
-                            className="rounded-full bg-orange-500 px-10 py-4 text-lg font-bold uppercase tracking-wider text-white shadow-xl transition-all duration-300 w-64 text-center hover:bg-orange-600 hover:scale-[1.03] active:scale-95"
-                        >
-                            {t("heroCtaButton")}
-                        </Link>
-
-                        {/* Sekundära CTA (Textlänkar) */}
-                        <div className="flex flex-col items-center gap-4 text-center md:flex-row md:gap-10">
-                            <Link
-                                href={`/${currentLang}/openhouse`}
-                                className="text-sm font-medium uppercase text-white border-b border-white/50 pb-0.5 transition-colors duration-200 hover:text-orange-300 hover:border-orange-300"
-                            >
-                                {t("heroCtaSecondary1")}
-                            </Link>
-                            <Link
-                                href={`/${currentLang}/FAQpage`}
-                                className="text-sm font-medium uppercase text-white border-b border-white/50 pb-0.5 transition-colors duration-200 hover:text-orange-300 hover:border-orange-300"
-                            >
-                                {t("heroCtaSecondary2")}
-                            </Link>
-                        </div>
-                    </div>
-                    {/* SLUT CTA GRUPP */}
-                </div>
-            </section>
-        );
-    }
-
-    // Klientrenderad version (när komponenten är mounted)
     return (
         <section
             id="heroreel"
@@ -97,68 +31,91 @@ export const Hero = () => {
         >
             {renderImage(HERO_MAIN_IMAGE_SRC)}
 
-            {/* Overlay */}
-            <div className="absolute inset-0 z-10 bg-black/50 pointer-events-none"></div>
+            {/* Förbättrad Overlay med gradient */}
+            <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/60 via-black/50 to-black/70 pointer-events-none"></div>
 
-            {/* === Innehåll (Med Animering & Förbättrat Avstånd) === */}
+            {/* Innehåll */}
             <div className="absolute inset-0 z-20 flex h-full w-full flex-col items-center justify-center px-6 text-center">
 
-                {/* Huvudrubrik - ANIME: Börjar ladda först */}
+                {/* Huvudrubrik - Elegant och luftig */}
                 <h1 className="
-                    text-4xl font-extrabold tracking-tight text-white drop-shadow-2xl sm:text-5xl md:text-7xl lg:text-8xl
-                    font-greatvibes mb-6 animate-hero-title
+                    text-4xl font-extrabold tracking-wide text-white drop-shadow-2xl
+                    sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl
+                    font-serif mb-8 animate-hero-title
+                    leading-tight max-w-5xl
+                    [text-shadow:_0_4px_12px_rgb(0_0_0_/_80%)]
                 ">
                     {t("heroTitle")}
                 </h1>
 
-                {/* Underrubrik / Måttband - ANIME: Fördröjd start */}
+                {/* Underrubrik - Elegant uppercase med spacing */}
                 <p className="
-                    mb-12 max-w-3xl text-lg font-light text-gray-200 drop-shadow-xl sm:text-xl md:text-2xl
+                    mb-20 max-w-3xl text-sm font-light text-gray-200 drop-shadow-xl
+                    sm:text-base md:text-lg lg:text-xl
                     animate-hero-subtitle
+                    tracking-[0.2em] leading-relaxed uppercase
+                    [text-shadow:_0_2px_8px_rgb(0_0_0_/_60%)]
                 ">
                     {t("heroSubtitle")}
                 </p>
 
-                {/* CTA GRUPPEN - ANIME: Sist att laddas + Förbättrat Avstånd */}
+                {/* CTA GRUPPEN - Förbättrad styling */}
                 <div className="
-                    flex flex-col items-center justify-center space-y-6 animate-hero-cta
+                    flex flex-col items-center justify-center space-y-8 animate-hero-cta
                 ">
 
-                    {/* Primär CTA (Solid Knapp) */}
+                    {/* Primär CTA - Med glassmorphism */}
                     <Link
-                        href={`/${currentLang}/#courses`}
+                        href={`/${currentLang}/courses`}
                         className="
-                            rounded-full bg-orange-500 px-10 py-4 text-lg font-bold uppercase
-                            tracking-wider text-white shadow-xl transition-all duration-300 w-64 text-center
-                            hover:bg-orange-600 hover:scale-[1.03] active:scale-95
+                            group relative rounded-full bg-orange-500 px-12 py-5 text-base sm:text-lg font-bold uppercase
+                            tracking-wider text-white shadow-2xl transition-all duration-300 w-72
+                            hover:bg-orange-600 hover:scale-105 hover:shadow-orange-500/50
+                            active:scale-95 overflow-hidden
                         "
                     >
-                        {t("heroCtaButton")}
+                        {/* Subtle shine effect on hover */}
+                        <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></span>
+                        <span className="relative z-10">{t("heroCtaButton")}</span>
                     </Link>
 
-                    {/* Sekundära CTA (Textlänkar) - Mer Avstånd mellan länkarna */}
-                    <div className="flex flex-col items-center gap-4 text-center md:flex-row md:gap-10">
+                    {/* Sekundära CTA - Förbättrad design */}
+                    <div className="flex flex-col items-center gap-6 text-center md:flex-row md:gap-12">
                         <Link
                             href={`/${currentLang}/openhouse`}
                             className="
-                                text-sm font-medium uppercase text-white border-b border-white/50 pb-0.5
-                                transition-colors duration-200 hover:text-orange-300 hover:border-orange-300
+                                group relative text-sm sm:text-base font-semibold uppercase text-white
+                                pb-1 transition-all duration-300
+                                hover:text-orange-300
                             "
                         >
-                            {t("heroCtaSecondary1")}
+                            <span className="relative z-10">{t("heroCtaSecondary1")}</span>
+                            <span className="absolute bottom-0 left-0 h-[2px] w-full bg-white/50 transition-all duration-300 group-hover:bg-orange-300 group-hover:h-[3px]"></span>
                         </Link>
+
+                        <span className="hidden md:block text-white/30 text-2xl font-light">|</span>
+
                         <Link
                             href={`/${currentLang}/FAQpage`}
                             className="
-                                text-sm font-medium uppercase text-white border-b border-white/50 pb-0.5
-                                transition-colors duration-200 hover:text-orange-300 hover:border-orange-300
+                                group relative text-sm sm:text-base font-semibold uppercase text-white
+                                pb-1 transition-all duration-300
+                                hover:text-orange-300
                             "
                         >
-                            {t("heroCtaSecondary2")}
+                            <span className="relative z-10">{t("heroCtaSecondary2")}</span>
+                            <span className="absolute bottom-0 left-0 h-[2px] w-full bg-white/50 transition-all duration-300 group-hover:bg-orange-300 group-hover:h-[3px]"></span>
                         </Link>
                     </div>
                 </div>
-                {/* SLUT CTA GRUPP */}
+
+                {/* Scroll indicator (valfritt) */}
+                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+                    <div className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
+                        <div className="w-1 h-2 bg-white/50 rounded-full"></div>
+                    </div>
+                </div>
+
             </div>
         </section>
     );

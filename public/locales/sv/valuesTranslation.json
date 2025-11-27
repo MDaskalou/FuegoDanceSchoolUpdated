@@ -1,29 +1,55 @@
 ﻿{
-  "valuesPageTitle": "Våra Kärnvärden",
+  "valuesPageTitle": "Våra Värderingar",
+  "showMore": "Läs mer",
+  "showLess": "Visa mindre",
   "valuesData": [
     {
       "key": "community",
       "iconKey": "users",
       "title": "Gemenskap",
-      "description": "Dans handlar om att mötas. Vi strävar efter att skapa en varm, inkluderande och respektfull miljö där alla känner sig välkomna och sedda – oavsett bakgrund eller nivå."
+      "shortDescription": "Dans handlar om kontakt. Vi strävar efter att skapa en varm, inkluderande och respektfull miljö där alla känner sig välkomna.",
+      "fullDescription": "Alla är välkomna här, oavsett bakgrund, erfarenhet eller nivå. Vi tror att dans förenar människor och skapar meningsfulla relationer. Våra instruktörer och medlemmar arbetar aktivt för att se till att alla känner sig sedda och uppskattade.",
+      "bulletPoints": [
+        "Inkluderande miljö för alla",
+        "Respekt och öppenhet",
+        "Starka sociala band"
+      ]
     },
     {
       "key": "growth",
       "iconKey": "lightbulb",
-      "title": "Utveckling",
-      "description": "Våra kurser är strukturerade för att ge dig en solid teknisk grund. Vi fokuserar på individuell progression och hjälper dig att bygga självförtroende på dansgolvet."
+      "title": "Utveckling & Framsteg",
+      "shortDescription": "Våra kurser är strukturerade för att ge dig en solid teknisk grund. Vi fokuserar på individuell utveckling och att hjälpa dig bygga självförtroende.",
+      "fullDescription": "Vi erbjuder tydliga utvecklingsvägar från nybörjare till avancerad. Varje kurs bygger vidare på den föregående, och våra instruktörer ger personlig feedback för att hjälpa dig nå dina mål. Din utveckling är vår prioritet.",
+      "bulletPoints": [
+        "Strukturerade kurser med tydliga mål",
+        "Individuell feedback och stöd",
+        "Synliga framsteg på varje nivå"
+      ]
     },
     {
       "key": "joy",
       "iconKey": "smile",
       "title": "Glädje & Passion",
-      "description": "Dans ska vara roligt! Våra instruktörer delar sin passion för Bachata och ser till att varje lektion är fylld med energi och positivitet. Det är din fristad."
+      "shortDescription": "Dans ska vara roligt! Våra instruktörer delar sin passion för Bachata och ser till att varje klass är fylld med energi och positivitet.",
+      "fullDescription": "Vi tror att glädje och passion är nyckeln till långsiktig motivation. Våra klasser är en plats där du kan släppa loss, ha kul och uttrycka dig genom dans. Det är din fristad från vardagen.",
+      "bulletPoints": [
+        "Positiv och energifylld atmosfär",
+        "Passion för dansen",
+        "Din paus från vardagens rutiner"
+      ]
     },
     {
       "key": "technique",
       "iconKey": "heart",
       "title": "Kvalitet & Teknik",
-      "description": "Vi tror på att teknik är grunden till frihet i dansen. Våra klasser lägger stor vikt vid musikalitet, kroppskontroll och de grundläggande principerna för att göra dig till en bättre dansare."
+      "shortDescription": "Vi tror att teknik är grunden för frihet i dansen. Våra klasser betonar musikalitet, kroppskontroll och grundläggande principer.",
+      "fullDescription": "God teknik ger dig friheten att uttrycka dig själv och improvisera. Vi fokuserar på grundläggande principer som musikalitet, balans, isolation och connection för att göra dig till en komplett dansare.",
+      "bulletPoints": [
+        "Fokus på grundläggande teknik",
+        "Musikalitet och tajming",
+        "Frihet genom kunskap"
+      ]
     }
   ]
 }

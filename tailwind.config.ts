@@ -21,6 +21,11 @@ const config: Config = {
                     '0%': {opacity: '0', transform: 'translateY(20px)'},
                     '100%': {opacity: '1', transform: 'translateY(0)'},
                 },
+                // --- NYTT FÖR INSTAGRAM FEED ---
+                scroll: {
+                    '0%': { transform: 'translateX(0)' },
+                    '100%': { transform: 'translateX(-50%)' },
+                },
             },
             animation: {
                 'fadeSlideUp': 'fadeSlideUp 0.6s ease-out forwards',
@@ -33,6 +38,10 @@ const config: Config = {
 
                 // Animation för CTA-gruppen (Startar efter 0.4s)
                 'hero-cta': 'fadeSlideUp 0.8s ease-out 0.4s forwards',
+
+                // --- NYTT FÖR INSTAGRAM FEED ---
+                // Ändra "40s" om du vill att det ska gå snabbare eller långsammare
+                'scroll': 'scroll 40s linear infinite',
             }
         }
     },

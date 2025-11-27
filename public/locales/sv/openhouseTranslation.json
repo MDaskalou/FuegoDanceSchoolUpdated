@@ -1,0 +1,31 @@
+﻿{
+  "formTitle": "Föranmäl dig till Vinterkurserna",
+  "formDescription": "Fyll i formuläret nedan så kontaktar vi dig med mer information.",
+  "nameLabel": "Namn",
+  "namePlaceholder": "Ditt fullständiga namn",
+  "emailLabel": "E-post",
+  "emailPlaceholder": "din@email.com",
+  "messagePlaceholder": "Finns det något annat vi bör veta?",
+  "coursesInterestTitle": "Vilka kurser är du intresserad av?",
+  "roleTitle": "Förare eller Följare",
+  "referralTitle": "Hur hittade du oss?",
+  "otherTitle": "Övrigt",
+  "submitButton": "Skicka Anmälan",
+  "submittingButton": "Skickar...",
+  "disclaimer1": "Genom att skicka in detta formulär godkänner du att vi behandlar dina personuppgifter.",
+  "disclaimer2": "Vi använder endast din information för att kontakta dig om kurserna.",
+  "formSubmittedMessage": "Tack för din anmälan!",
+  "formSubmittedDescription": "Vi har mottagit din intresseanmälan och återkommer med bekräftelse via e-post inom kort.",
+  "requiredField": "Fyll i alla obligatoriska fält (*).",
+
+  "courseOptions": [
+    "Nivå 1", "Nivå 2", "Nivå 3", "Nivå 3 Teknik",
+    "Nivå 4", "Nivå 4 Teknik", "Styling Class", "Role Rotation", "Footwork"
+  ],
+  "roleOptions": [
+    "Välj ett alternativ", "Förare", "Följare"
+  ],
+  "referralOptions": [
+    "Välj ett alternativ", "Facebook", "Instagram", "Google", "Vän", "Annat"
+  ]
+}

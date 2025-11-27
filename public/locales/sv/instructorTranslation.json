@@ -1,7 +1,12 @@
 ﻿{
-  "instructorsTitle": "Möt Våra Huvudinstruktörer",
-  "helperInstructorsTitle": "Våra Hjälpinstruktörer",
+  "instructorsTitle": "Möt våra huvudinstruktörer",
+  "helperInstructorsTitle": "Våra hjälpinsruktörer & assistansdansare",
   "focusLabel": "Fokus:",
+  "showMore": "Läs mer",
+  "showLess": "Visa mindre",
+  "experienceLabel": "Erfarenhet",
+  "specialtiesLabel": "Specialiteter",
+  "achievementsLabel": "Meriter",
   "instructorsData": [
     {
       "id": 1,
@@ -9,39 +14,175 @@
       "focus": "Bachata Sensual, Teknik",
       "bio": "Mikael har undervisat i över 8 år och är grundare av Fuego Dance School. Han har en passion för teknisk precision och att hjälpa elever bygga en stark grund.",
       "imageSrc": "/img/Instructors/instruktörMikael.jpg",
-      "role": "main"
+      "role": "main",
+      "experience": "10+ års undervisning och tävlande i Bachata",
+      "specialties": ["Sensual Bachata", "Musikalitet", "Förarteknik", "Kroppsisolation"],
+      "achievements": ["Grundare av Fuego Dance School", "Workshop-instruktör runtom i Europa", "Utvecklat läroplan för alla nivåer"]
     },
     {
       "id": 2,
       "name": "Irina",
       "focus": "Follower Styling, Koreografi",
-      "bio": "Med en bakgrund inom balett och modern dans, fokuserar Irina på att bygga musikalitet, flyt och självförtroende. Hon leder alla styling- och koreografiklasser.",
+      "bio": "Med en bakgrund inom balett och modern dans fokuserar Irina på att bygga musikalitet, flyt och självförtroende. Hon leder alla styling- och koreografiklasser.",
       "imageSrc": "/img/Instructors/instruktörIrina.jpg",
-      "role": "main"
+      "role": "main",
+      "experience": "8 år av professionell dans och undervisning",
+      "specialties": ["Follower styling", "Body movement", "Koreografi", "Balettfusion"],
+      "achievements": ["Professionell dansare", "Koreograf för flertalet Bachata-event", "Balettutbildad teknikspecialist"]
     },
     {
       "id": 3,
-      "name": "Tomas & Jennifer",
+      "name": "Jennifer",
       "focus": "Bachata Nivå 2 & 3",
-      "bio": "Ett dynamiskt par kända för sin pedagogik och roliga klasser. De har specialiserat sig på att göra komplexa turer tillgängliga för mellannivån.",
+      "bio": "En dynamisk duo kända för sin pedagogik och roliga klasser. De specialiserar sig på att göra komplexa turer tillgängliga för mellannivån.",
       "imageSrc": "/img/Instructors/instruktörJennifer.jpg",
-      "role": "main"
+      "role": "main",
+      "experience": "6 års undervisning tillsammans som par",
+      "specialties": ["Pararbete", "Teknik för mellannivå", "Musikalitet", "Rolig och engagerande undervisning"],
+      "achievements": ["Utvecklat läroplan för Nivå 2 & 3", "Tävlat internationellt", "Kända för att bryta ner komplexa turer"]
     },
     {
       "id": 4,
-      "name": "Nora",
-      "focus": "Social Dans",
-      "bio": "Nora assisterar under klasser för att säkerställa att alla studenter får personlig uppmärksamhet och hjälper till att upprätthålla en hög energinivå under social dans.",
-      "imageSrc": "/img/Instructors/instruktörNora.jpg",
-      "role": "helper"
+      "name": "Karin",
+      "focus": "Avancerad Teknik",
+      "bio": "Karin är dedikerad till de avancerade nivåerna och hjälper studenter att finslipa sin teknik med fokus på connection och kroppskontroll.",
+      "imageSrc": "/img/Instructors/instruktörKarin.jpg",
+      "role": "main",
+      "experience": "7 år av avancerad instruktion",
+      "specialties": ["Avancerad teknik", "Connection", "Kroppskontroll", "Precision"],
+      "achievements": ["Specialist på avancerade nivåer", "Känd för teknisk precision", "Förfinad undervisningsmetodik"]
     },
     {
       "id": 5,
-      "name": "Alex",
-      "focus": "Teknik & Drill",
-      "bio": "Alex är en engagerad hjälptränare som specialiserat sig på att leda teknik-drills och repetera kombinationer med studenter.",
-      "imageSrc": "/img/Instructors/instruktörAlex.jpg",
-      "role": "helper"
+      "name": "Raminta",
+      "focus": "Follower Styling",
+      "bio": "Raminta fokuserar på musikalitet och flyt i styling. Hon assisterar vid drop-ins och workshops.",
+      "imageSrc": "/img/Instructors/instruktörRaminta.jpg",
+      "role": "main",
+      "experience": "5 år av styling-instruktion",
+      "specialties": ["Musikalitet", "Flyt", "Styling-workshops", "Drop-in-tillfällen"],
+      "achievements": ["Workshop-specialist", "Känd för musikalisk tolkning", "Regelbunden drop-in-instruktör"]
+    },
+    {
+      "id": 6,
+      "name": "Andris",
+      "focus": "Nivå 1 Grunder",
+      "bio": "Andris har en passion för att lära ut grunderna. Han säkerställer en trygg och avslappnad start för alla nybörjare.",
+      "imageSrc": "/img/Instructors/instruktörAndris.jpeg",
+      "role": "main",
+      "experience": "6 års undervisning av nybörjare",
+      "specialties": ["Grunder", "Nybörjarsjälvförtroende", "Trygg lärmiljö", "Grundläggande teknik"],
+      "achievements": ["Nybörjarspecialist", "Skapar välkomnande atmosfär", "Tålmodig och tydlig instruktion"]
+    },
+    {
+      "id": 7,
+      "name": "Emma",
+      "focus": "Salsa & Bachata",
+      "bio": "Emma delar sin tid mellan Salsa och Bachata. Hon är en nyckelperson under våra socialdanskvällar.",
+      "imageSrc": "/img/Instructors/instruktörEmma.jpg",
+      "role": "main",
+      "experience": "7 år inom latinsk dans",
+      "specialties": ["Salsa", "Bachata", "Socialdans", "Tekniker över stilar"],
+      "achievements": ["Instruktör i flera stilar", "Koordinator för socialdans", "Ger energi till varje event"]
+    },
+    {
+      "id": 8,
+      "name": "Feras",
+      "focus": "Förarteknik",
+      "bio": "Feras fokuserar på tydlig förning och musikalisk tolkning. Han är en av skolans mest erfarna hjälpförare.",
+      "imageSrc": "/img/Instructors/instruktörFeras.jpeg",
+      "role": "helper",
+      "experience": "4 år som assisterande instruktör",
+      "specialties": ["Tydlig förning", "Musikalisk tolkning", "Stöd som hjälpförare"],
+      "achievements": ["Mest erfarna hjälpförare", "Känd för tydlighet", "Studentfavorit"]
+    },
+    {
+      "id": 9,
+      "name": "Filip",
+      "focus": "Body Movement",
+      "bio": "Filip är expert på body movement och hjälper elever att integrera mer flöde och sensualitet i sin dans.",
+      "imageSrc": "/img/Instructors/instruktörFilip.jpg",
+      "role": "helper",
+      "experience": "3 års specialisering inom body movement",
+      "specialties": ["Body movement", "Flöde", "Sensualitet", "Kroppsmedvetenhet"],
+      "achievements": ["Expert på body movement", "Hjälper elever hitta naturlig rörelse", "Workshop-assistent"]
+    },
+    {
+      "id": 10,
+      "name": "Ines",
+      "focus": "Nybörjarstöd & Social",
+      "bio": "Ines är en av våra nyare assistenter. Hennes mål är att alla ska känna sig sedda på klasser och socialdans.",
+      "imageSrc": "/img/Instructors/instruktörInes.jpg",
+      "role": "helper",
+      "experience": "2 år som assistent",
+      "specialties": ["Stöd för nyanlända", "Socialdans", "Skapar inkluderande miljö"],
+      "achievements": ["Får alla att känna sig välkomna", "Koordinator för socialdans", "Nybörjarförespråkare"]
+    },
+    {
+      "id": 12,
+      "name": "Sisco",
+      "focus": "Role Rotation",
+      "bio": "Sisco leder role rotation och ser till att alla får en balanserad upplevelse av båda rollerna i dansen.",
+      "imageSrc": "/img/Instructors/instruktörSisco.jpg",
+      "role": "main",
+      "experience": "5 års undervisning av båda roller",
+      "specialties": ["Role rotation", "Både föra och följa", "Mångsidig undervisning", "Könsneutral instruktion"],
+      "achievements": ["Specialist på role rotation", "Lär ut båda roller expertmässigt", "Främjar balanserat lärande"]
+    },
+    {
+      "id": 13,
+      "name": "Sofie",
+      "focus": "Follower Flow",
+      "bio": "Sofie assisterar i stylingklasser och fokuserar på att hjälpa elever uppnå ett naturligt och avslappnat flöde.",
+      "imageSrc": "/img/Instructors/instruktörSofie.jpg",
+      "role": "helper",
+      "experience": "3 år inom styling-assistans",
+      "specialties": ["Naturligt flöde", "Avslappnad rörelse", "Styling-stöd"],
+      "achievements": ["Känd för naturlig undervisningsstil", "Favorit på stylingklasser", "Hjälper elever slappna av"]
+    },
+    {
+      "id": 14,
+      "name": "Tomas",
+      "focus": "Socialdans",
+      "bio": "Tomas är en mycket uppskattad assistent på våra socialdanskvällar och nybörjarklasser.",
+      "imageSrc": "/img/Instructors/instruktörTomas.jpg",
+      "role": "main",
+      "experience": "6 års undervisning med Jennifer",
+      "specialties": ["Pararbete", "Socialdans", "Stöd för nybörjare", "Tydlig kommunikation"],
+      "achievements": ["Del av undervisningsduo", "Expert på socialdans", "Nybörjarvänligt tillvägagångssätt"]
+    },
+    {
+      "id": 15,
+      "name": "Nora",
+      "focus": "Nivå 1 & 2",
+      "bio": "Nora finns på plats för att ge individuell feedback under de lägre nivåerna.",
+      "imageSrc": "/img/Instructors/instruktörNora.jpg",
+      "role": "main",
+      "experience": "4 års undervisning av nybörjare och mellannivå",
+      "specialties": ["Individuell feedback", "Nivå 1 & 2", "Personlig uppmärksamhet", "Teknikförfining"],
+      "achievements": ["Specialist på detaljerad feedback", "Tålmodig instruktör", "Hjälper elever utvecklas"]
+    },
+    {
+      "id": 17,
+      "name": "Sasha",
+      "focus": "Klassassistent",
+      "bio": "Sasha ser till att allt flyter på smidigt under klasserna och assisterar med repetitioner.",
+      "imageSrc": "/img/Instructors/instruktörSasha.jpg",
+      "role": "helper",
+      "experience": "2 år som klassassistent",
+      "specialties": ["Klasskoordinering", "Stöd vid repetition", "Smidig drift"],
+      "achievements": ["Håller igång klasserna smidigt", "Pålitlig assistent", "Detaljorienterad"]
+    },
+    {
+      "id": 18,
+      "name": "Alessandro",
+      "focus": "Förarteknik",
+      "bio": "Alessandro har en solid grund i ledningsteknik och ger tydliga instruktioner till förare på alla nivåer.",
+      "imageSrc": "/img/Instructors/AlessandroU.jpg",
+      "role": "helper",
+      "experience": "3 års undervisning i förarteknik",
+      "specialties": ["Förarteknik", "Tydlig instruktion", "Stöd för alla nivåer", "Teknisk grund"],
+      "achievements": ["Solid teknisk grund", "Tydlig kommunikatör", "Hjälper förare på alla nivåer"]
     }
   ]
 }

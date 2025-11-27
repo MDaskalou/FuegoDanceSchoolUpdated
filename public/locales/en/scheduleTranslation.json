@@ -1,6 +1,6 @@
 ﻿{
-  "schedulePreamble": "Next semester schedule week 35 to 43",
-  "scheduleTitle": "Winter Schedule (week 44–51)",
+  "schedulePreamble": "Upcoming semester",
+  "scheduleTitle": "Spring Schedule (week 5–16)",
   "scheduleFooter1": "Join our bachata family",
   "scheduleFooter2": "Train with focus. Dance with freedom.",
   "scheduleCta": "See Our Courses",
@@ -9,20 +9,27 @@
   "dayWednesday": "Wednesday",
   "dayThursday": "Thursday",
   "daySunday": "Drop-in Sunday",
-  "courseNoteMax10": "Max 10 couples",
   "courses": [
     {
       "dayKey": "dayMonday",
-      "time": "18:00–19:30",
-      "name": "Level 2",
+      "time": "18:00–19:00",
+      "name": "Level 4 Technique (Isolation)",
+      "instructors": "Tomas & Jennifer",
+      "isNew": true,
+      "isDropIn": false
+    },
+    {
+      "dayKey": "dayMonday",
+      "time": "19:05–20:05",
+      "name": "Level 4",
       "instructors": "Tomas & Jennifer",
       "isNew": false,
       "isDropIn": false
     },
     {
       "dayKey": "dayMonday",
-      "time": "19:30–21:00",
-      "name": "Level 3",
+      "time": "20:10–21:10",
+      "name": "Level 4 Technique",
       "instructors": "Tomas & Jennifer",
       "isNew": false,
       "isDropIn": false
@@ -30,73 +37,73 @@
     {
       "dayKey": "dayTuesday",
       "time": "18:00–19:30",
-      "name": "Level 3 Technique",
-      "instructors": "Mikael & Jennifer",
+      "name": "Level 1",
+      "instructors": "Mikael",
       "isNew": false,
       "isDropIn": false
     },
     {
       "dayKey": "dayTuesday",
-      "time": "19:30–21:00",
-      "name": "Level 5",
-      "instructors": "Mikael & Jennifer",
-      "noteKey": "courseNoteMax10",
+      "time": "19:40–21:10",
+      "name": "Advance Foundation",
+      "instructors": "Mikael",
+      "isNew": false,
+      "isDropIn": false
+    },
+    {
+      "dayKey": "dayWednesday",
+      "time": "18:00–19:00",
+      "name": "Choreography Class",
+      "instructors": "Raminta",
       "isNew": true,
       "isDropIn": false
     },
     {
       "dayKey": "dayWednesday",
-      "time": "18:00–19:30",
-      "name": "Level 1",
+      "time": "19:05–20:05",
+      "name": "Level 2 Technique",
+      "instructors": "Andris & Emma",
+      "isNew": true,
+      "isDropIn": false
+    },
+    {
+      "dayKey": "dayWednesday",
+      "time": "20:05–21:05",
+      "name": "Level 2",
       "instructors": "Andris & Emma",
       "isNew": false,
       "isDropIn": false
     },
     {
-      "dayKey": "dayWednesday",
-      "time": "19:30–21:00",
-      "name": "Role Rotation",
-      "instructors": "Nora & Sisco",
-      "isNew": true,
-      "isDropIn": false
-    },
-    {
       "dayKey": "dayThursday",
       "time": "18:00–19:30",
-      "name": "Level 4 Technique",
-      "instructors": "Mikael & Karin",
+      "name": "Level 3",
+      "instructors": "Nora & Sisco",
       "isNew": false,
       "isDropIn": false
     },
     {
       "dayKey": "dayThursday",
-      "time": "19:30–21:00",
-      "name": "Level 4",
-      "instructors": "Mikael & Karin",
+      "time": "19:05–20:05",
+      "name": "Level 3 Technique",
+      "instructors": "Nora & Sisco",
       "isNew": false,
       "isDropIn": false
     },
     {
-      "dayKey": "daySunday",
-      "time": "12:00–13:00",
-      "name": "Follower Styling",
-      "instructors": "Raminta",
-      "isNew": true,
-      "isDropIn": true
-    },
-    {
-      "dayKey": "daySunday",
-      "time": "13:00–14:00",
-      "name": "Footwork",
-      "instructors": "Mikael",
-      "isNew": true,
-      "isDropIn": true
+      "dayKey": "dayThursday",
+      "time": "20:10–21:10",
+      "name": "Rolerotation",
+      "instructors": "Nora & Sisco",
+      "isNew": false,
+      "isDropIn": false
     },
     {
       "dayKey": "daySunday",
       "time": "14:00–15:00",
       "name": "Party Workshop",
       "instructors": "Different Instructors",
+      "note": "120kr incl. social",
       "isNew": false,
       "isDropIn": true
     },
@@ -104,7 +111,8 @@
       "dayKey": "daySunday",
       "time": "15:00–18:00",
       "name": "Social Dance",
-      "instructors": "DJ Krister",
+      "instructors": "",
+      "note": "80kr",
       "isNew": false,
       "isDropIn": true
     }

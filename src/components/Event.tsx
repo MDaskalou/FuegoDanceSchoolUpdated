@@ -4,8 +4,8 @@
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import { useInView } from "@/hooks/useInView";
-import EventCard from '@/components/EventCard'; // Använd ditt EventCard
-import React from "react"; // Importera React för Fragment/JSX
+import EventCard from '@/components/EventCard';
+import React from "react";
 
 // --- Typdefinitioner (måste matcha din JSON-struktur) ---
 interface EventItem {
@@ -22,18 +22,14 @@ interface EventItem {
 
 // --- Filtreringsfunktion för att dölja gamla events ---
 const filterUpcomingEvents = (events: EventItem[]): EventItem[] => {
-    // Sätt dagens datum vid midnatt
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
+    // Filter och sort (denna funktion fungerar endast om 'events' är en array)
     return events.filter(event => {
-        // Skapar ett Date-objekt från eventets startDate-sträng
         const eventDate = new Date(event.startDate);
-
-        // Returnerar TRUE om eventDate är idag eller i framtiden (>= today)
         return eventDate >= today;
     }).sort((a, b) => {
-        // Sortera efter datum (tidigaste först)
         const dateA = new Date(a.startDate).getTime();
         const dateB = new Date(b.startDate).getTime();
         return dateA - dateB;
@@ -51,8 +47,10 @@ export const Event = () => {
     // 1. Hämta alla events från JSON
     const allEvents: EventItem[] = t("events", { returnObjects: true }) as EventItem[] || [];
 
-    // 2. Filtrera och sortera kommande events
-    const upcomingEvents = filterUpcomingEvents(allEvents);
+    // 2. FIX: Filtrera och sortera kommande events ENDAST om allEvents är en array
+    const upcomingEvents = Array.isArray(allEvents)
+        ? filterUpcomingEvents(allEvents) // Kör filtreringen endast om det är en array
+        : []; // Returnera en tom array som fallback
 
     // 3. Visa endast de 3 nästkommande evenemangen
     const featuredEvents = upcomingEvents.slice(0, 3);
@@ -67,7 +65,6 @@ export const Event = () => {
         <section
             id="events" // Ankar-ID
             ref={sectionRef}
-            // FIX: Byt ut bg-[#1a1a1a] till bg-transparent för att visa body-gradienten
             className="py-20 sm:py-32 bg-transparent text-white"
         >
             <div className="container mx-auto max-w-7xl px-4 text-center">
@@ -78,6 +75,7 @@ export const Event = () => {
                 </h2>
 
                 {/* === Events Grid === */}
+                {/* Vi använder featuredEvents som vi VET är en array, tack vare fixen ovan. */}
                 {featuredEvents.length > 0 ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-16">
 

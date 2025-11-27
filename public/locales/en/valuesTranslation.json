@@ -1,29 +1,55 @@
 ﻿{
   "valuesPageTitle": "Our Core Values",
+  "showMore": "Read more",
+  "showLess": "Show less",
   "valuesData": [
     {
       "key": "community",
       "iconKey": "users",
       "title": "Community",
-      "description": "Dance is about connection. We strive to create a warm, inclusive, and respectful environment where everyone feels welcome and seen—regardless of background or level."
+      "shortDescription": "Dance is about connection. We strive to create a warm, inclusive, and respectful environment where everyone feels welcome.",
+      "fullDescription": "Everyone is welcome here, regardless of background, experience, or level. We believe dance unites people and creates meaningful relationships. Our instructors and members actively work to ensure everyone feels seen and valued.",
+      "bulletPoints": [
+        "Inclusive environment for all",
+        "Respect and openness",
+        "Strong social bonds"
+      ]
     },
     {
       "key": "growth",
       "iconKey": "lightbulb",
       "title": "Growth & Development",
-      "description": "Our courses are structured to give you a solid technical foundation. We focus on individual progression and helping you build self-confidence on the dance floor."
+      "shortDescription": "Our courses are structured to give you a solid technical foundation. We focus on individual progression and helping you build confidence.",
+      "fullDescription": "We offer clear progression paths from beginner to advanced. Each course builds on the previous one, and our instructors provide personal feedback to help you reach your goals. Your development is our priority.",
+      "bulletPoints": [
+        "Structured courses with clear goals",
+        "Individual feedback and support",
+        "Visible progress at every level"
+      ]
     },
     {
       "key": "joy",
       "iconKey": "smile",
       "title": "Joy & Passion",
-      "description": "Dance should be fun! Our instructors share their passion for Bachata and ensure every class is filled with energy and positivity. It is your sanctuary."
+      "shortDescription": "Dance should be fun! Our instructors share their passion for Bachata and ensure every class is filled with energy and positivity.",
+      "fullDescription": "We believe joy and passion are the keys to long-term motivation. Our classes are a place where you can let loose, have fun, and express yourself through dance. It's your sanctuary from everyday life.",
+      "bulletPoints": [
+        "Positive and energetic atmosphere",
+        "Passion for dance",
+        "Your escape from daily routines"
+      ]
     },
     {
       "key": "technique",
       "iconKey": "heart",
       "title": "Quality & Technique",
-      "description": "We believe technique is the foundation for freedom in dance. Our classes emphasize musicality, body control, and core principles to make you a better dancer."
+      "shortDescription": "We believe technique is the foundation for freedom in dance. Our classes emphasize musicality, body control, and core principles.",
+      "fullDescription": "Good technique gives you the freedom to express yourself and improvise. We focus on fundamental principles like musicality, balance, isolation, and connection to make you a complete dancer.",
+      "bulletPoints": [
+        "Focus on fundamental technique",
+        "Musicality and timing",
+        "Freedom through knowledge"
+      ]
     }
   ]
 }

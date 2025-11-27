@@ -3,9 +3,8 @@
 
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
-import Image from "next/image"; // Import av Image är inte nödvändig här, men skadar inte.
+import Image from "next/image";
 
-// Definerar strukturen för ett kurs-objekt (för bättre typning)
 interface Course {
     dayKey: string;
     time: string;
@@ -26,65 +25,76 @@ const ScheduleItem = ({ time, name, instructors, note, isNew = false, isDropIn =
     isDropIn?: boolean;
 }) => (
     <div className={`
-        bg-[#262626] p-4 rounded-xl text-center relative shadow-lg
-        border border-white/10 transition-transform duration-300 hover:scale-[1.03]
-        ${isDropIn ? 'bg-[#311a18]' : ''}
+        bg-white/5 p-4 rounded-xl text-center relative shadow-lg backdrop-blur-sm
+        border transition-all duration-300 hover:scale-[1.02] hover:shadow-xl
+        ${isDropIn ? 'bg-orange-500/15 border-orange-500 hover:bg-orange-500/20' : 'border-orange-500/50 hover:border-orange-500/70'} 
     `}>
-        {/* 'NY'-tagg */}
+        {/* 'NY'-tagg - Röd och tydlig */}
         {isNew && (
-            <span className="absolute top-[-10px] right-[-10px] bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow-lg transform rotate-6">
+            <span className="absolute top-[-10px] right-[-10px] bg-red-600 text-white text-xs font-extrabold px-2.5 py-1 rounded-full shadow-xl transform rotate-12 ring-2 ring-red-400">
                 NY
             </span>
         )}
 
-        <p className="text-sm font-light text-gray-400">{time}</p>
-        <h4 className="text-base font-bold my-1 text-orange-500">{name}</h4>
-        <p className="text-xs text-gray-300">{instructors}</p>
-        {note && <p className="text-[10px] italic text-red-300 mt-1">{note}</p>}
+        <p className="text-xs sm:text-sm font-light text-gray-400 mb-1">{time}</p>
+        <h4 className="text-base sm:text-lg font-bold my-2 text-orange-500">{name}</h4>
+        <p className="text-xs sm:text-sm text-gray-300">{instructors}</p>
+        {note && <p className="text-[10px] sm:text-xs italic text-red-300 mt-2">{note}</p>}
     </div>
 );
 
 
 // --- Kärnkomponenten ---
 export const ScheduleSection = () => {
-    // VIKTIGT: Byt till att använda scheduleTranslation
     const { t, i18n } = useTranslation("scheduleTranslation");
     const currentLang = i18n.language;
 
-    // Hämta kurserna från JSON och tvinga typen (alternativt hämta och parsa dem)
-    // I en verklig app skulle du ladda dessa asynkront. Här använder vi t()
-    const courses: Course[] = t("courses", { returnObjects: true }) as Course[];
+    const courses: Course[] = t("courses", { returnObjects: true }) as Course[] || [];
 
-    // Definiera dag-nycklarna för att iterera över i rätt ordning
     const dayKeys: string[] = ["dayMonday", "dayTuesday", "dayWednesday", "dayThursday", "daySunday"];
 
     return (
         <section
             id="schedule"
-            // FIX: Byt ut bg-[#1a1a1a] till bg-transparent för att visa body-gradienten
-            className="py-16 sm:py-24 bg-transparent text-white"
+            className="relative py-16 sm:py-24 bg-[#1a1a1a] text-white"
         >
-            <div className="container mx-auto max-w-7xl px-4 text-center">
 
-                {/* Rubrik/Info (Hämtas från JSON) */}
-                <p className="text-base text-gray-400 mb-2">{t("schedulePreamble")}</p>
-                <h2 className="text-4xl sm:text-5xl font-bold mb-12">
+            {/* Bakgrundsbild för sektionen */}
+            <div className="absolute inset-0">
+                <Image
+                    src="/img/Schedule/Scheduleimg.jpg"
+                    alt={t('scheduleImageAlt', { defaultValue: 'Bakgrundsbild av dansande par' })}
+                    fill
+                    sizes="100vw"
+                    priority={false}
+                    className="object-cover opacity-10"
+                />
+            </div>
+
+
+            <div className="container mx-auto max-w-7xl px-4 text-center relative z-10">
+
+                {/* Rubrik/Info - Förbättrad kontrast */}
+                <p className="text-sm sm:text-base text-gray-300 mb-2 font-medium tracking-wide uppercase">
+                    {t("schedulePreamble")}
+                </p>
+                <h2 className="text-4xl sm:text-5xl font-bold mb-16 font-serif">
                     {t("scheduleTitle")}
                 </h2>
 
                 {/* === SCHEDULE GRID FÖR DESKTOP/MOBIL === */}
                 <div className="mx-auto max-w-6xl">
-                    <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-8">
 
                         {dayKeys.map((dayKey) => (
                             <div key={dayKey} className="md:col-span-1 space-y-4">
-                                {/* Dag-rubrik */}
-                                <h3 className="text-lg font-semibold text-gray-300 md:text-orange-500">
+                                {/* Dag-rubrik - Förbättrad styling */}
+                                <h3 className="text-xl sm:text-2xl font-bold text-orange-500 mb-6 pb-2 border-b-2 border-orange-500/30">
                                     {t(dayKey)}
                                 </h3>
 
                                 {/* Filtrera och rendera kurser för denna dag */}
-                                {courses
+                                {Array.isArray(courses) && courses
                                     .filter(course => course.dayKey === dayKey)
                                     .map((course, index) => (
                                         <ScheduleItem
@@ -92,7 +102,6 @@ export const ScheduleSection = () => {
                                             time={course.time}
                                             name={course.name}
                                             instructors={course.instructors}
-                                            // Använd noteKey för att hämta översatt anteckning, annars undefined
                                             note={course.noteKey ? t(course.noteKey) : undefined}
                                             isNew={course.isNew}
                                             isDropIn={course.isDropIn}
@@ -104,16 +113,20 @@ export const ScheduleSection = () => {
                     </div>
                 </div>
 
-                {/* CTA / Footer Info (Hämtas från JSON) */}
-                <p className="text-xl italic font-serif text-gray-400 mt-12 mb-4">{t("scheduleFooter1")}</p>
-                <p className="text-base font-light text-gray-500 mb-10">{t("scheduleFooter2")}</p>
+                {/* CTA / Footer Info - Förbättrad läsbarhet */}
+                <p className="text-xl sm:text-2xl italic font-serif text-gray-300 mt-16 mb-3">
+                    {t("scheduleFooter1")}
+                </p>
+                <p className="text-base sm:text-lg font-light text-gray-400 mb-12">
+                    {t("scheduleFooter2")}
+                </p>
 
-                {/* CTA: Se Våra Kurser (Hämtas från JSON) */}
+                {/* CTA: Se Våra Kurser */}
                 <div className="text-center">
                     <Link
-                        href={`/${currentLang}/#courses`}
+                        href={`/${currentLang}/courses`}
                         className="
-                            rounded-full bg-orange-500 px-10 py-3 text-lg font-bold uppercase
+                            inline-block rounded-full bg-orange-500 px-10 py-4 text-lg sm:text-xl font-bold uppercase
                             tracking-wider text-white shadow-xl transition-all duration-300
                             hover:bg-orange-600 hover:scale-105 active:scale-95
                         "

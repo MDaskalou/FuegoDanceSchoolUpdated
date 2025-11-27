@@ -1,0 +1,45 @@
+﻿{
+  "title": "What Our Students Say",
+  "subtitle": "Here are some voices from our dancers – and our online ratings!",
+  "googleRating": "⭐ 4.9 out of 5 on Google",
+  "trustpilotRating": "⭐ 4.5 out of 5 on Trustpilot",
+  "seeReviewsButton": "See reviews",
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "Lisa B",
+      "imageSrc": "/img/Testimonials/LisaB.jpg",
+      "text": "There are so many reasons why I think everyone should come and learn bachata at Fuego! If I could only choose a few, it's because the teachers are truly committed to teaching the right technique, they are passionate about what they do – and it really shows. The assistant instructors are also incredibly supportive, always ready to help and ensure everyone feels comfortable and encouraged. It's a place where you not only develop as a dancer but also feel part of a fantastic community."
+    },
+    {
+      "id": 2,
+      "name": "Amanda W",
+      "imageSrc": "/img/Testimonials/AmandaW.jpg",
+      "text": "Fuego is a dance school where you feel welcome from the start. The teachers are knowledgeable and helpful. For me, dance has not always been a given; when I started at Fuego, I was very insecure in dance contexts, afraid of making mistakes, which made me tense and less motivated. Fuego has helped me grow as a dancer; you get feedback on a more personal level, both from the instructors and from the assistant instructors, which is invaluable."
+    },
+    {
+      "id": 3,
+      "name": "Alessandro U",
+      "imageSrc": "/img/Testimonials/AlessandroU.jpg",
+      "text": "Highly recommend!! Fuego Dance School offers a safe and inspiring environment where both beginners and experienced dancers have the opportunity to develop. The school is safe, welcoming, and the teachers are incredibly knowledgeable, pedagogical, and clearly passionate."
+    },
+    {
+      "id": 4,
+      "name": "Elvir D",
+      "imageSrc": "/img/Testimonials/ElvirD.jpg",
+      "text": "Has given me a better understanding of several different technical aspects, more than just learning sequences."
+    },
+    {
+      "id": 5,
+      "name": "My R",
+      "imageSrc": "/img/Testimonials/MyR.jpg",
+      "text": "What I appreciate about Fuego is that you feel seen and receive specific feedback based on your dance level. With fantastic teachers and assistant teachers, there's always someone there with encouraging words and constructive feedback. Courses combine theory and practice, which also gives you a better understanding of the dance instead of just learning a choreography."
+    },
+    {
+      "id": 6,
+      "name": "Ricardo R",
+      "imageSrc": "/img/Testimonials/RicardoR.jpg",
+      "text": "I’ve improved so much since joining, especially compared to my experience at a previous school. The environment here is safe, welcoming, and free of pretension – everyone, from the main instructors Mikael and Irina to the assistant teachers, is genuinely committed to helping you grow as a dancer. You can feel the difference in how they teach: it’s not about showing off, it’s about real progress."
+    }
+  ]
+}

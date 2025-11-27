@@ -2,21 +2,26 @@
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    // NYCKEL FÖR STATISK EXPORT (MÅSTE VARA MED FÖR GITHUB PAGES)
-    output: 'export',
+    // --- PRODUKTION / BUILD INSTÄLLNINGAR ---
+    // Avkommentera dessa rader INNAN du kör 'npm run build'
 
-    // NÖDVÄNDIGT: Ange basökvägen så att alla tillgångar (CSS/JS) laddas korrekt.
-    // Detta baseras på ditt arkivnamn: /FuegoDanceSchoolUpdated
-    basePath: '/FuegoDanceSchoolUpdated',
+    // output: 'export',
+    // basePath: '/FuegoDanceSchoolUpdated',
 
-    // NÖDVÄNDIGT: Inaktiverar bildoptimering vid statisk export,
-    // eftersom Next.js standardoptimering kräver en server.
-    images: {
-        unoptimized: true,
-    },
-
-    // Du kan behålla trailingSlash om du vill ha /example/ istället för /example
     trailingSlash: true,
+
+    images: {
+        // Denna del behövs för att Next.js ska lita på bilderna från Behold & Instagram
+        // Det behövs BÅDE lokalt och i produktion (om du inte kör unoptimized)
+        remotePatterns: [
+            { protocol: 'https', hostname: 'behold.pictures' },
+            { protocol: 'https', hostname: 'scontent-*.cdninstagram.com' },
+            { protocol: 'https', hostname: '*.cdninstagram.com' },
+        ],
+
+        // Avkommentera denna rad INNAN du kör 'npm run build' för Static Export
+        // unoptimized: true,
+    },
 };
 
 export default nextConfig;
