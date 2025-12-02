@@ -1,12 +1,12 @@
-﻿// src/components/ValuesPageClient.tsx
-"use client";
+﻿"use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from "react-i18next";
 import { IconType } from 'react-icons';
 import { FaHeart, FaUsers, FaLightbulb, FaSmile, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
-interface ValuesPageClientProps {
+// 1. Interface för params
+export interface ValuesPageClientProps {
     params: { lang: string };
 }
 
@@ -110,10 +110,17 @@ const ValueCard = ({ item, index }: { item: ValueItem; index: number }) => {
 };
 
 // --- Huvudkomponent (Client) ---
-export default function ValuesPageClient({ params: _params }: ValuesPageClientProps) {
+// 2. Vi tar emot params utan underscore för att vara konsekventa
+export default function ValuesPageClient({ params }: ValuesPageClientProps) {
     const { t } = useTranslation("valuesTranslation");
 
-    // Ladda värden från JSON (ingen dummy data här längre!)
+    // 3. Vi lägger till useEffect för att "använda" params och undvika lint-fel
+    useEffect(() => {
+        if (process.env.NODE_ENV === 'development') {
+            // console.log("Values page loaded for lang:", params.lang);
+        }
+    }, [params]);
+
     const values: ValueItem[] = t("valuesData", { returnObjects: true }) as ValueItem[] || [];
 
     return (

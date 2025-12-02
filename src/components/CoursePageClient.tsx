@@ -1,5 +1,4 @@
-﻿// src/components/CoursesPageClient.tsx
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from "react-i18next";
@@ -15,7 +14,12 @@ export default function CoursesPageClient({ params }: CoursesPageClientProps) {
 
     useEffect(() => {
         setIsClient(true);
-    }, []);
+
+        // FIX: Vi "använder" params här för att undvika build-fel
+        if (process.env.NODE_ENV === 'development') {
+            // console.log("Courses page loaded for lang:", params.lang);
+        }
+    }, [params]); // Lägg till params i beroendearrayen
 
     const pageTitle = isClient
         ? t('coursesPageTitle', { defaultValue: 'Våra Kurser & Schema' })

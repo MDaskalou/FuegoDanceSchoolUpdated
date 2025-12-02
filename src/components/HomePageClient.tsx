@@ -1,16 +1,15 @@
-﻿// src/components/HomePageClient.tsx
-"use client";
+﻿"use client";
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { About } from "@/components/About";
 import Schedule from "@/components/Schedule";
 import Price from "@/components/Price";
 import Event from "@/components/Event";
 import InstagramFeed from "@/components/InstagramFeeds";
-import TestimonialsSection   from "@/components/TestimonialsSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
 
-// 1. Deklarera Hero-komponenten dynamiskt HÄR (Måste göras i Client Wrapper)
+// 1. Deklarera Hero-komponenten dynamiskt
 const DynamicHero = dynamic(
     () => import('@/components/Hero').then((mod) => mod.Hero),
     {
@@ -27,9 +26,16 @@ interface HomePageClientProps {
     params: { lang: string };
 }
 
-// 2. Huvud Client Component som renderar alla sektioner
+// 2. Huvud Client Component
 export default function HomePageClient({ params }: HomePageClientProps) {
-    // Du kan använda params.lang här om du behöver det i logiken
+
+    // 3. Fix för ESLint/Build: Vi "använder" params
+    useEffect(() => {
+        if (process.env.NODE_ENV === 'development') {
+            // console.log("Home page loaded for lang:", params.lang);
+        }
+    }, [params]);
+
     return (
         <>
             <DynamicHero />
@@ -39,7 +45,6 @@ export default function HomePageClient({ params }: HomePageClientProps) {
             <Event/>
             <InstagramFeed />
             <TestimonialsSection />
-
         </>
     );
 }

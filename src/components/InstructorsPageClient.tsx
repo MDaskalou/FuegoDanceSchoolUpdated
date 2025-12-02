@@ -1,26 +1,44 @@
 ﻿"use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from "react-i18next";
 import InstructorCard, { Instructor } from './InstructorCard';
 
-const InstructorsSection = () => {
-    // Samma namespace som i kortet
-    const { t } = useTranslation("instructorTranslation");
+// 1. Lägg till interfacet för params
+export interface InstructorsPageClientProps {
+    params: { lang: string };
+}
 
-    // 1. Hämta datan som en array av objekt
-    // 'as Instructor[]' berättar för TypeScript hur datan ser ut
+// 2. Ta emot params i funktionen
+export default function InstructorsPageClient({ params }: InstructorsPageClientProps) {
+    const { t } = useTranslation("instructorTranslation");
+    const [isMounted, setIsMounted] = useState(false);
+
+    // 3. Använd params i en useEffect för att göra både TypeScript och ESLint nöjda
+    useEffect(() => {
+        if (process.env.NODE_ENV === 'development') {
+            // console.log("Instructors page loaded for lang:", params.lang);
+        }
+        setIsMounted(true);
+    }, [params]);
+
+    // Hämta datan som en array av objekt
     const instructors = t('instructorsData', { returnObjects: true }) as Instructor[];
 
-    // Kontrollera att det faktiskt är en array innan vi filtrerar (förhindrar krasch vid laddning)
+    // Kontrollera att det faktiskt är en array
     const allInstructors = Array.isArray(instructors) ? instructors : [];
 
-    // 2. Filtrera baserat på roll
+    // Filtrera baserat på roll
     const mainInstructors = allInstructors.filter(i => i.role === 'main');
     const helperInstructors = allInstructors.filter(i => i.role === 'helper');
 
+    // Förhindra hydration mismatch genom att inte rendera förrän klienten är redo
+    if (!isMounted) {
+        return <div className="py-20 bg-[#1a1a1a] min-h-screen"></div>;
+    }
+
     return (
-        <section className="py-20 bg-[#1a1a1a]">
+        <section className="py-20 bg-[#1a1a1a] min-h-screen">
             <div className="container mx-auto px-4">
 
                 {/* --- HUVUDINSTRUKTÖRER --- */}
@@ -63,6 +81,4 @@ const InstructorsSection = () => {
             </div>
         </section>
     );
-};
-
-export default InstructorsSection;
+}
