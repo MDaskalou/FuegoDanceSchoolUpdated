@@ -1,5 +1,5 @@
 ﻿{
-  "formTitle": "Föranmäl dig till Vinterkurserna",
+  "formTitle": "Föranmäl dig till Vårkurserna",
   "formDescription": "Fyll i formuläret nedan så kontaktar vi dig med mer information.",
   "nameLabel": "Namn",
   "namePlaceholder": "Ditt fullständiga namn",
@@ -19,8 +19,8 @@
   "requiredField": "Fyll i alla obligatoriska fält (*).",
 
   "courseOptions": [
-    "Nivå 1", "Nivå 2", "Nivå 3", "Nivå 3 Teknik",
-    "Nivå 4", "Nivå 4 Teknik", "Styling Class", "Role Rotation", "Footwork"
+    "Nivå 1", "Nivå 2","Nivå 2 Teknik", "Nivå 3", "Nivå 3 Teknik",
+    "Nivå 4", "Nivå 4 Teknik","Nivå 4 Teknik (Isolationer)", "Koreografi Class", "Rolerotation", "Advanced Fundation"
   ],
   "roleOptions": [
     "Välj ett alternativ", "Förare", "Följare"

@@ -1,6 +1,6 @@
 ﻿{
-  "formTitle": "Pre-register for Winter Courses",
-  "formDescription": "Fill out the form below and we'll contact you with more information.",
+  "formTitle": "Pre-register for the Spring Courses",
+  "formDescription": "Fill out the form below and we will contact you with more information.",
   "nameLabel": "Name",
   "namePlaceholder": "Your full name",
   "emailLabel": "Email",
@@ -11,16 +11,25 @@
   "referralTitle": "How did you find us?",
   "otherTitle": "Other",
   "submitButton": "Submit Registration",
-  "submittingButton": "Submitting...",
-  "disclaimer1": "By submitting this form, you agree that we process your personal information.",
-  "disclaimer2": "We only use your information to contact you about the courses.",
+  "submittingButton": "Sending...",
+  "disclaimer1": "By submitting this form, you consent to us processing your personal data.",
+  "disclaimer2": "We only use your information to contact you regarding the courses.",
   "formSubmittedMessage": "Thank you for your registration!",
-  "formSubmittedDescription": "We have received your interest and will get back to you with confirmation via email shortly.",
+  "formSubmittedDescription": "We have received your registration of interest and will get back to you with a confirmation via email shortly.",
   "requiredField": "Please fill in all required fields (*).",
 
   "courseOptions": [
-    "Level 1", "Level 2", "Level 3", "Level 3 Technique",
-    "Level 4", "Level 4 Technique", "Styling Class", "Role Rotation", "Footwork"
+    "Level 1",
+    "Level 2",
+    "Level 2 Technique",
+    "Level 3",
+    "Level 3 Technique",
+    "Level 4",
+    "Level 4 Technique",
+    "Level 4 Technique (Isolations)",
+    "Choreography Class",
+    "Role Rotation",
+    "Advanced Foundation"
   ],
   "roleOptions": [
     "Select an option", "Leader", "Follower"

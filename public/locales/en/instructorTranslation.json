@@ -183,6 +183,28 @@
       "experience": "3 years teaching lead technique",
       "specialties": ["Lead technique", "Clear instruction", "All levels support", "Technical foundation"],
       "achievements": ["Solid technical foundation", "Clear communicator", "Helps leaders at all levels"]
+    },
+    {
+      "id": 19,
+      "name": "Lisa",
+      "focus": "Musicality & Rhythm",
+      "bio": "Lina specializes in helping students understand musicality and rhythm to enhance their dancing experience.",
+      "imageSrc": "/img/Instructors/instruktörLisa.jpg",
+      "role": "helper",
+      "experience": "4 years focusing on musicality",
+      "specialties": ["Musicality", "Rhythm", "Dance expression", "Music interpretation"],
+      "achievements": ["Musicality expert", "Enhances dance experience", "Workshop assistant"]
+    },
+    {
+      "id": 20,
+      "name": "Johanna",
+      "focus": "Advanced Partner Work",
+      "bio": "Carlos is dedicated to advanced partner work, helping students refine their connection and lead-follow dynamics.",
+      "imageSrc": "/img/Instructors/instruktörJohanna.jpg",
+      "role": "helper",
+      "experience": "8 years teaching advanced partner techniques",
+      "specialties": ["Advanced partner work", "Connection", "Lead-follow dynamics", "Refined techniques"],
+      "achievements": ["Advanced partner work specialist", "Known for strong connection techniques", "Refined teaching methods"]
     }
   ]
 }

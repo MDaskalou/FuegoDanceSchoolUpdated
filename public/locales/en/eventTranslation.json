@@ -1,0 +1,22 @@
+{
+  "eventsTitle": "Upcoming Workshops & Events",
+  "eventsCta": "See all events",
+  "eventsCtaButton": "Read more & Book",
+  "noUpcomingEvents": "No upcoming events planned at the moment. Stay tuned!",
+
+  "events": [],
+
+  "__TEMPLATE_events_SAVE_FOR_LATER": [
+    {
+      "id": 1,
+      "title": "Bachata Intensive Weekend",
+      "date": "December 14-15, 2025",
+      "startDate": "2025-12-14",
+      "location": "Fuego Studio, Gothenburg",
+      "link": "/booking/bootcamp",
+      "description": "A weekend focusing on musicality and advanced partnerwork. Perfect for level 3+.",
+      "imageUrl": "/img/Events/event_intensiv.jpg",
+      "isNew": true
+    }
+  ]
+}

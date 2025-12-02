@@ -44,7 +44,7 @@
     },
     {
       "dayKey": "dayTuesday",
-      "time": "19:40–21:10",
+      "time": "19:30–21:00",
       "name": "Avancerad Grund",
       "instructors": "Mikael",
       "isNew": false,
@@ -68,7 +68,7 @@
     },
     {
       "dayKey": "dayWednesday",
-      "time": "20:05–21:05",
+      "time": "20:10–21:10",
       "name": "Nivå 2",
       "instructors": "Andris & Emma",
       "isNew": false,
@@ -76,7 +76,7 @@
     },
     {
       "dayKey": "dayThursday",
-      "time": "18:00–19:30",
+      "time": "18:00–19:00",
       "name": "Nivå 3",
       "instructors": "Nora & Sisco",
       "isNew": false,

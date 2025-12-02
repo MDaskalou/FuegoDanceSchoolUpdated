@@ -3,7 +3,9 @@
   "eventsCta": "Se alla evenemang",
   "eventsCtaButton": "Läs mer & Boka",
   "noUpcomingEvents": "Inga kommande evenemang planerade just nu. Håll utkik!",
-  "events": [
+  "events": [],
+
+  "__MALL_events_SPARA_FOR_SENARE": [
     {
       "id": 1,
       "title": "Bachata Intensivhelg",
@@ -14,39 +16,8 @@
       "description": "En helg med fokus på musikalitet och avancerad partnerwork. Perfekt för nivå 3+.",
       "imageUrl": "/img/Events/event_intensiv.jpg",
       "isNew": true
-    },
-    {
-      "id": 2,
-      "title": "Social Dance Night",
-      "date": "21 December 2025, 20:00",
-      "startDate": "2025-12-21",
-      "location": "Fuego Studio, Göteborg",
-      "link": "/booking/fuego-night",
-      "description": "Avsluta terminen med årets sista social! Dansa till de bästa Bachata-låtarna.",
-      "imageUrl": "/img/Events/event_social.jpg",
-      "isNew": false
-    },
-    {
-      "id": 3,
-      "title": "Nyårsworkshop 2026",
-      "date": "5 Januari 2026",
-      "startDate": "2026-01-05",
-      "location": "Centrala Göteborg",
-      "link": "/booking/new-year-workshop",
-      "description": "Starta det nya året med en dag fylld av teknik och glädje. Alla nivåer välkomna.",
-      "imageUrl": "/img/Events/event_newyear.jpg",
-      "isNew": true
-    },
-    {
-      "id": 4,
-      "title": "Gammalt Event (Dold)",
-      "date": "01 Januari 2024",
-      "startDate": "2024-01-01",
-      "location": "Historien",
-      "link": "#",
-      "description": "Detta event ska döljas av filtreringen och visas inte på hemsidan.",
-      "imageUrl": "/img/Events/old_event.jpg",
-      "isNew": false
     }
   ]
+
+
 }

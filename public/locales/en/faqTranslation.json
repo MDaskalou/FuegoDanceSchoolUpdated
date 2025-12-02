@@ -1,1 +1,106 @@
-﻿
+﻿{
+  "faqPageTitle": "Frequently Asked Questions",
+  "categories": [
+    {
+      "title": "General",
+      "questions": [
+        {
+          "q": "What is Bachata Sensual?",
+          "a": "Bachata Sensual is a modern and expressive style of bachata created in Spain by Korke and Judith. It is characterized by soft, fluid movements such as body waves and isolations, with a strong focus on musical interpretation and close connection between dance partners. The goal is not just to execute steps, but to use the whole body to visually express the emotions and nuances of the music."
+        },
+        {
+          "q": "I have never danced before – are your courses suitable for me?",
+          "a": "Absolutely! Our beginner courses are designed for those who have never taken a dance step before. We guide you step by step."
+        },
+        {
+          "q": "Are the courses open to all ages?",
+          "a": "Yes! We have students ranging from 18 to 60+. Everyone is welcome!"
+        },
+        {
+          "q": "Do you offer private lessons?",
+          "a": "Yes! You can book private lessons with our instructors, which is perfect if you want to progress faster or focus on specific details. Go to the 'Instructors' tab to read more and contact the instructor you are interested in booking."
+        }
+      ]
+    },
+    {
+      "title": "Practical",
+      "questions": [
+        {
+          "q": "Do I need to bring a partner?",
+          "a": "No! You can come alone. We rotate partners during class so that everyone gets to dance with everyone."
+        },
+        {
+          "q": "What happens if there is an uneven number of leaders and followers?",
+          "a": "We do our best to balance the groups. Sometimes you may have to wait a rotation, but we often have assistant instructors who step in to help."
+        },
+        {
+          "q": "What should I wear?",
+          "a": "Comfortable clothes that allow you to move freely. Sneakers or dance shoes with a smooth sole work well – there is no requirement for special shoes."
+        }
+      ]
+    },
+    {
+      "title": "Courses and Schedule",
+      "questions": [
+        {
+          "q": "How long is each course?",
+          "a": "Courses are 8 weeks long with 1 lesson per week, lasting 1.5 hours."
+        },
+        {
+          "q": "Do you offer drop-in classes?",
+          "a": "No, but the first lesson is always free so you can try it out before you decide."
+        },
+        {
+          "q": "Can I make up a missed lesson?",
+          "a": "Yes, if there is space in another group at the same level, you can jump in there for that week. Contact us and we will help you."
+        }
+      ]
+    },
+    {
+      "title": "Prices and Discounts",
+      "questions": [
+        {
+          "q": "How much do the courses cost?",
+          "a": "1 course = 1600 SEK, 2 courses = 2600 SEK, 3 courses = 3600 SEK, and so on. See our price list for all levels."
+        },
+        {
+          "q": "I am a student – do I get a discount?",
+          "a": "Yes! We offer a 10% discount for students upon presentation of a valid student ID."
+        },
+        {
+          "q": "Do you have a couple discount?",
+          "a": "Yes, if you sign up as a couple you get a 15% discount. You must sign up together and for the same number of courses, but it is not required to attend the same course."
+        },
+        {
+          "q": "I can only attend every other week – do I get a discount?",
+          "a": "Yes, you get a 35% discount if you can only participate every other week."
+        },
+        {
+          "q": "Can discounts be combined?",
+          "a": "No, discounts cannot unfortunately be combined. You choose the discount that suits you best."
+        }
+      ]
+    },
+    {
+      "title": "Registration",
+      "questions": [
+        {
+          "q": "How do I sign up?",
+          "a": "You can sign up in two ways: 1) Go to our 'Schedule' page and click 'Book now'. 2) Go to the 'Our Courses' page for details and book from there."
+        },
+        {
+          "q": "How do I sign up for the open house?",
+          "a": "You sign up via the 'Sign up for Open House' button found at the top of the homepage. IMPORTANT: Registration does not guarantee a spot, it is 'first come, first served'."
+        },
+        {
+          "q": "Can I sign up for multiple courses?",
+          "a": "Absolutely! You can easily select multiple courses in the registration form."
+        },
+        {
+          "q": "Can I cancel my payment?",
+          "a": "Yes, according to the Distance Contracts Act, you have a 14-day right of withdrawal from the purchase, provided the course has not started. If the course has begun or if you participated in the first trial lesson, the right of withdrawal does not apply."
+        }
+      ]
+    }
+  ]
+}

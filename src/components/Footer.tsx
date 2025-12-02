@@ -1,5 +1,4 @@
-﻿// src/components/Footer.tsx
-"use client";
+﻿"use client";
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -11,12 +10,12 @@ export const Footer = () => {
     const currentLang = i18n.language;
     const currentYear = new Date().getFullYear();
 
-    // Notera: Här kan du definiera navigeringslänkar som används i Navbar för enkelhet
+    // Uppdaterade länkar för att matcha din sajtstruktur
     const quickLinks = [
-        { href: `#heroreel`, label: t('nav.home', { defaultValue: 'Hem' }) },
-        { href: `#schedule`, label: t('nav.schedule', { defaultValue: 'Schema' }) },
+        { href: `/`, label: t('nav.home', { defaultValue: 'Hem' }) },
+        { href: `/#schedule`, label: t('nav.schedule', { defaultValue: 'Schema' }) }, // Antar ankarlänk på startsidan
         { href: `/courses`, label: t('nav.courses', { defaultValue: 'Kurser' }) },
-        { href: `#prices`, label: t('nav.prices', { defaultValue: 'Priser' }) },
+        { href: `/#prices`, label: t('nav.prices', { defaultValue: 'Priser' }) }, // Antar ankarlänk på startsidan
         { href: `/instructors`, label: t('nav.instructors', { defaultValue: 'Instruktörer' }) },
         { href: `/FAQpage`, label: t('nav.faq', { defaultValue: 'FAQ' }) },
     ];
@@ -36,11 +35,11 @@ export const Footer = () => {
                             {t('footerMotto', { defaultValue: 'Din plats för Bachata, gemenskap och utveckling.' })}
                         </p>
                         <div className="flex space-x-4 pt-2">
-                            {/* Sociala medier (Ersätt # med dina riktiga länkar) */}
-                            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                            {/* Sociala medier */}
+                            <a href="https://www.instagram.com/fuegodanceschool/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                                 <FaInstagram className="w-6 h-6 hover:text-orange-500 transition-colors" />
                             </a>
-                            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                            <a href="https://www.facebook.com/fuegodanceschool" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                                 <FaFacebook className="w-6 h-6 hover:text-orange-500 transition-colors" />
                             </a>
                         </div>
@@ -54,7 +53,11 @@ export const Footer = () => {
                         <ul className="space-y-2">
                             {quickLinks.map((link, index) => (
                                 <li key={index}>
-                                    <Link href={`/${currentLang}${link.href}`} className="hover:text-white transition-colors text-sm">
+                                    {/* Notera: Om länken börjar med /#, använd bara länken. Annars lägg till språk-prefix. */}
+                                    <Link
+                                        href={link.href.startsWith('/#') || link.href === '/' ? `/${currentLang}${link.href === '/' ? '' : link.href}` : `/${currentLang}${link.href}`}
+                                        className="hover:text-white transition-colors text-sm"
+                                    >
                                         {link.label}
                                     </Link>
                                 </li>
@@ -77,14 +80,14 @@ export const Footer = () => {
                             </li>
                             <li className="flex items-center">
                                 <FaEnvelope className="w-4 h-4 mr-3 flex-shrink-0 text-orange-500" />
-                                <a href="mailto:info@fuegoschool.se" className="hover:text-white transition-colors">
-                                    {t('email', { defaultValue: 'info@fuegoschool.se' })}
+                                <a href="mailto:info@fuegodanceschool.se" className="hover:text-white transition-colors">
+                                    {t('email', { defaultValue: 'info@fuegodanceschool.se' })}
                                 </a>
                             </li>
                         </ul>
                     </div>
 
-                    {/* Kolumn 4: Bli en del av familjen (Exempel CTA) */}
+                    {/* Kolumn 4: Bli en del av familjen (CTA) */}
                     <div>
                         <h4 className="text-lg font-bold mb-4 text-white">
                             {t('familyCtaTitle', { defaultValue: 'Bli en del av familjen' })}
@@ -93,8 +96,8 @@ export const Footer = () => {
                             {t('familyCtaText', { defaultValue: 'Prenumerera på vårt nyhetsbrev för att få uppdateringar om nya kurser och sociala events.' })}
                         </p>
                         {/* Här skulle ett nyhetsbrevformulär ligga */}
-                        <button className="mt-4 bg-orange-500 px-4 py-2 rounded-full text-white font-semibold text-sm hover:bg-orange-600">
-                            Prenumerera
+                        <button className="mt-4 bg-orange-500 px-4 py-2 rounded-full text-white font-semibold text-sm hover:bg-orange-600 transition-colors">
+                            {t('subscribeButton', { defaultValue: 'Prenumerera' })}
                         </button>
                     </div>
 

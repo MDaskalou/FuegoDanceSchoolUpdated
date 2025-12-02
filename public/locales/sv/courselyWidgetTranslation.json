@@ -1,0 +1,7 @@
+﻿{
+  "loadingMessage": "Laddar kurser...",
+  "errorMessage": "Kunde inte ladda kurser. Försök igen senare.",
+  "noCoursesMessage": "Inga kurser tillgängliga just nu.",
+  "widgetTitle": "Våra Kurser & Schema",
+  "widgetDescription": "Boka din plats i våra kommande kurser. Välj den nivå som passar dig bäst."
+}

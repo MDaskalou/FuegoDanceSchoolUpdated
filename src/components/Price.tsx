@@ -25,10 +25,12 @@ export const PriceSection = () => {
 
     const currentLang = i18n.language;
 
+    // Hämta listor (Arrays)
     const courses: Course[] = t("courses", { returnObjects: true }) as Course[] || [];
     const dropInItems: DropInItem[] = t("dropInItems", { returnObjects: true }) as DropInItem[] || [];
 
-    const cardBaseClass = "p-6 sm:p-8 rounded-3xl shadow-2xl backdrop-blur-sm bg-[#262626]/80";
+    // Definiera designen för korten (Denna saknades i din kod)
+    const cardBaseClass = "h-full p-8 rounded-3xl bg-[#262626] shadow-2xl transition-all duration-300 border border-white/5 hover:border-orange-500/30 flex flex-col";
 
     // Funktion för att rendera kursnamn dynamiskt
     const getCourseLabel = (count: number) => {
@@ -61,13 +63,13 @@ export const PriceSection = () => {
 
                     {/* --- KORT 1: KURSER --- */}
                     <div className={`w-full ${animateCard(0)}`}>
-                        <div className={`w-full ${cardBaseClass} border-t-4 border-orange-500`}>
+                        <div className={`${cardBaseClass} border-t-4 border-orange-500`}>
                             <h3 className="text-2xl font-bold mb-8 text-orange-500 flex items-center justify-center gap-2">
                                 <Sparkles className="w-6 h-6" />
                                 {t("cardCourseTitle")}
                             </h3>
 
-                            <ul className="space-y-4">
+                            <ul className="space-y-4 flex-grow">
                                 {Array.isArray(courses) && courses.map((course, index) => (
                                     <li
                                         key={index}
@@ -104,18 +106,22 @@ export const PriceSection = () => {
 
                     {/* --- KORT 2: RABATTER --- */}
                     <div className={`w-full ${animateCard(1)}`}>
-                        <div className={`w-full ${cardBaseClass}`}>
+                        <div className={cardBaseClass}>
                             <h3 className="text-2xl font-bold mb-8 text-orange-500 flex items-center justify-center gap-2">
                                 <Percent className="w-6 h-6" />
                                 {t("cardDiscountTitle")}
                             </h3>
 
-                            <ul className="space-y-6 text-left">
+                            <ul className="space-y-6 text-left flex-grow">
                                 <li className="text-lg sm:text-xl p-4 rounded-xl bg-white/5 border border-white/10 transition-all duration-300 hover:bg-white/10 hover:scale-[1.02]">
                                     {t("discountStudent")}
                                 </li>
                                 <li className="text-lg sm:text-xl p-4 rounded-xl bg-white/5 border border-white/10 transition-all duration-300 hover:bg-white/10 hover:scale-[1.02]">
                                     {t("discountCouple")}
+                                </li>
+                                <li className="text-lg sm:text-xl p-4 rounded-xl bg-white/5 border border-white/10 transition-all duration-300 hover:bg-white/10 hover:scale-[1.02]">
+                                    {/* HÄR ÄR ÄNDRINGEN: Använd rätt nyckel från JSON */}
+                                    {t("discountHalfOfSemester")}
                                 </li>
                             </ul>
                         </div>
@@ -123,13 +129,13 @@ export const PriceSection = () => {
 
                     {/* --- KORT 3: DROP-IN SÖNDAGAR --- */}
                     <div className={`w-full ${animateCard(2)}`}>
-                        <div className={`w-full ${cardBaseClass} border-t-4 border-orange-500`}>
+                        <div className={`${cardBaseClass} border-t-4 border-orange-500`}>
                             <h3 className="text-2xl font-bold mb-8 text-orange-500 flex items-center justify-center gap-2">
                                 <Calendar className="w-6 h-6" />
                                 {t("cardDropInTitle")}
                             </h3>
 
-                            <ul className="space-y-4 mb-4">
+                            <ul className="space-y-4 mb-4 flex-grow">
                                 {Array.isArray(dropInItems) && dropInItems.map((item, index) => (
                                     <li
                                         key={index}
@@ -162,7 +168,7 @@ export const PriceSection = () => {
                 {/* CTA: Boka nu */}
                 <div className="text-center mt-10">
                     <Link
-                        href={`/${currentLang}/booking-link`}
+                        href={`/${currentLang}/courses`}
                         className="
                             inline-block rounded-full bg-orange-500 px-12 py-4 text-xl font-bold uppercase
                             tracking-wider text-white shadow-xl transition-all duration-300

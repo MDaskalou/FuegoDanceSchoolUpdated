@@ -1,0 +1,7 @@
+﻿{
+  "loadingMessage": "Loading courses...",
+  "errorMessage": "Could not load courses. Please try again later.",
+  "noCoursesMessage": "No courses available at the moment.",
+  "widgetTitle": "Our Courses & Schedule",
+  "widgetDescription": "Book your spot in our upcoming courses. Choose the level that suits you best."
+}

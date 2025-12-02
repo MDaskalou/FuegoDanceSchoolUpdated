@@ -7,6 +7,7 @@
   "tagPopular": "POPULÄRAST",
   "discountStudent": "Studentrabatt: 10%",
   "discountCouple": "Parrabatt: 15% per person",
+  "discountHalfOfSemester": "Halvkursrabatt: 35%",
   "ctaBookNow": "Boka nu",
 
   "courseLabelSingular": "kurs",
@@ -23,8 +24,6 @@
   ],
   "dropInItems": [
     { "count": 1, "price": 120, "isSocial": false },
-    { "count": 2, "price": 200, "isSocial": false },
-    { "count": 3, "price": 300, "isSocial": false },
     { "count": 0, "price": 80, "labelKey": "socialDanceLabel", "isSocial": true }
   ]
 }

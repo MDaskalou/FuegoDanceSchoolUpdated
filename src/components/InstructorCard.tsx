@@ -13,11 +13,11 @@ export interface Instructor {
     focus: string;
     bio: string;
     imageSrc: string;
-    role: "main" | "helper"; // Lade till role här för typsäkerhet
-    // Ny data för expanderat innehåll
+    role: "main" | "helper";
     experience?: string;
     specialties?: string[];
     achievements?: string[];
+    levels?: string[];
 }
 
 interface InstructorCardProps {
@@ -62,7 +62,7 @@ const InstructorCard: React.FC<InstructorCardProps> = ({ instructor, index }) =>
                 <span className="ml-2">{instructor.focus}</span>
             </p>
 
-            {/* Bio */}
+            {/* Kort bio */}
             <p className="text-base text-gray-300 mb-4 flex-grow leading-relaxed">
                 {instructor.bio}
             </p>
@@ -75,6 +75,22 @@ const InstructorCard: React.FC<InstructorCardProps> = ({ instructor, index }) =>
                 `}
             >
                 <div className="pt-4 border-t border-orange-500/30 space-y-5 bg-black/20 -mx-2 p-4 rounded-lg mt-2">
+
+                    {/* 🔸 Nivåer / klasser */}
+                    {instructor.levels && instructor.levels.length > 0 && (
+                        <div>
+                            <h4 className="text-sm font-bold text-orange-400 uppercase tracking-widest mb-1">
+                                {t('levelsLabel', { defaultValue: 'Undervisar i' })}
+                            </h4>
+                            <ul className="list-disc list-inside space-y-1">
+                                {instructor.levels.map((level, idx) => (
+                                    <li key={idx} className="text-sm text-gray-300">
+                                        {level}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
 
                     {/* Erfarenhet */}
                     {instructor.experience && (
@@ -100,7 +116,7 @@ const InstructorCard: React.FC<InstructorCardProps> = ({ instructor, index }) =>
                         </div>
                     )}
 
-                    {/* Achievements */}
+                    {/* Meriter */}
                     {instructor.achievements && instructor.achievements.length > 0 && (
                         <div>
                             <h4 className="text-sm font-bold text-orange-400 uppercase tracking-widest mb-1">
@@ -140,7 +156,10 @@ const InstructorCard: React.FC<InstructorCardProps> = ({ instructor, index }) =>
 
             {/* Star Badge för huvudinstruktörer */}
             {instructor.role === 'main' && (
-                <div className="absolute top-4 right-4 bg-orange-500 text-white p-2 rounded-full shadow-lg z-20" title="Huvudinstruktör">
+                <div
+                    className="absolute top-4 right-4 bg-orange-500 text-white p-2 rounded-full shadow-lg z-20"
+                    title="Huvudinstruktör"
+                >
                     <FaStar className="w-4 h-4" />
                 </div>
             )}

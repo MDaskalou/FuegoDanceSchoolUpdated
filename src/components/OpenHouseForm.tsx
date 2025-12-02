@@ -43,6 +43,7 @@ export default function OpenHouseForm() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
+        // Validering: Kontrollera att obligatoriska fält är ifyllda
         if (!formData.name || !formData.email || !formData.role || !formData.referral) {
             alert(t('requiredField', { defaultValue: 'Fyll i alla obligatoriska fält (*).' }));
             return;
@@ -50,12 +51,31 @@ export default function OpenHouseForm() {
 
         setIsSubmitting(true);
 
-        // Simulera API-anrop
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        // Din Google Apps Script URL
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyz1pVbPGyUNspPhDZ0nMTeeenNsBk4o4ZrpN8tcQZTtacTt4CPwGBtb9il3KzKPbM5ig/exec";
 
-        console.log('Föranmälan skickad:', formData);
-        setIsSubmitted(true);
-        setIsSubmitting(false);
+        try {
+            // Vi skickar datan till Google Sheets
+            await fetch(SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors", // Viktigt: Gör att vi kan skicka data till Google utan att blockeras
+                headers: {
+                    "Content-Type": "text/plain", // Viktigt: Förhindrar komplicerade "preflight"-checkar
+                },
+                body: JSON.stringify(formData), // Vi skickar hela formuläret som ett JSON-paket
+            });
+
+            // Eftersom vi använder 'no-cors' får vi inget läsbart svar från Google,
+            // så vi antar att det lyckades om inget nätverksfel inträffade.
+            console.log('Anmälan skickad till Google Sheet:', formData);
+            setIsSubmitted(true);
+
+        } catch (error) {
+            console.error("Fel vid sändning till Google Sheet:", error);
+            alert("Något gick fel vid sändningen. Vänligen försök igen.");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     // Förbättrade input-klasser

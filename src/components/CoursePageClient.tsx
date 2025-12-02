@@ -5,7 +5,6 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from "react-i18next";
 import CourselyWidget from '@/components/CourselyWidget';
 
-// Obs: Vi behöver propsen här för att veta språket
 interface CoursesPageClientProps {
     params: { lang: string };
 }
@@ -15,17 +14,12 @@ export default function CoursesPageClient({ params }: CoursesPageClientProps) {
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
-        // eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/set-state-in-effect
         setIsClient(true);
     }, []);
 
-    // Använd en placeholder-sträng om vi inte är säkra på klienten
     const pageTitle = isClient
         ? t('coursesPageTitle', { defaultValue: 'Våra Kurser & Schema' })
         : 'Våra Kurser & Schema';
-
-    // Använd params.lang för att säkerställa att länkar fungerar om de behövs
-    const currentLang = params.lang;
 
     return (
         <div className="pt-24 bg-[#1a1a1a] min-h-screen text-white">
@@ -42,7 +36,8 @@ export default function CoursesPageClient({ params }: CoursesPageClientProps) {
                         transform translate-x-0.5
                     "
                 >
-                    <CourselyWidget />
+                    {/* Viktigt: undvik rubrik-dubblering */}
+                    <CourselyWidget showHeader={false} />
                 </div>
             </div>
         </div>

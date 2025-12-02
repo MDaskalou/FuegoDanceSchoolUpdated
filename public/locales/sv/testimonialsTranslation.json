@@ -5,24 +5,14 @@
   "trustpilotRating": "⭐ 4.5 av 5 på Trustpilot",
   "seeReviewsButton": "Se omdömen",
   "testimonials": [
-    {
-      "id": 1,
-      "name": "Lisa B",
-      "imageSrc": "/img/Testimonials/LisaB.jpeg",
-      "text": "Det finns så många anledningar till varför jag tycker att alla borde komma och lära sig bachata på Fuego! Om jag bara skulle välja några få så är det för att lärarna verkligen är engagerade i att lära ut rätt teknik, de är passionerade i det de gör – och det märks verkligen. Hjälpinstruktörerna är också otroligt stöttande, alltid redo att hjälpa till och se till att alla känner sig bekväma och uppmuntrade. Det är en plats där du inte bara utvecklas som dansare, utan också känner dig som en del av en fantastisk gemenskap."
-    },
+
     {
       "id": 2,
       "name": "Amanda W",
       "imageSrc": "/img/Testimonials/AmandaW.jpg",
       "text": "Fuego är en dansskola där du känner dig välkommen från start. Lärarna är kunniga och hjälpsamma. För mig har dans inte alltid varit en självklarhet; när jag började på Fuego var jag väldigt osäker i danssammanhang, rädd för att göra fel, vilket gjorde mig spänd. Fuego har hjälpt mig växa som dansare; du får feedback på en mer personlig nivå, både från instruktörer och hjälplärare, vilket är ovärderligt."
     },
-    {
-      "id": 3,
-      "name": "Alessandro U",
-      "imageSrc": "/img/Testimonials/AlessandroU.jpg",
-      "text": "Rekommenderar starkt!! Fuego Dance School erbjuder en trygg och inspirerande miljö där både nybörjare och erfarna dansare får möjligheten att utvecklas. Skolan är trygg, välkomnande och lärarna är otroligt kunniga, pedagogiska och tydligt passionerade."
-    },
+
     {
       "id": 4,
       "name": "Elvir D",
@@ -32,7 +22,7 @@
     {
       "id": 5,
       "name": "My R",
-      "imageSrc": "/img/Testimonials/MyR.jpg",
+      "imageSrc": "/img/Testimonials/MyR.jpeg",
       "text": "Det jag uppskattar med Fuego är att man känner sig sedd och får specifik feedback utifrån sin dansnivå. Med fantastiska lärare och hjälplärare finns det alltid någon där med uppmuntrande ord och konstruktiv feedback. Kurserna kombinerar teori och praktik, vilket ger en bättre förståelse för dansen istället för att bara lära sig en koreografi."
     },
     {

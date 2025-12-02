@@ -1,0 +1,29 @@
+﻿{
+  "priceTitle": "Prices & Discounts",
+  "priceHighlight": "First time is always free – come try it out!",
+  "cardCourseTitle": "Courses",
+  "cardDiscountTitle": "Discounts",
+  "cardDropInTitle": "Drop-in on Sundays",
+  "tagPopular": "MOST POPULAR",
+  "discountStudent": "Student discount: 10%",
+  "discountCouple": "Couple discount: 15% per person",
+  "discountHalfOfSemester": "Half of semester discount: 35%",
+  "ctaBookNow": "Book now",
+
+  "courseLabelSingular": "course",
+  "courseLabelPlural": "courses",
+  "dropInNote": "If you book at least one course, the social is always included.",
+  "socialDanceLabel": "Social dance",
+
+  "courses": [
+    { "count": 1, "price": 1600, "popular": false },
+    { "count": 2, "price": 2600, "popular": true },
+    { "count": 3, "price": 3600, "popular": false },
+    { "count": 4, "price": 4600, "popular": false },
+    { "count": 5, "price": 5600, "popular": false }
+  ],
+  "dropInItems": [
+    { "count": 1, "price": 120, "isSocial": false },
+    { "count": 0, "price": 80, "labelKey": "socialDanceLabel", "isSocial": true }
+  ]
+}

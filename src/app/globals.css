@@ -74,3 +74,9 @@ body {
   /* Invertera innehållet inuti (för att text/bilder ska visas korrekt) */
   /* filter: invert(100%); */
 }
+
+/* Steg 1: gör hela widget-ytan transparent så att din mörka bakgrund lyser igenom */
+#container-iframe,
+#container-iframe * {
+  background-color: transparent !important;
+}

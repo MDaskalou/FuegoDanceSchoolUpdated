@@ -4,38 +4,102 @@
     {
       "title": "Allmänt",
       "questions": [
-        { "q": "Jag har aldrig dansat förut – passar era kurser för mig?", "a": "Absolut! Vi erbjuder nybörjarkurser som börjar från grunden. Vi rekommenderar att du börjar med Bachata Level 1." },
-        { "q": "Vad är Bachata Sensual?", "a": "Bachata Sensual är en modern variant av Bachata som lägger stor vikt vid kroppskontroll, musikalitet och flytande rörelser." },
-        { "q": "Är kurserna öppna för alla åldrar?", "a": "Våra kurser är designade för vuxna (16+). För yngre elever, vänligen kontakta oss direkt för specialarrangemang." },
-        { "q": "Erbjuder ni privatlektioner?", "a": "Ja, vi erbjuder privatlektioner med alla våra instruktörer. Kontakta oss för att boka tid och diskutera dina mål." }
+        {
+          "q": "Vad är Bachata Sensual?",
+          "a": "Bachata Sensual är en modern och uttrycksfull stil av bachata som skapades i Spanien av Korke och Judith. Den kännetecknas av mjuka, flytande rörelser som kroppsvågor och isoleringar, där starkt fokus ligger på musiktolkning och en nära kontakt mellan danspartners. Målet är inte bara att utföra steg, utan att använda hela kroppen för att visuellt uttrycka känslorna och nyanserna i musiken."
+        },
+        {
+          "q": "Jag har aldrig dansat förut – passar era kurser för mig?",
+          "a": "Absolut! Våra nybörjarkurser är utformade för dig som aldrig har tagit ett danssteg tidigare. Vi guidar dig steg för steg."
+        },
+        {
+          "q": "Är kurserna öppna för alla åldrar?",
+          "a": "Ja! Vi har elever från 18 till 60+. Alla är välkomna!"
+        },
+        {
+          "q": "Erbjuder ni privatlektioner?",
+          "a": "Ja! Du kan boka privatlektioner med våra instruktörer, vilket är perfekt om du vill utvecklas snabbare eller gå igenom specifika saker. Gå till fliken 'Instruktörer' för att läsa mer och kontakta den instruktör du är intresserad av att boka en tid med."
+        }
       ]
     },
     {
       "title": "Praktiskt",
       "questions": [
-        { "q": "Behöver jag ha en danspartner?", "a": "Nej, du behöver inte en partner. Vi roterar partners i klasserna för att främja inlärning och social dans. Du kan anmäla dig ensam." },
-        { "q": "Vilka kläder ska jag ha på mig?", "a": "Bekväma kläder som tillåter rörelse och skor med slät sula som inte fastnar på golvet är bäst. Många använder dansskor, men det är inget krav för nybörjare." }
+        {
+          "q": "Behöver jag komma med partner?",
+          "a": "Nej! Du kan komma själv. Vi roterar partners så att alla får dansa med alla."
+        },
+        {
+          "q": "Vad händer om det är ojämnt antal följare och förare?",
+          "a": "Vi gör vårt bästa för att balansera grupperna. Ibland får man vänta något byte, men vi har ofta hjälpinstruktörer som kliver in."
+        },
+        {
+          "q": "Vad ska jag ha på mig?",
+          "a": "Bekväma kläder du kan röra dig fritt i. Sneakers eller dansskor med glid fungerar bra – inget krav på speciella skor."
+        }
       ]
     },
     {
       "title": "Kurser och tider",
       "questions": [
-        { "q": "Hur vet jag vilken nivå jag ska gå?", "a": "Vi har detaljerade nivåbeskrivningar på vår kurssida. Om du är osäker, kontakta oss så hjälper vi dig att placera dig rätt." },
-        { "q": "Hur lång är en kursperiod?", "a": "En vanlig kursperiod är 8 veckor, men vi erbjuder även intensivkurser och workshops." }
+        {
+          "q": "Hur lång är varje kurs?",
+          "a": "Kurserna är 8 veckor långa med 1 lektion i veckan på 1,5 timme."
+        },
+        {
+          "q": "Har ni drop-in?",
+          "a": "Nej, men första lektionen är alltid gratis så att du kan prova på innan du bestämmer dig."
+        },
+        {
+          "q": "Kan jag ta igen en missad lektion?",
+          "a": "Ja, om det finns plats i en annan grupp på samma nivå kan du hoppa in där den veckan. Kontakta oss så hjälper vi dig."
+        }
       ]
     },
     {
       "title": "Priser och rabatter",
       "questions": [
-        { "q": "Har ni studentrabatt?", "a": "Ja, vi erbjuder 10% rabatt för studenter mot uppvisande av giltigt student-ID." },
-        { "q": "Hur fungerar parrabatten?", "a": "När du anmäler dig som ett fast par (leader och follower) får ni 15% rabatt per person." }
+        {
+          "q": "Vad kostar kurserna?",
+          "a": "1 kurs = 1600 kr, 2 kurser = 2600 kr, 3 kurser = 3600 kr, och så vidare. Se vår prislista för alla nivåer."
+        },
+        {
+          "q": "Jag är student – får jag rabatt?",
+          "a": "Ja! Vi erbjuder 10% rabatt för studenter. Ta med giltigt student-ID."
+        },
+        {
+          "q": "Har ni parrabatt?",
+          "a": "Ja, om ni anmäler er som par får ni 15% rabatt. Ni måste anmäla er tillsammans och till samma antal kurser, men det är inget krav att gå i samma kurs."
+        },
+        {
+          "q": "Jag kan bara komma varannan vecka – får jag rabatt?",
+          "a": "Ja, du får 35% rabatt om du bara kan delta varannan vecka."
+        },
+        {
+          "q": "Kan man kombinera rabatter?",
+          "a": "Nej, rabatter kan tyvärr inte kombineras. Du väljer den rabatt som passar dig bäst."
+        }
       ]
     },
     {
       "title": "Anmälan",
       "questions": [
-        { "q": "Hur gör jag för att anmäla mig?", "a": "Anmälan görs direkt via vårt bokningssystem Coursely, som du hittar under fliken 'Kurser'." },
-        { "q": "Är anmälan bindande?", "a": "Ja, din anmälan är bindande. Läs våra fullständiga villkor innan du betalar." }
+        {
+          "q": "Hur anmäler jag mig?",
+          "a": "Du kan anmäla dig på två sätt: 1) Gå till vår 'Schema'-sida och klicka på 'Boka nu'. 2) Gå till sidan 'Våra Kurser' för detaljer och boka därifrån."
+        },
+        {
+          "q": "Hur anmäler jag mig till öppet hus?",
+          "a": "Du anmäler dig via knappen 'Anmäl dig till Öppet Hus' högst upp på startsidan. VIKTIGT: En anmälan garanterar inte en plats, det är först till kvarn som gäller."
+        },
+        {
+          "q": "Kan jag anmäla mig till flera kurser?",
+          "a": "Absolut! Du väljer enkelt flera kurser i anmälningsformuläret."
+        },
+        {
+          "q": "Kan jag ångra min betalning?",
+          "a": "Ja, enligt distansavtalslagen har du 14 dagars ångerrätt från köpet, förutsatt att kursen inte har startat. Om kursen har börjat eller du deltagit i prova-på-lektionen gäller inte ångerrätten."
+        }
       ]
     }
   ]

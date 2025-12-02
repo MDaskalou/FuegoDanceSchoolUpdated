@@ -1,0 +1,21 @@
+﻿{
+  "footerTitle": "Fuego Dance School",
+  "footerMotto": "Your place for Bachata, community, and growth.",
+  "navLinksTitle": "Quick Links",
+  "contactInfoTitle": "Contact & Studio",
+  "familyCtaTitle": "Join the Family",
+  "familyCtaText": "Subscribe to our newsletter to get updates on new courses and social events.",
+  "subscribeButton": "Subscribe",
+  "address": "Doktor Westrings Gata 14D",
+  "city": "413 24 Gothenburg",
+  "email": "info@fuegoschool.se",
+  "copyright": "© {{year}} Fuego Dance School. All rights reserved.",
+  "nav": {
+    "home": "Home",
+    "schedule": "Schedule",
+    "courses": "Courses",
+    "prices": "Prices",
+    "instructors": "Instructors",
+    "faq": "FAQ"
+  }
+}
