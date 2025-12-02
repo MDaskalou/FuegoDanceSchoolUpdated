@@ -109,9 +109,11 @@ const AccordionCategory: React.FC<{ category: Category; defaultOpen?: boolean }>
 
 // --- Huvudkomponent (Client) ---
 // FIX: Tog bort { params } från argumenten eftersom den inte användes (löser ESLint-felet "unused var")
-export default function FAQPageClient() {
+export default function FAQPageClient({params}:FAQPageClientProps){
     const { t } = useTranslation("faqTranslation");
     const [isMounted, setIsMounted] = useState(false);
+    const { lang } = params;
+
 
     useEffect(() => {
         // FIX: Använder setTimeout(0) för att undvika "synchronous state update"-felet
