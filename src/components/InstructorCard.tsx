@@ -26,9 +26,7 @@ interface InstructorCardProps {
 }
 
 const InstructorCard: React.FC<InstructorCardProps> = ({ instructor, index }) => {
-    // OBS: Se till att namespace matchar din filstruktur (t.ex. "sv.json" -> "translation" eller "instructors")
-    // Om du bara har en fil som heter sv.json brukar namespace vara "translation" eller "common".
-    // Här använder jag "instructorTranslation" baserat på din kod, men ändra om det behövs.
+
     const { t } = useTranslation("instructorTranslation");
     const [isExpanded, setIsExpanded] = useState(false);
 
