@@ -1,7 +1,10 @@
 ﻿"use client";
 
-import React, { useEffect } from 'react';
-import dynamic from 'next/dynamic';
+import React, { useEffect, useState } from 'react';
+// VIKTIGT: Vi importerar Hero som vanligt (inte dynamic).
+// Detta tar bort den svarta "Laddar innehåll..."-rutan.
+import { Hero } from "@/components/Hero";
+
 import { About } from "@/components/About";
 import Schedule from "@/components/Schedule";
 import Price from "@/components/Price";
@@ -9,36 +12,27 @@ import Event from "@/components/Event";
 import InstagramFeed from "@/components/InstagramFeeds";
 import TestimonialsSection from "@/components/TestimonialsSection";
 
-// 1. Deklarera Hero-komponenten dynamiskt
-const DynamicHero = dynamic(
-    () => import('@/components/Hero').then((mod) => mod.Hero),
-    {
-        ssr: false,
-        loading: () => (
-            <div className="h-[calc(100vh-80px)] w-full bg-black flex items-center justify-center">
-                <p className="text-white text-xl">Laddar innehåll...</p>
-            </div>
-        ),
-    }
-);
-
 interface HomePageClientProps {
     params: { lang: string };
 }
 
-// 2. Huvud Client Component
 export default function HomePageClient({ params }: HomePageClientProps) {
+    const [isMounted, setIsMounted] = useState(false);
 
-    // 3. Fix för ESLint/Build: Vi "använder" params
     useEffect(() => {
+        setIsMounted(true);
         if (process.env.NODE_ENV === 'development') {
             // console.log("Home page loaded for lang:", params.lang);
         }
     }, [params]);
 
+    // Om vi inte har mountat än, rendera en tom fragment eller en väldigt enkel loader
+    // för att undvika att "råa" översättningsnycklar (heroTitle) blinkar till.
+    // Men för snabbast möjliga upplevelse renderar vi direkt.
+
     return (
         <>
-            <DynamicHero />
+            <Hero />
             <About />
             <Schedule />
             <Price />

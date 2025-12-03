@@ -39,6 +39,9 @@ export const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isClient, setIsClient] = useState(false);
 
+    // NYTT: State för att hantera "fade-in" av texten
+    const [mounted, setMounted] = useState(false);
+
     const { t, i18n } = useTranslation("navbarTranslation");
     const currentLang = i18n.language;
 
@@ -54,9 +57,15 @@ export const Navbar = () => {
         window.addEventListener("scroll", onScroll, { passive: true });
         return () => window.removeEventListener("scroll", onScroll);
     }, []);
-    // eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/set-state-in-effect
+
+    // Effekt: Hantera client-side mounting för att undvika flimmer
     useEffect(() => {
         setIsClient(true);
+        // Samma delay-trick som i Hero för att säkerställa att översättningen är laddad
+        const timer = setTimeout(() => {
+            setMounted(true);
+        }, 100);
+        return () => clearTimeout(timer);
     }, []);
 
     // Effekt: Lås body-scroll när mobilmenyn är öppen
@@ -67,17 +76,14 @@ export const Navbar = () => {
     }, [isMenuOpen]);
 
     // Effekt: Stäng menyn vid sidbyte
-    // Fixat: ESLint-felet "set-state-in-effect" löses genom att endast bero på pathname
     useEffect(() => {
         if (isMenuOpen) {
-            // ESLint klagar inte på detta, eftersom anropet inte är synkront.
             const timer = setTimeout(() => {
                 setIsMenuOpen(false);
             }, 0);
-
-            return () => clearTimeout(timer); // Rensa timern vid unmount/nästa körning
+            return () => clearTimeout(timer);
         }
-    }, [pathname]); // Endast beroende av pathname
+    }, [pathname, isMenuOpen]);
 
     // Effekt: Stäng menyn med "Escape"-tangenten
     useEffect(() => {
@@ -93,44 +99,29 @@ export const Navbar = () => {
         const newLang = currentLang === "sv" ? "en" : "sv";
         i18n.changeLanguage(newLang);
 
-        // Fixat: ESLint-varningen "prefer-const" genom att byta let till const
-        const pathSegments = pathname.split('/').filter(Boolean); // ["sv", "instructors"]
+        const pathSegments = pathname.split('/').filter(Boolean);
         const pathWithoutLang = pathSegments.length > 1 ? `/${pathSegments.slice(1).join('/')}` : '/';
 
         router.push(`/${newLang}${pathWithoutLang}`);
     };
 
-    // Funktion: Hantera "aktiv" länk-styling (för icke-scroll-länkar)
+    // Funktion: Hantera "aktiv" länk-styling
     const getLinkClass = (href: string) => {
-        const active = "text-orange-500 font-bold md:after:scale-x-100"; // Klasser för aktiv länk
-        const inactive = "text-gray-300 md:text-gray-400"; // Klasser för inaktiv länk
-
-        // Bygg den fullständiga sökvägen, t.ex. /sv/instructors
+        const active = "text-orange-500 font-bold md:after:scale-x-100";
+        const inactive = "text-gray-300 md:text-gray-400";
         const fullHref = `/${currentLang}${href}`;
-
-        // Använd startsWith för att matcha sub-sidor (t.ex. /sv/instructors/details)
-        // Jämför: /sv/instructors mot /sv/instructors (true)
-        // Jämför: /sv mot /sv/instructors (false)
         return `${NAV_LINK_BASE} ${pathname.startsWith(fullHref) ? active : inactive}`;
     };
 
-    // Funktion: Hantera "aktiv" scroll-länk-styling (endast startsidan)
+    // Funktion: Hantera "aktiv" scroll-länk-styling
     const getScrollBtnClass = () => {
         const langHomepage = `/${currentLang}`;
         const inactive = "text-gray-300 md:text-gray-400";
-
-        // Scroll-länkar är bara "aktiva" när vi är på exakt startsidan.
-        // I detta fall använder vi bara inaktiv färg.
-        if (pathname === langHomepage || pathname === `${langHomepage}/`) {
-            // Om man vill att scroll-länkarna ska vara aktiva på startsidan kan man lägga till "active" här:
-            // return `${NAV_LINK_BASE} ${inactive} text-orange-500 font-bold`;
-        }
-
         return `${NAV_LINK_BASE} ${inactive}`;
     };
 
     return (
-        <header // Använd <header> istället för <nav> för semantisk korrekthet
+        <header
             ref={navRef}
             role="banner"
             aria-label="Huvudnavigering"
@@ -143,7 +134,7 @@ export const Navbar = () => {
                 : "bg-gradient-to-r from-[#1f1f1f] to-[#3a1f1d]"}
             `}
         >
-            {/* === LOGO === */}
+            {/* === LOGO (Visas alltid direkt) === */}
             <Link href={`/${currentLang}`} className="flex shrink-0 cursor-pointer items-center gap-2.5">
                 <Image
                     src="/img/Navbar/FuegoLogoimg.png"
@@ -161,7 +152,6 @@ export const Navbar = () => {
 
             {/* === Språk & Hamburgare === */}
             <div className="flex items-center gap-2">
-                {/* --- Språkknapp --- */}
                 <button
                     type="button"
                     onClick={handleLanguageChange}
@@ -191,9 +181,9 @@ export const Navbar = () => {
                 </button>
             </div>
 
-            {/* === NAV-LÄNKAR WRAPPER (MD: flex-1 för centrering) === */}
+            {/* === NAV-LÄNKAR WRAPPER === */}
             <div className="md:flex md:flex-1 md:justify-center">
-                <nav // Använd <nav> här för själva länklistan
+                <nav
                     id="main-nav"
                     role="navigation"
                     className={`
@@ -204,12 +194,19 @@ export const Navbar = () => {
                         ${isMenuOpen ? "flex animate-fadeSlideUp" : "hidden md:flex"}
                     `}
                 >
-                    <ul className="m-0 flex list-none flex-col items-center gap-4 p-0 md:flex-row md:gap-7">
+                    {/* HÄR ÄR FIXEN:
+                        Vi lägger till 'transition-opacity' och styr opaciteten med 'mounted'.
+                        Detta gör att länkarna är osynliga tills språket är laddat.
+                    */}
+                    <ul className={`
+                        m-0 flex list-none flex-col items-center gap-4 p-0 md:flex-row md:gap-7
+                        transition-opacity duration-500 ease-out
+                        ${mounted ? 'opacity-100' : 'opacity-0'}
+                    `}>
                         {/* --- Scroll-länkar --- */}
                         <li><Link href={`/${currentLang}/#heroreel`} className={getScrollBtnClass()}><FaHome className={ICON_STYLE} /> {t("nav.home")}</Link></li>
                         <li><Link href={`/${currentLang}/#schedule`} className={getScrollBtnClass()}><FaCalendarAlt className={ICON_STYLE} /> {t("nav.schedule")}</Link></li>
                         <li>
-                            {/* CTA Länk - FIX: Ny statisk kurssida */}
                             <Link
                                 href={`/${currentLang}/courses`}
                                 className={`
@@ -234,8 +231,6 @@ export const Navbar = () => {
                 </nav>
             </div>
 
-            {/* CSS-hack för att definiera de delade ikon-klasserna */}
-            {/* Nav-link-base ska DEFINIERAS i globals.css, men ikon-stilen kan vara här. */}
             <style jsx>{`
                 .icon-style {
                     font-size: 1.6rem;

@@ -1,22 +1,18 @@
-﻿// src/components/FAQPageClient.tsx
-"use client";
+﻿"use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from "react-i18next";
 import { FaChevronDown, FaPlus, FaMinus } from 'react-icons/fa';
 
-// --- Typdefinitioner ---
 interface Question { q: string; a: string; }
 interface Category { id: string; title: string; questions: Question[]; }
 
-// VIKTIGT: Lägg till props interface
 interface FAQPageClientProps {
     params: {
         lang: string;
     };
 }
 
-// --- FAQ Item Component ---
 const AccordionItem: React.FC<{ question: Question }> = ({ question }) => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -64,7 +60,6 @@ const AccordionItem: React.FC<{ question: Question }> = ({ question }) => {
     );
 };
 
-// --- FAQ Category Component ---
 const AccordionCategory: React.FC<{ category: Category; defaultOpen?: boolean }> = ({ category, defaultOpen = false }) => {
     const [isCategoryOpen, setIsCategoryOpen] = useState(defaultOpen);
 
@@ -104,22 +99,22 @@ const AccordionCategory: React.FC<{ category: Category; defaultOpen?: boolean }>
     );
 };
 
-// --- Huvudkomponent - NU MED PARAMS PROP ---
 export default function FAQPageClient({ params }: FAQPageClientProps) {
-    const { t, ready } = useTranslation("faqTranslation");
+    const { t, ready, i18n } = useTranslation("faqTranslation");
+    const [isHydrated, setIsHydrated] = useState(false);
 
-    // Du kan använda params.lang om du behöver
-    // const { lang } = params;
+    useEffect(() => {
+        // Vänta tills både translations och hydration är klara
+        if (ready && i18n.language === params.lang) {
+            setIsHydrated(true);
+        }
+    }, [ready, i18n.language, params.lang]);
 
-    if (!ready) {
+    // Visa ingenting under den första millisekunden - förhindrar flash
+    if (!isHydrated) {
         return (
-            <div className="pt-24 pb-16 min-h-screen bg-transparent">
-                <div className="container mx-auto max-w-3xl px-4">
-                    <div className="text-center mb-12 pt-8">
-                        <div className="h-12 bg-white/5 rounded-lg animate-pulse mb-4 max-w-md mx-auto"></div>
-                        <div className="w-24 h-1 bg-orange-500/30 mx-auto rounded-full"></div>
-                    </div>
-                </div>
+            <div className="pt-24 pb-16 min-h-screen bg-transparent" style={{ opacity: 0 }}>
+                {/* Gömd skeleton - renderas men visas inte */}
             </div>
         );
     }
@@ -127,7 +122,16 @@ export default function FAQPageClient({ params }: FAQPageClientProps) {
     const categories: Category[] = t("categories", { returnObjects: true }) as Category[] || [];
 
     return (
-        <div className="pt-24 pb-16 bg-transparent min-h-screen text-white">
+        <div className="pt-24 pb-16 bg-transparent min-h-screen text-white" style={{
+            animation: 'fadeIn 0.3s ease-in'
+        }}>
+            <style jsx>{`
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+            `}</style>
+
             <div className="container mx-auto max-w-3xl px-4">
                 <div className="text-center mb-12 pt-8">
                     <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">
