@@ -10,9 +10,33 @@ const options = {
     supportedLngs: Object.keys(supportedLngs),
     defaultNS: "navbarTranslation",
     fallbackNS: "navbarTranslation",
-    backend: { loadPath: "/locales/{{lng}}/{{ns}}.json" },
-    detection: { order: ["path"], caches: [] },
-    interpolation: { escapeValue: false },
+
+    backend: {
+        loadPath: "/locales/{{lng}}/{{ns}}.json",
+        requestOptions: {
+            cache: 'force-cache',
+        },
+    },
+
+    detection: {
+        order: ["path"],
+        caches: []
+    },
+
+    interpolation: {
+        escapeValue: false
+    },
+
+    react: {
+        useSuspense: false,
+    },
+
+    preload: ["sv", "en"],
 };
-i18n.use(Backend).use(initReactI18next).init({ ...options });
+
+i18n
+    .use(Backend)
+    .use(initReactI18next)
+    .init(options);
+
 export default i18n;

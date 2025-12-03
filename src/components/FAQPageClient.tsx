@@ -1,19 +1,16 @@
 ﻿"use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from "react-i18next";
 import { FaChevronDown, FaPlus, FaMinus } from 'react-icons/fa';
 
-// --- Typdefinitioner ---
 interface Question { q: string; a: string; }
 interface Category { id: string; title: string; questions: Question[]; }
 
-// Vi behåller interfacet ifall det behövs för importer, men vi använder det inte i funktionen nedan för att slippa ESLint-varningar
 export interface FAQPageClientProps {
     params: { lang: string };
 }
 
-// --- FAQ Item Component (Individuell fråga) ---
 const AccordionItem: React.FC<{ question: Question }> = ({ question }) => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -35,7 +32,6 @@ const AccordionItem: React.FC<{ question: Question }> = ({ question }) => {
                     {question.q}
                 </span>
 
-                {/* Ikon-container */}
                 <div className={`
                     flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full border border-white/10
                     transition-all duration-300
@@ -49,7 +45,6 @@ const AccordionItem: React.FC<{ question: Question }> = ({ question }) => {
                 </div>
             </button>
 
-            {/* Svarspanel */}
             <div
                 className={`overflow-hidden transition-[max-height, opacity] duration-500 ease-in-out ${
                     isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
@@ -63,8 +58,6 @@ const AccordionItem: React.FC<{ question: Question }> = ({ question }) => {
     );
 };
 
-
-// --- FAQ Category Component (En kategori med frågor) ---
 const AccordionCategory: React.FC<{ category: Category; defaultOpen?: boolean }> = ({ category, defaultOpen = false }) => {
     const [isCategoryOpen, setIsCategoryOpen] = useState(defaultOpen);
 
@@ -80,7 +73,6 @@ const AccordionCategory: React.FC<{ category: Category; defaultOpen?: boolean }>
                     {category.title}
                 </span>
 
-                {/* Roterande Chevron */}
                 <FaChevronDown
                     className={`
                         w-5 h-5 text-orange-500 transition-transform duration-500
@@ -89,7 +81,6 @@ const AccordionCategory: React.FC<{ category: Category; defaultOpen?: boolean }>
                 />
             </button>
 
-            {/* Panel för frågor */}
             <div
                 id={`faq-panel-${category.id}`}
                 className={`overflow-hidden transition-[max-height] duration-700 ease-in-out ${
@@ -106,33 +97,28 @@ const AccordionCategory: React.FC<{ category: Category; defaultOpen?: boolean }>
     );
 };
 
+export default function FAQPageClient() {
+    const { t, ready } = useTranslation("faqTranslation");
 
-// --- Huvudkomponent (Client) ---
-// FIX: Tog bort { params } från argumenten eftersom den inte användes (löser ESLint-felet "unused var")
-export default function FAQPageClient({params}:FAQPageClientProps){
-    const { t } = useTranslation("faqTranslation");
-    const [isMounted, setIsMounted] = useState(false);
-    const { lang } = params;
-
-
-    useEffect(() => {
-        // FIX: Använder setTimeout(0) för att undvika "synchronous state update"-felet
-        const timer = setTimeout(() => {
-            setIsMounted(true);
-        }, 0);
-        return () => clearTimeout(timer);
-    }, []);
+    // Visa loading state medan translations laddar
+    if (!ready) {
+        return (
+            <div className="pt-24 pb-16 min-h-screen bg-transparent">
+                <div className="container mx-auto max-w-3xl px-4">
+                    <div className="text-center mb-12 pt-8">
+                        <div className="h-12 bg-white/5 rounded-lg animate-pulse mb-4 max-w-md mx-auto"></div>
+                        <div className="w-24 h-1 bg-orange-500/30 mx-auto rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     const categories: Category[] = t("categories", { returnObjects: true }) as Category[] || [];
-
-    if (!isMounted) {
-        return <div className="pt-24 pb-16 min-h-screen"></div>;
-    }
 
     return (
         <div className="pt-24 pb-16 bg-transparent min-h-screen text-white">
             <div className="container mx-auto max-w-3xl px-4">
-
                 <div className="text-center mb-12 pt-8">
                     <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">
                         {t('faqPageTitle', { defaultValue: 'Vanliga frågor' })}
@@ -143,15 +129,12 @@ export default function FAQPageClient({params}:FAQPageClientProps){
                 <div className="space-y-2">
                     {Array.isArray(categories) && categories.map((category, index) => (
                         <AccordionCategory
-                            key={index}
-                            // Skapar ett ID baserat på titeln för att undvika Hydration Error
+                            key={category.title}
                             category={{ ...category, id: category.title.replace(/\s/g, "") }}
-                            // Öppnar alltid den första kategorin i listan automatiskt
                             defaultOpen={index === 0}
                         />
                     ))}
                 </div>
-
             </div>
         </div>
     );

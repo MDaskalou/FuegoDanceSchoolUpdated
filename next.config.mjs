@@ -8,6 +8,8 @@ const nextConfig = {
     // output: 'export',
     // basePath: '/FuegoDanceSchoolUpdated',
 
+
+    reactStrictMode: true,
     trailingSlash: true,
 
     images: {
