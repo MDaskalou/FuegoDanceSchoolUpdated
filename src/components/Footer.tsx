@@ -39,7 +39,7 @@ export const Footer = () => {
                             <a href="https://www.instagram.com/fuegodanceschool/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                                 <FaInstagram className="w-6 h-6 hover:text-orange-500 transition-colors" />
                             </a>
-                            <a href="https://www.facebook.com/fuegodanceschool" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                            <a href="https://www.facebook.com/fuegodschool" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                                 <FaFacebook className="w-6 h-6 hover:text-orange-500 transition-colors" />
                             </a>
                         </div>

@@ -29,334 +29,350 @@
         "Utbildad idrottslärare",
         "Vunnit flera Jack & Jill-tävlingar"
       ],
-      "levels": ["Level 1", "Advanced Foundations"]
+      "levels": [
+        "Level 1",
+        "Advanced Foundations"
+      ]
     },
     {
       "id": 2,
       "name": "Irina",
-      "focus": "Follower styling, musikalitet & koreografi",
-      "bio": "Irina har en stark bakgrund inom balett, latin och modern dans och har undervisat i bachata sedan 2017. Hon fokuserar på musikalitet, flow och självförtroende och leder styling- och koreografiklasser på Fuego.",
+      "focus": "Bachata Sensual, teknik och styling",
+      "bio": "Irina har dansat sedan hon var 5 år gammal: balett, ballroom och latinodans. Hon har undervisat bachata sedan 2017 och är medgrundare till Fuego Dance School. Med bakgrund som erfaren dansare samt lärare till vardags, lägger Irina stor vikt på grunder och teknik.",
       "imageSrc": "/img/Instructors/instruktörIrina.jpg",
       "role": "main",
-      "experience": "8+ år av professionell dans och undervisning",
+      "experience": "8+ års dansundervisning och 9+ som lärare",
       "specialties": [
-        "Follower styling",
-        "Body movement",
-        "Koreografi",
-        "Balett- och teknikbaserad träning"
+        "Bachata Sensual-teknik",
+        "Styling och kroppskontroll",
+        "Nörd inom dansteknik"
       ],
       "achievements": [
-        "Lång erfarenhet av balett och latindans",
-        "Undervisar bachata sedan 2017",
+        "Medgrundare av Fuego Dance School",
         "1,5 års mentorskap hos grundarna till bachata sensual Korke & Judith",
-        "Utbildad lärare"
+        "Utbildad lärare",
+        "Utbildning i dansteknik"
       ],
-      "levels": ["Styling", "Choreography"]
+      "levels": [
+        "Mammaledig"
+      ]
     },
     {
       "id": 3,
       "name": "Jennifer",
-      "focus": "Teknik och musikalitet",
-      "bio": "Jennifer har dansat sedan hon var barn och har erfarenhet av bland annat balett, jazz, hiphop och bugg. Det var dock bachata som verkligen fastnade. Hon är en pedagogisk instruktör som kombinerar tydlighet med lekfullhet.",
+      "focus": "Mer info kommer snart",
+      "bio": "Mer information kommer snart.",
       "imageSrc": "/img/Instructors/instruktörJennifer.jpg",
       "role": "main",
-      "experience": "Flera års erfarenhet av bachata och annan pardans",
+      "experience": "Mer info kommer snart",
       "specialties": [
-        "Musikalitet och uttryck",
-        "Strukturerad men lekfull undervisning",
-        "Skapar utmanande men roliga klasser"
+        "Mer info kommer snart"
       ],
       "achievements": [
-        "Lång dansbakgrund i flera stilar",
-        "Aktiv instruktör på Fuego Dance School",
-        "Uppskattad för sin kombination av tydlighet och lekfullhet"
+        "Mer info kommer snart"
       ],
-      "levels": ["Level 4 Technique Isolation", "Level 4", "Level 4 Technique"]
+      "levels": [
+        "Level 4 Technique Isolation",
+        "Level 4",
+        "Level 4 Technique"
+      ]
     },
     {
       "id": 4,
       "name": "Karin",
-      "focus": "Teknik, trygghet & dansglädje",
-      "bio": "Karin har dansat bachata och flera andra stilar under många år och har varit en del av Fuego nästan från starten. För henne handlar dans om glädje och att eleverna ska lämna klassen med en positiv känsla i kroppen.",
+      "focus": "Mer info kommer snart",
+      "bio": "Mer information kommer snart.",
       "imageSrc": "/img/Instructors/instruktörKarin.jpg",
       "role": "main",
-      "experience": "Många års erfarenhet av dans och handledning",
+      "experience": "Mer info kommer snart",
       "specialties": [
-        "Utveckling med konkreta delmål",
-        "Teknik och kroppsmedvetenhet",
-        "Stöttande och coachande undervisning",
-        "Skapa trygg och inkluderande miljö"
+        "Mer info kommer snart"
       ],
       "achievements": [
-        "Varit med på Fuegos resa från början",
-        "Utbildad studie- och yrkesvägledare",
-        "Stark fokus på lyssnande och coachning"
+        "Mer info kommer snart"
       ],
-      "levels": ["Ledig"]
+      "levels": [
+        "Ledig"
+      ]
     },
     {
       "id": 5,
       "name": "Raminta",
-      "focus": "Follower styling & uttryck",
-      "bio": "Raminta fokuserar på styling, uttryck och musikalitet för followers. Mer detaljerad information om hennes bakgrund kommer snart.",
+      "focus": "Mer info kommer snart",
+      "bio": "Mer information kommer snart.",
       "imageSrc": "/img/Instructors/instruktörRaminta.jpg",
       "role": "main",
-      "experience": "Erfaren follower med fokus på styling",
+      "experience": "Mer info kommer snart",
       "specialties": [
-        "Follower styling",
-        "Musikalitet och uttryck",
-        "Feminint flow"
+        "Mer info kommer snart"
       ],
       "achievements": [
-        "Del av Fuegos instruktörsteam",
-        "Aktiv på stylingklasser och socialdans"
+        "Mer info kommer snart"
       ],
-      "levels": ["Choreography class"]
+      "levels": [
+        "Choreography class"
+      ]
     },
     {
       "id": 6,
       "name": "Andris",
-      "focus": "Grunder & utveckling på nivå 2",
-      "bio": "Andris hittade bachata 2018 och blev riktigt fast 2022. Han brinner för att utmana sig själv, gå tillbaka till grunderna och hela tiden utvecklas – något han tar med sig in i undervisningen.",
+      "focus": "Mer info kommer snart",
+      "bio": "Mer information kommer snart.",
       "imageSrc": "/img/Instructors/instruktörAndris.jpeg",
       "role": "main",
-      "experience": "Flera års erfarenhet av bachata och annan dans",
+      "experience": "Mer info kommer snart",
       "specialties": [
-        "Starka grunder för nivå 2",
-        "Tålamod och tydlig förklaring",
-        "Utveckling genom utmaning",
-        "Inspirera nybörjare att fortsätta"
+        "Mer info kommer snart"
       ],
       "achievements": [
-        "Aktiv dansare och instruktör på Fuego",
-        "Känd för sitt fokus på grunder och repetition"
+        "Mer info kommer snart"
       ],
-      "levels": ["Level 2", "Level 2 Technique"]
+      "levels": [
+        "Level 2",
+        "Level 2 Technique"
+      ]
     },
     {
       "id": 7,
       "name": "Emma",
-      "focus": "Teknik & naturlig rörelse",
-      "bio": "Emma hittade till bachata via salsa och andra danser, och fastnade direkt när hon började på Fuego 2022. She fokuserar på naturlig rörelse, kroppskontroll och att bygga självförtroende hos nybörjare.",
+      "focus": "Mer info kommer snart",
+      "bio": "Mer information kommer snart.",
       "imageSrc": "/img/Instructors/instruktörEmma.jpg",
       "role": "main",
-      "experience": "Flera års erfarenhet av socialdans och bachata",
+      "experience": "Mer info kommer snart",
       "specialties": [
-        "Naturlig och avslappnad rörelse",
-        "Kroppsmedvetenhet och flow",
-        "Skapa trygg och peppande stämning"
+        "Mer info kommer snart"
       ],
       "achievements": [
-        "Började som hjälp­instruktör och undervisar nu nivå 2",
-        "Engagerad i elevernas långsiktiga utveckling"
+        "Mer info kommer snart"
       ],
-      "levels": ["Level 2", "Level 2 Technique"]
+      "levels": [
+        "Level 2",
+        "Level 2 Technique"
+      ]
     },
     {
       "id": 8,
       "name": "Feras",
-      "focus": "Förarteknik, mjuk lead & connection",
-      "bio": "Feras började dansa bachata när han flyttade utomlands 2022 och sökte ett sätt att möta människor. Han fastnade snabbt för bachata sensual och brinner nu för mjuk förning, tydlig teknik och närvaro i dansen.",
+      "focus": "Mer info kommer snart",
+      "bio": "Mer information kommer snart.",
       "imageSrc": "/img/Instructors/instruktörFeras.jpeg",
       "role": "helper",
-      "experience": "Sedan 2022 aktiv inom bachata och undervisning som hjälpinstruktör",
+      "experience": "Mer info kommer snart",
       "specialties": [
-        "Mjuk och tydlig förning",
-        "Connection och närvaro",
-        "Teknik i bachata sensual",
-        "Stöd för förare på olika nivåer"
+        "Mer info kommer snart"
       ],
       "achievements": [
-        "Hjälpinstruktör på Fuego Dance School",
-        "Stark drivkraft att växa och utvecklas som förare och instruktör"
+        "Mer info kommer snart"
       ],
-      "levels": ["Level 3", "Level 3 Technique", "Role Rotation"]
+      "levels": [
+        "Level 3",
+        "Level 3 Technique",
+        "Role Rotation"
+      ]
     },
     {
       "id": 9,
       "name": "Filip",
-      "focus": "Body movement & flow",
-      "bio": "Filip assisterar främst inom body movement och hjälper elever att hitta mer flöde och kroppskontroll i sin dans. Mer detaljerad information kommer snart.",
+      "focus": "Mer info kommer snart",
+      "bio": "Mer information kommer snart.",
       "imageSrc": "/img/Instructors/instruktörFilip.jpg",
       "role": "helper",
-      "experience": "Flera års fokus på body movement",
+      "experience": "Mer info kommer snart",
       "specialties": [
-        "Body movement",
-        "Flöde och kroppsmedvetenhet",
-        "Styling-stöd"
+        "Mer info kommer snart"
       ],
       "achievements": [
-        "Aktiv hjälpinstruktör på styling- och teknikklasser"
+        "Mer info kommer snart"
       ],
-      "levels": ["Level 1", "Advanced Foundations"]
+      "levels": [
+        "Level 1",
+        "Advanced Foundations"
+      ]
     },
     {
       "id": 10,
       "name": "Ines",
-      "focus": "Nybörjarstöd & socialdans",
-      "bio": "Ines är en av Fuegos hjälpinstruktörer och brinner för att nybörjare ska känna sig sedda och välkomna, både på klasser och socialdans.",
+      "focus": "Mer info kommer snart",
+      "bio": "Mer information kommer snart.",
       "imageSrc": "/img/Instructors/instruktörInes.jpg",
       "role": "helper",
-      "experience": "Assisterande instruktör sedan flera år",
+      "experience": "Mer info kommer snart",
       "specialties": [
-        "Stöd till nya elever",
-        "Skapa inkluderande miljö",
-        "Trygg socialdans"
+        "Mer info kommer snart"
       ],
       "achievements": [
-        "Viktig del av Fuegos välkomnande atmosfär"
+        "Mer info kommer snart"
       ],
-      "levels": ["Level 4 Technique Isolation", "Level 4", "Level 4 Technique"]
+      "levels": [
+        "Level 4 Technique Isolation",
+        "Level 4",
+        "Level 4 Technique"
+      ]
     },
     {
       "id": 12,
       "name": "Sisco",
-      "focus": "Role rotation, teknik & kroppskontroll",
-      "bio": "Sisco började med två vänsterfötter men fastnade totalt för bachata. Han är idag certifierad instruktör och tekniknörd med 20+ års erfarenhet från gym- och träningsvärlden, vilket ger honom en djup förståelse för kroppen.",
+      "focus": "Mer info kommer snart",
+      "bio": "Mer information kommer snart.",
       "imageSrc": "/img/Instructors/instruktörSisco.jpg",
       "role": "main",
-      "experience": "8+ år inom bachata och över 20 år inom träning",
+      "experience": "Mer info kommer snart",
       "specialties": [
-        "Role rotation (föra och följa)",
-        "Teknik och detaljer",
-        "Kroppsaktivering och hållning",
-        "Humor och tydliga metaforer i undervisningen"
+        "Mer info kommer snart"
       ],
       "achievements": [
-        "Certifierad Bachata Sensual Level 1-instruktör",
-        "Rolerotation-instruktör",
-        "Känd för sitt fokus på trygga och tekniska dansare"
+        "Mer info kommer snart"
       ],
-      "levels": ["Level 3", "Level 3 Technique", "Role Rotation"]
+      "levels": [
+        "Level 3",
+        "Level 3 Technique",
+        "Role Rotation"
+      ]
     },
     {
       "id": 13,
       "name": "Sofie",
-      "focus": "Follower flow & stylingstöd",
-      "bio": "Sofie assisterar i stylingklasser och hjälper elever att hitta ett naturligt, avslappnat flöde i sin dans.",
+      "focus": "Mer info kommer snart",
+      "bio": "Mer information kommer snart.",
       "imageSrc": "/img/Instructors/instruktörSofie.jpg",
       "role": "helper",
-      "experience": "Flera års erfarenhet som styling-assistent",
+      "experience": "Mer info kommer snart",
       "specialties": [
-        "Naturligt flow",
-        "Avslappnad rörelse",
-        "Stöd i follower-styling"
+        "Mer info kommer snart"
       ],
       "achievements": [
-        "Uppskattad hjälpinstruktör på stylingklasser"
+        "Mer info kommer snart"
       ],
-      "levels": ["Choreography", "Level 2", "Level 2 Technique"]
+      "levels": [
+        "Choreography",
+        "Level 2",
+        "Level 2 Technique"
+      ]
     },
     {
       "id": 14,
       "name": "Tomas",
-      "focus": "Socialdans, teknik & mindset",
-      "bio": "Tomas upptäckte bachata under sin rehabilitering efter en kampsportsskada. Sedan dess har han tävlat, rest, undervisat på festivaler och till och med dömt tävlingar. Han tar med sig ett analytiskt mindset från MMA in i dansundervisningen.",
+      "focus": "Musikalitet, connection, social dancing",
+      "bio": "Tomas kombinerar danspsykologi, musikalitet och teknik för att skapa tydlig och trygg kommunikation i pardans. Hans undervisning bygger på effektiv utveckling, flow och social säkerhet på dansgolvet.",
       "imageSrc": "/img/Instructors/instruktörTomas.jpg",
       "role": "main",
-      "experience": "Flera års erfarenhet av tävling, socialdans och undervisning",
+      "experience": "4+ år inom bachata",
       "specialties": [
-        "Socialdans och tävlingsförberedelse",
-        "Tekniknedbrytning inspirerad av kampsport",
-        "Peppande och utvecklingsfokuserad undervisning"
+        "Musicality & timing i social dancing",
+        "Connection och lead–follow-kommunikation",
+        "Flow, isolations och kontroll i kroppen",
+        "Individanpassad coaching och tydlig teknik"
       ],
       "achievements": [
-        "Tävlat och vunnit i bachata",
-        "Undervisat och dömt på festivaler och events"
+        "Certifieringar inom: Musicality in Ballet – Tiler Peck (USA), Mental Skills for Dancers – Dr. Peter Lovatt (UK), Intro to Teaching – Nicholas Palmquist (USA), Effective Training for Dancers – Luke Abnett (AUS), Dance Psychology – Dr. Peter Lovatt (UK), Anatomy for Dancers – Luke Abnett (AUS)",
+        "Gero Miglé — Social Dance Lab",
+        "Tävlings och showerfarenhet på social-fokuserade events i Norden",
+        "Aktiv instruktör på Fuego Dance School och bokad på workshops runt Sverige"
       ],
-      "levels": ["Level 4 Technique Isolation", "Level 4", "Level 4 Technique"]
+      "levels": [
+        "Level 4",
+        "Isolation and Technique"
+      ]
     },
     {
       "id": 15,
       "name": "Nora",
-      "focus": "Trygghet & kommunikation",
-      "bio": "Nora är en varm och närvarande instruktör som blandar noggrannhet med lekfullhet. Med bakgrund som sexolog och lång erfarenhet inom socialt arbete fokuserar hon starkt på trygghet, respekt och samspel i dansen.",
+      "focus": "Mer info kommer snart",
+      "bio": "Mer information kommer snart.",
       "imageSrc": "/img/Instructors/instruktörNora.jpg",
       "role": "main",
-      "experience": "Flera års undervisning av nybörjare och mellannivå",
+      "experience": "Mer info kommer snart",
       "specialties": [
-        "Trygg och inkluderande lärmiljö",
-        "Både föra och följa samt role rotation",
-        "Individuell feedback och kommunikation"
+        "Mer info kommer snart"
       ],
       "achievements": [
-        "Rolerotation-instruktör",
-        "Bachata Sensual Level 1-instruktör",
-        "Känd för sitt fokus på samtycke, frihet och respekt"
+        "Mer info kommer snart"
       ],
-      "levels": ["Level 3", "Level 3 Technique", "Role Rotation"]
+      "levels": [
+        "Level 3",
+        "Level 3 Technique",
+        "Role Rotation"
+      ]
     },
     {
       "id": 17,
       "name": "Sasha",
-      "focus": "Klassassistent & struktur",
-      "bio": "Sasha hjälper till att hålla klasserna flytande och stöttar både instruktörer och elever under repetition och övningar.",
+      "focus": "Mer info kommer snart",
+      "bio": "Mer information kommer snart.",
       "imageSrc": "/img/Instructors/instruktörSasha.jpg",
       "role": "helper",
-      "experience": "Flera års erfarenhet som klassassistent",
+      "experience": "Mer info kommer snart",
       "specialties": [
-        "Klasskoordinering",
-        "Stöd under repetition",
-        "Detaljorienterad hjälp i klass"
+        "Mer info kommer snart"
       ],
       "achievements": [
-        "Bidrar till att klasserna flyter smidigt"
+        "Mer info kommer snart"
       ],
-      "levels": ["Choreography", "Level 2", "Level 2 Technique"]
+      "levels": [
+        "Choreography",
+        "Level 2",
+        "Level 2 Technique"
+      ]
     },
     {
       "id": 18,
       "name": "Alessandro",
-      "focus": "Förarteknik & tydlig kommunikation",
-      "bio": "Alessandro har en stabil teknisk grund i förarteknik och hjälper förare på alla nivåer att förstå hur signaler och connection fungerar.",
+      "focus": "Mer info kommer snart",
+      "bio": "Mer information kommer snart.",
       "imageSrc": "/img/Instructors/AlessandroU.jpg",
       "role": "helper",
-      "experience": "Flera års undervisning i förarteknik",
+      "experience": "Mer info kommer snart",
       "specialties": [
-        "Grundläggande och vidareutvecklad förarteknik",
-        "Tydlig och rak kommunikation",
-        "Stöd till förare på alla nivåer"
+        "Mer info kommer snart"
       ],
       "achievements": [
-        "Uppskattad för sin tydlighet och tekniska förklaringar"
+        "Mer info kommer snart"
       ],
-      "levels": ["Level 4 Technique Isolation", "Level 4", "Level 4 Technique"]
+      "levels": [
+        "Level 4 Technique Isolation",
+        "Level 4",
+        "Level 4 Technique"
+      ]
     },
     {
       "id": 19,
       "name": "Lisa",
-      "focus": "Styling & personligt uttryck",
-      "bio": "Lisa assisterar i stylingklasser och hjälper elever att utveckla sitt personliga uttryck och ett mjukt, naturligt flöde.",
+      "focus": "Mer info kommer snart",
+      "bio": "Mer information kommer snart.",
       "imageSrc": "/img/Instructors/instruktörLisa.jpeg",
       "role": "helper",
-      "experience": "Flera års erfarenhet inom styling-assistans",
+      "experience": "Mer info kommer snart",
       "specialties": [
-        "Personligt uttryck",
-        "Styling-stöd",
-        "Flöde och musikalitet"
+        "Mer info kommer snart"
       ],
       "achievements": [
-        "Stödjer elever i att hitta sin egen stil"
+        "Mer info kommer snart"
       ],
-      "levels": ["Choreography", "Level 2", "Level 2 Technique"]
+      "levels": [
+        "Choreography",
+        "Level 2",
+        "Level 2 Technique"
+      ]
     },
     {
       "id": 20,
       "name": "Johanna",
-      "focus": "Nybörjarstöd & trygg lärmiljö",
-      "bio": "Johanna är en engagerad assistent som fokuserar på att skapa en trygg och välkomnande miljö för nybörjare, både på klasser och socialdans.",
+      "focus": "Mer info kommer snart",
+      "bio": "Mer information kommer snart.",
       "imageSrc": "/img/Instructors/instruktörJohanna.jpg",
       "role": "helper",
-      "experience": "Flera års erfarenhet som nybörjarassistent",
+      "experience": "Mer info kommer snart",
       "specialties": [
-        "Trygg och välkomnande atmosfär",
-        "Stöd till nya dansare",
-        "Engagerande och tydlig hjälp"
+        "Mer info kommer snart"
       ],
       "achievements": [
-        "Uppskattad av nybörjare för sitt tålamod och stöd"
+        "Mer info kommer snart"
       ],
-      "levels": ["Level 1", "Advanced Foundations"]
+      "levels": [
+        "Level 1",
+        "Advanced Foundations"
+      ]
     }
   ]
 }

@@ -1,6 +1,6 @@
 ﻿{
-  "instructorsTitle": "Meet Our Main Instructors",
-  "helperInstructorsTitle": "Our Helper Instructors & Assistant Dancers",
+  "instructorsTitle": "Meet our instructors",
+  "helperInstructorsTitle": "Our assistant instructors",
   "focusLabel": "Focus:",
   "showMore": "Read more",
   "showLess": "Show less",
@@ -11,200 +11,368 @@
     {
       "id": 1,
       "name": "Mikael",
-      "focus": "Bachata Sensual, Technique",
-      "bio": "Mikael has been teaching for over 8 years and is the founder of Fuego Dance School. He has a passion for technical precision and helping students build a strong foundation.",
+      "focus": "Bachata Sensual, technique & musicality",
+      "bio": "Mikael has been dancing for over 12 years with a focus on bachata and is the founder of Fuego Dance School. With a background as a PE teacher and Thai boxing instructor, he teaches clearly, structurally, and always with a focus on safety and technique in partner dancing.",
       "imageSrc": "/img/Instructors/instruktörMikael.jpg",
       "role": "main",
-      "experience": "10+ years of teaching and competing in Bachata",
-      "specialties": ["Sensual Bachata", "Musicality", "Leading techniques", "Body isolation"],
-      "achievements": ["Founder of Fuego Dance School", "Workshop instructor across Europe", "Developed curriculum for all levels"]
+      "experience": "7+ years of dance teaching and 9 years as a Thai boxing instructor",
+      "specialties": [
+        "Bachata Sensual technique",
+        "Musicality and body control",
+        "Pedagogical and structured teaching",
+        "Safety and security in partner dance"
+      ],
+      "achievements": [
+        "Founder of Fuego Dance School",
+        "1.5 years mentorship with Bachata Sensual founders Korke & Judith",
+        "Certified Bachata Sensual Level 1 and 2 instructor training",
+        "Educated PE teacher",
+        "Won several Jack & Jill competitions"
+      ],
+      "levels": [
+        "Level 1",
+        "Advanced Foundations"
+      ]
     },
     {
       "id": 2,
       "name": "Irina",
-      "focus": "Follower Styling, Choreography",
-      "bio": "With a background in ballet and contemporary dance, Irina focuses on building musicality, fluidity, and confidence. She leads all styling and choreography classes.",
+      "focus": "Bachata Sensual, technique and styling",
+      "bio": "Irina has been dancing since she was 5 years old: ballet, ballroom, and latin dance. She has been teaching bachata since 2017 and is a co-founder of Fuego Dance School. With a background as an experienced dancer and teacher in daily life, Irina places great emphasis on basics and technique.",
       "imageSrc": "/img/Instructors/instruktörIrina.jpg",
       "role": "main",
-      "experience": "8 years of professional dance and teaching",
-      "specialties": ["Follower styling", "Body movement", "Choreography", "Ballet fusion"],
-      "achievements": ["Professional dancer", "Choreographer for multiple Bachata events", "Ballet-trained technique specialist"]
+      "experience": "8+ years of dance teaching and 9+ as a teacher",
+      "specialties": [
+        "Bachata Sensual technique",
+        "Styling and body control",
+        "Dance technique nerd"
+      ],
+      "achievements": [
+        "Co-founder of Fuego Dance School",
+        "1.5 years mentorship with Bachata Sensual founders Korke & Judith",
+        "Educated teacher",
+        "Education in dance technique"
+      ],
+      "levels": [
+        "Maternity leave"
+      ]
     },
     {
       "id": 3,
       "name": "Jennifer",
-      "focus": "Bachata Levels 2 & 3",
-      "bio": "A dynamic duo known for their pedagogy and fun classes. They specialize in making complex moves accessible to the intermediate level.",
+      "focus": "More info coming soon",
+      "bio": "More information coming soon.",
       "imageSrc": "/img/Instructors/instruktörJennifer.jpg",
       "role": "main",
-      "experience": "6 years teaching together as a couple",
-      "specialties": ["Partner work", "Intermediate technique", "Musicality", "Fun and engaging teaching"],
-      "achievements": ["Developed Level 2 & 3 curriculum", "Competed internationally", "Known for breaking down complex moves"]
+      "experience": "More info coming soon",
+      "specialties": [
+        "More info coming soon"
+      ],
+      "achievements": [
+        "More info coming soon"
+      ],
+      "levels": [
+        "Level 4 Technique Isolation",
+        "Level 4",
+        "Level 4 Technique"
+      ]
     },
     {
       "id": 4,
       "name": "Karin",
-      "focus": "Advanced Technique",
-      "bio": "Karin is dedicated to the advanced levels, helping students refine their technique with a focus on connection and body control.",
+      "focus": "More info coming soon",
+      "bio": "More information coming soon.",
       "imageSrc": "/img/Instructors/instruktörKarin.jpg",
       "role": "main",
-      "experience": "7 years of advanced instruction",
-      "specialties": ["Advanced technique", "Connection", "Body control", "Precision"],
-      "achievements": ["Specialist in advanced levels", "Known for technical precision", "Refined teaching methodology"]
+      "experience": "More info coming soon",
+      "specialties": [
+        "More info coming soon"
+      ],
+      "achievements": [
+        "More info coming soon"
+      ],
+      "levels": [
+        "On leave"
+      ]
     },
     {
       "id": 5,
       "name": "Raminta",
-      "focus": "Follower Styling",
-      "bio": "Raminta focuses on musicality and fluidity in styling. She assists with drop-ins and workshops.",
+      "focus": "More info coming soon",
+      "bio": "More information coming soon.",
       "imageSrc": "/img/Instructors/instruktörRaminta.jpg",
       "role": "main",
-      "experience": "5 years of styling instruction",
-      "specialties": ["Musicality", "Fluidity", "Styling workshops", "Drop-in sessions"],
-      "achievements": ["Workshop specialist", "Known for musical interpretation", "Regular drop-in instructor"]
+      "experience": "More info coming soon",
+      "specialties": [
+        "More info coming soon"
+      ],
+      "achievements": [
+        "More info coming soon"
+      ],
+      "levels": [
+        "Choreography class"
+      ]
     },
     {
       "id": 6,
       "name": "Andris",
-      "focus": "Level 1 Fundamentals",
-      "bio": "Andris has a passion for teaching fundamentals. He ensures a safe and relaxed start for all beginners.",
+      "focus": "More info coming soon",
+      "bio": "More information coming soon.",
       "imageSrc": "/img/Instructors/instruktörAndris.jpeg",
       "role": "main",
-      "experience": "6 years teaching beginners",
-      "specialties": ["Fundamentals", "Beginner confidence", "Safe learning environment", "Basic technique"],
-      "achievements": ["Beginner specialist", "Creates welcoming atmosphere", "Patient and clear instruction"]
+      "experience": "More info coming soon",
+      "specialties": [
+        "More info coming soon"
+      ],
+      "achievements": [
+        "More info coming soon"
+      ],
+      "levels": [
+        "Level 2",
+        "Level 2 Technique"
+      ]
     },
     {
       "id": 7,
       "name": "Emma",
-      "focus": "Salsa & Bachata",
-      "bio": "Emma splits her time between Salsa and Bachata. She is a key figure in our social dance evenings.",
+      "focus": "More info coming soon",
+      "bio": "More information coming soon.",
       "imageSrc": "/img/Instructors/instruktörEmma.jpg",
       "role": "main",
-      "experience": "7 years in Latin dance",
-      "specialties": ["Salsa", "Bachata", "Social dancing", "Cross-style techniques"],
-      "achievements": ["Multi-style instructor", "Social dance coordinator", "Brings energy to every event"]
+      "experience": "More info coming soon",
+      "specialties": [
+        "More info coming soon"
+      ],
+      "achievements": [
+        "More info coming soon"
+      ],
+      "levels": [
+        "Level 2",
+        "Level 2 Technique"
+      ]
     },
     {
       "id": 8,
       "name": "Feras",
-      "focus": "Lead Technique",
-      "bio": "Feras focuses on clear leading and musical interpretation. He is one of the school's most experienced helper leads.",
+      "focus": "More info coming soon",
+      "bio": "More information coming soon.",
       "imageSrc": "/img/Instructors/instruktörFeras.jpeg",
       "role": "helper",
-      "experience": "4 years as assistant instructor",
-      "specialties": ["Clear leading", "Musical interpretation", "Helper lead support"],
-      "achievements": ["Most experienced helper lead", "Known for clarity", "Student favorite"]
+      "experience": "More info coming soon",
+      "specialties": [
+        "More info coming soon"
+      ],
+      "achievements": [
+        "More info coming soon"
+      ],
+      "levels": [
+        "Level 3",
+        "Level 3 Technique",
+        "Role Rotation"
+      ]
     },
     {
       "id": 9,
       "name": "Filip",
-      "focus": "Body Movement",
-      "bio": "Filip is an expert in body movement, helping students integrate more flow and sensuality into their dance.",
+      "focus": "More info coming soon",
+      "bio": "More information coming soon.",
       "imageSrc": "/img/Instructors/instruktörFilip.jpg",
       "role": "helper",
-      "experience": "3 years specializing in body movement",
-      "specialties": ["Body movement", "Flow", "Sensuality", "Body awareness"],
-      "achievements": ["Body movement expert", "Helps students find natural movement", "Workshop assistant"]
+      "experience": "More info coming soon",
+      "specialties": [
+        "More info coming soon"
+      ],
+      "achievements": [
+        "More info coming soon"
+      ],
+      "levels": [
+        "Level 1",
+        "Advanced Foundations"
+      ]
     },
     {
       "id": 10,
       "name": "Ines",
-      "focus": "Newcomer Support & Social",
-      "bio": "Ines is one of our newer assistants. Her goal is to make everyone feel seen in classes and socials.",
+      "focus": "More info coming soon",
+      "bio": "More information coming soon.",
       "imageSrc": "/img/Instructors/instruktörInes.jpg",
       "role": "helper",
-      "experience": "2 years as assistant",
-      "specialties": ["Newcomer support", "Social dance", "Creating inclusive environment"],
-      "achievements": ["Makes everyone feel welcome", "Social dance coordinator", "Beginner champion"]
+      "experience": "More info coming soon",
+      "specialties": [
+        "More info coming soon"
+      ],
+      "achievements": [
+        "More info coming soon"
+      ],
+      "levels": [
+        "Level 4 Technique Isolation",
+        "Level 4",
+        "Level 4 Technique"
+      ]
     },
     {
       "id": 12,
       "name": "Sisco",
-      "focus": "Role Rotation",
-      "bio": "Sisco leads role rotation and ensures everyone gets a balanced experience of both roles in dance.",
+      "focus": "More info coming soon",
+      "bio": "More information coming soon.",
       "imageSrc": "/img/Instructors/instruktörSisco.jpg",
       "role": "main",
-      "experience": "5 years teaching both roles",
-      "specialties": ["Role rotation", "Both lead and follow", "Versatile teaching", "Gender-neutral instruction"],
-      "achievements": ["Role rotation specialist", "Teaches both roles expertly", "Promotes balanced learning"]
+      "experience": "More info coming soon",
+      "specialties": [
+        "More info coming soon"
+      ],
+      "achievements": [
+        "More info coming soon"
+      ],
+      "levels": [
+        "Level 3",
+        "Level 3 Technique",
+        "Role Rotation"
+      ]
     },
     {
       "id": 13,
       "name": "Sofie",
-      "focus": "Follower Flow",
-      "bio": "Sofie assists in styling classes and focuses on helping students achieve a natural and relaxed flow.",
+      "focus": "More info coming soon",
+      "bio": "More information coming soon.",
       "imageSrc": "/img/Instructors/instruktörSofie.jpg",
       "role": "helper",
-      "experience": "3 years in styling assistance",
-      "specialties": ["Natural flow", "Relaxed movement", "Styling support"],
-      "achievements": ["Known for natural teaching style", "Styling class favorite", "Helps students relax"]
+      "experience": "More info coming soon",
+      "specialties": [
+        "More info coming soon"
+      ],
+      "achievements": [
+        "More info coming soon"
+      ],
+      "levels": [
+        "Choreography",
+        "Level 2",
+        "Level 2 Technique"
+      ]
     },
     {
       "id": 14,
       "name": "Tomas",
-      "focus": "Social Dance",
-      "bio": "Tomas is a highly valued assistant at our social dance evenings and beginner classes.",
+      "focus": "Musicality, connection, social dancing",
+      "bio": "Tomas combines dance psychology, musicality, and technique to create clear and safe communication in partner dancing. His teaching is based on effective development, flow, and social safety on the dance floor.",
       "imageSrc": "/img/Instructors/instruktörTomas.jpg",
       "role": "main",
-      "experience": "6 years teaching with Jennifer",
-      "specialties": ["Partner work", "Social dancing", "Beginner support", "Clear communication"],
-      "achievements": ["Part of teaching duo", "Social dance expert", "Beginner-friendly approach"]
+      "experience": "4+ years in bachata",
+      "specialties": [
+        "Musicality & timing in social dancing",
+        "Connection and lead–follow communication",
+        "Flow, isolations and body control",
+        "Individualized coaching and clear technique"
+      ],
+      "achievements": [
+        "Certifications in: Musicality in Ballet – Tiler Peck (USA), Mental Skills for Dancers – Dr. Peter Lovatt (UK), Intro to Teaching – Nicholas Palmquist (USA), Effective Training for Dancers – Luke Abnett (AUS), Dance Psychology – Dr. Peter Lovatt (UK), Anatomy for Dancers – Luke Abnett (AUS)",
+        "Gero Miglé — Social Dance Lab",
+        "Competition and show experience at social-focused events in the Nordics",
+        "Active instructor at Fuego Dance School and booked for workshops around Sweden"
+      ],
+      "levels": [
+        "Level 4",
+        "Isolation and Technique"
+      ]
     },
     {
       "id": 15,
       "name": "Nora",
-      "focus": "Level 1 & 2",
-      "bio": "Nora is on hand to provide individual feedback during the lower levels.",
+      "focus": "More info coming soon",
+      "bio": "More information coming soon.",
       "imageSrc": "/img/Instructors/instruktörNora.jpg",
       "role": "main",
-      "experience": "4 years teaching beginners and intermediates",
-      "specialties": ["Individual feedback", "Level 1 & 2", "Personal attention", "Technique refinement"],
-      "achievements": ["Detailed feedback specialist", "Patient instructor", "Helps students progress"]
+      "experience": "More info coming soon",
+      "specialties": [
+        "More info coming soon"
+      ],
+      "achievements": [
+        "More info coming soon"
+      ],
+      "levels": [
+        "Level 3",
+        "Level 3 Technique",
+        "Role Rotation"
+      ]
     },
     {
       "id": 17,
       "name": "Sasha",
-      "focus": "Class Assistant",
-      "bio": "Sasha ensures everything runs smoothly during classes and assists with repetitions.",
+      "focus": "More info coming soon",
+      "bio": "More information coming soon.",
       "imageSrc": "/img/Instructors/instruktörSasha.jpg",
       "role": "helper",
-      "experience": "2 years as class assistant",
-      "specialties": ["Class coordination", "Repetition support", "Smooth operations"],
-      "achievements": ["Keeps classes running smoothly", "Reliable assistant", "Detail-oriented"]
+      "experience": "More info coming soon",
+      "specialties": [
+        "More info coming soon"
+      ],
+      "achievements": [
+        "More info coming soon"
+      ],
+      "levels": [
+        "Choreography",
+        "Level 2",
+        "Level 2 Technique"
+      ]
     },
     {
       "id": 18,
       "name": "Alessandro",
-      "focus": "Lead Technique",
-      "bio": "Alessandro has a solid foundation in leading technique and provides clear instruction to leaders of all levels.",
+      "focus": "More info coming soon",
+      "bio": "More information coming soon.",
       "imageSrc": "/img/Instructors/AlessandroU.jpg",
       "role": "helper",
-      "experience": "3 years teaching lead technique",
-      "specialties": ["Lead technique", "Clear instruction", "All levels support", "Technical foundation"],
-      "achievements": ["Solid technical foundation", "Clear communicator", "Helps leaders at all levels"]
+      "experience": "More info coming soon",
+      "specialties": [
+        "More info coming soon"
+      ],
+      "achievements": [
+        "More info coming soon"
+      ],
+      "levels": [
+        "Level 4 Technique Isolation",
+        "Level 4",
+        "Level 4 Technique"
+      ]
     },
     {
       "id": 19,
       "name": "Lisa",
-      "focus": "Musicality & Rhythm",
-      "bio": "Lina specializes in helping students understand musicality and rhythm to enhance their dancing experience.",
-      "imageSrc": "/img/Instructors/instruktörLisa.jpg",
+      "focus": "More info coming soon",
+      "bio": "More information coming soon.",
+      "imageSrc": "/img/Instructors/instruktörLisa.jpeg",
       "role": "helper",
-      "experience": "4 years focusing on musicality",
-      "specialties": ["Musicality", "Rhythm", "Dance expression", "Music interpretation"],
-      "achievements": ["Musicality expert", "Enhances dance experience", "Workshop assistant"]
+      "experience": "More info coming soon",
+      "specialties": [
+        "More info coming soon"
+      ],
+      "achievements": [
+        "More info coming soon"
+      ],
+      "levels": [
+        "Choreography",
+        "Level 2",
+        "Level 2 Technique"
+      ]
     },
     {
       "id": 20,
       "name": "Johanna",
-      "focus": "Advanced Partner Work",
-      "bio": "Carlos is dedicated to advanced partner work, helping students refine their connection and lead-follow dynamics.",
+      "focus": "More info coming soon",
+      "bio": "More information coming soon.",
       "imageSrc": "/img/Instructors/instruktörJohanna.jpg",
       "role": "helper",
-      "experience": "8 years teaching advanced partner techniques",
-      "specialties": ["Advanced partner work", "Connection", "Lead-follow dynamics", "Refined techniques"],
-      "achievements": ["Advanced partner work specialist", "Known for strong connection techniques", "Refined teaching methods"]
+      "experience": "More info coming soon",
+      "specialties": [
+        "More info coming soon"
+      ],
+      "achievements": [
+        "More info coming soon"
+      ],
+      "levels": [
+        "Level 1",
+        "Advanced Foundations"
+      ]
     }
   ]
 }

@@ -4,35 +4,33 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from "react-i18next";
 import InstructorCard, { Instructor } from './InstructorCard';
 
-// 1. Lägg till interfacet för params
 export interface InstructorsPageClientProps {
     params: { lang: string };
 }
 
-// 2. Ta emot params i funktionen
 export default function InstructorsPageClient({ params }: InstructorsPageClientProps) {
     const { t } = useTranslation("instructorTranslation");
     const [isMounted, setIsMounted] = useState(false);
 
-    // 3. Använd params i en useEffect för att göra både TypeScript och ESLint nöjda
+    // Använd params för att undvika ESLint-varningar och säkerställa uppdatering
     useEffect(() => {
+        setIsMounted(true);
         if (process.env.NODE_ENV === 'development') {
             // console.log("Instructors page loaded for lang:", params.lang);
         }
-        setIsMounted(true);
     }, [params]);
 
     // Hämta datan som en array av objekt
     const instructors = t('instructorsData', { returnObjects: true }) as Instructor[];
 
-    // Kontrollera att det faktiskt är en array
+    // Säkerställ att det är en array
     const allInstructors = Array.isArray(instructors) ? instructors : [];
 
     // Filtrera baserat på roll
     const mainInstructors = allInstructors.filter(i => i.role === 'main');
     const helperInstructors = allInstructors.filter(i => i.role === 'helper');
 
-    // Förhindra hydration mismatch genom att inte rendera förrän klienten är redo
+    // Förhindra hydration mismatch
     if (!isMounted) {
         return <div className="py-20 bg-[#1a1a1a] min-h-screen"></div>;
     }

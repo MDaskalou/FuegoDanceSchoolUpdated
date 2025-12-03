@@ -18,6 +18,6 @@ export function middleware(request: NextRequest) {
 export const config = {
     matcher: [
         '/',
-        '/((?!_next|api|favicon.ico).*)', // Matcha alla routes utom Next.js internals
+        '/((?!_next|api|icon.png).*)', // Matcha alla routes utom Next.js internals
     ],
 };
