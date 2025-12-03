@@ -1,16 +1,22 @@
-﻿"use client";
+﻿// src/components/FAQPageClient.tsx
+"use client";
 
 import React, { useState } from 'react';
 import { useTranslation } from "react-i18next";
 import { FaChevronDown, FaPlus, FaMinus } from 'react-icons/fa';
 
+// --- Typdefinitioner ---
 interface Question { q: string; a: string; }
 interface Category { id: string; title: string; questions: Question[]; }
 
-export interface FAQPageClientProps {
-    params: { lang: string };
+// VIKTIGT: Lägg till props interface
+interface FAQPageClientProps {
+    params: {
+        lang: string;
+    };
 }
 
+// --- FAQ Item Component ---
 const AccordionItem: React.FC<{ question: Question }> = ({ question }) => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -58,6 +64,7 @@ const AccordionItem: React.FC<{ question: Question }> = ({ question }) => {
     );
 };
 
+// --- FAQ Category Component ---
 const AccordionCategory: React.FC<{ category: Category; defaultOpen?: boolean }> = ({ category, defaultOpen = false }) => {
     const [isCategoryOpen, setIsCategoryOpen] = useState(defaultOpen);
 
@@ -97,10 +104,13 @@ const AccordionCategory: React.FC<{ category: Category; defaultOpen?: boolean }>
     );
 };
 
-export default function FAQPageClient() {
+// --- Huvudkomponent - NU MED PARAMS PROP ---
+export default function FAQPageClient({ params }: FAQPageClientProps) {
     const { t, ready } = useTranslation("faqTranslation");
 
-    // Visa loading state medan translations laddar
+    // Du kan använda params.lang om du behöver
+    // const { lang } = params;
+
     if (!ready) {
         return (
             <div className="pt-24 pb-16 min-h-screen bg-transparent">
