@@ -113,7 +113,6 @@ export default async function RootLayout({
                 {children}
             </main>
 
-            <ContactSection />
 
             <Footer />
 
