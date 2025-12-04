@@ -1,26 +1,29 @@
 ﻿{
-  "schedulePreamble": "Kommande termin",
-  "scheduleTitle": "Vårschema (vecka 5–16)",
-  "scheduleFooter1": "Gå med i vår bachata-familj",
-  "scheduleFooter2": "Träna med fokus. Dansa med frihet.",
-  "scheduleCta": "Se Våra Kurser",
+  "schedulePreamble": "Vårschema (Vecka 5-16)",
+  "scheduleTitle": "Veckoschema",
+  "scheduleImageAlt": "Bakgrundsbild av dansande par på Fuego Dance School",
   "dayMonday": "Måndag",
   "dayTuesday": "Tisdag",
   "dayWednesday": "Onsdag",
   "dayThursday": "Torsdag",
-  "daySunday": "Drop-in Söndag",
+  "daySunday": "Söndag",
+  "scheduleFooter1": "Gå med i vår bachata-familj",
+  "scheduleFooter2": "Träna med fokus. Dansa med frihet.",
+  "scheduleCta": "Registrera dig nu",
+  "noteWorkshopPrice": "120kr inkl. social",
+  "noteSocialPrice": "80kr",
   "courses": [
     {
       "dayKey": "dayMonday",
-      "time": "18:00–19:00",
-      "name": "Nivå 4 Teknik (Isolation)",
+      "time": "18:00 - 19:00",
+      "name": "Nivå 4 Isolationer",
       "instructors": "Tomas & Jennifer",
       "isNew": true,
       "isDropIn": false
     },
     {
       "dayKey": "dayMonday",
-      "time": "19:05–20:05",
+      "time": "19:05 - 20:05",
       "name": "Nivå 4",
       "instructors": "Tomas & Jennifer",
       "isNew": false,
@@ -28,7 +31,7 @@
     },
     {
       "dayKey": "dayMonday",
-      "time": "20:10–21:10",
+      "time": "20:10 - 21:10",
       "name": "Nivå 4 Teknik",
       "instructors": "Tomas & Jennifer",
       "isNew": false,
@@ -36,7 +39,7 @@
     },
     {
       "dayKey": "dayTuesday",
-      "time": "18:00–19:30",
+      "time": "18:00 - 19:30",
       "name": "Nivå 1",
       "instructors": "Mikael",
       "isNew": false,
@@ -44,15 +47,15 @@
     },
     {
       "dayKey": "dayTuesday",
-      "time": "19:30–21:00",
-      "name": "Avancerad Grund",
+      "time": "19:40 - 21:10",
+      "name": "Advanced Foundation",
       "instructors": "Mikael",
       "isNew": false,
       "isDropIn": false
     },
     {
       "dayKey": "dayWednesday",
-      "time": "18:00–19:00",
+      "time": "18:00 - 19:00",
       "name": "Koreografiklass",
       "instructors": "Raminta",
       "isNew": true,
@@ -60,7 +63,7 @@
     },
     {
       "dayKey": "dayWednesday",
-      "time": "19:05–20:05",
+      "time": "19:05 - 20:05",
       "name": "Nivå 2 Teknik",
       "instructors": "Andris & Emma",
       "isNew": true,
@@ -68,7 +71,7 @@
     },
     {
       "dayKey": "dayWednesday",
-      "time": "20:10–21:10",
+      "time": "20:10 - 21:10",
       "name": "Nivå 2",
       "instructors": "Andris & Emma",
       "isNew": false,
@@ -76,7 +79,7 @@
     },
     {
       "dayKey": "dayThursday",
-      "time": "18:00–19:00",
+      "time": "18:00 - 19:00",
       "name": "Nivå 3",
       "instructors": "Nora & Sisco",
       "isNew": false,
@@ -84,7 +87,7 @@
     },
     {
       "dayKey": "dayThursday",
-      "time": "19:05–20:05",
+      "time": "19:05 - 20:05",
       "name": "Nivå 3 Teknik",
       "instructors": "Nora & Sisco",
       "isNew": false,
@@ -92,29 +95,29 @@
     },
     {
       "dayKey": "dayThursday",
-      "time": "20:10–21:10",
-      "name": "Rolerotation",
+      "time": "20:10 - 21:10",
+      "name": "RoleRotation",
       "instructors": "Nora & Sisco",
       "isNew": false,
       "isDropIn": false
     },
     {
       "dayKey": "daySunday",
-      "time": "14:00–15:00",
+      "time": "14:00 - 15:00",
       "name": "Party Workshop",
-      "instructors": "Olika instruktörer",
-      "note": "120kr inkl. social",
+      "instructors": "",
       "isNew": false,
-      "isDropIn": true
+      "isDropIn": true,
+      "noteKey": "noteWorkshopPrice"
     },
     {
       "dayKey": "daySunday",
-      "time": "15:00–18:00",
+      "time": "15:00 - 18:00",
       "name": "Socialdans",
       "instructors": "",
-      "note": "80kr",
       "isNew": false,
-      "isDropIn": true
+      "isDropIn": true,
+      "noteKey": "noteSocialPrice"
     }
   ]
 }

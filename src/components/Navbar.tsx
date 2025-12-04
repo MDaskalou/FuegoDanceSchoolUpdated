@@ -120,6 +120,34 @@ export const Navbar = () => {
         return `${NAV_LINK_BASE} ${inactive}`;
     };
 
+    // Helper: handle clicks on anchor/hash links (e.g. /sv/#prices)
+    const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+        // If no hash, let Link/router handle it
+        const hashIndex = href.indexOf('#');
+        if (hashIndex === -1) return;
+
+        e.preventDefault();
+        const anchor = href.slice(hashIndex + 1);
+
+        // Normalize pathname (remove trailing slash)
+        const normalizedPath = pathname ? pathname.replace(/\/$/, '') : '';
+        const homePath = `/${currentLang}`;
+
+        // If we're already on the homepage, scroll to the element
+        if (normalizedPath === homePath) {
+            const el = document.getElementById(anchor);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Close mobile menu if open
+                setIsMenuOpen(false);
+                return;
+            }
+        }
+
+        // Otherwise navigate to the URL (this will load the page and the hash)
+        router.push(href);
+    };
+
     return (
         <header
             ref={navRef}
@@ -196,7 +224,7 @@ export const Navbar = () => {
                 >
                     {/* HÄR ÄR FIXEN:
                         Vi lägger till 'transition-opacity' och styr opaciteten med 'mounted'.
-                        Detta gör att länkarna är osynliga tills språket är laddat.
+                        Detta gör att länkarna är osynliga tills språket är laddad.
                     */}
                     <ul className={`
                         m-0 flex list-none flex-col items-center gap-4 p-0 md:flex-row md:gap-7
@@ -204,8 +232,16 @@ export const Navbar = () => {
                         ${mounted ? 'opacity-100' : 'opacity-0'}
                     `}>
                         {/* --- Scroll-länkar --- */}
-                        <li><Link href={`/${currentLang}/#heroreel`} className={getScrollBtnClass()}><FaHome className={ICON_STYLE} /> {t("nav.home")}</Link></li>
-                        <li><Link href={`/${currentLang}/#schedule`} className={getScrollBtnClass()}><FaCalendarAlt className={ICON_STYLE} /> {t("nav.schedule")}</Link></li>
+                        <li>
+                            <Link href={`/${currentLang}/#heroreel`} onClick={(e) => handleAnchorClick(e as any, `/${currentLang}/#heroreel`)} className={getScrollBtnClass()}>
+                                <FaHome className={ICON_STYLE} /> {t("nav.home")}
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href={`/${currentLang}/#schedule`} onClick={(e) => handleAnchorClick(e as any, `/${currentLang}/#schedule`)} className={getScrollBtnClass()}>
+                                <FaCalendarAlt className={ICON_STYLE} /> {t("nav.schedule")}
+                            </Link>
+                        </li>
                         <li>
                             <Link
                                 href={`/${currentLang}/courses`}
@@ -220,8 +256,16 @@ export const Navbar = () => {
                                 <FaBook className={ICON_STYLE} /> {t("nav.courses")}
                             </Link>
                         </li>
-                        <li><Link href={`/${currentLang}/#prices`} className={getScrollBtnClass()}><FaTags className={ICON_STYLE} /> {t("nav.prices")}</Link></li>
-                        <li><Link href={`/${currentLang}/#events`} className={getScrollBtnClass()}><FaStar className={ICON_STYLE} /> {t("nav.events")}</Link></li>
+                        <li>
+                            <Link href={`/${currentLang}/#prices`} onClick={(e) => handleAnchorClick(e as any, `/${currentLang}/#prices`)} className={getScrollBtnClass()}>
+                                <FaTags className={ICON_STYLE} /> {t("nav.prices")}
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href={`/${currentLang}/#events`} onClick={(e) => handleAnchorClick(e as any, `/${currentLang}/#events`)} className={getScrollBtnClass()}>
+                                <FaStar className={ICON_STYLE} /> {t("nav.events")}
+                            </Link>
+                        </li>
 
                         {/* --- Vanliga sid-länkar --- */}
                         <li><Link href={`/${currentLang}/instructors`} className={getLinkClass("/instructors")}><FaUsers className={ICON_STYLE} /> {t("nav.instructors")}</Link></li>

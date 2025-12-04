@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import { Playfair_Display, Lato, Great_Vibes } from "next/font/google";
 import '@/app/globals.css';
 import dynamic from "next/dynamic";
-import Script from "next/script"; // Behövs för GTM
+import Script from "next/script";
 import TranslationProvider from "@/i18n/TranslationProvider";
 import { Footer } from "@/components/Footer";
-import { ContactSection } from "@/components/Contact"; // Obs: Ändrade till ContactSection (kolla filnamn om det är Contact.tsx eller ContactSection.tsx)
+import { ContactSection } from "@/components/Contact";
 import CookieConsent from "@/components/CookieConsent";
+import initTranslations from "@/i18n";
 
-// --- Typsnitt ---
 const playfair = Playfair_Display({
     subsets: ["latin"],
     variable: "--font-playfair",
@@ -29,7 +29,6 @@ const greatVibes = Great_Vibes({
     display: "swap",
 });
 
-// --- METADATA (SEO) ---
 export const metadata: Metadata = {
     title: {
         default: "Fuego Dance School | Bachata i Göteborg",
@@ -61,11 +60,12 @@ export const metadata: Metadata = {
     },
 };
 
-// --- Dynamisk Navbar (Din kod) ---
 const DynamicNavbar = dynamic(() => import("@/components/Navbar").then(mod => mod.Navbar), {
     ssr: false,
     loading: () => <div style={{ height: 80, backgroundColor: '#1a1a1a' }}></div>
 });
+
+const i18nNamespaces = ['common', 'navbarTranslation', 'footerTranslation'];
 
 interface RootLayoutProps {
     children: React.ReactNode;
@@ -74,17 +74,18 @@ interface RootLayoutProps {
     };
 }
 
-export default function RootLayout({
-                                       children,
-                                       params,
-                                   }: RootLayoutProps) {
+export default async function RootLayout({
+                                             children,
+                                             params,
+                                         }: RootLayoutProps) {
     const GTM_ID = "GTM-5TDBRW66";
+
+    const { resources } = await initTranslations(params.lang, i18nNamespaces);
 
     return (
         <html lang={params.lang} className="scroll-smooth">
         <body className={`${playfair.variable} ${lato.variable} ${greatVibes.variable} font-sans bg-[#121212] text-white antialiased`}>
 
-        {/* Google Tag Manager (noscript) - Ska ligga direkt efter body start */}
         <noscript>
             <iframe
                 src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
@@ -94,7 +95,6 @@ export default function RootLayout({
             />
         </noscript>
 
-        {/* Google Tag Manager (Script) */}
         <Script id="google-tag-manager" strategy="afterInteractive">
             {`
                 (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -105,7 +105,7 @@ export default function RootLayout({
                 `}
         </Script>
 
-        <TranslationProvider lang={params.lang}>
+        <TranslationProvider namespaces={i18nNamespaces} resources={resources} lang={params.lang}>
 
             <DynamicNavbar />
 
@@ -113,10 +113,8 @@ export default function RootLayout({
                 {children}
             </main>
 
-            {/* GLOBAL CTA */}
             <ContactSection />
 
-            {/* GLOBAL FOOTER */}
             <Footer />
 
             <CookieConsent />

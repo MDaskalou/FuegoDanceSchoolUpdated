@@ -1,44 +1,28 @@
 ﻿"use client";
 
-import React, { useEffect, useState } from 'react';
-// VIKTIGT: Vi importerar Hero som vanligt (inte dynamic).
-// Detta tar bort den svarta "Laddar innehåll..."-rutan.
-import { Hero } from "@/components/Hero";
+import React from 'react';
+import Hero from './Hero';
+import ScheduleSection from './Schedule';
+import About from "@/components/About";
+import TestimonialsSection from './TestimonialsSection';
+import InstagramFeed from './InstagramFeeds';
+import { ContactSection } from './Contact';
 
-import { About } from "@/components/About";
-import Schedule from "@/components/Schedule";
-import Price from "@/components/Price";
-import Event from "@/components/Event";
-import InstagramFeed from "@/components/InstagramFeeds";
-import TestimonialsSection from "@/components/TestimonialsSection";
-
-interface HomePageClientProps {
+export interface HomePageClientProps {
     params: { lang: string };
 }
 
 export default function HomePageClient({ params }: HomePageClientProps) {
-    const [isMounted, setIsMounted] = useState(false);
-
-    useEffect(() => {
-        setIsMounted(true);
-        if (process.env.NODE_ENV === 'development') {
-            // console.log("Home page loaded for lang:", params.lang);
-        }
-    }, [params]);
-
-    // Om vi inte har mountat än, rendera en tom fragment eller en väldigt enkel loader
-    // för att undvika att "råa" översättningsnycklar (heroTitle) blinkar till.
-    // Men för snabbast möjliga upplevelse renderar vi direkt.
-
     return (
         <>
             <Hero />
-            <About />
-            <Schedule />
-            <Price />
-            <Event/>
-            <InstagramFeed />
-            <TestimonialsSection />
+            <main>
+                <About />
+                <ScheduleSection />
+                <TestimonialsSection />
+                <InstagramFeed />
+            </main>
+            <ContactSection />
         </>
     );
 }
