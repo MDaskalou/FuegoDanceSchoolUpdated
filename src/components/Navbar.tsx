@@ -75,15 +75,13 @@ export const Navbar = () => {
         return () => { style.overflow = ""; };
     }, [isMenuOpen]);
 
-    // Effekt: Stäng menyn vid sidbyte
+    // Effekt: Stäng menyn vid sidbyte. Viktigt: kör endast när `pathname` ändras —
+    // tidigare stängdes menyn även när `isMenuOpen` ändrades vilket ledde till att
+    // menyn öppnades och direkt stängdes. Nu sätter vi alltid `isMenuOpen=false`
+    // när route ändras.
     useEffect(() => {
-        if (isMenuOpen) {
-            const timer = setTimeout(() => {
-                setIsMenuOpen(false);
-            }, 0);
-            return () => clearTimeout(timer);
-        }
-    }, [pathname, isMenuOpen]);
+        setIsMenuOpen(false);
+    }, [pathname]);
 
     // Effekt: Stäng menyn med "Escape"-tangenten
     useEffect(() => {
@@ -115,7 +113,6 @@ export const Navbar = () => {
 
     // Funktion: Hantera "aktiv" scroll-länk-styling
     const getScrollBtnClass = () => {
-        const langHomepage = `/${currentLang}`;
         const inactive = "text-gray-300 md:text-gray-400";
         return `${NAV_LINK_BASE} ${inactive}`;
     };
