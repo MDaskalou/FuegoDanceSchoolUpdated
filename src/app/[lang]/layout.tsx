@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import Script from "next/script";
 import TranslationProvider from "@/i18n/TranslationProvider";
 import { Footer } from "@/components/Footer";
-import { ContactSection } from "@/components/Contact";
+// import { ContactSection } from "@/components/Contact"; // Om du använder denna, avkommentera
 import CookieConsent from "@/components/CookieConsent";
 import initTranslations from "@/i18n";
 
@@ -86,6 +86,28 @@ export default async function RootLayout({
         <html lang={params.lang} className="scroll-smooth">
         <body className={`${playfair.variable} ${lato.variable} ${greatVibes.variable} font-sans bg-[#121212] text-white antialiased`}>
 
+        {/* VIKTIGT: Detta script sätter Default Consent till 'denied'.
+              strategy="beforeInteractive" garanterar att detta körs INNAN GTM laddas.
+            */}
+        <Script id="google-consent-mode" strategy="beforeInteractive">
+            {`
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    
+                    // Sätt default till 'denied' för att blockera cookies tills godkännande sker
+                    gtag('consent', 'default', {
+                        'ad_storage': 'denied',
+                        'analytics_storage': 'denied',
+                        'ad_user_data': 'denied',
+                        'ad_personalization': 'denied',
+                        'personalization_storage': 'denied',
+                        'functionality_storage': 'granted', // Nödvändiga cookies tillåts
+                        'security_storage': 'granted',      // Säkerhetscookies tillåts
+                        'wait_for_update': 500
+                    });
+                `}
+        </Script>
+
         <noscript>
             <iframe
                 src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
@@ -95,13 +117,14 @@ export default async function RootLayout({
             />
         </noscript>
 
+        {/* Google Tag Manager - Main Script */}
         <Script id="google-tag-manager" strategy="afterInteractive">
             {`
-                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                })(window,document,'script','dataLayer','${GTM_ID}');
+                    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                    })(window,document,'script','dataLayer','${GTM_ID}');
                 `}
         </Script>
 
@@ -112,7 +135,6 @@ export default async function RootLayout({
             <main className="min-h-screen">
                 {children}
             </main>
-
 
             <Footer />
 
