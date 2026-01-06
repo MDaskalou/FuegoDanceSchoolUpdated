@@ -1,18 +1,11 @@
 ﻿import React from 'react';
 import OpenHouseForm from '@/components/OpenHouseForm';
-import initTranslations from '@/i18n';
-import TranslationProvider from '@/i18n/TranslationProvider';
 
-// VIKTIGT: Vi måste ladda 'openhouseTranslation' här
-const i18nNamespaces = ['openhouseTranslation', 'common'];
-
-export default async function OpenHousePage({ params: { lang } }: { params: { lang: string } }) {
-    // 1. Hämta översättningar på servern
-    const { i18n, resources } = await initTranslations(lang, i18nNamespaces);
-
+export default function OpenHousePage() {
     return (
-        // 2. Skicka med dem till TranslationProvider så att OpenHouseForm kan använda dem
-        <TranslationProvider namespaces={i18nNamespaces} resources={resources} lang={lang} i18nInstance={i18n}>
+        <main className="min-h-screen pt-24 bg-transparent text-white">
+            {/* Komponenten kommer nu ärva översättningarna från layoutens provider */}
             <OpenHouseForm />
-        </TranslationProvider>
+        </main>
     );
+}

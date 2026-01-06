@@ -65,7 +65,8 @@ const DynamicNavbar = dynamic(() => import("@/components/Navbar").then(mod => mo
     loading: () => <div style={{ height: 80, backgroundColor: '#1a1a1a' }}></div>
 });
 
-const i18nNamespaces = ['common', 'navbarTranslation', 'footerTranslation', 'bookingCompleteTranslation'];
+const i18nNamespaces = ['common', 'navbarTranslation', 'footerTranslation', 'bookingCompleteTranslation'
+, 'cookieConsentTranslation', 'aboutTranslation', 'openhouseTranslation'];
 
 interface RootLayoutProps {
     children: React.ReactNode;
