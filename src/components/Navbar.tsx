@@ -1,294 +1,187 @@
 ﻿"use client";
 
-import { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
-import { FaHome, FaCalendarAlt, FaBook, FaTags, FaStar, FaUsers, FaHeart, FaQuestion } from "react-icons/fa";
+import { usePathname, useRouter, useParams } from "next/navigation";
+import {
+  FaHome, FaCalendarAlt, FaBook, FaTags,
+  FaStar, FaUsers, FaHeart, FaQuestion
+} from "react-icons/fa";
 
-// --- Hook: Göm navbar vid scroll (TypeScript-version) ---
+// --- Hook: Göm navbar vid scroll ---
 function useHideOnScroll(offset: number = 80): boolean {
-    const [hidden, setHidden] = useState(false);
-    const lastY = useRef<number>(0);
+  const [hidden, setHidden] = useState(false);
+  const lastY = useRef<number>(0);
 
-    useEffect(() => {
-        const onScroll = () => {
-            const y = window.scrollY;
-            const goingDown = y > lastY.current;
-            setHidden(goingDown && y > offset);
-            lastY.current = y;
-        };
-        // Använder "passive: true" för bättre prestanda vid scroll
-        window.addEventListener("scroll", onScroll, { passive: true });
-        return () => window.removeEventListener("scroll", onScroll);
-    }, [offset]);
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY;
+      const goingDown = y > lastY.current;
+      setHidden(goingDown && y > offset);
+      lastY.current = y;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [offset]);
 
-    return hidden;
+  return hidden;
 }
 
-// --- BAS STYLING: Använd 'nav-link-base' som definierats via @apply i globals.css ---
-const NAV_LINK_BASE = "nav-link-base"; // Enkel klassnamn
+export const Navbar: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
-// Bas-styling för ikoner (används inom `nav-link-base` för mobil)
-const ICON_STYLE = "icon-style";
+  const { t, i18n } = useTranslation("navbarTranslation");
+  const params = useParams();
+  const router = useRouter();
+  const pathname = usePathname();
 
-// --- Huvudkomponent ---
-export const Navbar = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isScrolled, setIsScrolled] = useState(false);
-    const [isClient, setIsClient] = useState(false);
+  const currentLang = (params?.lang as string) || "sv";
+  const isHidden = useHideOnScroll(80);
 
-    // NYTT: State för att hantera "fade-in" av texten
-    const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+    const onScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-    const { t, i18n } = useTranslation("navbarTranslation");
-    const currentLang = i18n.language;
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? "hidden" : "";
+  }, [isMenuOpen]);
 
-    const router = useRouter();
-    const pathname = usePathname();
+  // Placeholder med samma färg som resten av sidan - TRANSPARENT
+  if (!mounted) return <div className="h-[90px] bg-transparent" />;
 
-    const hidden = useHideOnScroll(80);
-    const navRef = useRef<HTMLElement>(null);
+  const handleLanguageChange = () => {
+    const newLang = currentLang === "sv" ? "en" : "sv";
+    const newPath = pathname.replace(`/${currentLang}`, `/${newLang}`);
+    router.push(newPath);
+  };
 
-    // Effekt: Lyssna på scroll för att ändra navbar-bakgrund
-    useEffect(() => {
-        const onScroll = () => setIsScrolled(window.scrollY > 20);
-        window.addEventListener("scroll", onScroll, { passive: true });
-        return () => window.removeEventListener("scroll", onScroll);
-    }, []);
+  // Navigeringslänkar exakt enligt dina bilder
+  const navLinks = [
+    { name: t('nav.home'), href: "/#heroreel", icon: <FaHome />, isAnchor: true },
+    { name: t('nav.schedule'), href: "/#schedule", icon: <FaCalendarAlt />, isAnchor: true },
+    { name: t('nav.courses'), href: "/courses", icon: <FaBook />, isCta: true },
+    { name: t('nav.prices'), href: "/#prices", icon: <FaTags />, isAnchor: true },
+    { name: t('nav.events'), href: "/#events", icon: <FaStar />, isAnchor: true },
+    { name: t('nav.instructors'), href: "/instructors", icon: <FaUsers /> },
+    { name: t('nav.values'), href: "/values", icon: <FaHeart /> },
+    { name: t('nav.faq'), href: "/FAQpage", icon: <FaQuestion /> },
+  ];
 
-    // Effekt: Hantera client-side mounting för att undvika flimmer
-    useEffect(() => {
-        setIsClient(true);
-        // Samma delay-trick som i Hero för att säkerställa att översättningen är laddad
-        const timer = setTimeout(() => {
-            setMounted(true);
-        }, 100);
-        return () => clearTimeout(timer);
-    }, []);
+  const getLinkClass = (href: string, isCta: boolean) => {
+    const fullHref = `/${currentLang}${href === "/" ? "" : href}`;
+    const isActive = pathname === fullHref;
 
-    // Effekt: Lås body-scroll när mobilmenyn är öppen
-    useEffect(() => {
-        const { style } = document.documentElement;
-        style.overflow = isMenuOpen ? "hidden" : "";
-        return () => { style.overflow = ""; };
-    }, [isMenuOpen]);
+    // Orange knapp för "KURSER"
+    if (isCta) return "bg-[#f26722] text-white px-6 py-2.5 rounded-full font-bold flex items-center gap-2 hover:bg-[#d5561d] transition-all transform hover:scale-105 shadow-lg uppercase tracking-wider";
 
-    // Effekt: Stäng menyn vid sidbyte. Viktigt: kör endast när `pathname` ändras —
-    // tidigare stängdes menyn även när `isMenuOpen` ändrades vilket ledde till att
-    // menyn öppnades och direkt stängdes. Nu sätter vi alltid `isMenuOpen=false`
-    // när route ändras.
-    useEffect(() => {
-        setIsMenuOpen(false);
-    }, [pathname]);
+    // Vanliga länkar: Grå/Vita med orange hover
+    return `flex items-center gap-1.5 transition-colors duration-200 uppercase tracking-widest text-[14px] font-semibold ${
+        isActive ? "text-[#f26722]" : "text-gray-200 hover:text-[#f26722]"
+    }`;
+  };
 
-    // Effekt: Stäng menyn med "Escape"-tangenten
-    useEffect(() => {
-        const onKey = (e: KeyboardEvent) => {
-            if (e.key === "Escape") setIsMenuOpen(false);
-        };
-        window.addEventListener("keydown", onKey);
-        return () => window.removeEventListener("keydown", onKey);
-    }, []);
-
-    // Funktion: Byt språk (Next.js-anpassad)
-    const handleLanguageChange = () => {
-        const newLang = currentLang === "sv" ? "en" : "sv";
-        i18n.changeLanguage(newLang);
-
-        const pathSegments = pathname.split('/').filter(Boolean);
-        const pathWithoutLang = pathSegments.length > 1 ? `/${pathSegments.slice(1).join('/')}` : '/';
-
-        router.push(`/${newLang}${pathWithoutLang}`);
-    };
-
-    // Funktion: Hantera "aktiv" länk-styling
-    const getLinkClass = (href: string) => {
-        const active = "text-orange-500 font-bold md:after:scale-x-100";
-        const inactive = "text-gray-300 md:text-gray-400";
-        const fullHref = `/${currentLang}${href}`;
-        return `${NAV_LINK_BASE} ${pathname.startsWith(fullHref) ? active : inactive}`;
-    };
-
-    // Funktion: Hantera "aktiv" scroll-länk-styling
-    const getScrollBtnClass = () => {
-        const inactive = "text-gray-300 md:text-gray-400";
-        return `${NAV_LINK_BASE} ${inactive}`;
-    };
-
-    // Helper: handle clicks on anchor/hash links (e.g. /sv/#prices)
-    const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-        // If no hash, let Link/router handle it
-        const hashIndex = href.indexOf('#');
-        if (hashIndex === -1) return;
-
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, isAnchor: boolean) => {
+    if (isAnchor && pathname === `/${currentLang}`) {
+      const id = href.split("#")[1];
+      const el = document.getElementById(id);
+      if (el) {
         e.preventDefault();
-        const anchor = href.slice(hashIndex + 1);
+        el.scrollIntoView({ behavior: "smooth" });
+        setIsMenuOpen(false);
+      }
+    } else {
+      setIsMenuOpen(false);
+    }
+  };
 
-        // Normalize pathname (remove trailing slash)
-        const normalizedPath = pathname ? pathname.replace(/\/$/, '') : '';
-        const homePath = `/${currentLang}`;
+  return (
+      <header
+          className={`fixed top-0 left-0 z-[1000] w-full transition-all duration-300 ${
+              isHidden && !isMenuOpen ? "-translate-y-full" : "translate-y-0"
+          } ${isScrolled
+              ? "bg-gradient-to-br from-[#1f1f1f]/90 to-[#3a1f1d]/90 backdrop-blur-md border-b border-white/5 shadow-2xl"    
+              : "bg-transparent"
+          }`}
+      >
+        <div className="mx-auto flex h-[90px] max-w-[1500px] items-center justify-between px-6">
 
-        // If we're already on the homepage, scroll to the element
-        if (normalizedPath === homePath) {
-            const el = document.getElementById(anchor);
-            if (el) {
-                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                // Close mobile menu if open
-                setIsMenuOpen(false);
-                return;
-            }
-        }
+          {/* Vänster: Logotyp utan cirkel/ring */}
+          <Link href={`/${currentLang}`} className="flex items-center gap-3 group">
+            <Image
+                src="/img/Navbar/FuegoLogoimg.png"
+                alt="Fuego Logo"
+                width={80}
+                height={80}
+                className="object-contain transition-transform group-hover:scale-105"
+                priority
+            />
+            <div className="flex flex-col">
+              <span className="font-playfair text-2xl font-black leading-none text-[#f26722]">Fuego</span>
+              <span className="text-[10px] tracking-[0.25em] text-white/80 uppercase font-light">Dance School</span>
+            </div>
+          </Link>
 
-        // Otherwise navigate to the URL (this will load the page and the hash)
-        router.push(href);
-    };
+          {/* Mitten: Desktop Nav (UPPERCASE) */}
+          <nav className="hidden items-center gap-6 xl:flex">
+            {navLinks.map((link) => (
+                <Link
+                    key={link.href}
+                    href={`/${currentLang}${link.href}`}
+                    onClick={(e) => handleLinkClick(e, link.href, !!link.isAnchor)}
+                    className={getLinkClass(link.href, !!link.isCta)}
+                >
+                  <span className="text-base">{link.icon}</span>
+                  <span>{link.name}</span>
+                </Link>
+            ))}
+          </nav>
 
-    return (
-        <header
-            ref={navRef}
-            role="banner"
-            aria-label="Huvudnavigering"
-            className={`
-                fixed top-0 left-0 z-[1000] flex h-[80px] w-full items-center justify-between px-4
-                text-white transition-all duration-300 ease-in-out will-change-transform md:px-10
-                ${hidden ? "-translate-y-full" : "translate-y-0"}
-                ${isScrolled
-                ? "bg-gradient-to-r from-[#1b1b1b] to-[#311a18] shadow-2xl"
-                : "bg-gradient-to-r from-[#1f1f1f] to-[#3a1f1d]"}
-            `}
+          {/* Höger: Språkval & Mobil-knapp */}
+          <div className="flex items-center gap-5">
+            <button
+                onClick={handleLanguageChange}
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-[10px] font-bold text-white hover:bg-[#f26722] transition-all"
+            >
+              {currentLang.toUpperCase()}
+            </button>
+
+            <button
+                className="text-3xl text-[#f26722] xl:hidden"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? "✕" : "☰"}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobilmeny Overlay - Samma färg som body (#121212) */}
+        <div
+            className={`fixed inset-0 z-[999] flex flex-col items-center justify-center bg-[#121212] transition-transform duration-500 xl:hidden ${
+                isMenuOpen ? "translate-x-0" : "translate-x-full"
+            }`}
         >
-            {/* === LOGO (Visas alltid direkt) === */}
-            <Link href={`/${currentLang}`} className="flex shrink-0 cursor-pointer items-center gap-2.5">
-                <Image
-                    src="/img/Navbar/FuegoLogoimg.png"
-                    alt="Fuego logo"
-                    width={60}
-                    height={60}
-                    priority
-                    className="rounded-full drop-shadow-[0_0_4px_#f26722]"
-                />
-                <div className="text-2xl leading-tight" aria-label="Fuego Dance School">
-                    <div className="font-playfair font-bold text-orange-500">Fuego </div>
-                    <div className="ml-1.5 font-greatvibes text-xl text-white">Dance School</div>
-                </div>
-            </Link>
-
-            {/* === Språk & Hamburgare === */}
-            <div className="flex items-center gap-2">
-                <button
-                    type="button"
-                    onClick={handleLanguageChange}
-                    aria-label={currentLang === "sv" ? t("switchLangEN") : t("switchLangSV")}
-                    className="
-                        inline-flex h-7 w-7 items-center justify-center rounded-full border border-white/20 bg-white/10
-                        text-xs font-bold uppercase text-white transition-all duration-100 ease-in-out
-                        hover:bg-white/20 active:scale-95 active:opacity-90
-                        focus:outline-none focus:border-orange-500 md:ml-4
-                    "
+          <div className="flex flex-col gap-10 text-center uppercase tracking-widest">
+            {navLinks.map((link) => (
+                <Link
+                    key={link.href}
+                    href={`/${currentLang}${link.href}`}
+                    onClick={(e) => handleLinkClick(e, link.href, !!link.isAnchor)}
+                    className={`flex items-center justify-center gap-4 text-2xl ${link.isCta ? "text-[#f26722] font-bold" : "text-white"}`}
                 >
-                    {isClient ? (currentLang === "sv" ? "EN" : "SV") : "SV"}
-                </button>
-
-                <button
-                    type="button"
-                    aria-expanded={isMenuOpen}
-                    aria-controls="main-nav"
-                    onClick={() => setIsMenuOpen((v) => !v)}
-                    aria-label={isMenuOpen ? t("closeMenu") : t("openMenu")}
-                    className="
-                        z-[1002] border-none bg-transparent text-3xl text-white
-                        transition-all duration-100 ease-in-out active:scale-95 active:opacity-90 md:hidden
-                    "
-                >
-                    {isMenuOpen ? "✕" : "☰"}
-                </button>
-            </div>
-
-            {/* === NAV-LÄNKAR WRAPPER === */}
-            <div className="md:flex md:flex-1 md:justify-center">
-                <nav
-                    id="main-nav"
-                    role="navigation"
-                    className={`
-                        fixed top-0 left-0 z-[1001] flex h-screen w-screen flex-col items-center
-                        justify-center bg-black/95 pt-20 backdrop-blur-md transition-opacity
-                        md:static md:h-auto md:w-auto md:flex-row md:items-center 
-                        md:bg-transparent md:p-0 md:backdrop-blur-none
-                        ${isMenuOpen ? "flex animate-fadeSlideUp" : "hidden md:flex"}
-                    `}
-                >
-                    {/* HÄR ÄR FIXEN:
-                        Vi lägger till 'transition-opacity' och styr opaciteten med 'mounted'.
-                        Detta gör att länkarna är osynliga tills språket är laddad.
-                    */}
-                    <ul className={`
-                        m-0 flex list-none flex-col items-center gap-4 p-0 md:flex-row md:gap-7
-                        transition-opacity duration-500 ease-out
-                        ${mounted ? 'opacity-100' : 'opacity-0'}
-                    `}>
-                        {/* --- Scroll-länkar --- */}
-                        <li>
-                            <Link href={`/${currentLang}/#heroreel`} onClick={(e) => handleAnchorClick(e as any, `/${currentLang}/#heroreel`)} className={getScrollBtnClass()}>
-                                <FaHome className={ICON_STYLE} /> {t("nav.home")}
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href={`/${currentLang}/#schedule`} onClick={(e) => handleAnchorClick(e as any, `/${currentLang}/#schedule`)} className={getScrollBtnClass()}>
-                                <FaCalendarAlt className={ICON_STYLE} /> {t("nav.schedule")}
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                href={`/${currentLang}/courses`}
-                                className={`
-                                    ${getScrollBtnClass()}
-                                    nav-link-cta rounded-full bg-orange-500 !text-white px-6 py-3
-                                    transition-all duration-200 ease-in-out hover:scale-105
-                                    hover:translate-x-0 hover:shadow-[0_6px_15px_rgba(242,103,34,.4)]
-                                    md:font-bold md:hover:bg-orange-300 md:hover:translate-y-[-2px]
-                                `}
-                            >
-                                <FaBook className={ICON_STYLE} /> {t("nav.courses")}
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href={`/${currentLang}/#prices`} onClick={(e) => handleAnchorClick(e as any, `/${currentLang}/#prices`)} className={getScrollBtnClass()}>
-                                <FaTags className={ICON_STYLE} /> {t("nav.prices")}
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href={`/${currentLang}/#events`} onClick={(e) => handleAnchorClick(e as any, `/${currentLang}/#events`)} className={getScrollBtnClass()}>
-                                <FaStar className={ICON_STYLE} /> {t("nav.events")}
-                            </Link>
-                        </li>
-
-                        {/* --- Vanliga sid-länkar --- */}
-                        <li><Link href={`/${currentLang}/instructors`} className={getLinkClass("/instructors")}><FaUsers className={ICON_STYLE} /> {t("nav.instructors")}</Link></li>
-                        <li><Link href={`/${currentLang}/values`} className={getLinkClass("/values")}><FaHeart className={ICON_STYLE} /> {t("nav.values")}</Link></li>
-                        <li><Link href={`/${currentLang}/FAQpage`} className={getLinkClass("/FAQpage")}><FaQuestion className={ICON_STYLE} /> {t("nav.faq")}</Link></li>
-                    </ul>
-                </nav>
-            </div>
-
-            <style jsx>{`
-                .icon-style {
-                    font-size: 1.6rem;
-                    vertical-align: middle;
-                    flex-shrink: 0;
-                }
-                @media (min-width: 768px) {
-                    .icon-style {
-                        display: none;
-                    }
-                    .nav-link-base {
-                        gap: 0;
-                    }
-                }
-            `}</style>
-        </header>
-    );
+                  {link.icon} {link.name}
+                </Link>
+            ))}
+          </div>
+        </div>
+      </header>
+  );
 };
 
 export default Navbar;

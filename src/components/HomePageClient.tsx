@@ -7,6 +7,8 @@ import About from "@/components/About";
 import TestimonialsSection from './TestimonialsSection';
 import InstagramFeed from './InstagramFeeds';
 import { ContactSection } from './Contact';
+import PriceSection from './Price';
+import EventSection from './Event';
 
 export interface HomePageClientProps {
     params: { lang: string };
@@ -19,6 +21,8 @@ export default function HomePageClient({ params }: HomePageClientProps) {
             <main>
                 <About />
                 <ScheduleSection />
+                <PriceSection />
+                <EventSection />
                 <TestimonialsSection />
                 <InstagramFeed />
             </main>

@@ -18,6 +18,9 @@ const i18nNamespaces = [
     'scheduleTranslation',
     'testimonialsTranslation',
     'footerTranslation',
+    'priceTranslation',
+    'eventTranslation',
+    'eventsTranslation',
 ];
 
 export default async function Home({ params }: { params: { lang: string } }) {

@@ -1,0 +1,9 @@
+﻿{
+  "bookingComplete": {
+    "title": "Tack för din anmälan!",
+    "description": "Vi har tagit emot din bokning och ser fram emot att dansa med dig. En bekräftelse har skickats till din e-post.",
+    "idLabel": "Referensnummer",
+    "nextStepsTitle": "Håll kontakten",
+    "socialText": "Följ oss på sociala medier för inspiration och viktiga uppdateringar!"
+  }
+}

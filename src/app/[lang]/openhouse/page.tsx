@@ -8,12 +8,11 @@ const i18nNamespaces = ['openhouseTranslation', 'common'];
 
 export default async function OpenHousePage({ params: { lang } }: { params: { lang: string } }) {
     // 1. Hämta översättningar på servern
-    const { resources } = await initTranslations(lang, i18nNamespaces);
+    const { i18n, resources } = await initTranslations(lang, i18nNamespaces);
 
     return (
         // 2. Skicka med dem till TranslationProvider så att OpenHouseForm kan använda dem
-        <TranslationProvider namespaces={i18nNamespaces} resources={resources} lang={lang}>
+        <TranslationProvider namespaces={i18nNamespaces} resources={resources} lang={lang} i18nInstance={i18n}>
             <OpenHouseForm />
         </TranslationProvider>
     );
-}

@@ -3,6 +3,10 @@
   "eventsCta": "Se alla evenemang",
   "eventsCtaButton": "Läs mer & Boka",
   "noUpcomingEvents": "Inga kommande evenemang planerade just nu. Håll utkik!",
+
+  "comingSoonTitle": "Nya event kommer snart!",
+  "comingSoonDescription": "Just nu planerar vi för fullt inför kommande termin. Håll utkik här eller på våra sociala medier för uppdateringar.",
+
   "events": [],
 
   "__MALL_events_SPARA_FOR_SENARE": [
@@ -18,6 +22,5 @@
       "isNew": true
     }
   ]
-
 
 }

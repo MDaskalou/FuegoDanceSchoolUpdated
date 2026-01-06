@@ -4,7 +4,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaCalendarAlt, FaMapMarkerAlt, FaStar } from 'react-icons/fa';
+import { FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 
 // --- Typdefinitioner (Hämtad från EventsSection) ---
@@ -27,7 +27,8 @@ interface EventCardProps {
 }
 
 const EventCard: React.FC<EventCardProps> = ({ event, animateClass = '' }) => {
-    const { t } = useTranslation("eventsTranslation");
+    // FIX: use the same namespace as the Event section + translation files
+    const { t } = useTranslation("eventTranslation");
 
     // NYCKEL: Kontrollera om länken är extern
     const isExternal = event.link && (event.link.startsWith('http://') || event.link.startsWith('https://'));

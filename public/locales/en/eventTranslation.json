@@ -4,6 +4,9 @@
   "eventsCtaButton": "Read more & Book",
   "noUpcomingEvents": "No upcoming events planned at the moment. Stay tuned!",
 
+  "comingSoonTitle": "New events are coming soon!",
+  "comingSoonDescription": "We're currently planning upcoming workshops and special events. Check back here or follow us on social media for updates.",
+
   "events": [],
 
   "__TEMPLATE_events_SAVE_FOR_LATER": [
