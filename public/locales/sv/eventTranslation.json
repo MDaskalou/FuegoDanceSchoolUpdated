@@ -38,6 +38,18 @@
       "description": "More information coming soon.",
       "imageUrl": "/img/Events/fuegoNight25april.jpg",
       "isNew": true
+    },
+    {
+      "id": 4,
+      "title": "Beginner Bachata Workshop",
+      "date": "7 Februari 2026",
+      "startDate": "2026-02-07",
+      "location": "Fuego Studio, Gothenburg",
+      "link": "https://app.coursely.se/activity/beginner-bachata-sensual",
+      "description": " What you’ll get:\n– A safe and welcoming introduction to Bachata Sensual\n– A fun, sensual, and energizing experience\n– Tools to dance with both your body and your emotions\n– Lots of dance joy — whether you come alone or with a partner\nNo previous experience needed — just curiosity.",
+      "imageUrl": "/img/Events/beginnerBachata.jpg",
+      "isNew": true
+
     }
   ],
   "__MALL_events_SPARA_FOR_SENARE": [
