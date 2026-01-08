@@ -29,10 +29,7 @@
         "Educated PE teacher",
         "Won several Jack & Jill competitions"
       ],
-      "levels": [
-        "Level 1",
-        "Advanced Foundations"
-      ]
+      "levels": ["Level 1", "Advanced Foundations"]
     },
     {
       "id": 2,
@@ -53,9 +50,7 @@
         "Educated teacher",
         "Education in dance technique"
       ],
-      "levels": [
-        "Maternity leave"
-      ]
+      "levels": ["Maternity leave"]
     },
     {
       "id": 3,
@@ -65,17 +60,9 @@
       "imageSrc": "/img/Instructors/instruktörJennifer.jpg",
       "role": "main",
       "experience": "More info coming soon",
-      "specialties": [
-        "More info coming soon"
-      ],
-      "achievements": [
-        "More info coming soon"
-      ],
-      "levels": [
-        "Level 4 Technique Isolation",
-        "Level 4",
-        "Level 4 Technique"
-      ]
+      "specialties": ["More info coming soon"],
+      "achievements": ["More info coming soon"],
+      "levels": ["Level 4 Technique Isolation", "Level 4", "Level 4 Technique"]
     },
     {
       "id": 4,
@@ -85,15 +72,9 @@
       "imageSrc": "/img/Instructors/instruktörKarin.jpg",
       "role": "main",
       "experience": "More info coming soon",
-      "specialties": [
-        "More info coming soon"
-      ],
-      "achievements": [
-        "More info coming soon"
-      ],
-      "levels": [
-        "On leave"
-      ]
+      "specialties": ["More info coming soon"],
+      "achievements": ["More info coming soon"],
+      "levels": ["On leave"]
     },
     {
       "id": 5,
@@ -103,15 +84,9 @@
       "imageSrc": "/img/Instructors/instruktörRaminta.jpg",
       "role": "main",
       "experience": "More info coming soon",
-      "specialties": [
-        "More info coming soon"
-      ],
-      "achievements": [
-        "More info coming soon"
-      ],
-      "levels": [
-        "Choreography class"
-      ]
+      "specialties": ["More info coming soon"],
+      "achievements": ["More info coming soon"],
+      "levels": ["Choreography class"]
     },
     {
       "id": 6,
@@ -121,16 +96,9 @@
       "imageSrc": "/img/Instructors/instruktörAndris.jpeg",
       "role": "main",
       "experience": "More info coming soon",
-      "specialties": [
-        "More info coming soon"
-      ],
-      "achievements": [
-        "More info coming soon"
-      ],
-      "levels": [
-        "Level 2",
-        "Level 2 Technique"
-      ]
+      "specialties": ["More info coming soon"],
+      "achievements": ["More info coming soon"],
+      "levels": ["Level 2", "Level 2 Technique"]
     },
     {
       "id": 7,
@@ -140,16 +108,9 @@
       "imageSrc": "/img/Instructors/instruktörEmma.jpg",
       "role": "main",
       "experience": "More info coming soon",
-      "specialties": [
-        "More info coming soon"
-      ],
-      "achievements": [
-        "More info coming soon"
-      ],
-      "levels": [
-        "Level 2",
-        "Level 2 Technique"
-      ]
+      "specialties": ["More info coming soon"],
+      "achievements": ["More info coming soon"],
+      "levels": ["Level 2", "Level 2 Technique"]
     },
     {
       "id": 8,
@@ -159,17 +120,9 @@
       "imageSrc": "/img/Instructors/instruktörFeras.jpeg",
       "role": "helper",
       "experience": "More info coming soon",
-      "specialties": [
-        "More info coming soon"
-      ],
-      "achievements": [
-        "More info coming soon"
-      ],
-      "levels": [
-        "Level 3",
-        "Level 3 Technique",
-        "Role Rotation"
-      ]
+      "specialties": ["More info coming soon"],
+      "achievements": ["More info coming soon"],
+      "levels": ["Level 3", "Level 3 Technique", "Role Rotation"]
     },
     {
       "id": 9,
@@ -179,16 +132,9 @@
       "imageSrc": "/img/Instructors/instruktörFilip.jpg",
       "role": "helper",
       "experience": "More info coming soon",
-      "specialties": [
-        "More info coming soon"
-      ],
-      "achievements": [
-        "More info coming soon"
-      ],
-      "levels": [
-        "Level 1",
-        "Advanced Foundations"
-      ]
+      "specialties": ["More info coming soon"],
+      "achievements": ["More info coming soon"],
+      "levels": ["Level 1", "Advanced Foundations"]
     },
     {
       "id": 10,
@@ -198,37 +144,31 @@
       "imageSrc": "/img/Instructors/instruktörInes.jpg",
       "role": "helper",
       "experience": "More info coming soon",
-      "specialties": [
-        "More info coming soon"
-      ],
-      "achievements": [
-        "More info coming soon"
-      ],
-      "levels": [
-        "Level 4 Technique Isolation",
-        "Level 4",
-        "Level 4 Technique"
-      ]
+      "specialties": ["More info coming soon"],
+      "achievements": ["More info coming soon"],
+      "levels": ["Level 4 Technique Isolation", "Level 4", "Level 4 Technique"]
     },
     {
       "id": 12,
       "name": "Sisco",
-      "focus": "More info coming soon",
-      "bio": "More information coming soon.",
+      "focus": "Technique, body understanding and role rotation",
+      "bio": "With over 20 years of experience from the training and coaching world, Sisco has a deep understanding of the body in motion. With humor and clear feedback, he coaches students to become safe, stable dancers. By leading, following, and role-rotating, he gives students a holistic understanding of the dance.",
       "imageSrc": "/img/Instructors/instruktörSisco.jpg",
       "role": "main",
-      "experience": "More info coming soon",
+      "experience": "7+ years of experience in bachata, 20+ years in sports coaching",
       "specialties": [
-        "More info coming soon"
+        "Biomechanics, body awareness and basic technique",
+        "Role rotation",
+        "Individual-centered coaching"
       ],
       "achievements": [
-        "More info coming soon"
+        "Certified Bachata Sensual Level 1 instructor training",
+        "Certified Role Rotation instructor",
+        "Under mentorship of the founders of Role Rotation – Felipe & Tiago",
+        "Former professional basketball coach",
+        "Ongoing ballet training for technique and body control"
       ],
-      "levels": [
-        "Level 3",
-        "Level 3 Technique",
-        "Role Rotation"
-      ]
+      "levels": ["Level 3", "Level 3 Technique", "Role Rotation"]
     },
     {
       "id": 13,
@@ -238,17 +178,9 @@
       "imageSrc": "/img/Instructors/instruktörSofie.jpg",
       "role": "helper",
       "experience": "More info coming soon",
-      "specialties": [
-        "More info coming soon"
-      ],
-      "achievements": [
-        "More info coming soon"
-      ],
-      "levels": [
-        "Choreography",
-        "Level 2",
-        "Level 2 Technique"
-      ]
+      "specialties": ["More info coming soon"],
+      "achievements": ["More info coming soon"],
+      "levels": ["Choreography", "Level 2", "Level 2 Technique"]
     },
     {
       "id": 14,
@@ -265,35 +197,34 @@
         "Individualized coaching and clear technique"
       ],
       "achievements": [
-        "Certifications in: Musicality in Ballet – Tiler Peck (USA), Mental Skills for Dancers – Dr. Peter Lovatt (UK), Intro to Teaching – Nicholas Palmquist (USA), Effective Training for Dancers – Luke Abnett (AUS), Dance Psychology – Dr. Peter Lovatt (UK), Anatomy for Dancers – Luke Abnett (AUS)",
+        "Certifications in: Musicality in Ballet, Mental Skills for Dancers, Intro to Teaching, Effective Training for Dancers, Dance Psychology, Anatomy for Dancers",
         "Gero Miglé — Social Dance Lab",
         "Competition and show experience at social-focused events in the Nordics",
         "Active instructor at Fuego Dance School and booked for workshops around Sweden"
       ],
-      "levels": [
-        "Level 4",
-        "Isolation and Technique"
-      ]
+      "levels": ["Level 4", "Isolation and Technique"]
     },
     {
       "id": 15,
       "name": "Nora",
-      "focus": "More info coming soon",
-      "bio": "More information coming soon.",
+      "focus": "Role rotation, dance communication and creativity",
+      "bio": "Nora started dancing bachata while living in Barcelona in 2017. With a background in norm-critical social work, she teaches with soft clarity and a focus on safety and interplay. By switching between leading and following roles, she gives students a holistic view and a deeper understanding of the dance.",
       "imageSrc": "/img/Instructors/instruktörNora.jpg",
       "role": "main",
-      "experience": "More info coming soon",
+      "experience": "8+ years of experience in bachata, 10+ years of dance experience in other styles",
       "specialties": [
-        "More info coming soon"
+        "Role rotation and connection",
+        "Participant-centered and norm-aware pedagogy",
+        "Musicality and responsive communication"
       ],
       "achievements": [
-        "More info coming soon"
+        "Certified Bachata Sensual Level 1 instructor training",
+        "Certified Role Rotation instructor",
+        "Under mentorship of the founders of Role Rotation – Felipe & Tiago",
+        "Certifications in Dance Psychology, Anatomy and Teaching",
+        "Ongoing ballet training for technique and body control"
       ],
-      "levels": [
-        "Level 3",
-        "Level 3 Technique",
-        "Role Rotation"
-      ]
+      "levels": ["Level 3", "Level 3 Technique", "Role Rotation"]
     },
     {
       "id": 17,
@@ -303,17 +234,9 @@
       "imageSrc": "/img/Instructors/instruktörSasha.jpg",
       "role": "helper",
       "experience": "More info coming soon",
-      "specialties": [
-        "More info coming soon"
-      ],
-      "achievements": [
-        "More info coming soon"
-      ],
-      "levels": [
-        "Choreography",
-        "Level 2",
-        "Level 2 Technique"
-      ]
+      "specialties": ["More info coming soon"],
+      "achievements": ["More info coming soon"],
+      "levels": ["Choreography", "Level 2", "Level 2 Technique"]
     },
     {
       "id": 18,
@@ -323,56 +246,48 @@
       "imageSrc": "/img/Instructors/AlessandroU.jpg",
       "role": "helper",
       "experience": "More info coming soon",
-      "specialties": [
-        "More info coming soon"
-      ],
-      "achievements": [
-        "More info coming soon"
-      ],
-      "levels": [
-        "Level 4 Technique Isolation",
-        "Level 4",
-        "Level 4 Technique"
-      ]
+      "specialties": ["More info coming soon"],
+      "achievements": ["More info coming soon"],
+      "levels": ["Level 4 Technique Isolation", "Level 4", "Level 4 Technique"]
     },
     {
-      "id": 19,
+      "id": 5,
       "name": "Lisa",
-      "focus": "More info coming soon",
-      "bio": "More information coming soon.",
+      "focus": "Bachata Sensual, musicality & partner connection",
+      "bio": "Lisa has trained in bachata for over a year, but dance has always been a part of her life. Originally from France, she grew up exploring different styles, especially Afro dance, and now loves sharing the joy of bachata in a safe and inclusive space like Fuego.",
       "imageSrc": "/img/Instructors/instruktörLisa.jpeg",
       "role": "helper",
-      "experience": "More info coming soon",
+      "experience": "1.5 years of bachata training and social dancing, with lifelong personal experience in dance",
       "specialties": [
-        "More info coming soon"
+        "Musicality and rhythm interpretation",
+        "Communication and comfort in partner work",
+        "Freestyle and creative movement"
       ],
       "achievements": [
-        "More info coming soon"
+        "Experience in Afro dance",
+        "Lifelong background in various dance styles"
       ],
-      "levels": [
-        "Choreography",
-        "Level 2",
-        "Level 2 Technique"
-      ]
+      "levels": ["Level 2", "Level 2 Technique", "Choreography class"]
     },
     {
-      "id": 20,
+      "id": 4,
       "name": "Johanna",
-      "focus": "More info coming soon",
-      "bio": "More information coming soon.",
-      "imageSrc": "/img/Instructors/instruktörJohanna.jpg",
+      "focus": "Bachata Sensual, Social dancing, Solo dance",
+      "bio": "Johanna found bachata two years ago and has since focused heavily on developing her technique and creativity. As a trained physiotherapist, she looks forward to supporting dancers in developing in a way that both feels good and looks good.",
+      "imageSrc": "/img/Instructors/InstruktörJohanna.jpg",
       "role": "helper",
-      "experience": "More info coming soon",
+      "experience": "10+ years of dance experience in various styles",
       "specialties": [
-        "More info coming soon"
+        "Musicality",
+        "Body control",
+        "Injury prevention"
       ],
       "achievements": [
-        "More info coming soon"
+        "Trained Physiotherapist",
+        "Modern/Contemporary dance education, Balettakademien Stockholm",
+        "Contemporary dance education, 1 semester, Danceworks Berlin"
       ],
-      "levels": [
-        "Level 1",
-        "Advanced Foundations"
-      ]
+      "levels": ["Level 1", "Advanced Foundations"]
     }
   ]
 }

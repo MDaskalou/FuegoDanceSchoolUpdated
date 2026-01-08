@@ -12,50 +12,45 @@
       "id": 1,
       "name": "Mikael",
       "focus": "Bachata Sensual, teknik & musikalitet",
-      "bio": "Mikael har dansat i över 12 år med fokus på bachata och är grundare av Fuego Dance School. Med bakgrund som idrottslärare och thaiboxningsinstruktör undervisar han tydligt, strukturerat och alltid med fokus på trygghet och teknik i pardansen.",
+      "bio": "Mikael har dansat i över 12 år med fokus på bachata och är grundare av Fuego Dance School. Med en bakgrund som idrottslärare och thaiboxningsinstruktör undervisar han tydligt, strukturerat och alltid med fokus på trygghet och teknik i pardansen.",
       "imageSrc": "/img/Instructors/instruktörMikael.jpg",
       "role": "main",
       "experience": "7+ års dansundervisning och 9 år som thaiboxningsinstruktör",
       "specialties": [
-        "Bachata Sensual-teknik",
+        "Bachata Sensual teknik",
         "Musikalitet och kroppskontroll",
         "Pedagogisk och strukturerad undervisning",
         "Trygghet och säkerhet i pardans"
       ],
       "achievements": [
         "Grundare av Fuego Dance School",
-        "1,5 års mentorskap hos grundarna till bachata sensual Korke & Judith",
-        "Certifierad Bachata Sensual Level 1 och 2 -instruktörutbildning",
+        "1,5 års mentorskap hos Bachata Sensuals grundare Korke & Judith",
+        "Certifierad Bachata Sensual Level 1 och 2 instruktörsutbildning",
         "Utbildad idrottslärare",
         "Vunnit flera Jack & Jill-tävlingar"
       ],
-      "levels": [
-        "Level 1",
-        "Advanced Foundations"
-      ]
+      "levels": ["Level 1", "Advanced Foundations"]
     },
     {
       "id": 2,
       "name": "Irina",
       "focus": "Bachata Sensual, teknik och styling",
-      "bio": "Irina har dansat sedan hon var 5 år gammal: balett, ballroom och latinodans. Hon har undervisat bachata sedan 2017 och är medgrundare till Fuego Dance School. Med bakgrund som erfaren dansare samt lärare till vardags, lägger Irina stor vikt på grunder och teknik.",
+      "bio": "Irina har dansat sedan hon var 5 år gammal: balett, ballroom och latindans. Hon har undervisat i bachata sedan 2017 och är medgrundare av Fuego Dance School. Med en bakgrund som erfaren dansare och lärare i vardagen lägger Irina stor vikt vid grunderna och teknik.",
       "imageSrc": "/img/Instructors/instruktörIrina.jpg",
       "role": "main",
-      "experience": "8+ års dansundervisning och 9+ som lärare",
+      "experience": "8+ års dansundervisning och 9+ år som lärare",
       "specialties": [
-        "Bachata Sensual-teknik",
+        "Bachata Sensual teknik",
         "Styling och kroppskontroll",
-        "Nörd inom dansteknik"
+        "Dansteknik-nörd"
       ],
       "achievements": [
         "Medgrundare av Fuego Dance School",
-        "1,5 års mentorskap hos grundarna till bachata sensual Korke & Judith",
+        "1,5 års mentorskap hos Bachata Sensuals grundare Korke & Judith",
         "Utbildad lärare",
-        "Utbildning i dansteknik"
+        "Utbildning inom dansteknik"
       ],
-      "levels": [
-        "Mammaledig"
-      ]
+      "levels": ["Föräldraledig"]
     },
     {
       "id": 3,
@@ -65,17 +60,9 @@
       "imageSrc": "/img/Instructors/instruktörJennifer.jpg",
       "role": "main",
       "experience": "Mer info kommer snart",
-      "specialties": [
-        "Mer info kommer snart"
-      ],
-      "achievements": [
-        "Mer info kommer snart"
-      ],
-      "levels": [
-        "Level 4 Technique Isolation",
-        "Level 4",
-        "Level 4 Technique"
-      ]
+      "specialties": ["Mer info kommer snart"],
+      "achievements": ["Mer info kommer snart"],
+      "levels": ["Level 4 Technique Isolation", "Level 4", "Level 4 Technique"]
     },
     {
       "id": 4,
@@ -85,15 +72,9 @@
       "imageSrc": "/img/Instructors/instruktörKarin.jpg",
       "role": "main",
       "experience": "Mer info kommer snart",
-      "specialties": [
-        "Mer info kommer snart"
-      ],
-      "achievements": [
-        "Mer info kommer snart"
-      ],
-      "levels": [
-        "Ledig"
-      ]
+      "specialties": ["Mer info kommer snart"],
+      "achievements": ["Mer info kommer snart"],
+      "levels": ["Ledig"]
     },
     {
       "id": 5,
@@ -103,15 +84,9 @@
       "imageSrc": "/img/Instructors/instruktörRaminta.jpg",
       "role": "main",
       "experience": "Mer info kommer snart",
-      "specialties": [
-        "Mer info kommer snart"
-      ],
-      "achievements": [
-        "Mer info kommer snart"
-      ],
-      "levels": [
-        "Choreography class"
-      ]
+      "specialties": ["Mer info kommer snart"],
+      "achievements": ["Mer info kommer snart"],
+      "levels": ["Koreografiklass"]
     },
     {
       "id": 6,
@@ -121,16 +96,9 @@
       "imageSrc": "/img/Instructors/instruktörAndris.jpeg",
       "role": "main",
       "experience": "Mer info kommer snart",
-      "specialties": [
-        "Mer info kommer snart"
-      ],
-      "achievements": [
-        "Mer info kommer snart"
-      ],
-      "levels": [
-        "Level 2",
-        "Level 2 Technique"
-      ]
+      "specialties": ["Mer info kommer snart"],
+      "achievements": ["Mer info kommer snart"],
+      "levels": ["Level 2", "Level 2 Technique"]
     },
     {
       "id": 7,
@@ -140,16 +108,9 @@
       "imageSrc": "/img/Instructors/instruktörEmma.jpg",
       "role": "main",
       "experience": "Mer info kommer snart",
-      "specialties": [
-        "Mer info kommer snart"
-      ],
-      "achievements": [
-        "Mer info kommer snart"
-      ],
-      "levels": [
-        "Level 2",
-        "Level 2 Technique"
-      ]
+      "specialties": ["Mer info kommer snart"],
+      "achievements": ["Mer info kommer snart"],
+      "levels": ["Level 2", "Level 2 Technique"]
     },
     {
       "id": 8,
@@ -159,17 +120,9 @@
       "imageSrc": "/img/Instructors/instruktörFeras.jpeg",
       "role": "helper",
       "experience": "Mer info kommer snart",
-      "specialties": [
-        "Mer info kommer snart"
-      ],
-      "achievements": [
-        "Mer info kommer snart"
-      ],
-      "levels": [
-        "Level 3",
-        "Level 3 Technique",
-        "Role Rotation"
-      ]
+      "specialties": ["Mer info kommer snart"],
+      "achievements": ["Mer info kommer snart"],
+      "levels": ["Level 3", "Level 3 Technique", "Role Rotation"]
     },
     {
       "id": 9,
@@ -179,16 +132,9 @@
       "imageSrc": "/img/Instructors/instruktörFilip.jpg",
       "role": "helper",
       "experience": "Mer info kommer snart",
-      "specialties": [
-        "Mer info kommer snart"
-      ],
-      "achievements": [
-        "Mer info kommer snart"
-      ],
-      "levels": [
-        "Level 1",
-        "Advanced Foundations"
-      ]
+      "specialties": ["Mer info kommer snart"],
+      "achievements": ["Mer info kommer snart"],
+      "levels": ["Level 1", "Advanced Foundations"]
     },
     {
       "id": 10,
@@ -198,37 +144,31 @@
       "imageSrc": "/img/Instructors/instruktörInes.jpg",
       "role": "helper",
       "experience": "Mer info kommer snart",
-      "specialties": [
-        "Mer info kommer snart"
-      ],
-      "achievements": [
-        "Mer info kommer snart"
-      ],
-      "levels": [
-        "Level 4 Technique Isolation",
-        "Level 4",
-        "Level 4 Technique"
-      ]
+      "specialties": ["Mer info kommer snart"],
+      "achievements": ["Mer info kommer snart"],
+      "levels": ["Level 4 Technique Isolation", "Level 4", "Level 4 Technique"]
     },
     {
       "id": 12,
       "name": "Sisco",
-      "focus": "Mer info kommer snart",
-      "bio": "Mer information kommer snart.",
+      "focus": "Teknik, kroppsförståelse och rolerotation",
+      "bio": "Med över 20 års erfarenhet från tränings- och coachvärlden har Sisco djup förståelse för kroppen i rörelse. Med humor och tydlig feedback coachar han eleverna till trygga, stabila dansare. Genom att föra, följa och rollrotera ger han eleverna en helhetsförståelse av dansen.",
       "imageSrc": "/img/Instructors/instruktörSisco.jpg",
       "role": "main",
-      "experience": "Mer info kommer snart",
+      "experience": "7+ års erfarenhet inom bachata, 20+ år inom idrottscoaching",
       "specialties": [
-        "Mer info kommer snart"
+        "Biomekanik, kroppskännedom och grundteknik",
+        "Rolerotation",
+        "Individcentrerad coachning"
       ],
       "achievements": [
-        "Mer info kommer snart"
+        "Certifierad Bachata Sensual Level 1 instruktörsutbildning",
+        "Certifierad Role Rotation-instruktör",
+        "Under mentorskap hos grundarna till Role Rotation – Felipe & Tiago",
+        "Tidigare professionell basketcoach",
+        "Pågående balettutbildning för teknik och kroppskontroll"
       ],
-      "levels": [
-        "Level 3",
-        "Level 3 Technique",
-        "Role Rotation"
-      ]
+      "levels": ["Level 3", "Level 3 Teknik", "Rolerotation"]
     },
     {
       "id": 13,
@@ -238,62 +178,53 @@
       "imageSrc": "/img/Instructors/instruktörSofie.jpg",
       "role": "helper",
       "experience": "Mer info kommer snart",
-      "specialties": [
-        "Mer info kommer snart"
-      ],
-      "achievements": [
-        "Mer info kommer snart"
-      ],
-      "levels": [
-        "Choreography",
-        "Level 2",
-        "Level 2 Technique"
-      ]
+      "specialties": ["Mer info kommer snart"],
+      "achievements": ["Mer info kommer snart"],
+      "levels": ["Koreografi", "Level 2", "Level 2 Technique"]
     },
     {
       "id": 14,
       "name": "Tomas",
-      "focus": "Musikalitet, connection, social dancing",
-      "bio": "Tomas kombinerar danspsykologi, musikalitet och teknik för att skapa tydlig och trygg kommunikation i pardans. Hans undervisning bygger på effektiv utveckling, flow och social säkerhet på dansgolvet.",
+      "focus": "Musikalitet, kontakt, socialdans",
+      "bio": "Tomas kombinerar danspsykologi, musikalitet och teknik för att skapa tydlig och trygg kommunikation i pardans. Hans undervisning bygger på effektiv utveckling, flow och social trygghet på dansgolvet.",
       "imageSrc": "/img/Instructors/instruktörTomas.jpg",
       "role": "main",
       "experience": "4+ år inom bachata",
       "specialties": [
-        "Musicality & timing i social dancing",
-        "Connection och lead–follow-kommunikation",
-        "Flow, isolations och kontroll i kroppen",
-        "Individanpassad coaching och tydlig teknik"
+        "Musikalitet & timing i socialdans",
+        "Kontakt och kommunikation i förning/följning",
+        "Flow, isolationer och kroppskontroll",
+        "Individuell coachning och tydlig teknik"
       ],
       "achievements": [
-        "Certifieringar inom: Musicality in Ballet – Tiler Peck (USA), Mental Skills for Dancers – Dr. Peter Lovatt (UK), Intro to Teaching – Nicholas Palmquist (USA), Effective Training for Dancers – Luke Abnett (AUS), Dance Psychology – Dr. Peter Lovatt (UK), Anatomy for Dancers – Luke Abnett (AUS)",
+        "Certifieringar i: Mental Skills for Dancers, Intro to Teaching, Dance Psychology, Anatomy for Dancers",
         "Gero Miglé — Social Dance Lab",
-        "Tävlings och showerfarenhet på social-fokuserade events i Norden",
-        "Aktiv instruktör på Fuego Dance School och bokad på workshops runt Sverige"
+        "Tävlings- och showerfarenhet i Norden",
+        "Aktiv instruktör på Fuego Dance School och bokad för workshops runt om i Sverige"
       ],
-      "levels": [
-        "Level 4",
-        "Isolation and Technique"
-      ]
+      "levels": ["Level 4", "Isolation and Technique"]
     },
     {
       "id": 15,
       "name": "Nora",
-      "focus": "Mer info kommer snart",
-      "bio": "Mer information kommer snart.",
+      "focus": "Rolerotation, danskommunikation och kreativitet",
+      "bio": "Nora började dansa bachata när hon bodde i Barcelona 2017. Med bakgrund inom normkritiskt socialt arbete undervisar hon med mjuk tydlighet och fokus på trygghet och samspel. Genom att växla mellan förar- och följarrollen ger hon eleverna en helhetsbild och en djupare förståelse för dansen.",
       "imageSrc": "/img/Instructors/instruktörNora.jpg",
       "role": "main",
-      "experience": "Mer info kommer snart",
+      "experience": "8+ års erfarenhet inom bachata, 10+ års danserfarenhet inom andra dansstilar",
       "specialties": [
-        "Mer info kommer snart"
+        "Rolerotation och connection",
+        "Deltagarcentrerad och normmedveten pedagogik",
+        "Musikalitet och lyhörd kommunikation"
       ],
       "achievements": [
-        "Mer info kommer snart"
+        "Certifierad Bachata Sensual Level 1 instruktörsutbildning",
+        "Certifierad Role Rotation-instruktör",
+        "Under mentorskap hos grundarna till Role Rotation – Felipe & Tiago",
+        "Utbildningar inom danspsykologi, anatomi och pedagogik",
+        "Pågående balettutbildning för teknik och kroppskontroll"
       ],
-      "levels": [
-        "Level 3",
-        "Level 3 Technique",
-        "Role Rotation"
-      ]
+      "levels": ["Level 3", "Level 3 Teknik", "Rolerotation"]
     },
     {
       "id": 17,
@@ -303,17 +234,9 @@
       "imageSrc": "/img/Instructors/instruktörSasha.jpg",
       "role": "helper",
       "experience": "Mer info kommer snart",
-      "specialties": [
-        "Mer info kommer snart"
-      ],
-      "achievements": [
-        "Mer info kommer snart"
-      ],
-      "levels": [
-        "Choreography",
-        "Level 2",
-        "Level 2 Technique"
-      ]
+      "specialties": ["Mer info kommer snart"],
+      "achievements": ["Mer info kommer snart"],
+      "levels": ["Koreografi", "Level 2", "Level 2 Technique"]
     },
     {
       "id": 18,
@@ -323,56 +246,48 @@
       "imageSrc": "/img/Instructors/AlessandroU.jpg",
       "role": "helper",
       "experience": "Mer info kommer snart",
-      "specialties": [
-        "Mer info kommer snart"
-      ],
-      "achievements": [
-        "Mer info kommer snart"
-      ],
-      "levels": [
-        "Level 4 Technique Isolation",
-        "Level 4",
-        "Level 4 Technique"
-      ]
+      "specialties": ["Mer info kommer snart"],
+      "achievements": ["Mer info kommer snart"],
+      "levels": ["Level 4 Technique Isolation", "Level 4", "Level 4 Technique"]
     },
     {
-      "id": 19,
+      "id": 5,
       "name": "Lisa",
-      "focus": "Mer info kommer snart",
-      "bio": "Mer information kommer snart.",
+      "focus": "Bachata Sensual, musikalitet & kontakt",
+      "bio": "Lisa har tränat bachata i över ett år, men dansen har alltid varit en del av hennes liv. Ursprungligen från Frankrike växte hon upp med att utforska olika stilar, särskilt Afro-dans, och älskar nu att dela glädjen i bachata i en trygg och inkluderande miljö.",
       "imageSrc": "/img/Instructors/instruktörLisa.jpeg",
       "role": "helper",
-      "experience": "Mer info kommer snart",
+      "experience": "1,5 års bachata-träning och socialdans, livslång personlig erfarenhet av dans",
       "specialties": [
-        "Mer info kommer snart"
+        "Musikalitet och rytmisk tolkning",
+        "Kommunikation och trygghet i pardans",
+        "Freestyle och kreativ rörelse"
       ],
       "achievements": [
-        "Mer info kommer snart"
+        "Erfarenhet inom Afro-dans",
+        "Lång bakgrund inom olika dansstilar"
       ],
-      "levels": [
-        "Choreography",
-        "Level 2",
-        "Level 2 Technique"
-      ]
+      "levels": ["Level 2", "Level 2 Teknik", "Koreografiklass"]
     },
     {
-      "id": 20,
+      "id": 4,
       "name": "Johanna",
-      "focus": "Mer info kommer snart",
-      "bio": "Mer information kommer snart.",
-      "imageSrc": "/img/Instructors/instruktörJohanna.jpg",
+      "focus": "Bachata Sensual, socialdans, solodans",
+      "bio": "Johanna hittade till bachata för två år sedan och har sedan dess lagt stort fokus på att utveckla sin teknik och kreativitet. Som utbildad fysioterapeut ser hon fram emot att stötta dansare i att utvecklas på ett sätt som både känns bra och ser bra ut.",
+      "imageSrc": "/img/Instructors/InstruktörJohanna.jpg",
       "role": "helper",
-      "experience": "Mer info kommer snart",
+      "experience": "10+ års danserfarenhet inom olika dansstilar",
       "specialties": [
-        "Mer info kommer snart"
+        "Musikalitet",
+        "Kroppskontroll",
+        "Skadeprevention"
       ],
       "achievements": [
-        "Mer info kommer snart"
+        "Utbildad fysioterapeut",
+        "Dansutbildning Modern/nutida dans, Balettakademien Stockholm",
+        "Contemporary dance education, 1 termin, Danceworks Berlin"
       ],
-      "levels": [
-        "Level 1",
-        "Advanced Foundations"
-      ]
+      "levels": ["Level 1", "Advanced Foundations"]
     }
   ]
 }

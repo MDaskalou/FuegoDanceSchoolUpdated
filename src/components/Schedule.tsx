@@ -74,13 +74,23 @@ export const ScheduleSection = () => {
 
             <div className="container mx-auto max-w-7xl px-4 text-center relative z-10">
 
-                {/* Rubrik/Info - Förbättrad kontrast */}
+                {/* Rubrik/Info */}
                 <p className="text-sm sm:text-base text-gray-300 mb-2 font-medium tracking-wide uppercase">
                     {t("schedulePreamble")}
                 </p>
-                <h2 className="text-4xl sm:text-5xl font-bold mb-16 font-serif">
+
+                <h2 className="text-4xl sm:text-5xl font-bold mb-4 font-serif">
                     {t("scheduleTitle")}
                 </h2>
+
+                {/* NYTT: Tydlig info om Öppet Hus */}
+                <div className="mb-12 animate-pulse">
+                    <p className="text-xl sm:text-2xl font-extrabold text-orange-400 tracking-tight bg-orange-500/10 inline-block px-6 py-2 rounded-full border border-orange-500/30">
+                        {t("openHouseInfo")}
+                    </p>
+                </div>
+
+
 
                 {/* === SCHEDULE GRID FÖR DESKTOP/MOBIL === */}
                 <div className="mx-auto max-w-6xl">
