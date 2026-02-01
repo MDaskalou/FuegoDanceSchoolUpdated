@@ -19,14 +19,14 @@ export default function HomePageClient({ params }: HomePageClientProps) {
         <>
             <Hero />
             <main>
-                <About />
+                 <About />
                 <ScheduleSection />
-                <PriceSection />
-                <EventSection />
+                 <PriceSection />
+                 <EventSection />
                 <TestimonialsSection />
-                <InstagramFeed />
+                 <InstagramFeed />
             </main>
-            <ContactSection />
+            {/* <ContactSection /> */}
         </>
     );
 }

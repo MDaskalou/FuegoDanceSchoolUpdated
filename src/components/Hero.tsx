@@ -4,8 +4,7 @@ import { useTranslation } from "react-i18next";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-
-const HERO_MAIN_IMAGE_SRC = "/img/Hero/Heromain.jpg";
+import heroMainImage from "../../public/img/Hero/HeroMain.jpg";
 
 export const Hero = () => {
     const { t, i18n } = useTranslation("heroTranslation");
@@ -13,17 +12,16 @@ export const Hero = () => {
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        // En liten fördröjning för att säkerställa att renderingen är stabil innan vi tonar in
         const timer = setTimeout(() => {
             setMounted(true);
         }, 100);
         return () => clearTimeout(timer);
     }, []);
 
-    const renderImage = (src: string) => (
+    const renderImage = () => (
         <div className="absolute inset-0 z-0">
             <Image
-                src={src}
+                src={heroMainImage} // Använder den importerade bild-modulen direkt
                 alt={t("heroImageAlt", { defaultValue: "Dansskola bakgrundsbild" })}
                 fill
                 priority
@@ -38,7 +36,7 @@ export const Hero = () => {
             id="heroreel"
             className="relative h-[calc(100vh-80px)] w-full overflow-hidden bg-black text-white"
         >
-            {renderImage(HERO_MAIN_IMAGE_SRC)}
+            {renderImage()}
 
             {/* Overlay */}
             <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/60 via-black/50 to-black/70 pointer-events-none"></div>
@@ -59,7 +57,7 @@ export const Hero = () => {
                     {t("heroTitle")}
                 </h1>
 
-                {/* Underrubrik - Lite fördröjning (delay-200) */}
+                {/* Underrubrik */}
                 <p className={`
                     mb-20 max-w-3xl text-sm font-light text-gray-200 drop-shadow-xl
                     sm:text-base md:text-lg lg:text-xl
@@ -71,14 +69,13 @@ export const Hero = () => {
                     {t("heroSubtitle")}
                 </p>
 
-                {/* CTA GRUPPEN - Mer fördröjning (delay-500) */}
+                {/* CTA GRUPPEN */}
                 <div className={`
                     flex flex-col items-center justify-center space-y-8
                     transition-all duration-1000 delay-500 ease-out
                     ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
                 `}>
 
-                    {/* Primär CTA */}
                     <Link
                         href={`/${currentLang}/courses`}
                         className="
@@ -92,15 +89,10 @@ export const Hero = () => {
                         <span className="relative z-10">{t("heroCtaButton")}</span>
                     </Link>
 
-                    {/* Sekundära länkar */}
                     <div className="flex flex-col items-center gap-6 text-center md:flex-row md:gap-12">
                         <Link
                             href={`/${currentLang}/openhouse`}
-                            className="
-                                group relative text-sm sm:text-base font-semibold uppercase text-white
-                                pb-1 transition-all duration-300
-                                hover:text-orange-300
-                            "
+                            className="group relative text-sm sm:text-base font-semibold uppercase text-white pb-1 transition-all duration-300 hover:text-orange-300"
                         >
                             <span className="relative z-10">{t("heroCtaSecondary1")}</span>
                             <span className="absolute bottom-0 left-0 h-[2px] w-full bg-white/50 transition-all duration-300 group-hover:bg-orange-300 group-hover:h-[3px]"></span>
@@ -110,11 +102,7 @@ export const Hero = () => {
 
                         <Link
                             href={`/${currentLang}/FAQpage`}
-                            className="
-                                group relative text-sm sm:text-base font-semibold uppercase text-white
-                                pb-1 transition-all duration-300
-                                hover:text-orange-300
-                            "
+                            className="group relative text-sm sm:text-base font-semibold uppercase text-white pb-1 transition-all duration-300 hover:text-orange-300"
                         >
                             <span className="relative z-10">{t("heroCtaSecondary2")}</span>
                             <span className="absolute bottom-0 left-0 h-[2px] w-full bg-white/50 transition-all duration-300 group-hover:bg-orange-300 group-hover:h-[3px]"></span>
@@ -132,7 +120,6 @@ export const Hero = () => {
                         <div className="w-1 h-2 bg-white/50 rounded-full"></div>
                     </div>
                 </div>
-
             </div>
         </section>
     );
