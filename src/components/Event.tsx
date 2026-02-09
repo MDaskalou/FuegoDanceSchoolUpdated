@@ -93,16 +93,7 @@ export const Event = ({ id = "events" }: EventSectionProps) => {
                     </div>
                 )}
 
-                {featuredEvents.length > 0 && (
-                    <div className="text-center mt-10">
-                        <Link
-                            href={`/${currentLang}/events`}
-                            className="inline-block rounded-full bg-orange-500 px-10 py-3 text-lg font-bold uppercase tracking-wider text-white shadow-xl transition-all duration-300 hover:bg-orange-600 hover:scale-105 active:scale-95"
-                        >
-                            {t("eventsCta")}
-                        </Link>
-                    </div>
-                )}
+
 
             </div>
         </section>
