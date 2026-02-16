@@ -5,7 +5,8 @@ import dynamic from "next/dynamic";
 import Script from "next/script";
 import TranslationProvider from "@/i18n/TranslationProvider";
 import { Footer } from "@/components/Footer";
-// import { ContactSection } from "@/components/Contact"; // Om du använder denna, avkommentera
+import ChatBot from "@/components/ChatBot";
+
 import CookieConsent from "@/components/CookieConsent";
 import initTranslations from "@/i18n";
 
@@ -138,7 +139,7 @@ export default async function RootLayout({
             </main>
 
             <Footer />
-
+            <ChatBot/>
             <CookieConsent />
 
         </TranslationProvider>
