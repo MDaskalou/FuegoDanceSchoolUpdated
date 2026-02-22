@@ -66,8 +66,15 @@ const DynamicNavbar = dynamic(() => import("@/components/Navbar").then(mod => mo
     loading: () => <div style={{ height: 80, backgroundColor: '#1a1a1a' }}></div>
 });
 
-const i18nNamespaces = ['common', 'navbarTranslation', 'footerTranslation', 'bookingCompleteTranslation'
-, 'cookieConsentTranslation', 'aboutTranslation', 'openhouseTranslation'];
+const i18nNamespaces = [
+    'common',
+    'navbarTranslation',
+    'footerTranslation',
+    'bookingCompleteTranslation',
+    'cookieConsentTranslation',
+    'aboutTranslation',
+    'openhouseTranslation',
+    'featureTranslation',];
 
 interface RootLayoutProps {
     children: React.ReactNode;
@@ -139,7 +146,7 @@ export default async function RootLayout({
             </main>
 
             <Footer />
-            <ChatBot/>
+            {/* <ChatBot /> */}
             <CookieConsent />
 
         </TranslationProvider>

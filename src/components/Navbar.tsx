@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import React, { useEffect, useState, useRef } from "react";
-import { FaInstagram, FaFacebook } from "react-icons/fa";
+import { FaBars, FaTimes } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import Image from "next/image";
@@ -35,6 +35,7 @@ export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
 
+  // Vi drar ut i18n här för att kunna byta språk programmatiskt
   const { t, i18n } = useTranslation("navbarTranslation");
   const params = useParams();
   const router = useRouter();
@@ -56,10 +57,23 @@ export const Navbar: React.FC = () => {
 
   if (!mounted) return <div className="h-[90px] bg-transparent" />;
 
-  const handleLanguageChange = () => {
+  // I Navbar.tsx
+  const handleLanguageChange = async () => {
     const newLang = currentLang === "sv" ? "en" : "sv";
-    const newPath = pathname.replace(`/${currentLang}`, `/${newLang}`);
-    router.push(newPath);
+
+    // 1. Förbered i18next direkt
+    await i18n.changeLanguage(newLang);
+
+    // 2. Beräkna den nya vägen säkert
+    const segments = pathname.split('/');
+    if (segments[1] === currentLang) {
+      segments[1] = newLang;
+    }
+    const newPath = segments.join('/') || `/${newLang}`;
+
+    // 3. Utför navigeringen tyst
+    // scroll: false förhindrar att sidan hoppar till toppen
+    router.push(newPath, { scroll: false });
   };
 
   const navLinks = [
@@ -73,8 +87,35 @@ export const Navbar: React.FC = () => {
     { name: t('nav.faq'), href: "/FAQpage", icon: <FaQuestion /> },
   ];
 
+  const handleLinkClick = async (e: React.MouseEvent<HTMLAnchorElement>, href: string, isAnchor: boolean) => {
+    if (isAnchor) {
+      const id = href.split("#")[1];
+      const isHomePage = pathname === `/${currentLang}` || pathname === `/${currentLang}/`;
+
+      if (isHomePage) {
+        e.preventDefault();
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+        setIsMenuOpen(false);
+        return;
+      }
+
+      // Om vi inte är på startsidan, navigera dit först
+      e.preventDefault();
+      setIsMenuOpen(false);
+      await router.push(`/${currentLang}`);
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 150);
+      return;
+    }
+    setIsMenuOpen(false);
+  };
+
   const getLinkClass = (href: string, isCta: boolean) => {
-    const fullHref = `/${currentLang}${href === "/" ? "" : href}`;
+    const pathOnly = href.split('#')[0] || '/';
+    const fullHref = `/${currentLang}${pathOnly === "/" ? "" : pathOnly}`;
     const isActive = pathname === fullHref;
 
     if (isCta) return "bg-[#f26722] text-white px-6 py-2.5 rounded-full font-bold flex items-center gap-2 hover:bg-[#d5561d] transition-all transform hover:scale-105 shadow-lg uppercase tracking-wider";
@@ -84,183 +125,94 @@ export const Navbar: React.FC = () => {
     }`;
   };
 
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, isAnchor: boolean) => {
-    if (isAnchor && pathname === `/${currentLang}`) {
-      const id = href.split("#")[1];
-      const el = document.getElementById(id);
-      if (el) {
-        e.preventDefault();
-        el.scrollIntoView({ behavior: "smooth" });
-        setIsMenuOpen(false);
-      }
-    } else {
-      setIsMenuOpen(false);
-    }
-  };
+  const headerClasses = [
+    "fixed top-0 left-0 w-full transition-all duration-300",
+    isMenuOpen ? "z-[100000]" : "z-[1000]",
+    isHidden && !isMenuOpen ? "-translate-y-full" : "translate-y-0",
+    isScrolled
+        ? "bg-[#1a1a1a]/80 backdrop-blur-lg border-b border-white/5 shadow-2xl"
+        : "bg-transparent"
+  ].join(" ");
 
   return (
-      <header
-          className={`fixed top-0 left-0 w-full transition-all duration-300 ${
-              isMenuOpen ? "z-[100000]" : "z-[1000]"
-          } ${
-              isHidden && !isMenuOpen ? "-translate-y-full" : "translate-y-0"
-          } ${isScrolled
-              ? "bg-gradient-to-br from-[#1f1f1f]/90 to-[#3a1f1d]/90 backdrop-blur-md border-b border-white/5 shadow-2xl"
-              : "bg-transparent"
-          }`}
-      >
-        {/* HUVUD-NAVBAR: Vi lägger till opacity-0 när menyn är öppen för att slippa dubbletter */}
+      <header className={headerClasses}>
         <div className={`mx-auto flex h-[90px] max-w-[1500px] items-center justify-between px-6 transition-opacity duration-300 ${
             isMenuOpen ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}>
-
-          {/* Vänster: Logotyp */}
-          <Link href={`/${currentLang}`} className="flex items-center gap-3 group relative z-[10001]">
-            <Image
-                src="/img/Navbar/FuegoLogoimg.png"
-                alt="Fuego Logo"
-                width={80}
-                height={80}
-                className="object-contain transition-transform group-hover:scale-105"
-                priority
-            />
-            <div className="flex flex-col">
-              <span className="font-playfair text-2xl font-black leading-none text-[#f26722]">Fuego</span>
-              <span className="text-[10px] tracking-[0.25em] text-white/80 uppercase font-light">Dance School</span>
-            </div>
+          {/* LOGO */}
+          <Link href={`/${currentLang}`} className="flex items-center gap-3 group">
+            <Image src="/img/Navbar/FuegoLogoimg.png" alt="Fuego" width={50} height={50} />
+            <span className="font-playfair text-2xl font-bold text-[#f26722] uppercase tracking-tighter">Fuego</span>
           </Link>
 
-          {/* Mitten: Desktop Nav */}
-          <nav className="hidden items-center gap-6 xl:flex">
+          {/* DESKTOP NAV */}
+          <nav className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
                 <Link
-                    key={link.href}
+                    key={link.name}
                     href={`/${currentLang}${link.href}`}
-                    onClick={(e) => handleLinkClick(e, link.href, !!link.isAnchor)}
-                    className={getLinkClass(link.href, !!link.isCta)}
+                    className={getLinkClass(link.href, link.isCta || false)}
+                    onClick={(e) => handleLinkClick(e, link.href, link.isAnchor || false)}
                 >
-                  <span className="text-base">{link.icon}</span>
-                  <span>{link.name}</span>
+                  {link.icon}
+                  {link.name}
                 </Link>
             ))}
           </nav>
 
-          {/* Höger: Språkval & Mobil-knapp */}
-          <div className="flex items-center gap-5 relative z-[10001]">
+          {/* RIGHT SECTION (Language + Mobile Toggle) */}
+          <div className="flex items-center gap-6">
             <button
                 onClick={handleLanguageChange}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-[10px] font-bold text-white hover:bg-[#f26722] transition-all"
+                className="text-white hover:text-[#f26722] font-bold transition-colors min-w-[30px]"
             >
-              {currentLang.toUpperCase()}
+              {currentLang === "sv" ? "EN" : "SV"}
             </button>
 
             <button
-                className="text-3xl text-[#f26722] xl:hidden transition-transform duration-300 hover:scale-110"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                aria-label="Toggle menu"
+                className="lg:hidden text-white text-2xl"
+                onClick={() => setIsMenuOpen(true)}
             >
-              {isMenuOpen ? "✕" : "☰"}
+              <FaBars />
             </button>
           </div>
         </div>
 
-        {/* MOBILMENY: Denna syns nu ensam utan dubbletter bakom */}
-        <div
-            className={`fixed inset-0 h-screen w-screen bg-[#121212] flex flex-col transition-all duration-500 ease-in-out xl:hidden ${
-                isMenuOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0 pointer-events-none"
-            }`}
-        >
-          {/* Menyns Topp-bar */}
-          <div className="flex h-[90px] w-full items-center justify-between px-6 bg-[#1a1a1a] border-b border-white/5 shrink-0">
-            <div className="flex items-center gap-3">
-              <Image
-                  src="/img/Navbar/FuegoLogoimg.png"
-                  alt="Fuego Logo"
-                  width={50}
-                  height={50}
-                  className="object-contain"
-              />
-              <span className="font-playfair text-xl font-black text-[#f26722]">Fuego</span>
+        {/* MOBILE OVERLAY MENU */}
+        <div className={`fixed inset-0 bg-[#1a1a1a] z-[100001] transition-transform duration-500 ${isMenuOpen ? "translate-x-0" : "translate-x-full"} lg:hidden`}>
+          <div className="flex flex-col h-full p-8">
+            <div className="flex justify-between items-center mb-12">
+              <span className="text-[#f26722] font-playfair text-2xl">FUEGO</span>
+              <button onClick={() => setIsMenuOpen(false)} className="text-white text-3xl"><FaTimes /></button>
             </div>
-            <button
-                className="text-4xl text-[#f26722] p-2"
-                onClick={() => setIsMenuOpen(false)}
-            >
-              ✕
-            </button>
-          </div>
 
-          {/* Navigeringslänkar */}
-          <nav className="flex-1 overflow-y-auto bg-[#121212] py-8 px-6 flex flex-col gap-3">
-            {navLinks.map((link, index) => {
-              // Vi separerar CTA (Kurser) från de andra för att ge den fokus
-              if (link.isCta) {
-                return (
-                    <Link
-                        key={link.href}
-                        href={`/${currentLang}${link.href}`}
-                        onClick={(e) => handleLinkClick(e, link.href, !!link.isAnchor)}
-                        className="flex items-center justify-between w-full py-5 px-6 rounded-2xl bg-gradient-to-r from-[#f26722] to-[#ff8c52] text-white shadow-[0_10px_20px_rgba(242,103,34,0.3)] mb-4 transition-transform active:scale-95"
-                    >
-                      <div className="flex items-center gap-4">
-                        <span className="text-2xl">{link.icon}</span>
-                        <span className="text-xl font-bold uppercase tracking-wider">{link.name}</span>
-                      </div>
-                      <span className="text-white/50">→</span>
-                    </Link>
-                );
-              }
-
-              // Vanliga länkar i ett snyggt listformat eller grid
-              return (
+            <div className="flex flex-col gap-6 overflow-y-auto">
+              {navLinks.map((link) => (
                   <Link
-                      key={link.href}
+                      key={link.name}
                       href={`/${currentLang}${link.href}`}
-                      onClick={(e) => handleLinkClick(e, link.href, !!link.isAnchor)}
-                      className="flex items-center gap-4 w-full py-4 px-5 rounded-xl text-gray-300 bg-white/5 border border-white/5 hover:bg-white/10 active:bg-[#f26722]/10 active:border-[#f26722]/30 transition-all uppercase tracking-widest font-semibold text-sm"
+                      className="text-2xl text-white font-semibold flex items-center gap-4 active:text-[#f26722]"
+                      onClick={(e) => handleLinkClick(e, link.href, link.isAnchor || false)}
                   >
-        <span className="text-[#f26722] text-xl opacity-80">
-          {link.icon}
-        </span>
+                    <span className="text-[#f26722]">{link.icon}</span>
                     {link.name}
                   </Link>
-              );
-            })}
+              ))}
 
-            {/* Snabbval för Sociala Medier */}
-            <div className="flex gap-4 mt-6 justify-center">
-              {/* Instagram */}
-              <a
-                  href="https://www.instagram.com/fuegodanceschool/" // Ersätt med din länk
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-4 bg-white/5 rounded-full text-white hover:text-[#f26722] transition-colors"
-                  aria-label="Följ oss på Instagram"
+              {/* Extra språkknapp i mobilmenyn för tydlighet */}
+              <button
+                  onClick={() => {
+                    handleLanguageChange();
+                    setIsMenuOpen(false);
+                  }}
+                  className="mt-4 text-left text-xl text-gray-400 border-t border-white/10 pt-6"
               >
-                <FaInstagram size={24} />
-              </a>
-
-              {/* Facebook */}
-              <a
-                  href="https://www.facebook.com/FuegoDSchool" // Ersätt med din länk
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-4 bg-white/5 rounded-full text-white hover:text-[#f26722] transition-colors"
-                  aria-label="Följ oss på Facebook"
-              >
-                <FaFacebook size={24} />
-              </a>
+                {currentLang === "sv" ? "Switch to English" : "Byt till Svenska"}
+              </button>
             </div>
-          </nav>
-
-          <div className="p-8 bg-[#0a0a0a] border-t border-white/5 text-center shrink-0">
-            <p className="text-gray-500 text-[10px] tracking-[0.4em] uppercase">
-              Göteborgs skönaste dansskola
-            </p>
           </div>
         </div>
       </header>
-
   );
 };
 

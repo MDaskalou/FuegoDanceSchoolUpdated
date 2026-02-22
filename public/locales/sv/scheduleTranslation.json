@@ -13,6 +13,8 @@
   "scheduleCta": "Registrera dig nu",
   "noteWorkshopPrice": "120kr inkl. social",
   "noteSocialPrice": "80kr",
+  "noteDropIn": "Drop-in",
+  "noteGuidedSocialPrise": "150kr solo, 200kr par",
   "courses": [
     {
       "dayKey": "dayMonday",
@@ -56,27 +58,12 @@
     },
     {
       "dayKey": "dayWednesday",
-      "time": "18:00 - 19:00",
-      "name": "Koreografiklass",
-      "instructors": "Raminta",
+      "time": "18:30 - 20:20",
+      "name": "Guidad Socialdans",
+      "instructors": "Mikael",
       "isNew": true,
-      "isDropIn": false
-    },
-    {
-      "dayKey": "dayWednesday",
-      "time": "19:05 - 20:05",
-      "name": "Nivå 2 Teknik",
-      "instructors": "Andris & Emma",
-      "isNew": true,
-      "isDropIn": false
-    },
-    {
-      "dayKey": "dayWednesday",
-      "time": "20:10 - 21:10",
-      "name": "Nivå 2",
-      "instructors": "Andris & Emma",
-      "isNew": false,
-      "isDropIn": false
+      "isDropIn": true,
+      "noteKey": "noteGuidedSocialPrise"
     },
     {
       "dayKey": "dayThursday",

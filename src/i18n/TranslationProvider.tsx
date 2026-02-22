@@ -10,8 +10,8 @@ interface TranslationProviderProps {
     children: ReactNode;
     lang: string;
     namespaces: string[];
-    resources: Resource; // Denna saknades i ditt interface
-    i18nInstance?: any; // optionally accept a pre-initialized i18n instance from server
+    resources: Resource;
+    i18nInstance?: any;
 }
 
 export default function TranslationProvider({
@@ -21,16 +21,15 @@ export default function TranslationProvider({
                                                 resources,
                                                 i18nInstance,
                                             }: TranslationProviderProps) {
-    // If an initialized i18n instance is provided (from server), use it directly
+
+    // 1. Om en instans skickas med från servern, använd den direkt
     if (i18nInstance) {
         return <I18nextProvider i18n={i18nInstance}>{children}</I18nextProvider>;
     }
 
-    // Skapa en instans som lever under komponentens livstid (memoized)
+    // 2. Skapa instansen (memoized så den inte skapas om vid varje render)
     const i18n = useMemo(() => {
         const i18nInstanceLocal = createInstance();
-
-        // We don't call .init here synchronously; we'll init in useEffect and track readiness
         i18nInstanceLocal
             .use(initReactI18next)
             .use(
@@ -39,45 +38,48 @@ export default function TranslationProvider({
                         import(`../../public/locales/${language}/${namespace}.json`)
                 )
             );
-
         return i18nInstanceLocal;
-    }, [/* stable */]);
+    }, []);
 
     const [ready, setReady] = useState(false);
 
     useEffect(() => {
         let mounted = true;
 
-        i18n
-            .init({
-                lng: lang,
-                resources,
-                fallbackLng: "sv",
-                supportedLngs: ["sv", "en"],
-                defaultNS: namespaces[0],
-                fallbackNS: namespaces[0],
-                ns: namespaces,
-                detection: {
-                    caches: [],
-                },
-            })
-            .then(() => {
-                if (mounted) setReady(true);
-            })
-            .catch((err) => {
-                console.error("i18n init error:", err);
-                if (mounted) setReady(true); // still render (will show keys) but avoid blocking forever
-            });
+        const init = async () => {
+            // Om instansen inte är initierad, gör det nu
+            if (!i18n.isInitialized) {
+                await i18n.init({
+                    lng: lang,
+                    resources,
+                    fallbackLng: "sv",
+                    supportedLngs: ["sv", "en"],
+                    defaultNS: namespaces[0],
+                    fallbackNS: namespaces[0],
+                    ns: namespaces,
+                    react: {
+                        bindI18n: 'languageChanged',
+                        useSuspense: false,
+                    },
+                });
+            } else if (i18n.language !== lang) {
+                // Om den redan är initierad men språket i URL ändras, byt bara språk
+                await i18n.changeLanguage(lang);
+            }
+
+            if (mounted) setReady(true);
+        };
+
+        init();
 
         return () => {
             mounted = false;
         };
     }, [i18n, lang, namespaces, resources]);
 
-    if (!ready) {
-        // You can return a loader/skeleton here if desired
-        return null;
-    }
+    // 3. Vänta tills instansen är redo innan vi renderar barnen
+    // Annars kommer komponenten krascha eller visa tomma nycklar
+    if (!ready) return null;
 
     return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
 }

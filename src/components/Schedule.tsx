@@ -25,21 +25,34 @@ const ScheduleItem = ({ time, name, instructors, note, isNew = false, isDropIn =
     isDropIn?: boolean;
 }) => (
     <div className={`
-        bg-white/5 p-4 rounded-xl text-center relative shadow-lg backdrop-blur-sm
-        border transition-all duration-300 hover:scale-[1.02] hover:shadow-xl
-        ${isDropIn ? 'bg-orange-500/15 border-orange-500 hover:bg-orange-500/20' : 'border-orange-500/50 hover:border-orange-500/70'} 
+        /* Bas-styling: Nu identisk för ALLA kort */
+        bg-white/5 border-orange-500/30 p-4 rounded-xl text-center relative shadow-lg backdrop-blur-sm border
+        transition-all duration-300 transform 
+        
+        /* Hovring: Samma för alla */
+        hover:scale-[1.02] hover:bg-orange-500/20 hover:border-orange-500/60 hover:shadow-orange-500/20
     `}>
-        {/* 'NY'-tagg - Röd och tydlig */}
         {isNew && (
-            <span className="absolute top-[-10px] right-[-10px] bg-red-600 text-white text-xs font-extrabold px-2.5 py-1 rounded-full shadow-xl transform rotate-12 ring-2 ring-red-400">
+            <span className="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full z-20 shadow-md">
                 NY
+            </span>
+        )}
+
+        {isDropIn && (
+            <span className="absolute -top-2 -left-2 bg-orange-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full z-20 shadow-md">
+                DROP-IN
             </span>
         )}
 
         <p className="text-xs sm:text-sm font-light text-gray-400 mb-1">{time}</p>
         <h4 className="text-base sm:text-lg font-bold my-2 text-orange-500">{name}</h4>
         <p className="text-xs sm:text-sm text-gray-300">{instructors}</p>
-        {note && <p className="text-[10px] sm:text-xs italic text-red-300 mt-2">{note}</p>}
+
+        {note && (
+            <p className="text-[10px] sm:text-xs italic text-orange-200/70 mt-2 leading-tight">
+                {note}
+            </p>
+        )}
     </div>
 );
 

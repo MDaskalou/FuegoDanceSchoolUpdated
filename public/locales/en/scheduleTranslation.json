@@ -13,6 +13,8 @@
   "scheduleCta": "Register Now",
   "noteWorkshopPrice": "120kr incl. social",
   "noteSocialPrice": "80kr",
+  "noteDropIn": "Drop-in available",
+  "noteGuidedSocialPrise": "150kr solo, 200kr couple",
   "courses": [
     {
       "dayKey": "dayMonday",
@@ -56,27 +58,13 @@
     },
     {
       "dayKey": "dayWednesday",
-      "time": "18:00 - 19:00",
-      "name": "Choreography class",
-      "instructors": "Raminta",
+      "time": "18:30 - 20:30",
+      "name": "Guided Social Dance",
+      "instructors": "Mikael",
       "isNew": true,
-      "isDropIn": false
-    },
-    {
-      "dayKey": "dayWednesday",
-      "time": "19:05 - 20:05",
-      "name": "Level 2 Technique",
-      "instructors": "Andris & Emma",
-      "isNew": true,
-      "isDropIn": false
-    },
-    {
-      "dayKey": "dayWednesday",
-      "time": "20:10 - 21:10",
-      "name": "Level 2",
-      "instructors": "Andris & Emma",
-      "isNew": false,
-      "isDropIn": false
+      "isDropIn": true,
+      "noteKeyDropIn": "noteDropIn",
+      "noteKey": "noteGuidedSocialPrise"
     },
     {
       "dayKey": "dayThursday",

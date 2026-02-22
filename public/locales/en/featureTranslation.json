@@ -1,0 +1,21 @@
+﻿{
+  "title": "Our Standing Events",
+  "guidedSocial": {
+    "title": "Guided Social Dance",
+    "subtitle": "Practice with intention & build confidence.",
+    "when": "Every Wednesday",
+    "time": "18:30 – 20:30",
+    "price": "150 SEK / 200 SEK",
+    "cta": "Learn more"
+  },
+  "sundayFunday": {
+    "title": "Sunday Funday",
+    "subtitle": "100% Bachata",
+    "when": "Every Sunday",
+    "workshopTime": "14:00 – 15:00",
+    "socialTime": "15:00 – 18:00",
+    "price": "80 SEK Social / 120 SEK All-in",
+    "cta": "Learn more"
+  },
+  "comingSoon": "Coming soon"
+}
