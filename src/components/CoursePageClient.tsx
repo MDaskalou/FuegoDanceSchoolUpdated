@@ -14,12 +14,10 @@ export default function CoursesPageClient({ params }: CoursesPageClientProps) {
 
     useEffect(() => {
         setIsClient(true);
-
-        // FIX: Vi "använder" params här för att undvika build-fel
         if (process.env.NODE_ENV === 'development') {
             // console.log("Courses page loaded for lang:", params.lang);
         }
-    }, [params]); // Lägg till params i beroendearrayen
+    }, [params]);
 
     const pageTitle = isClient
         ? t('coursesPageTitle', { defaultValue: 'Våra Kurser & Schema' })
@@ -29,20 +27,24 @@ export default function CoursesPageClient({ params }: CoursesPageClientProps) {
         <div className="pt-24 bg-[#1a1a1a] min-h-screen text-white">
             <div className="container mx-auto max-w-5xl">
 
+                {/* ── Kurser ── */}
                 <h1 className="text-4xl font-bold text-orange-500 mb-8 text-center px-4">
                     {pageTitle}
                 </h1>
 
-                <div
-                    className="
-                        w-full rounded-xl bg-[#262626] shadow-2xl shadow-black/70
-                        border-2 border-orange-500/50 mx-auto mb-16
-                        transform translate-x-0.5
-                    "
-                >
-                    {/* Viktigt: undvik rubrik-dubblering */}
-                    <CourselyWidget showHeader={false} />
+                <div className="w-full rounded-xl bg-[#262626] shadow-2xl shadow-black/70 border-2 border-orange-500/50 mx-auto mb-16 transform translate-x-0.5">
+                    <CourselyWidget showHeader={false} activityType="Course" />
                 </div>
+
+                {/* ── Events & Workshops ── */}
+                <h2 className="text-4xl font-bold text-orange-500 mb-8 text-center px-4 font-serif">
+                    Events &amp; Workshops
+                </h2>
+
+                <div className="w-full rounded-xl bg-[#262626] shadow-2xl shadow-black/70 border-2 border-orange-500/50 mx-auto mb-16">
+                    <CourselyWidget showHeader={false} activityType="Event" />
+                </div>
+
             </div>
         </div>
     );
