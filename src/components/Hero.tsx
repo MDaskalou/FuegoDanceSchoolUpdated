@@ -90,20 +90,18 @@ export const Hero = () => {
 
             {/* ── Main Content ── */}
             <div className="absolute inset-0 z-20 flex h-full w-full flex-col items-center justify-center px-6 text-center pointer-events-none">
-
-                {/* Headline — Cormorant Garamond */}
+                {/* Headline */}
                 <h1
                     className={`
                         font-bold tracking-wide text-white
-                        text-4xl sm:text-5xl md:text-6xl lg:text-7xl
-                        mb-6 leading-[1.1] max-w-4xl
+                        text-3xl sm:text-5xl md:text-6xl lg:text-7xl
+                        mb-4 sm:mb-6 leading-[1.2] sm:leading-[1.1] max-w-4xl
                         [text-shadow:_0_4px_24px_rgb(0_0_0_/_70%)]
                         transition-all duration-1000 ease-out
                         ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
                     `}
                     style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
                 >
-                    {/* Sista ordet blir kursivt — festivalkänsla */}
                     {t("heroTitle").split(" ").map((word, i, arr) =>
                         i === arr.length - 1
                             ? <em key={i} style={{ fontStyle: "italic" }}> {word}</em>
@@ -111,9 +109,9 @@ export const Hero = () => {
                     )}
                 </h1>
 
-                {/* Dekorativ linje med ornament */}
+                {/* Dekorativ linje */}
                 <div className={`
-                    flex items-center gap-4 mb-6
+                    hidden sm:flex items-center gap-4 mb-6
                     transition-all duration-700 delay-300 ease-out
                     ${mounted ? 'opacity-100' : 'opacity-0'}
                 `}>
@@ -124,9 +122,8 @@ export const Hero = () => {
 
                 {/* Subtitle */}
                 <p className={`
-                    mb-16 max-w-2xl text-sm font-light text-gray-200 drop-shadow-xl
-                    sm:text-base md:text-lg
-                    tracking-[0.25em] leading-relaxed uppercase
+                    mb-8 sm:mb-16 max-w-2xl text-xs sm:text-base md:text-lg font-light text-gray-200
+                    tracking-[0.15em] sm:tracking-[0.25em] leading-relaxed uppercase
                     [text-shadow:_0_2px_8px_rgb(0_0_0_/_60%)]
                     transition-all duration-1000 delay-200 ease-out
                     ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
@@ -136,7 +133,7 @@ export const Hero = () => {
 
                 {/* CTA Group */}
                 <div className={`
-                    flex flex-col items-center justify-center space-y-8
+                    flex flex-col items-center justify-center space-y-6 sm:space-y-8
                     pointer-events-auto
                     transition-all duration-1000 delay-500 ease-out
                     ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
@@ -144,80 +141,46 @@ export const Hero = () => {
                     <Link
                         href={`/${currentLang}/courses`}
                         className="
-                            group relative rounded-full bg-orange-500 px-12 py-5 text-base sm:text-lg font-bold uppercase
-                            tracking-wider text-white shadow-2xl transition-all duration-300 w-72
-                            hover:bg-orange-600 hover:scale-105 hover:shadow-orange-500/50
-                            active:scale-95 overflow-hidden
+                            group relative rounded-full bg-orange-500 px-10 py-4 sm:px-12 sm:py-5 text-sm sm:text-lg font-bold uppercase
+                            tracking-wider text-white shadow-2xl transition-all duration-300 w-64 sm:w-72
+                            hover:bg-orange-600 hover:scale-105
                         "
                     >
-                        <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
                         <span className="relative z-10">{t("heroCtaButton")}</span>
                     </Link>
 
-                    <div className="flex flex-col items-center gap-6 text-center md:flex-row md:gap-12">
-                        <Link
-                            href={`/${currentLang}/openhouse`}
-                            className="group relative text-sm sm:text-base font-semibold uppercase text-white pb-1 transition-all duration-300 hover:text-orange-300"
-                        >
-                            <span className="relative z-10">{t("heroCtaSecondary1")}</span>
-                            <span className="absolute bottom-0 left-0 h-[2px] w-full bg-white/50 transition-all duration-300 group-hover:bg-orange-300 group-hover:h-[3px]" />
+                    <div className="flex flex-row items-center gap-4 sm:gap-12">
+                        <Link href={`/${currentLang}/openhouse`} className="text-[10px] sm:text-base font-semibold uppercase text-white pb-1 border-b border-white/30 transition-all hover:text-orange-300">
+                            {t("heroCtaSecondary1")}
                         </Link>
-
-                        <span className="hidden md:block text-white/30 text-2xl font-light">|</span>
-
-                        <Link
-                            href={`/${currentLang}/FAQpage`}
-                            className="group relative text-sm sm:text-base font-semibold uppercase text-white pb-1 transition-all duration-300 hover:text-orange-300"
-                        >
-                            <span className="relative z-10">{t("heroCtaSecondary2")}</span>
-                            <span className="absolute bottom-0 left-0 h-[2px] w-full bg-white/50 transition-all duration-300 group-hover:bg-orange-300 group-hover:h-[3px]" />
+                        <span className="text-white/30 text-xl font-light">|</span>
+                        <Link href={`/${currentLang}/FAQpage`} className="text-[10px] sm:text-base font-semibold uppercase text-white pb-1 border-b border-white/30 transition-all hover:text-orange-300">
+                            {t("heroCtaSecondary2")}
                         </Link>
                     </div>
                 </div>
 
-                {/* ── Ny Scroll Indicator ── */}
+                {/* Scroll Indicator */}
                 <div className={`
-                    absolute bottom-8 left-1/2 -translate-x-1/2
+                    hidden sm:flex absolute bottom-8 left-1/2 -translate-x-1/2
                     flex flex-col items-center gap-2
                     transition-opacity duration-1000 delay-[1200ms]
                     ${mounted ? 'opacity-100' : 'opacity-0'}
                 `}>
-                    <span className="text-[9px] font-bold uppercase tracking-[0.45em] text-white/35">
-                        Utforska
-                    </span>
-                    <div className="flex flex-col items-center -space-y-1.5">
-                        {[0, 1, 2].map((i) => (
-                            <svg
-                                key={i}
-                                className="w-5 h-5"
-                                style={{
-                                    animation: "scrollChevron 1.8s ease-in-out infinite",
-                                    animationDelay: `${i * 0.18}s`,
-                                    color: `rgba(255,255,255,${0.25 + i * 0.2})`,
-                                }}
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                strokeWidth={1.5}
-                            >
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                            </svg>
-                        ))}
-                    </div>
+                    <span className="text-[9px] font-bold uppercase tracking-[0.45em] text-white/35">Utforska</span>
                 </div>
             </div>
 
-            {/* ── Floating Event Card ── */}
+            {/* ── Floating Event Card (Desktop-version) ── */}
             {nextEvent && formatted && (
                 <Link
                     href={nextEvent.link}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`
-                        group absolute bottom-10 right-6 z-30
-                        w-64 sm:w-72 rounded-2xl overflow-hidden
-                        border border-white/10
-                        shadow-[0_8px_40px_rgba(0,0,0,0.6)]
+                        group hidden sm:block absolute bottom-10 right-6 z-30
+                        w-72 rounded-2xl overflow-hidden
+                        border border-white/10 shadow-[0_8px_40px_rgba(0,0,0,0.6)]
                         backdrop-blur-md bg-black/40
                         transition-all duration-700 ease-out
                         hover:scale-[1.03] hover:shadow-orange-500/20 hover:border-orange-500/40
@@ -227,44 +190,70 @@ export const Hero = () => {
                 >
                     <div className="h-1 w-full bg-gradient-to-r from-orange-500 to-orange-400" />
                     <div className="p-4">
-                        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-orange-400 mb-2">
-                            Kommande event
-                        </p>
+                        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-orange-400 mb-2">Kommande event</p>
                         <div className="flex items-start justify-between gap-3">
                             <div className="flex-1 min-w-0">
-                                <h3 className="text-white font-bold text-sm sm:text-base leading-tight line-clamp-2">
-                                    {nextEvent.title}
-                                </h3>
-                                <p className="text-gray-300 text-xs mt-1 capitalize">
-                                    {formatted.weekday} {nextEvent.date}
-                                </p>
-                                <p className="text-gray-400 text-xs truncate mt-0.5">
-                                    {nextEvent.location}
-                                </p>
+                                <h3 className="text-white font-bold text-sm sm:text-base leading-tight line-clamp-2">{nextEvent.title}</h3>
+                                <p className="text-gray-300 text-xs mt-1 capitalize">{formatted.weekday} {nextEvent.date}</p>
+                                <p className="text-gray-400 text-xs truncate mt-0.5">{nextEvent.location}</p>
                             </div>
                             <div className="flex-shrink-0 flex flex-col items-center justify-center bg-orange-500 rounded-xl w-12 h-12 text-white">
-                                <span className="text-[10px] font-semibold uppercase leading-none capitalize">{formatted.month}</span>
+                                <span className="text-[10px] font-semibold uppercase leading-none">{formatted.month}</span>
                                 <span className="text-xl font-extrabold leading-none">{formatted.day}</span>
                             </div>
-                        </div>
-                        <div className="mt-3 flex items-center justify-between">
-                            {nextEvent.isNew && (
-                                <span className="text-[10px] font-bold uppercase tracking-wider text-orange-400 bg-orange-400/10 px-2 py-0.5 rounded-full">
-                                    Nytt
-                                </span>
-                            )}
-                            <span className="ml-auto text-[11px] font-semibold uppercase tracking-wider text-white/70 group-hover:text-orange-400 transition-colors duration-300 flex items-center gap-1">
-                                Boka nu
-                                <svg className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                                </svg>
-                            </span>
                         </div>
                     </div>
                 </Link>
             )}
 
-            {/* Keyframes */}
+            {/* ── Floating Event Card (Mobil-version) ── */}
+            {nextEvent && formatted && (
+                <Link
+                    href={nextEvent.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`
+            group 
+            block sm:hidden 
+            absolute bottom-6 left-4 right-4 z-30
+            /* Ändrat från 'fixed' till 'absolute' för att stanna i herosection */
+            
+            rounded-xl overflow-hidden 
+            border border-white/10 backdrop-blur-lg bg-black/60 
+            shadow-[0_8px_40px_rgba(0,0,0,0.8)]
+            transition-all duration-700 ease-out pointer-events-auto
+            ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
+        `}
+                    style={{ transitionDelay: '800ms' }}
+                >
+                    <div className="h-1.5 w-full bg-gradient-to-r from-orange-500 to-orange-400" />
+                    <div className="p-4 flex items-center gap-4"> {/* Ökad padding och gap */}
+
+                        {/* Större datum-badge för mobilen */}
+                        <div className="flex-shrink-0 flex flex-col items-center justify-center bg-orange-500 rounded-lg w-14 h-14 text-white shadow-lg">
+                            <span className="text-[10px] font-bold uppercase leading-none">{formatted.month}</span>
+                            <span className="text-2xl font-black leading-none">{formatted.day}</span>
+                        </div>
+
+                        <div className="flex-1 min-w-0 text-left">
+                            <p className="text-[10px] font-bold uppercase tracking-widest text-orange-400 mb-1">Kommande event</p>
+                            <h3 className="text-white font-bold text-sm leading-tight line-clamp-1 italic">
+                                {nextEvent.title}
+                            </h3>
+                            <p className="text-gray-300 text-xs mt-1 truncate">
+                                {formatted.weekday} • {nextEvent.location}
+                            </p>
+                        </div>
+
+                        <div className="text-white/40">
+                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                            </svg>
+                        </div>
+                    </div>
+                </Link>
+            )}
+
             <style>{`
                 @keyframes scrollChevron {
                     0%, 100% { opacity: 0.2; transform: translateY(-4px); }
