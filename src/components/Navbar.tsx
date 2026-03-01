@@ -19,16 +19,26 @@ export const Navbar: React.FC = () => {
 
   const currentLang = (params?.lang as string) || "sv";
 
+  // 1. Säkrare scroll-hantering
   useEffect(() => {
     setMounted(true);
-    const onScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const handleScroll = () => {
+      // Kontrollera window explicit för mobila in-app browsers
+      if (typeof window !== "undefined") {
+        setIsScrolled(window.scrollY > 20);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+// 2. Säkrare overflow-hantering
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? "hidden" : "";
-  }, [isMenuOpen]);
+    if (mounted && typeof document !== "undefined") {
+      document.body.style.overflow = isMenuOpen ? "hidden" : "";
+    }
+  }, [isMenuOpen, mounted]);
 
   if (!mounted) return <div className="h-[100px] bg-transparent" />; //
 
