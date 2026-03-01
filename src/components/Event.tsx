@@ -1,14 +1,11 @@
-﻿// src/components/EventsSection.tsx
-"use client";
+﻿"use client";
 
 import { useTranslation } from "react-i18next";
-import Link from "next/link";
 import { useInView } from "@/hooks/useInView";
-import EventCard from '@/components/EventCard';
+import EventCarousel from "@/components/EventCarousel";
 import React from "react";
 import { FaCalendarPlus } from "react-icons/fa";
 
-// --- Type definition (shared shape used in translation JSON) ---
 export interface EventItem {
     id: number;
     title: string;
@@ -19,9 +16,9 @@ export interface EventItem {
     description: string;
     imageUrl: string;
     isNew?: boolean;
+    priority?: number;
 }
 
-// --- Filtering helper ---
 const filterUpcomingEvents = (events: EventItem[]): EventItem[] => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -31,7 +28,16 @@ const filterUpcomingEvents = (events: EventItem[]): EventItem[] => {
             const eventDate = new Date(event.startDate);
             return !Number.isNaN(eventDate.getTime()) && eventDate >= today;
         })
-        .sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
+        .sort((a, b) => {
+            // Prioriterade events först
+            const aPriority = a.priority ?? Infinity;
+            const bPriority = b.priority ?? Infinity;
+
+            if (aPriority !== bPriority) return aPriority - bPriority;
+
+            // Resten sorteras på datum
+            return new Date(a.startDate).getTime() - new Date(b.startDate).getTime();
+        });
 };
 
 type EventSectionProps = {
@@ -39,20 +45,18 @@ type EventSectionProps = {
 };
 
 export const Event = ({ id = "events" }: EventSectionProps) => {
-    const { t, i18n } = useTranslation("eventTranslation");
+    const { t } = useTranslation("eventTranslation");
     const { ref: sectionRef, inView } = useInView(0.1);
 
-    const currentLang = i18n.language;
+    const allEvents = t("events", {
+        returnObjects: true,
+    }) as unknown as EventItem[];
+    const normalizedEvents: EventItem[] = Array.isArray(allEvents)
+        ? allEvents
+        : [];
 
-    // Get events from translation JSON
-    const allEvents = (t("events", { returnObjects: true }) as unknown) as EventItem[];
-    const normalizedEvents: EventItem[] = Array.isArray(allEvents) ? allEvents : [];
-
+    // ✅ No longer slicing to 3 — show ALL upcoming events via carousel
     const upcomingEvents = filterUpcomingEvents(normalizedEvents);
-    const featuredEvents = upcomingEvents.slice(0, 3);
-
-    const animateClass = (index: number) =>
-        `transition-all duration-700 ease-out ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} delay-${index * 150}`;
 
     return (
         <section
@@ -66,15 +70,17 @@ export const Event = ({ id = "events" }: EventSectionProps) => {
                     {t("eventsTitle")}
                 </h2>
 
-                {featuredEvents.length > 0 ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-16">
-                        {featuredEvents.map((event, index) => (
-                            <EventCard
-                                key={event.id}
-                                event={event}
-                                animateClass={animateClass(index)}
-                            />
-                        ))}
+                {upcomingEvents.length > 0 ? (
+                    // ✅ Replaced the static grid with EventCarousel
+                    // - 1–3 events: renders as a normal responsive grid (no carousel)
+                    // - 4+ events: activates swipeable carousel with arrows + dots
+                    <div
+                        className={`
+              mb-16 transition-all duration-700 ease-out
+              ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}
+            `}
+                    >
+                        <EventCarousel events={upcomingEvents} />
                     </div>
                 ) : (
                     <div className="text-center py-16 px-6 bg-[#262626] rounded-3xl border border-white/5 shadow-2xl max-w-2xl mx-auto mb-16">
@@ -84,17 +90,13 @@ export const Event = ({ id = "events" }: EventSectionProps) => {
                             </div>
                         </div>
                         <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-                            {t('comingSoonTitle') || t('noUpcomingEvents')}
+                            {t("comingSoonTitle") || t("noUpcomingEvents")}
                         </h3>
                         <p className="text-gray-400 text-lg leading-relaxed max-w-lg mx-auto">
-                            {/* Prefer a descriptive message, fall back to a generic one */}
-                            {t('comingSoonDescription') || t('noUpcomingEvents')}
+                            {t("comingSoonDescription") || t("noUpcomingEvents")}
                         </p>
                     </div>
                 )}
-
-
-
             </div>
         </section>
     );

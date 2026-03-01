@@ -41,15 +41,70 @@
     },
     {
       "id": 4,
-      "title": "Beginner Bachata Workshop",
-      "date": "7 Februari 2026",
-      "startDate": "2026-02-07",
-      "location": "Fuego Studio, Gothenburg",
-      "link": "https://app.coursely.se/activity/beginner-bachata-sensual",
-      "description": " What you’ll get:\n– A safe and welcoming introduction to Bachata Sensual\n– A fun, sensual, and energizing experience\n– Tools to dance with both your body and your emotions\n– Lots of dance joy — whether you come alone or with a partner\nNo previous experience needed — just curiosity.",
-      "imageUrl": "/img/Events/beginnerBachata.jpg",
+      "title": "Bachata Foundations: Master Your Waves",
+      "date": "25 mars 2026",
+      "startDate": "2026-03-25",
+      "location": "Fuego Studio, Göteborg",
+      "link": "https://app.coursely.se/activity/xych8gpgytfsnhrs",
+      "description": "Vill du bygga starkare grunder och äntligen få dina body waves att kännas mjuka, kontrollerade och ansträngningslösa? Denna workshop fokuserar helt på att förfina din teknik och förstå mekaniken bakom rena, flytande rörelser. Under två fokuserade timmar bryter vi ner grunderna steg för steg och visar hur du naturligt integrerar waves i din socialdans. Pris: 250 SEK per person.",
+      "imageUrl": "/img/Events/FuegoEventWaves.jpg",
       "isNew": true
-
+    },
+    {
+      "id": 5,
+      "title": "Bachata Sensual Advanced",
+      "date": "April 24th, 2026",
+      "startDate": "2026-04-24",
+      "location": "Fuego Dance School",
+      "link": "https://app.coursely.se/activity/wnvax056iqm1m6yk",
+      "imageUrl": "/img/Events/EventAdvancedWorkshop.png",
+      "isNew": true,
+      "price": "350 SEK solo / 600 SEK couple",
+      "time": "12:00–15:00 (3 hours)",
+      "description": [
+        "Created for dedicated dancers who want to train at a high level and refine the smallest details that make a big difference.",
+        "During three intensive hours, we focus on advanced body mechanics, complex transitions, and seamless partner connection.",
+        "Expect depth and drills covering high-level lead & follow, waves, isolations, and sophisticated musicality.",
+        "Includes challenging, performance-level combinations in a focused and ambitious training environment.",
+        "For experienced dancers who feel fully confident with intermediate material. Train seriously. Dance exceptionally."
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Bachata Bootcamp med Victor & Alba",
+      "date": "9–10 maj, 2026",
+      "startDate": "2026-05-09",
+      "location": "Fuego Dance School",
+      "link": "https://app.coursely.se/activity/0h0k5qw0efa0ut5i",
+      "imageUrl": "/img/Events/BootcampVictorAlba.jpeg",
+      "isNew": true,
+      "price": "1200 kr per person / 2300 kr per par",
+      "description": [
+        "Delta i vårt exklusiva Bachata Bootcamp med gästinstruktörerna Victor och Alba, direkt från Spanien — de tar med sig autentisk stil, teknik och energi till dansgolvet.",
+        "Under två intensiva dagar dyker vi djupt ner i teknik, partnerarbete och kraftfulla kombinationer designade för att lyfta din dans.",
+        "Förvänta dig detaljerad feedback, dynamiska övningar och en inspirerande atmosfär som kommer att utmana och motivera dig.",
+        "Vad du får: Experträning, starkare teknik, djupare kontakt och kombinationer du kan använda med självförtroende på socialdansen.",
+        "Öppet för dedikerade dansare som vill pusha sin nivå och träna seriöst — samtidigt som vi har roligt."
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Bachata Sensual Intermediate/Advanced",
+      "date": "June 13th, 2026",
+      "startDate": "2026-06-13",
+      "location": "Fuego Dance School",
+      "link": "https://app.coursely.se/activity/f4di31yflptkrl8b",
+      "imageUrl": "/img/Events/EventAdvIntWorkshop.png",
+      "isNew": true,
+      "price": "350 kr solo / 600 kr par",
+      "time": "12:00–15:00 (3 timmar)",
+      "description": [
+        "Designad för erfarna dansare som vill vässa sin teknik och förfina detaljerna som verkligen lyfter din dans.",
+        "Under tre intensiva timmar arbetar vi med precision, avancerad kroppskontroll, komplexa övergångar och dynamiska kombinationer.",
+        "Fokus på följsamhet i lead & follow, waves, isolationer och kreativ musikalisk tolkning.",
+        "Innehåller utmanande kombinationer för socialdansgolvet och detaljerad feedback i en inspirerande miljö.",
+        "För dansare som tränar regelbundet och är redo att utmanas. Pusha dina gränser. Lyft din dans."
+      ]
     }
   ],
   "__MALL_events_SPARA_FOR_SENARE": [

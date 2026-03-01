@@ -10,6 +10,7 @@ import { ContactSection } from './Contact';
 import PriceSection from './Price';
 import EventSection from './Event';
 import {FeatureSection} from './FeatureSection';
+import BootcampFeature from "@/components/BootcampFeature";
 
 export interface HomePageClientProps {
     params: { lang: string };
@@ -20,6 +21,7 @@ export default function HomePageClient({ params }: HomePageClientProps) {
         <>
             <Hero />
             <main>
+                <BootcampFeature/>
                  <About />
                 <ScheduleSection />
                 <FeatureSection />

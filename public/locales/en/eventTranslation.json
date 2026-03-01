@@ -38,7 +38,77 @@
       "description": "More information coming soon.",
       "imageUrl": "/img/Events/fuegoNight25april.jpg",
       "isNew": true
+    },
+    {
+      "id": 4,
+      "title": "Bachata Foundations: Master Your Waves",
+      "date": "March 25, 2026",
+      "startDate": "2026-03-25",
+      "location": "Fuego Studio, Gothenburg",
+      "link": "https://app.coursely.se/activity/xych8gpgytfsnhrs",
+      "description": "Want to build stronger basics and finally make your body waves feel smooth, controlled, and effortless? This workshop is all about refining your technique and understanding the mechanics behind clean, fluid waves. During two focused hours, we’ll break down the fundamentals step by step and show you how to naturally integrate waves into your social dancing. Price: 250 SEK per person.",
+      "imageUrl": "/img/Events/FuegoEventWaves.jpg",
+      "isNew": true
+    },
+
+    {
+      "id": 5,
+      "title": "Bachata Sensual Advanced",
+      "date": "24 april, 2026",
+      "startDate": "2026-04-24",
+      "location": "Fuego Dance School",
+      "link": "https://app.coursely.se/activity/wnvax056iqm1m6yk",
+      "imageUrl": "/img/Events/EventAdvancedWorkshop.png",
+      "isNew": true,
+      "price": "350 kr solo / 600 kr par",
+      "time": "12:00–15:00 (3 timmar)",
+      "description": [
+        "Skapad för dedikerade dansare som vill träna på hög nivå och förfina de små detaljerna som gör den stora skillnaden.",
+        "Under tre intensiva timmar fokuserar vi på avancerad kroppsmekanik, komplexa övergångar och sömlös kontakt i paret.",
+        "Förvänta dig djupgående övningar inom lead & follow, waves, isolationer och sofistikerad musikalitet.",
+        "Innehåller utmanande kombinationer på avancerad nivå i en fokuserad och ambitiös träningsmiljö.",
+        "För erfarna dansare som känner sig helt trygga med fortsättningsmaterial. Träna seriöst. Dansa exceptionellt."
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Bachata Bootcamp w/ Victor & Alba",
+      "date": "May 9th–10th, 2026",
+      "startDate": "2026-05-09",
+      "location": "Fuego Dance School",
+      "link": "https://app.coursely.se/activity/0h0k5qw0efa0ut5i",
+      "imageUrl": "/img/Events/BootcampVictorAlba.jpeg",
+      "isNew": true,
+      "price": "1200 SEK per person / 2300 SEK per couple",
+      "description": [
+        "Join our exclusive Bachata Bootcamp with guest instructors Victor and Alba, straight from Spain — bringing authentic style, technique, and energy to the dance floor.",
+        "During two intensive days, you’ll dive deep into technique, partner work, and powerful combinations designed to elevate your dancing.",
+        "Expect detailed feedback, dynamic drills, and an inspiring atmosphere that will challenge and motivate you.",
+        "What you’ll get: Expert training, stronger technique, deeper connection, and combinations you can confidently use socially.",
+        "Open for dedicated dancers who want to push their level and train seriously — while still having fun."
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Bachata Sensual Intermediate/Advanced",
+      "date": "June 13th, 2026",
+      "startDate": "2026-06-13",
+      "location": "Fuego Dance School",
+      "link": "https://app.coursely.se/activity/f4di31yflptkrl8b",
+      "imageUrl": "/img/Events/EventAdvIntWorkshop.png",
+      "isNew": true,
+      "price": "350 SEK solo / 600 SEK couple",
+      "time": "12:00–15:00 (3 hours)",
+      "description": [
+        "Designed for experienced dancers who want to sharpen their technique and refine the details that truly elevate their dance.",
+        "During three intensive hours, we work on precision, advanced body movement, complex transitions, and dynamic combinations.",
+        "Focus on high-level lead & follow responsiveness, waves, isolations, and creative musical interpretation.",
+        "Expect challenging combinations for the social dance floor and detailed feedback in an inspiring environment.",
+        "For dancers who train regularly and are ready to be challenged. Push your limits. Elevate your dance."
+      ]
     }
+
+
   ],
   "__MALL_events_SPARA_FOR_SENARE": [
     {

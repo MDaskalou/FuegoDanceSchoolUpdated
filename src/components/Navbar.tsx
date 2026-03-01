@@ -35,7 +35,6 @@ export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  // Vi drar ut i18n här för att kunna byta språk programmatiskt
   const { t, i18n } = useTranslation("navbarTranslation");
   const params = useParams();
   const router = useRouter();
@@ -57,22 +56,14 @@ export const Navbar: React.FC = () => {
 
   if (!mounted) return <div className="h-[90px] bg-transparent" />;
 
-  // I Navbar.tsx
   const handleLanguageChange = async () => {
     const newLang = currentLang === "sv" ? "en" : "sv";
-
-    // 1. Förbered i18next direkt
     await i18n.changeLanguage(newLang);
-
-    // 2. Beräkna den nya vägen säkert
     const segments = pathname.split('/');
     if (segments[1] === currentLang) {
       segments[1] = newLang;
     }
     const newPath = segments.join('/') || `/${newLang}`;
-
-    // 3. Utför navigeringen tyst
-    // scroll: false förhindrar att sidan hoppar till toppen
     router.push(newPath, { scroll: false });
   };
 
@@ -100,7 +91,6 @@ export const Navbar: React.FC = () => {
         return;
       }
 
-      // Om vi inte är på startsidan, navigera dit först
       e.preventDefault();
       setIsMenuOpen(false);
       await router.push(`/${currentLang}`);
@@ -139,10 +129,30 @@ export const Navbar: React.FC = () => {
         <div className={`mx-auto flex h-[90px] max-w-[1500px] items-center justify-between px-6 transition-opacity duration-300 ${
             isMenuOpen ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}>
+
           {/* LOGO */}
           <Link href={`/${currentLang}`} className="flex items-center gap-3 group">
             <Image src="/img/Navbar/FuegoLogoimg.png" alt="Fuego" width={50} height={50} />
-            <span className="font-playfair text-2xl font-bold text-[#f26722] uppercase tracking-tighter">Fuego</span>
+            <div className="flex flex-col leading-none gap-[2px]">
+              {/* "Fuego" — letter-spacing expanderar vid hover */}
+              <span
+                  className="font-playfair text-[22px] font-bold text-[#f26722] uppercase
+                  tracking-tighter
+                  transition-all duration-400 ease-out
+                  group-hover:tracking-wide"
+              >
+                Fuego
+              </span>
+              {/* "Dance School" — fade + letter-spacing glider ut vid hover */}
+              <span
+                  className="font-playfair italic text-[11.5px] font-normal
+                  text-[#f26722]/60 tracking-[0.22em]
+                  transition-all duration-500 ease-out
+                  group-hover:text-[#f26722]/90 group-hover:tracking-[0.32em]"
+              >
+                Dance School
+              </span>
+            </div>
           </Link>
 
           {/* DESKTOP NAV */}
@@ -160,7 +170,7 @@ export const Navbar: React.FC = () => {
             ))}
           </nav>
 
-          {/* RIGHT SECTION (Language + Mobile Toggle) */}
+          {/* RIGHT SECTION */}
           <div className="flex items-center gap-6">
             <button
                 onClick={handleLanguageChange}
@@ -182,7 +192,15 @@ export const Navbar: React.FC = () => {
         <div className={`fixed inset-0 bg-[#1a1a1a] z-[100001] transition-transform duration-500 ${isMenuOpen ? "translate-x-0" : "translate-x-full"} lg:hidden`}>
           <div className="flex flex-col h-full p-8">
             <div className="flex justify-between items-center mb-12">
-              <span className="text-[#f26722] font-playfair text-2xl">FUEGO</span>
+              {/* Logo i mobilmenyn */}
+              <div className="flex flex-col leading-none gap-[2px]">
+                <span className="font-playfair text-[22px] font-bold text-[#f26722] uppercase tracking-tighter">
+                  Fuego
+                </span>
+                <span className="font-playfair italic text-[11.5px] text-[#f26722]/70 tracking-[0.22em]">
+                  Dance School
+                </span>
+              </div>
               <button onClick={() => setIsMenuOpen(false)} className="text-white text-3xl"><FaTimes /></button>
             </div>
 
@@ -199,7 +217,6 @@ export const Navbar: React.FC = () => {
                   </Link>
               ))}
 
-              {/* Extra språkknapp i mobilmenyn för tydlighet */}
               <button
                   onClick={() => {
                     handleLanguageChange();
