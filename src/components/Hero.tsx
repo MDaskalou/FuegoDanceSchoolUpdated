@@ -7,6 +7,7 @@ import { useState, useEffect, useRef } from "react";
 import heroMainImage from "../../public/img/Hero/HeroMain.jpg";
 import type { EventItem } from "@/components/Event";
 
+// ─── Event helpers ────────────────────────────────────────────────
 const filterUpcomingEvents = (events: EventItem[]): EventItem[] => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
