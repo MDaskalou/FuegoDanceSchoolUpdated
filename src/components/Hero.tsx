@@ -264,7 +264,7 @@ export const Hero = () => {
             )}
 
             {/* Keyframes */}
-            <style jsx>{`
+            <style>{`
                 @keyframes scrollChevron {
                     0%, 100% { opacity: 0.2; transform: translateY(-4px); }
                     50%       { opacity: 1;   transform: translateY(4px);  }
