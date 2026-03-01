@@ -24,9 +24,9 @@ export default function HomePageClient({ params }: HomePageClientProps) {
                 <BootcampFeature/>
                  <About />
                 <ScheduleSection />
-                <FeatureSection />
+                <FeatureSection showSeeAllButton={true} lang={params.lang} />
                  <PriceSection />
-                 <EventSection />
+                <EventSection showSeeAllButton={true} lang={params.lang} />
                 <TestimonialsSection />
                  <InstagramFeed />
             </main>

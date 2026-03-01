@@ -64,7 +64,7 @@ export const Hero = () => {
         <section
             id="heroreel"
             ref={sectionRef}
-            className="relative h-[calc(100vh-80px)] w-full overflow-hidden bg-black text-white"
+            className="relative h-[calc(100vh-80px)] w-full overflow-hidden bg-black text-white isolate"
         >
             {/* ── Parallax Background ── */}
             <div
@@ -89,7 +89,7 @@ export const Hero = () => {
             <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/60 via-black/50 to-black/70 pointer-events-none" />
 
             {/* ── Main Content ── */}
-            <div className="absolute inset-0 z-20 flex h-full w-full flex-col items-center justify-center px-6 text-center">
+            <div className="absolute inset-0 z-20 flex h-full w-full flex-col items-center justify-center px-6 text-center pointer-events-none">
 
                 {/* Headline — Cormorant Garamond */}
                 <h1
@@ -137,6 +137,7 @@ export const Hero = () => {
                 {/* CTA Group */}
                 <div className={`
                     flex flex-col items-center justify-center space-y-8
+                    pointer-events-auto
                     transition-all duration-1000 delay-500 ease-out
                     ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
                 `}>

@@ -5,12 +5,14 @@ import { useInView } from "@/hooks/useInView";
 import EventCarousel from "@/components/EventCarousel";
 import React from "react";
 import { FaCalendarPlus } from "react-icons/fa";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 export interface EventItem {
     id: number;
     title: string;
     date: string;
-    startDate: string; // YYYY-MM-DD for filtering
+    startDate: string;
     location: string;
     link: string;
     description: string;
@@ -22,40 +24,31 @@ export interface EventItem {
 const filterUpcomingEvents = (events: EventItem[]): EventItem[] => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-
     return events
         .filter((event) => {
             const eventDate = new Date(event.startDate);
             return !Number.isNaN(eventDate.getTime()) && eventDate >= today;
         })
         .sort((a, b) => {
-            // Prioriterade events först
             const aPriority = a.priority ?? Infinity;
             const bPriority = b.priority ?? Infinity;
-
             if (aPriority !== bPriority) return aPriority - bPriority;
-
-            // Resten sorteras på datum
             return new Date(a.startDate).getTime() - new Date(b.startDate).getTime();
         });
 };
 
 type EventSectionProps = {
     id?: string;
+    showSeeAllButton?: boolean; // visa knapp på startsidan
+    lang?: string;
 };
 
-export const Event = ({ id = "events" }: EventSectionProps) => {
+export const Event = ({ id = "events", showSeeAllButton = false, lang = "sv" }: EventSectionProps) => {
     const { t } = useTranslation("eventTranslation");
     const { ref: sectionRef, inView } = useInView(0.1);
 
-    const allEvents = t("events", {
-        returnObjects: true,
-    }) as unknown as EventItem[];
-    const normalizedEvents: EventItem[] = Array.isArray(allEvents)
-        ? allEvents
-        : [];
-
-    // ✅ No longer slicing to 3 — show ALL upcoming events via carousel
+    const allEvents = t("events", { returnObjects: true }) as unknown as EventItem[];
+    const normalizedEvents: EventItem[] = Array.isArray(allEvents) ? allEvents : [];
     const upcomingEvents = filterUpcomingEvents(normalizedEvents);
 
     return (
@@ -71,15 +64,7 @@ export const Event = ({ id = "events" }: EventSectionProps) => {
                 </h2>
 
                 {upcomingEvents.length > 0 ? (
-                    // ✅ Replaced the static grid with EventCarousel
-                    // - 1–3 events: renders as a normal responsive grid (no carousel)
-                    // - 4+ events: activates swipeable carousel with arrows + dots
-                    <div
-                        className={`
-              mb-16 transition-all duration-700 ease-out
-              ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}
-            `}
-                    >
+                    <div className={`mb-16 transition-all duration-700 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
                         <EventCarousel events={upcomingEvents} />
                     </div>
                 ) : (
@@ -96,6 +81,17 @@ export const Event = ({ id = "events" }: EventSectionProps) => {
                             {t("comingSoonDescription") || t("noUpcomingEvents")}
                         </p>
                     </div>
+                )}
+
+                {/* Se alla event-knapp (visas bara på startsidan) */}
+                {showSeeAllButton && (
+                    <Link
+                        href={`/${lang}/events`}
+                        className="inline-flex items-center gap-2 rounded-full border-2 border-orange-500 px-8 py-3 text-sm font-bold uppercase tracking-wider text-orange-500 transition-all duration-300 hover:bg-orange-500 hover:text-white"
+                    >
+                        Se alla events
+                        <ArrowRight className="w-4 h-4" />
+                    </Link>
                 )}
             </div>
         </section>

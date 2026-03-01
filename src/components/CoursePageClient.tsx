@@ -35,16 +35,6 @@ export default function CoursesPageClient({ params }: CoursesPageClientProps) {
                 <div className="w-full rounded-xl bg-[#262626] shadow-2xl shadow-black/70 border-2 border-orange-500/50 mx-auto mb-16 transform translate-x-0.5">
                     <CourselyWidget showHeader={false} activityType="Course" />
                 </div>
-
-                {/* ── Events & Workshops ── */}
-                <h2 className="text-4xl font-bold text-orange-500 mb-8 text-center px-4 font-serif">
-                    Events &amp; Workshops
-                </h2>
-
-                <div className="w-full rounded-xl bg-[#262626] shadow-2xl shadow-black/70 border-2 border-orange-500/50 mx-auto mb-16">
-                    <CourselyWidget showHeader={false} activityType="Event" />
-                </div>
-
             </div>
         </div>
     );

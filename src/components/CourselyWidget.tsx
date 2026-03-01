@@ -36,18 +36,18 @@ const CourselyWidget: React.FC<CourselyWidgetProps> = ({
 
     return (
         <section className={`py-8 ${showHeader ? 'sm:py-24' : ''} bg-transparent w-full`}>
-            <style jsx global>{`
-                #${containerId} {
+            <style>{`
+                .container-iframe {
                     font-family: inherit !important;
                     min-height: 600px;
                 }
-                #${containerId} button,
-                #${containerId} .btn {
+                .container-iframe button,
+                .container-iframe .btn {
                     background-color: #f97316 !important;
                     border-radius: 9999px !important;
                     transition: all 0.3s ease !important;
                 }
-                #${containerId} button:hover {
+                .container-iframe button:hover {
                     background-color: #ea580c !important;
                     transform: scale(1.02);
                 }
@@ -63,7 +63,7 @@ const CourselyWidget: React.FC<CourselyWidgetProps> = ({
                 )}
 
                 <div
-                    id={containerId}
+                    id="container-iframe"
                     className="container-iframe bg-transparent rounded-2xl w-full"
                     data-client-id="FuegoDance"
                     data-filter=""
