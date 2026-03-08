@@ -24,7 +24,7 @@ export default function HomePageClient({ params }: HomePageClientProps) {
                 <BootcampFeature/>
                  <About />
                 <ScheduleSection />
-                <FeatureSection showSeeAllButton={true} lang={params.lang} />
+                <FeatureSection showSeeAllButton={true} />
                  <PriceSection />
                 <EventSection showSeeAllButton={true} lang={params.lang} />
                 <TestimonialsSection />
