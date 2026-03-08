@@ -1,12 +1,21 @@
 ﻿{
-  "title": "Our Standing Events",
+  "title": "Our Regular Events",
   "guidedSocial": {
     "title": "Guided Social Dance",
     "subtitle": "Practice with intention & build confidence.",
-    "when": "Every Wednesday",
+    "when": "Every Friday",
     "time": "18:30 – 20:30",
-    "price": "150 SEK / 200 SEK",
-    "cta": "Learn more"
+    "price": "150kr / 200kr",
+    "cta": "More Info",
+    "benefits": [
+      "Get personal feedback on your technique",
+      "Correct habits in real-time on the social floor",
+      "A safe environment for all levels"
+    ],
+    "soloParLabel": "Solo / Couple",
+    "workshopLabel": "Workshop",
+    "socialLabel": "Bachata Social",
+    "priceLabel": "Price:"
   },
   "sundayFunday": {
     "title": "Sunday Funday",
@@ -14,8 +23,12 @@
     "when": "Every Sunday",
     "workshopTime": "14:00 – 15:00",
     "socialTime": "15:00 – 18:00",
-    "price": "80 SEK Social / 120 SEK All-in",
-    "cta": "Learn more"
+    "price": "80kr Social / 120kr All-in",
+    "cta": "More Info",
+    "workshopLabel": "Workshop",
+    "socialLabel": "Bachata Social",
+    "priceLabel": "Price:"
   },
-  "comingSoon": "Coming soon"
+  "comingSoon": "Coming soon",
+  "seeAllEvents": "See all events"
 }

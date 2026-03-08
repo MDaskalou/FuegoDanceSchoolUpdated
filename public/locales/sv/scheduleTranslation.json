@@ -1,25 +1,27 @@
 ﻿{
-  "schedulePreamble": "Vårschema (Vecka 5-16)",
+  "schedulePreamble": "Sommarschema (Vecka 19-24)",
   "scheduleTitle": "Veckoschema",
-  "openHouseInfo": "VECKA 4 HAR VI ÖPPET HUS! 🎉",
-  "scheduleImageAlt": "Bakgrundsbild av dansande par på Fuego Dance School",
+  "openHouseInfo": "VECKA 18 ÄR DET ÖPPET HUS! 🎉",
+  "scheduleImageAlt": "Bakgrundsbild på dansande par på Fuego Dance School",
   "dayMonday": "Måndag",
   "dayTuesday": "Tisdag",
   "dayWednesday": "Onsdag",
   "dayThursday": "Torsdag",
+  "dayFriday": "Fredag",
   "daySunday": "Söndag",
-  "scheduleFooter1": "Gå med i vår bachata-familj",
+  "scheduleFooter1": "Bli en del av vår bachata-familj",
   "scheduleFooter2": "Träna med fokus. Dansa med frihet.",
-  "scheduleCta": "Registrera dig nu",
+  "scheduleCta": "Anmäl dig nu",
   "noteWorkshopPrice": "120kr inkl. social",
   "noteSocialPrice": "80kr",
-  "noteDropIn": "Drop-in",
-  "noteGuidedSocialPrise": "150kr solo, 200kr par",
+  "noteDropIn": "Drop-in tillgängligt",
+  "noteGuidedSocialPrise": "150kr singel, 200kr par",
   "courses": [
     {
       "dayKey": "dayMonday",
       "time": "18:00 - 19:00",
-      "name": "Nivå 4 Isolationer",
+      "name": "Level 4 ",
+      "subtitle": "Isolationer",
       "instructors": "Tomas & Jennifer",
       "isNew": true,
       "isDropIn": false
@@ -27,7 +29,7 @@
     {
       "dayKey": "dayMonday",
       "time": "19:05 - 20:05",
-      "name": "Nivå 4",
+      "name": "Level 4",
       "instructors": "Tomas & Jennifer",
       "isNew": false,
       "isDropIn": false
@@ -35,40 +37,67 @@
     {
       "dayKey": "dayMonday",
       "time": "20:10 - 21:10",
-      "name": "Nivå 4 Teknik",
+      "name": "Level 4 Teknik",
       "instructors": "Tomas & Jennifer",
       "isNew": false,
       "isDropIn": false
     },
     {
       "dayKey": "dayTuesday",
-      "time": "18:00 - 19:30",
-      "name": "Nivå 1",
+      "time": "18:00 - 19:00",
+      "name": "Level 1",
       "instructors": "Mikael",
       "isNew": false,
       "isDropIn": false
     },
     {
       "dayKey": "dayTuesday",
-      "time": "19:40 - 21:10",
+      "time": "19:05 - 20:05",
       "name": "Advanced Foundation",
       "instructors": "Mikael",
+      "isNew": false,
+      "isDropIn": true,
+      "noteKeyDropIn": "noteDropIn"
+    },
+    {
+      "dayKey": "dayTuesday",
+      "time": "20:10 - 21:10",
+      "name": "Level 2",
+      "instructors": "Andris & Emma",
       "isNew": false,
       "isDropIn": false
     },
     {
       "dayKey": "dayWednesday",
-      "time": "18:30 - 20:20",
-      "name": "Guidad Socialdans",
-      "instructors": "Mikael",
+      "time": "18:00 - 19:00",
+      "name": "Contemporary",
+      "instructors": "Johanna",
       "isNew": true,
       "isDropIn": true,
-      "noteKey": "noteGuidedSocialPrise"
+      "noteKeyDropIn": "noteDropIn"
+    },
+    {
+      "dayKey": "dayWednesday",
+      "time": "19:05 - 20:05",
+      "name": "Raminta Styling",
+      "subtitle": "Feminine Touch",
+      "instructors": "Raminta",
+      "isNew": true,
+      "isDropIn": true,
+      "noteKeyDropIn": "noteDropIn"
+    },
+    {
+      "dayKey": "dayWednesday",
+      "time": "20:10 - 21:10",
+      "name": "Footwork",
+      "instructors": "Mikael",
+      "isNew": true,
+      "isDropIn": true
     },
     {
       "dayKey": "dayThursday",
       "time": "18:00 - 19:00",
-      "name": "Nivå 3",
+      "name": "Level 3",
       "instructors": "Nora & Sisco",
       "isNew": false,
       "isDropIn": false
@@ -76,7 +105,7 @@
     {
       "dayKey": "dayThursday",
       "time": "19:05 - 20:05",
-      "name": "Nivå 3 Teknik",
+      "name": "Level 3 Teknik",
       "instructors": "Nora & Sisco",
       "isNew": false,
       "isDropIn": false
@@ -87,6 +116,24 @@
       "name": "RoleRotation",
       "instructors": "Nora & Sisco",
       "isNew": false,
+      "isDropIn": false
+    },
+    {
+        "dayKey": "dayFriday",
+        "time": "18:30 - 20:30",
+        "name": "Guided Socialdans",
+        "instructors": "Mikael",
+        "isNew": true,
+        "isDropIn": true,
+        "noteKey": "noteGuidedSocialPrise"
+
+    },
+    {
+      "dayKey": "daySunday",
+      "time": "09:00 - 10:10",
+      "name": "Mini Fuego",
+      "instructors": "Irina",
+      "isNew": true,
       "isDropIn": false
     },
     {

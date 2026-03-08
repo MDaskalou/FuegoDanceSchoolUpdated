@@ -16,11 +16,11 @@
   "socialDanceLabel": "Social dance",
 
   "courses": [
-    { "count": 1, "price": 1600, "popular": false },
-    { "count": 2, "price": 2600, "popular": true },
-    { "count": 3, "price": 3600, "popular": false },
-    { "count": 4, "price": 4600, "popular": false },
-    { "count": 5, "price": 5600, "popular": false }
+    { "count": 1, "price": 900, "popular": false },
+    { "count": 2, "price": 1400, "popular": true, "saving": 400 },
+    { "count": 3, "price": 1900, "popular": false, "saving": 800 },
+    { "count": 4, "price": 2400, "popular": false, "saving": 1200 },
+    { "count": 5, "price": 2900, "popular": false, "saving": 1600 }
   ],
   "dropInItems": [
     { "count": 1, "price": 120, "isSocial": false },

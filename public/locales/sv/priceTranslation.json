@@ -3,27 +3,28 @@
   "priceHighlight": "Första gången är alltid gratis – kom och prova!",
   "cardCourseTitle": "Kurser",
   "cardDiscountTitle": "Rabatter",
-  "cardDropInTitle": "Drop-in på söndagar",
+  "cardDropInTitle": "Drop-in",
   "tagPopular": "POPULÄRAST",
   "discountStudent": "Studentrabatt: 10%",
-  "discountCouple": "Parrabatt: 15% per person",
+  "discountCouple": "Parrabatt: 15%",
   "discountHalfOfSemester": "Halvkursrabatt: 35%",
   "ctaBookNow": "Boka nu",
 
   "courseLabelSingular": "kurs",
   "courseLabelPlural": "kurser",
-  "dropInNote": "Väljer man minst en kurs så är socialen alltid inräknad.",
+  "dropInNote": "Detta gäller kurser i schemat. Söndags socialdans och workshops har separata drop-in priser.",
   "socialDanceLabel": "Social dans",
 
   "courses": [
-    { "count": 1, "price": 1600, "popular": false },
-    { "count": 2, "price": 2600, "popular": true },
-    { "count": 3, "price": 3600, "popular": false },
-    { "count": 4, "price": 4600, "popular": false },
-    { "count": 5, "price": 5600, "popular": false }
+    { "count": 1, "price": 900, "popular": false },
+    { "count": 2, "price": 1400, "popular": true, "saving": 400 },
+    { "count": 3, "price": 1900, "popular": false, "saving": 800 },
+    { "count": 4, "price": 2400, "popular": false, "saving": 1200 },
+    { "count": 5, "price": 2900, "popular": false, "saving": 1600 }
   ],
   "dropInItems": [
-    { "count": 1, "price": 120, "isSocial": false },
-    { "count": 0, "price": 80, "labelKey": "socialDanceLabel", "isSocial": true }
+    { "count": 1, "price": 200, "isSocial": false },
+    { "count": 2, "price": 350, "isSocial": false },
+    { "count": 3, "price": 400, "isSocial": false }
   ]
 }

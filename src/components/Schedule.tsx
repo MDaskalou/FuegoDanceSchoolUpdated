@@ -13,16 +13,20 @@ interface Course {
     noteKey?: string;
     isNew: boolean;
     isDropIn: boolean;
+    subtitle?: string;
 }
 
 // --- Återanvändbar Klasskomponent ---
-const ScheduleItem = ({ time, name, instructors, note, isNew = false, isDropIn = false }: {
+const ScheduleItem = ({ time, name, instructors, note, isNew = false, isDropIn = false, subtitle }: {
     time: string;
     name: string;
     instructors: string;
     note?: string;
     isNew?: boolean;
     isDropIn?: boolean;
+    subtitle?: string;
+
+
 }) => (
     <div className={`
         /* Bas-styling: Nu identisk för ALLA kort */
@@ -45,7 +49,10 @@ const ScheduleItem = ({ time, name, instructors, note, isNew = false, isDropIn =
         )}
 
         <p className="text-xs sm:text-sm font-light text-gray-400 mb-1">{time}</p>
-        <h4 className="text-base sm:text-lg font-bold my-2 text-orange-500">{name}</h4>
+        <h4 className="text-base sm:text-lg font-bold mt-2 text-orange-500">{name}</h4>
+        {subtitle && (
+            <p className="text-xs sm:text-sm font-medium text-orange-300/80 -mt-1 mb-1">{subtitle}</p>
+        )}
         <p className="text-xs sm:text-sm text-gray-300">{instructors}</p>
 
         {note && (
@@ -64,7 +71,7 @@ export const ScheduleSection = () => {
 
     const courses: Course[] = t("courses", { returnObjects: true }) as Course[] || [];
 
-    const dayKeys: string[] = ["dayMonday", "dayTuesday", "dayWednesday", "dayThursday", "daySunday"];
+    const dayKeys: string[] = ["dayMonday", "dayTuesday", "dayWednesday", "dayThursday","dayFriday", "daySunday"];
 
     return (
         <section
@@ -88,11 +95,11 @@ export const ScheduleSection = () => {
             <div className="container mx-auto max-w-7xl px-4 text-center relative z-10">
 
                 {/* Rubrik/Info */}
-                <p className="text-sm sm:text-base text-gray-300 mb-2 font-medium tracking-wide uppercase">
+                <p className="text-xs sm:text-sm text-orange-400/70 mb-3 font-semibold tracking-[0.2em] uppercase">
                     {t("schedulePreamble")}
                 </p>
 
-                <h2 className="text-4xl sm:text-5xl font-bold mb-4 font-serif">
+                <h2 className="text-5xl sm:text-6xl font-bold mb-8 font-serif text-white drop-shadow-lg">
                     {t("scheduleTitle")}
                 </h2>
 
@@ -107,7 +114,7 @@ export const ScheduleSection = () => {
 
                 {/* === SCHEDULE GRID FÖR DESKTOP/MOBIL === */}
                 <div className="mx-auto max-w-6xl">
-                    <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-6 gap-6 md:gap-8">
 
                         {dayKeys.map((dayKey) => (
                             <div key={dayKey} className="md:col-span-1 space-y-4">
@@ -124,6 +131,7 @@ export const ScheduleSection = () => {
                                             key={index}
                                             time={course.time}
                                             name={course.name}
+                                            subtitle={course.subtitle}
                                             instructors={course.instructors}
                                             note={course.noteKey ? t(course.noteKey) : undefined}
                                             isNew={course.isNew}

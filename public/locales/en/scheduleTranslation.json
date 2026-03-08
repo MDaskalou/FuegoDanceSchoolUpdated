@@ -1,7 +1,7 @@
 ﻿{
-  "schedulePreamble": "Spring Schedule (Week 5-16)",
+  "schedulePreamble": "Spring Schedule (Week 19-24)",
   "scheduleTitle": "Weekly Schedule",
-  "openHouseInfo": "WEEK 4 IS OPEN HOUSE! 🎉",
+  "openHouseInfo": "WEEK 18 IS OPEN HOUSE! 🎉",
   "scheduleImageAlt": "Background image of dancing couples at Fuego Dance School",
   "dayMonday": "Monday",
   "dayTuesday": "Tuesday",
@@ -42,7 +42,7 @@
     },
     {
       "dayKey": "dayTuesday",
-      "time": "18:00 - 19:30",
+      "time": "18:00 - 19:00",
       "name": "Level 1",
       "instructors": "Mikael",
       "isNew": false,
@@ -50,21 +50,46 @@
     },
     {
       "dayKey": "dayTuesday",
-      "time": "19:40 - 21:10",
+      "time": "19:05 - 20:05",
       "name": "Advanced Foundation",
       "instructors": "Mikael",
       "isNew": false,
-      "isDropIn": false
+      "isDropIn": true,
+      "noteKeyDropIn": "noteDropIn"
+    },
+    {
+        "dayKey": "dayTuesday",
+        "time": "20:10 - 21:10",
+        "name": "Level 2",
+        "instructors": "Andris & Emma",
+        "isNew": false,
+        "isDropIn": false
     },
     {
       "dayKey": "dayWednesday",
-      "time": "18:30 - 20:30",
-      "name": "Guided Social Dance",
-      "instructors": "Mikael",
+      "time": "18:00 - 19:00",
+      "name": "Contemporary",
+      "instructors": "Johanna",
       "isNew": true,
       "isDropIn": true,
-      "noteKeyDropIn": "noteDropIn",
-      "noteKey": "noteGuidedSocialPrise"
+      "noteKeyDropIn": "noteDropIn"
+    },
+    {
+        "dayKey": "dayWednesday",
+        "time": "19:05 - 20:05",
+        "name": "Raminta Styling Feminine Touch ",
+        "instructors": "Raminta",
+        "isNew": true,
+        "isDropIn": true,
+        "noteKeyDropIn": "noteDropIn"
+    },
+    {
+        "dayKey": "dayWednesday",
+        "time": "20:10 - 21:10",
+        "name": "Footwork",
+        "instructors": "Mikael",
+        "isNew": true,
+        "isDropIn": true
     },
     {
       "dayKey": "dayThursday",
@@ -88,6 +113,14 @@
       "name": "RoleRotation",
       "instructors": "Nora & Sisco",
       "isNew": false,
+      "isDropIn": false
+    },
+    {
+      "dayKey": "daySunday",
+      "time": "9:00 - 10:10",
+      "name": "Mini Fuego",
+      "instructors": "Irina",
+      "isNew": true,
       "isDropIn": false
     },
     {
