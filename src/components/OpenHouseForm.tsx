@@ -91,20 +91,48 @@ export default function OpenHouseForm() {
 
     // Success screen
     if (isSubmitted) {
+        const descriptionPoints = t('formSubmittedDescription', { returnObjects: true }) as string[];
+
+        // Hjälpfunktion för att välja ikon baserat på textinnehåll
+        const getIcon = (index: number) => {
+            const icons = [
+                <FaUsers className="text-orange-500" />,     // Schema
+                <FaLightbulb className="text-orange-500" />, // Öppet hus
+                <FaCheckCircle className="text-orange-500" />, // Kläder
+                <FaCheckCircle className="text-orange-500" />, // Footwork
+                <FaCommentDots className="text-orange-500" />  // Frågor
+            ];
+            return icons[index] || <FaCheckCircle className="text-orange-500" />;
+        };
+
         return (
             <div className="pt-24 pb-16 min-h-screen bg-transparent text-white flex items-center justify-center px-4">
-                <div className="bg-[#262626] p-8 sm:p-12 rounded-2xl shadow-2xl max-w-lg w-full text-center border border-orange-500/30">
-                    <div className="flex justify-center mb-6">
-                        <div className="w-20 h-20 bg-orange-500 rounded-full flex items-center justify-center">
+                <div className="bg-[#1a1a1a] p-8 sm:p-12 rounded-3xl shadow-2xl max-w-xl w-full text-center border border-orange-500/20">
+                    <div className="flex justify-center mb-8">
+                        <div className="w-20 h-20 bg-gradient-to-tr from-orange-600 to-orange-400 rounded-full flex items-center justify-center shadow-lg shadow-orange-500/20">
                             <FaCheckCircle className="w-10 h-10 text-white" />
                         </div>
                     </div>
-                    <h1 className="text-3xl sm:text-4xl font-bold text-orange-500 mb-4">
-                        {t('formSubmittedMessage', { defaultValue: 'Tack för din anmälan!' })}
+
+                    <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2">
+                        {t('formSubmittedMessage')}
                     </h1>
-                    <p className="text-gray-300 text-lg leading-relaxed">
-                        {t('formSubmittedDescription', { defaultValue: 'Vi har mottagit din intresseanmälan och återkommer med bekräftelse via e-post inom kort.' })}
-                    </p>
+
+
+                    <div className="space-y-6 text-left">
+                        {Array.isArray(descriptionPoints) && descriptionPoints.map((point, index) => (
+                            <div key={index} className="flex items-start gap-4 p-4 rounded-xl bg-gray-800/30 border border-gray-700/50 hover:border-orange-500/30 transition-colors">
+                                <div className="mt-1 flex-shrink-0 bg-gray-800 p-2 rounded-lg">
+                                    {getIcon(index)}
+                                </div>
+                                <p className="text-gray-300 text-base leading-relaxed">
+                                    {point}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+
+
                 </div>
             </div>
         );

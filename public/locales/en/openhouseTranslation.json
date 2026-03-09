@@ -1,5 +1,5 @@
 ﻿{
-  "formTitle": "Pre-register for the Spring Courses",
+  "formTitle": "Pre-register for Summer Courses",
   "formDescription": "Fill out the form below and we will contact you with more information.",
   "nameLabel": "Name",
   "namePlaceholder": "Your full name",
@@ -7,32 +7,33 @@
   "emailPlaceholder": "your@email.com",
   "messagePlaceholder": "Is there anything else we should know?",
   "coursesInterestTitle": "Which courses are you interested in?",
-  "roleTitle": "Leader or Follower",
+  "roleTitle": "Lead or Follow",
   "referralTitle": "How did you find us?",
   "otherTitle": "Other",
   "submitButton": "Submit Registration",
   "submittingButton": "Sending...",
-  "disclaimer1": "By submitting this form, you consent to us processing your personal data.",
+  "disclaimer1": "By submitting this form, you agree to the processing of your personal data.",
   "disclaimer2": "We only use your information to contact you regarding the courses.",
   "formSubmittedMessage": "Thank you for your registration!",
-  "formSubmittedDescription": "We have received your registration of interest and will get back to you with a confirmation via email shortly.",
+
+  "formSubmittedDescription": [
+    "The summer schedule starts week 19 and runs until week 24.",
+    "Week 18 is our Open House where you can try our classes (Note: Does not apply to Mini Fuego).",
+    "Comfortable clothing is all you need – come as you are!",
+    "Don't miss our Wednesdays with Footwork at 19:05 and Contemporary at 18:00.",
+    "Do you have any questions? Send us a message and we'll help you right away!"
+  ],
+
   "requiredField": "Please fill in all required fields (*).",
 
   "courseOptions": [
-    "Level 1",
-    "Level 2",
-    "Level 2 Technique",
-    "Level 3",
-    "Level 3 Technique",
-    "Level 4",
-    "Level 4 Technique",
-    "Level 4 Technique (Isolations)",
-    "Choreography Class",
-    "Role Rotation",
-    "Advanced Foundation"
+    "Level 1", "Level 2", "Level 3", "Level 3 Technique",
+    "Level 4", "Level 4 Technique", "Level 4 Technique (Isolations)",
+    "Ramintas Styling", "Role Rotation", "Advanced Foundation",
+    "Footwork", "Contemporary", "Mini Fuego"
   ],
   "roleOptions": [
-    "Select an option", "Leader", "Follower"
+    "Select an option", "Lead", "Follow"
   ],
   "referralOptions": [
     "Select an option", "Facebook", "Instagram", "Google", "Friend", "Other"

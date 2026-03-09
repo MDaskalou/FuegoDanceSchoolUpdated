@@ -1,5 +1,5 @@
 ﻿{
-  "formTitle": "Föranmäl dig till Vårkurserna",
+  "formTitle": "Föranmäl dig till Sommarkurserna",
   "formDescription": "Fyll i formuläret nedan så kontaktar vi dig med mer information.",
   "nameLabel": "Namn",
   "namePlaceholder": "Ditt fullständiga namn",
@@ -15,12 +15,22 @@
   "disclaimer1": "Genom att skicka in detta formulär godkänner du att vi behandlar dina personuppgifter.",
   "disclaimer2": "Vi använder endast din information för att kontakta dig om kurserna.",
   "formSubmittedMessage": "Tack för din anmälan!",
-  "formSubmittedDescription": "Vi har mottagit din intresseanmälan och återkommer med bekräftelse via e-post inom kort.",
+
+  "formSubmittedDescription": [
+    "Sommarschemat drar igång vecka 19 och pågår till vecka 24.",
+    "Vecka 18 har vi Öppet Hus där du kan testa våra klasser (Obs! Ej Mini Fuego).",
+    "Bekväma kläder är allt som behövs",
+    "Missa inte våra onsdagar med Footwork kl. 19:05 och Contemporary kl. 18:00.",
+    "Har du några frågor? Skicka ett meddelande till oss så hjälper vi dig direkt!"
+  ],
+
   "requiredField": "Fyll i alla obligatoriska fält (*).",
 
   "courseOptions": [
-    "Nivå 1", "Nivå 2","Nivå 2 Teknik", "Nivå 3", "Nivå 3 Teknik",
-    "Nivå 4", "Nivå 4 Teknik","Nivå 4 Teknik (Isolationer)", "Koreografi Class", "Rolerotation", "Advanced Fundation"
+    "Nivå 1", "Nivå 2", "Nivå 3", "Nivå 3 Teknik",
+    "Nivå 4", "Nivå 4 Teknik", "Nivå 4 Teknik (Isolationer)",
+    "Ramintas Styling", "Rolerotation", "Advanced Fundation",
+    "Footwork", "Contemporary", "Mini Fuego"
   ],
   "roleOptions": [
     "Välj ett alternativ", "Förare", "Följare"
