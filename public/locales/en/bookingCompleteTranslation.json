@@ -1,9 +1,9 @@
 ﻿{
   "bookingComplete": {
-    "title": "Thank you for joining us!",
-    "description": "We have received your booking. We can't wait to see you on the dance floor! A confirmation email is on its way.",
-    "idLabel": "Reference Number",
-    "nextStepsTitle": "Stay Connected",
+    "title": "Thank you for signing up!",
+    "description": "We have received your booking and look forward to dancing with you. A confirmation has been sent to your email.",
+    "idLabel": "Reference number",
+    "nextStepsTitle": "Stay connected",
     "socialText": "Follow us on social media for inspiration and important updates!"
   }
 }

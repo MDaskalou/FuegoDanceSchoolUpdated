@@ -1,7 +1,8 @@
 ﻿"use client";
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useTranslation } from "react-i18next";
+import { useRouter } from 'next/navigation';
 
 interface CourselyWidgetProps {
     showHeader?: boolean;
@@ -14,10 +15,12 @@ const CourselyWidget: React.FC<CourselyWidgetProps> = ({
                                                            activityType = "Course",
                                                            title,
                                                        }) => {
-    const { t } = useTranslation("courselyWidgetTranslation");
-
-    // Unikt ID per activityType så båda kan laddas på samma sida
-    const containerId = `container-iframe-${activityType.toLowerCase()}`;
+    const { t, i18n } = useTranslation("courselyWidgetTranslation");
+    const router = useRouter();
+    const currentLang = i18n.language || "sv";
+    const lastHeight = useRef(0);
+    const bookingStepReached = useRef(false);
+    const hasRedirected = useRef(false);
 
     useEffect(() => {
         const scriptId = 'coursely-activity-loader';
@@ -29,6 +32,55 @@ const CourselyWidget: React.FC<CourselyWidgetProps> = ({
             document.head.appendChild(script);
         }
     }, []);
+
+    useEffect(() => {
+        const handleMessage = (event: MessageEvent) => {
+            if (!event.origin.includes("coursely.se")) return;
+
+            const data = event.data;
+
+            if (data?.type === "IFRAME_NAVIGATED") {
+                bookingStepReached.current = true;
+                console.log("🔀 Navigerade till:", data?.path);
+            }
+
+            if (data?.type === "adjustHeight") {
+                const newHeight = data?.height;
+                console.log(`📏 Höjd: ${lastHeight.current} → ${newHeight} | bookingStep: ${bookingStepReached.current}`);
+
+                // Om höjden minskar kraftigt efter att bokningssteget nåtts → tacksida
+                if (
+                    !hasRedirected.current &&
+                    bookingStepReached.current &&
+                    lastHeight.current > 800 &&
+                    newHeight < 700
+                ) {
+                    hasRedirected.current = true;
+                    console.log("✅ Bokning klar! Redirectar...");
+                    router.push(`/${currentLang}/booking-complete`);
+                }
+
+                lastHeight.current = newHeight;
+            }
+
+            // Fallback: explicit event från Coursely
+            if (
+                data?.type === "IFRAME_NAVIGATED" && (
+                    data?.path?.includes("confirmation") ||
+                    data?.path?.includes("complete") ||
+                    data?.path?.includes("success")
+                )
+            ) {
+                if (!hasRedirected.current) {
+                    hasRedirected.current = true;
+                    router.push(`/${currentLang}/booking-complete`);
+                }
+            }
+        };
+
+        window.addEventListener("message", handleMessage);
+        return () => window.removeEventListener("message", handleMessage);
+    }, [currentLang, router]);
 
     const defaultTitle = activityType === "Event"
         ? t('widgetTitleEvents', { defaultValue: 'Events & Workshops' })
