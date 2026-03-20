@@ -95,6 +95,25 @@
         "Expect challenging combinations for the social dance floor and detailed feedback in an inspiring environment.",
         "For dancers who train regularly and are ready to be challenged. Push your limits. Elevate your dance."
       ]
+    },
+    {
+      "id": 8,
+      "title": "Discover Bachata Sensual",
+      "date": "April 21st, 2026",
+      "startDate": "2026-04-21",
+      "location": "Fuego Dance School",
+      "link": "https://app.coursely.se/activity/pidif68vrbykiza2",
+      "imageUrl": "/img/Events/beginnerBachataApril.jpg",
+      "isNew": true,
+      "price": "99 SEK",
+      "time": "18:00–20:00 (2 hours)",
+      "description": [
+        "Have you ever felt the music move beneath your skin? Move softly and playfully without any previous experience.",
+        "A passionate and modern partner dance focused on connection, musicality, and enjoyment.",
+        "Explore the basics, learn fluid movements, and discover how fun and relaxing it is to dance together.",
+        "A safe and welcoming introduction providing tools to dance with both your body and your emotions.",
+        "No previous experience needed—just curiosity. Come alone or with a partner and let the music guide you."
+      ]
     }
 
 
