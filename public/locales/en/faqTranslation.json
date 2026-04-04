@@ -44,11 +44,11 @@
       "questions": [
         {
           "q": "How long is each course?",
-          "a": "Courses are 8 weeks long with 1 lesson per week, lasting 1.5 hours."
+          "a": "Courses are 8 weeks long with 1 lesson per week, lasting 1 hours."
         },
         {
           "q": "Do you offer drop-in classes?",
-          "a": "No, but the first lesson is always free so you can try it out before you decide."
+          "a": "We have drop-in classes on our solo classes but we dont have any drop-ins on our couple classes."
         },
         {
           "q": "Can I make up a missed lesson?",
@@ -61,7 +61,7 @@
       "questions": [
         {
           "q": "How much do the courses cost?",
-          "a": "1 course = 1600 SEK, 2 courses = 2600 SEK, 3 courses = 3600 SEK, and so on. See our price list for all levels."
+          "a": "1 course = 900 SEK, 2 courses = 1400 SEK, 3 courses = 1900 SEK, and so on. See our price list for all levels."
         },
         {
           "q": "I am a student – do I get a discount?",

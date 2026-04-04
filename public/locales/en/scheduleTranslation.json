@@ -44,7 +44,7 @@
       "dayKey": "dayTuesday",
       "time": "18:00 - 19:00",
       "name": "Level 1",
-      "instructors": "Mikael",
+      "instructors": "Mikael & Jennifer",
       "isNew": false,
       "isDropIn": false
     },
@@ -114,6 +114,16 @@
       "instructors": "Nora & Sisco",
       "isNew": false,
       "isDropIn": false
+    },
+    {
+      "dayKey": "dayFriday",
+      "time": "18:30 - 20:30",
+      "name": "Guided Socialdans",
+      "instructors": "Mikael",
+      "isNew": true,
+      "isDropIn": true,
+      "noteKey": "noteGuidedSocialPrise"
+
     },
     {
       "dayKey": "daySunday",

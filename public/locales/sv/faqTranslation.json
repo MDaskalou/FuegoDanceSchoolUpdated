@@ -44,11 +44,11 @@
       "questions": [
         {
           "q": "Hur lång är varje kurs?",
-          "a": "Kurserna är 8 veckor långa med 1 lektion i veckan på 1,5 timme."
+          "a": "Kurserna är 6 veckor långa med 1 lektion i veckan på 1 timme."
         },
         {
           "q": "Har ni drop-in?",
-          "a": "Nej, men första lektionen är alltid gratis så att du kan prova på innan du bestämmer dig."
+          "a": "Vi har drop in kurser på våra solo klasser men inte på våra parklasser."
         },
         {
           "q": "Kan jag ta igen en missad lektion?",
@@ -61,7 +61,7 @@
       "questions": [
         {
           "q": "Vad kostar kurserna?",
-          "a": "1 kurs = 1600 kr, 2 kurser = 2600 kr, 3 kurser = 3600 kr, och så vidare. Se vår prislista för alla nivåer."
+          "a": "1 kurs = 900 kr, 2 kurser = 1400 kr, 3 kurser = 1900 kr, och så vidare. Se vår prislista för alla nivåer."
         },
         {
           "q": "Jag är student – får jag rabatt?",
