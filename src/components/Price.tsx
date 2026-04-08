@@ -1,11 +1,10 @@
-﻿// src/components/PriceSection.tsx
-"use client";
+﻿"use client";
 
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import { useInView } from "@/hooks/useInView";
-import { Sparkles, Percent, Calendar, CheckCircle2 } from 'lucide-react';
+import { Sparkles, Percent, Calendar, CheckCircle2, Gift } from 'lucide-react';
 
 // --- Typer ---
 interface Course {
@@ -60,36 +59,49 @@ interface PriceRowProps {
     muted?: boolean;
     dashed?: boolean;
     saving?: number;
+    bonusText?: string; // Ny prop för att visa bonus
 }
 
-const PriceRow: React.FC<PriceRowProps> = ({ label, price, highlighted, popular, popularLabel, muted, dashed, saving }) => (
+const PriceRow: React.FC<PriceRowProps> = ({
+                                               label, price, highlighted, popular, popularLabel, muted, dashed, saving, bonusText
+                                           }) => (
     <li className={`
-        flex justify-between items-center py-3 px-4 rounded-xl
-        transition-all duration-300 hover:scale-[1.02]
+        flex flex-col py-3 px-4 rounded-xl
+        transition-all duration-300 hover:scale-[1.01]
         ${highlighted ? 'bg-orange-500/10 border border-orange-500/40 hover:bg-orange-500/15' : ''}
         ${dashed ? 'border border-dashed border-white/10 hover:border-white/20' : ''}
         ${!highlighted && !dashed ? 'border-b border-white/8 hover:bg-white/5' : ''}
     `}>
-        <span className={`text-base font-medium ${muted ? 'text-gray-500' : 'text-gray-200'}`}>
-            {label}
-        </span>
-        <div className="flex flex-col items-end">
-            <div className="flex items-center gap-3">
-                {popular && popularLabel && (
-                    <span className="bg-red-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow animate-pulse">
-                        {popularLabel}
+        <div className="flex justify-between items-center w-full">
+            <span className={`text-base font-medium ${muted ? 'text-gray-500' : 'text-gray-200'}`}>
+                {label}
+            </span>
+            <div className="flex flex-col items-end">
+                <div className="flex items-center gap-3">
+                    {popular && popularLabel && (
+                        <span className="bg-red-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow animate-pulse">
+                            {popularLabel}
+                        </span>
+                    )}
+                    <span className={`text-xl font-bold ${muted ? 'text-gray-500' : 'text-white'}`}>
+                        {price}
+                    </span>
+                </div>
+                {saving && saving > 0 && (
+                    <span className="text-[11px] text-green-400 font-semibold mt-0.5">
+                        du sparar {saving} kr
                     </span>
                 )}
-                <span className={`text-xl font-bold ${muted ? 'text-gray-500' : 'text-white'}`}>
-                    {price}
-                </span>
             </div>
-            {saving && saving > 0 && (
-                <span className="text-[11px] text-green-400 font-semibold mt-0.5">
-                    du sparar {saving} kr
-                </span>
-            )}
         </div>
+
+        {/* Renderar bonusraden om 3+ kurser är valda */}
+        {bonusText && (
+            <div className="mt-2.5 flex items-center gap-1.5 text-[10px] sm:text-[11px] text-orange-400 font-bold uppercase tracking-wider bg-orange-500/5 py-1 px-2 rounded-md border border-orange-500/10 self-start">
+                <Gift className="w-3 h-3" />
+                {bonusText}
+            </div>
+        )}
     </li>
 );
 
@@ -163,6 +175,8 @@ export const PriceSection = () => {
                                     popular={course.popular}
                                     popularLabel={t("tagPopular")}
                                     saving={course.saving}
+                                    // Här läggs bonus-texten till automatiskt för 3 kurser och uppåt
+                                    bonusText={course.count >= 3 ? t("bonusIncluded") : undefined}
                                 />
                             ))}
                         </ul>
