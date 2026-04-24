@@ -40,25 +40,6 @@
       "isNew": true
     },
     {
-      "id": 5,
-      "title": "Bachata Sensual Advanced",
-      "date": "April 24th, 2026",
-      "startDate": "2026-04-24",
-      "location": "Fuego Dance School",
-      "link": "https://app.coursely.se/activity/wnvax056iqm1m6yk",
-      "imageUrl": "/img/Events/EventAdvancedWorkshop.png",
-      "isNew": true,
-      "price": "350 SEK solo / 600 SEK couple",
-      "time": "12:00–15:00 (3 hours)",
-      "description": [
-        "Created for dedicated dancers who want to train at a high level and refine the smallest details that make a big difference.",
-        "During three intensive hours, we focus on advanced body mechanics, complex transitions, and seamless partner connection.",
-        "Expect depth and drills covering high-level lead & follow, waves, isolations, and sophisticated musicality.",
-        "Includes challenging, performance-level combinations in a focused and ambitious training environment.",
-        "For experienced dancers who feel fully confident with intermediate material. Train seriously. Dance exceptionally."
-      ]
-    },
-    {
       "id": 6,
       "title": "Bachata Bootcamp med Victor & Alba",
       "date": "9–10 maj, 2026",

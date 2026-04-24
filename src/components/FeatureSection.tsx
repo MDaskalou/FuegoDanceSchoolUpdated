@@ -8,8 +8,8 @@ import { ArrowRight, CheckCircle2, Clock, Users, Flame } from "lucide-react";
 
 // --- Konstanter utanför komponenten ---
 const EVENT_LINKS = {
-    guidedSocial: "https://app.coursely.se/activity/zoix7gzytqz1mtl8",
-    sundayFunday: "https://app.coursely.se/activity/lk1k7x5lokmv1bp1"
+    guidedSocial: "https://app.coursely.se/checkout/FuegoDance/dropinPackages?fbclid=IwY2xjawRYMuFleHRuA2FlbQIxMABicmlkETAxR1FGNFV6OEoxWVZmbWx5c3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHl6KcdHom_zZTHeZeDbXEY5mJ0B6Pxm7LnarBTIqhTC0VdZkBggaJxgnHRjp_aem_sjvSi_YlL3bxy-d288QDfw",
+    sundayFunday: "https://app.coursely.se/checkout/FuegoDance/dropinPackages?fbclid=IwY2xjawRYMuFleHRuA2FlbQIxMABicmlkETAxR1FGNFV6OEoxWVZmbWx5c3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHl6KcdHom_zZTHeZeDbXEY5mJ0B6Pxm7LnarBTIqhTC0VdZkBggaJxgnHRjp_aem_sjvSi_YlL3bxy-d288QDfw"
 } as const;
 
 interface Props {
