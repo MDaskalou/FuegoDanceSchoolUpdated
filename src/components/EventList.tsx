@@ -11,9 +11,12 @@ interface Event {
     date: string;
     location: string;
     link: string;
-    description: string;
+    description: string | string[];
     imageUrl: string;
+    imageFit?: "cover" | "contain";
     isNew?: boolean;
+    price?: string;
+    time?: string;
 }
 
 interface EventListProps {

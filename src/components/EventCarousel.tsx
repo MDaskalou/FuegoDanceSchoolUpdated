@@ -7,7 +7,9 @@ import Image from "next/image";
 import Link from "next/link";
 import {
     FaCalendarAlt,
+    FaClock,
     FaMapMarkerAlt,
+    FaTag,
     FaChevronLeft,
     FaChevronRight,
     FaArrowRight,
@@ -27,18 +29,24 @@ const PortraitEventCard: React.FC<{ event: EventItem }> = ({ event }) => {
     const isExternal =
         event.link &&
         (event.link.startsWith("http://") || event.link.startsWith("https://"));
+    const description = Array.isArray(event.description)
+        ? event.description.join(" ")
+        : event.description;
 
     return (
         <div className="group relative flex flex-col rounded-3xl overflow-hidden bg-[#1c1c1c] border border-white/8 shadow-2xl h-full transition-transform duration-500 hover:scale-[1.015]">
 
             {/* ── Image (portrait ratio) ── */}
-            <div className="relative w-full overflow-hidden" style={{ aspectRatio: "2/3", minHeight: "260px", maxHeight: "460px" }}>
+            <div
+                className={`relative w-full overflow-hidden ${event.imageFit === "contain" ? "bg-[#f8e9d8]" : ""}`}
+                style={{ aspectRatio: "2/3", minHeight: "260px", maxHeight: "460px" }}
+            >
                 <Image
                     src={event.imageUrl || "/img/event_placeholder.jpg"}
                     alt={event.title}
                     fill
                     sizes="(max-width: 768px) 90vw, 45vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    className={`${event.imageFit === "contain" ? "object-contain" : "object-cover"} transition-transform duration-700 group-hover:scale-105`}
                 />
 
                 {/* Bottom gradient so text floats over image */}
@@ -67,6 +75,23 @@ const PortraitEventCard: React.FC<{ event: EventItem }> = ({ event }) => {
                     <span className="truncate">{event.location}</span>
                 </div>
 
+                {(event.time || event.price) && (
+                    <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-gray-300">
+                        {event.time && (
+                            <span className="flex items-center gap-1.5">
+                                <FaClock className="w-3.5 h-3.5 text-orange-500" />
+                                {event.time}
+                            </span>
+                        )}
+                        {event.price && (
+                            <span className="flex items-center gap-1.5">
+                                <FaTag className="w-3.5 h-3.5 text-orange-500" />
+                                {event.price}
+                            </span>
+                        )}
+                    </div>
+                )}
+
                 {/* Title */}
                 <h3 className="text-2xl sm:text-3xl font-extrabold text-orange-500 leading-tight tracking-tight">
                     {event.title}
@@ -74,7 +99,7 @@ const PortraitEventCard: React.FC<{ event: EventItem }> = ({ event }) => {
 
                 {/* Description */}
                 <p className="text-gray-300 text-sm leading-relaxed line-clamp-3 flex-1">
-                    {event.description}
+                    {description}
                 </p>
 
                 {/* CTA */}

@@ -60,25 +60,6 @@
       ]
     },
     {
-      "id": 7,
-      "title": "Bachata Sensual Intermediate/Advanced",
-      "date": "June 13th, 2026",
-      "startDate": "2026-06-13",
-      "location": "Fuego Dance School",
-      "link": "https://app.coursely.se/activity/f4di31yflptkrl8b",
-      "imageUrl": "/img/Events/EventAdvIntWorkshop.png",
-      "isNew": true,
-      "price": "350 SEK solo / 600 SEK couple",
-      "time": "12:00–15:00 (3 hours)",
-      "description": [
-        "Designed for experienced dancers who want to sharpen their technique and refine the details that truly elevate their dance.",
-        "During three intensive hours, we work on precision, advanced body movement, complex transitions, and dynamic combinations.",
-        "Focus on high-level lead & follow responsiveness, waves, isolations, and creative musical interpretation.",
-        "Expect challenging combinations for the social dance floor and detailed feedback in an inspiring environment.",
-        "For dancers who train regularly and are ready to be challenged. Push your limits. Elevate your dance."
-      ]
-    },
-    {
       "id": 8,
       "title": "Discover Bachata Sensual",
       "date": "April 21st, 2026",
@@ -96,6 +77,27 @@
         "A safe and welcoming introduction providing tools to dance with both your body and your emotions.",
         "No previous experience needed—just curiosity. Come alone or with a partner and let the music guide you."
       ]
+    },
+    {
+      "id": 9,
+      "title": "Beginner Workshop",
+      "date": "June 27, 2026",
+      "startDate": "2026-06-27",
+      "location": "Fuego Dance School",
+      "link": "https://app.coursely.se/fuego-dance-school/activity/bachata-beginner",
+      "imageUrl": "/img/Events/BeginnerWorkshopJune.png",
+      "imageFit": "contain",
+      "isNew": true,
+      "priority": 1,
+      "price": "199 SEK",
+      "time": "12:00–15:00",
+      "description": [
+        "Welcome to our exciting event where the joy of dancing takes center stage!",
+        "What will you learn? During these 3 hours, you will get an introduction to bachata. We focus on the fundamentals and give you the tools to express yourself through movement.",
+        "Who is it for? The event is suitable for all curious dancers, regardless of age or previous experience.",
+        "Practical information: Location: Fuego Dance School. Date and time: June 27, 12:00–15:00. Number of sessions: 1. Price: 199 SEK.",
+        "Please note: Registration is binding."
+      ]
     }
 
 
@@ -111,6 +113,25 @@
       "description": "A weekend focused on musicality and advanced partner work. Perfect for level 3+.",
       "imageUrl": "/img/Events/event_intensiv.jpg",
       "isNew": true
+    },
+    {
+      "id": 7,
+      "title": "Bachata Sensual Intermediate/Advanced",
+      "date": "June 13th, 2026",
+      "startDate": "2026-06-13",
+      "location": "Fuego Dance School",
+      "link": "https://app.coursely.se/activity/f4di31yflptkrl8b",
+      "imageUrl": "/img/Events/EventAdvIntWorkshop.png",
+      "isNew": true,
+      "price": "350 SEK solo / 600 SEK couple",
+      "time": "12:00–15:00 (3 hours)",
+      "description": [
+        "Designed for experienced dancers who want to sharpen their technique and refine the details that truly elevate their dance.",
+        "During three intensive hours, we work on precision, advanced body movement, complex transitions, and dynamic combinations.",
+        "Focus on high-level lead & follow responsiveness, waves, isolations, and creative musical interpretation.",
+        "Expect challenging combinations for the social dance floor and detailed feedback in an inspiring environment.",
+        "For dancers who train regularly and are ready to be challenged. Push your limits. Elevate your dance."
+      ]
     }
   ]
 }

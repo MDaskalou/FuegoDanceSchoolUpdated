@@ -9,7 +9,6 @@ import InstagramFeed from './InstagramFeeds';
 import { ContactSection } from './Contact';
 import PriceSection from './Price';
 import EventSection from './Event';
-import {FeatureSection} from './FeatureSection';
 import BootcampFeature from "@/components/BootcampFeature";
 
 export interface HomePageClientProps {
@@ -24,7 +23,6 @@ export default function HomePageClient({ params }: HomePageClientProps) {
                 <BootcampFeature/>
                  <About />
                 <ScheduleSection />
-                <FeatureSection showSeeAllButton={true} />
                  <PriceSection />
                 <EventSection showSeeAllButton={true} lang={params.lang} />
                 <TestimonialsSection />

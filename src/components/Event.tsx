@@ -15,10 +15,13 @@ export interface EventItem {
     startDate: string;
     location: string;
     link: string;
-    description: string;
+    description: string | string[];
     imageUrl: string;
+    imageFit?: "cover" | "contain";
     isNew?: boolean;
     priority?: number;
+    price?: string;
+    time?: string;
 }
 
 const filterUpcomingEvents = (events: EventItem[]): EventItem[] => {
