@@ -36,18 +36,22 @@ const InstructorCard: React.FC<InstructorCardProps> = ({ instructor, index }) =>
         transform hover:scale-[1.02] relative flex flex-col h-full
         ${isExpanded ? 'scale-[1.02] z-10' : 'z-0'}
     `;
+    const imageFrameClasses = `
+        relative w-full mb-5 overflow-hidden rounded-xl shadow-inner
+        ${instructor.role === 'main' ? 'h-80 sm:h-96' : 'h-64'}
+    `;
 
     return (
         <div className={cardClasses}>
 
             {/* Bild */}
-            <div className="relative w-full h-64 mb-5 overflow-hidden rounded-xl shadow-inner">
+            <div className={imageFrameClasses}>
                 <Image
                     src={instructor.imageSrc}
                     alt={instructor.name}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover object-top transition-transform duration-700 hover:scale-110"
+                    className="object-cover object-top transition-transform duration-700 hover:scale-105"
                 />
             </div>
 

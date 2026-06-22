@@ -1,6 +1,6 @@
-﻿{
+{
   "priceTitle": "Prices & Discounts",
-  "priceHighlight": "First time is always free – come try it out!",
+  "priceHighlight": "First time is always free - come try it out!",
   "cardCourseTitle": "Courses",
   "cardDiscountTitle": "Discounts",
   "cardDropInTitle": "Drop-in on Sundays",
@@ -9,7 +9,8 @@
   "discountCouple": "Couple discount: 15% per person",
   "discountHalfOfSemester": "Half of semester discount: 35%",
   "ctaBookNow": "Book now",
-  "bonusIncluded": "Includes free Guided Social & Sunday Funday!",
+  "bonusIncluded": "Guided Social Dance included",
+  "memberDropInDiscount": "Members get 50% off drop-in",
 
   "courseLabelSingular": "course",
   "courseLabelPlural": "courses",
@@ -17,11 +18,11 @@
   "socialDanceLabel": "Social dance",
 
   "courses": [
-    { "count": 1, "price": 900, "popular": false },
-    { "count": 2, "price": 1400, "popular": true, "saving": 400 },
-    { "count": 3, "price": 1900, "popular": false, "saving": 800 },
-    { "count": 4, "price": 2400, "popular": false, "saving": 1200 },
-    { "count": 5, "price": 2900, "popular": false, "saving": 1600 }
+    { "count": 1, "price": 1600, "popular": false },
+    { "count": 2, "price": 2800, "popular": true, "saving": 400 },
+    { "count": 3, "price": 4000, "popular": false, "saving": 800 },
+    { "count": 4, "price": 5200, "popular": false, "saving": 1200 },
+    { "count": 5, "price": 6400, "popular": false, "saving": 1600 }
   ],
   "dropInItems": [
     { "count": 1, "price": 120, "isSocial": false },

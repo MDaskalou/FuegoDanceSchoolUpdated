@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import heroMainImage from "../../public/img/Hero/HeroMain.jpg";
+import heroImage9 from "../../public/img/Hero/Heroimg9.jpg";
+import heroImage11 from "../../public/img/Hero/Heroimg11.jpg";
 import type { EventItem } from "@/components/Event";
 import { FaGoogle, FaStar } from "react-icons/fa";
 
@@ -21,14 +23,16 @@ const filterUpcomingEvents = (events: EventItem[]): EventItem[] => {
         });
 };
 
-const formatEventDate = (dateStr: string) => {
+const formatEventDate = (dateStr: string, locale: string) => {
     const date = new Date(dateStr);
     return {
         day: date.getDate().toString(),
-        month: date.toLocaleString("sv-SE", { month: "short" }),
-        weekday: date.toLocaleString("sv-SE", { weekday: "long" }),
+        month: date.toLocaleString(locale, { month: "short" }),
+        weekday: date.toLocaleString(locale, { weekday: "long" }),
     };
 };
+
+const heroImages = [heroMainImage, heroImage9, heroImage11];
 
 // ─── Component ────────────────────────────────────────────────────
 export const Hero = () => {
@@ -38,6 +42,7 @@ export const Hero = () => {
 
     const [mounted, setMounted] = useState(false);
     const [scrollY, setScrollY] = useState(0);
+    const [activeImageIndex, setActiveImageIndex] = useState(0);
     const sectionRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
@@ -51,10 +56,18 @@ export const Hero = () => {
         return () => clearTimeout(timer);
     }, []);
 
+    useEffect(() => {
+        const interval = window.setInterval(() => {
+            setActiveImageIndex((current) => (current + 1) % heroImages.length);
+        }, 6500);
+
+        return () => window.clearInterval(interval);
+    }, []);
+
     const allEvents = tEvent("events", { returnObjects: true }) as unknown as EventItem[];
     const upcomingEvents = filterUpcomingEvents(Array.isArray(allEvents) ? allEvents : []);
     const nextEvent = upcomingEvents[0] ?? null;
-    const formatted = nextEvent ? formatEventDate(nextEvent.startDate) : null;
+    const formatted = nextEvent ? formatEventDate(nextEvent.startDate, currentLang.startsWith("en") ? "en-US" : "sv-SE") : null;
 
     const parallaxOffset = scrollY * 0.4;
 
@@ -62,7 +75,7 @@ export const Hero = () => {
         <section
             id="heroreel"
             ref={sectionRef}
-            className="relative h-[calc(100vh-80px)] w-full overflow-hidden bg-black text-white isolate"
+            className="relative min-h-[720px] h-[100svh] w-full overflow-hidden bg-black text-white isolate"
         >
             {/* ── Parallax Background ── */}
             <div
@@ -73,14 +86,19 @@ export const Hero = () => {
                     height: "115%",
                 }}
             >
-                <Image
-                    src={heroMainImage}
-                    alt={t("heroImageAlt", { defaultValue: "Dansskola bakgrundsbild" })}
-                    fill
-                    priority
-                    sizes="100vw"
-                    className="object-cover object-center"
-                />
+                {heroImages.map((image, index) => (
+                    <Image
+                        key={image.src}
+                        src={image}
+                        alt={t("heroImageAlt", { defaultValue: "Dansskola bakgrundsbild" })}
+                        fill
+                        priority={index === 0}
+                        sizes="100vw"
+                        className={`object-cover object-center transition-opacity duration-[1800ms] ease-in-out ${
+                            index === activeImageIndex ? "opacity-100" : "opacity-0"
+                        }`}
+                    />
+                ))}
             </div>
 
             {/* Overlay */}
@@ -89,12 +107,12 @@ export const Hero = () => {
 
 
             {/* ── Main Content ── */}
-            <div className="absolute inset-0 z-20 flex h-full w-full flex-col items-center justify-center px-6 text-center pointer-events-none">
+            <div className="absolute inset-0 z-20 flex h-full w-full flex-col items-center px-5 pt-28 sm:px-6 sm:pt-36 text-center pointer-events-none">
                 <h1
                     className={`
                         font-bold tracking-wide text-white
-                        text-3xl sm:text-5xl md:text-6xl lg:text-7xl
-                        mb-4 sm:mb-6 leading-[1.2] sm:leading-[1.1] max-w-4xl
+                        text-[2.45rem] sm:text-5xl md:text-6xl xl:text-7xl
+                        mb-3 sm:mb-4 leading-[1.15] sm:leading-[1.05] max-w-4xl
                         [text-shadow:_0_4px_24px_rgb(0_0_0_/_70%)]
                         transition-all duration-1000 ease-out
                         ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
@@ -108,8 +126,17 @@ export const Hero = () => {
                     )}
                 </h1>
 
+                <p className={`
+                    mb-3 sm:mb-5 text-lg sm:text-2xl md:text-3xl font-light italic text-orange-200
+                    [text-shadow:_0_3px_16px_rgb(0_0_0_/_70%)]
+                    transition-all duration-1000 delay-150 ease-out
+                    ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
+                `}>
+                    {t("heroSubtitle")}
+                </p>
+
                 <div className={`
-                    hidden sm:flex items-center gap-4 mb-6
+                    hidden sm:flex items-center gap-4 mb-5
                     transition-all duration-700 delay-300 ease-out
                     ${mounted ? 'opacity-100' : 'opacity-0'}
                 `}>
@@ -119,39 +146,46 @@ export const Hero = () => {
                 </div>
 
                 <p className={`
-                    mb-8 sm:mb-16 max-w-2xl text-xs sm:text-base md:text-lg font-light text-gray-200
-                    tracking-[0.15em] sm:tracking-[0.25em] leading-relaxed uppercase
+                    mb-6 sm:mb-9 max-w-2xl text-xs sm:text-base md:text-lg font-light text-gray-200
+                    tracking-[0.07em] sm:tracking-[0.16em] leading-relaxed uppercase
                     [text-shadow:_0_2px_8px_rgb(0_0_0_/_60%)]
                     transition-all duration-1000 delay-200 ease-out
                     ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
                 `}>
-                    {t("heroSubtitle")}
+                    {t("heroDescription")}
                 </p>
 
                 <div className={`
-                    flex flex-col items-center justify-center space-y-6 sm:space-y-8
+                    flex w-full max-w-xl flex-col items-center justify-center gap-3 sm:gap-4
                     pointer-events-auto
                     transition-all duration-1000 delay-500 ease-out
                     ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
                 `}>
-                    <Link
-                        href={`/${currentLang}/courses`}
-                        className="
-                            group relative rounded-full bg-orange-500 px-10 py-4 sm:px-12 sm:py-5 text-sm sm:text-lg font-bold uppercase
-                            tracking-wider text-white shadow-2xl transition-all duration-300 w-64 sm:w-72
-                            hover:bg-orange-600 hover:scale-105
-                        "
-                    >
-                        <span className="relative z-10">{t("heroCtaButton")}</span>
-                    </Link>
+                    <p className="max-w-sm sm:max-w-xl text-xs sm:text-base font-medium normal-case tracking-normal leading-relaxed text-white/80">
+                        {t("heroChoiceHint")}
+                    </p>
 
-                    <div className="flex flex-row items-center gap-4 sm:gap-12">
-                        <Link href={`/${currentLang}/openhouse`} className="text-[10px] sm:text-base font-semibold uppercase text-white pb-1 border-b border-white/30 transition-all hover:text-orange-300">
-                            {t("heroCtaSecondary1")}
+                    <div className="flex w-full flex-col items-center justify-center gap-2.5 sm:flex-row sm:gap-3">
+                        <Link
+                            href={`/${currentLang}/courses`}
+                            className="
+                                group relative rounded-full bg-orange-500 px-8 py-3.5 sm:px-12 sm:py-5 text-sm sm:text-base font-bold uppercase
+                                tracking-wider text-white shadow-2xl transition-all duration-300 w-full max-w-[19rem] sm:w-72
+                                hover:bg-orange-600 hover:scale-105
+                            "
+                        >
+                            <span className="relative z-10">{t("heroCtaButton")}</span>
                         </Link>
-                        <span className="text-white/30 text-xl font-light">|</span>
-                        <Link href={`/${currentLang}/FAQpage`} className="text-[10px] sm:text-base font-semibold uppercase text-white pb-1 border-b border-white/30 transition-all hover:text-orange-300">
-                            {t("heroCtaSecondary2")}
+
+                        <Link
+                            href={`/${currentLang}/openhouse`}
+                            className="
+                                rounded-full border border-white/35 bg-black/25 px-8 py-3.5 sm:py-5 text-sm sm:text-base font-bold uppercase
+                                tracking-wider text-white backdrop-blur-sm transition-all duration-300 w-full max-w-[19rem] sm:w-72
+                                hover:border-orange-400 hover:bg-orange-500/15 hover:text-orange-200 hover:scale-105
+                            "
+                        >
+                            {t("heroCtaSecondary1")}
                         </Link>
                     </div>
                 </div>
@@ -162,7 +196,7 @@ export const Hero = () => {
                     transition-opacity duration-1000 delay-[1200ms]
                     ${mounted ? 'opacity-100' : 'opacity-0'}
                 `}>
-                    <span className="text-[9px] font-bold uppercase tracking-[0.45em] text-white/35">Utforska</span>
+                    <span className="text-[9px] font-bold uppercase tracking-[0.45em] text-white/35">{t("exploreLabel")}</span>
                 </div>
             </div>
 
@@ -248,7 +282,7 @@ export const Hero = () => {
                 >
                     <div className="h-1 w-full bg-gradient-to-r from-orange-500 to-orange-400" />
                     <div className="p-4">
-                        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-orange-400 mb-2">Kommande event</p>
+                        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-orange-400 mb-2">{t("upcomingEventLabel")}</p>
                         <div className="flex items-start justify-between gap-3">
                             <div className="flex-1 min-w-0">
                                 <h3 className="text-white font-bold text-sm sm:text-base leading-tight line-clamp-2">{nextEvent.title}</h3>
@@ -267,7 +301,7 @@ export const Hero = () => {
             {/* ── Rating Badges (Mobil) ── */}
             <div
                 className={`
-                    flex sm:hidden items-center gap-3
+                    hidden items-center gap-3
                     absolute bottom-6 left-4 z-30
                     transition-all duration-700 ease-out
                     ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}
@@ -331,7 +365,7 @@ export const Hero = () => {
                     rel="noopener noreferrer"
                     className={`
                         group block sm:hidden
-                        absolute bottom-24 left-4 right-4 z-30
+                        absolute bottom-5 left-4 right-4 z-30
                         rounded-xl overflow-hidden
                         border border-white/10 backdrop-blur-lg bg-black/60
                         shadow-[0_8px_40px_rgba(0,0,0,0.8)]
@@ -341,13 +375,13 @@ export const Hero = () => {
                     style={{ transitionDelay: '800ms' }}
                 >
                     <div className="h-1.5 w-full bg-gradient-to-r from-orange-500 to-orange-400" />
-                    <div className="p-4 flex items-center gap-4">
-                        <div className="flex-shrink-0 flex flex-col items-center justify-center bg-orange-500 rounded-lg w-14 h-14 text-white shadow-lg">
+                    <div className="p-3 flex items-center gap-3">
+                        <div className="flex-shrink-0 flex flex-col items-center justify-center bg-orange-500 rounded-lg w-12 h-12 text-white shadow-lg">
                             <span className="text-[10px] font-bold uppercase leading-none">{formatted.month}</span>
-                            <span className="text-2xl font-black leading-none">{formatted.day}</span>
+                            <span className="text-xl font-black leading-none">{formatted.day}</span>
                         </div>
                         <div className="flex-1 min-w-0 text-left">
-                            <p className="text-[10px] font-bold uppercase tracking-widest text-orange-400 mb-1">Kommande event</p>
+                            <p className="text-[10px] font-bold uppercase tracking-widest text-orange-400 mb-1">{t("upcomingEventLabel")}</p>
                             <h3 className="text-white font-bold text-sm leading-tight line-clamp-1 italic">
                                 {nextEvent.title}
                             </h3>

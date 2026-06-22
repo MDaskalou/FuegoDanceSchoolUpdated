@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import { I18nextProvider } from "react-i18next";
-import { ReactNode, useMemo, useEffect, useState } from "react";
+import { ReactNode, useMemo, useEffect } from "react";
 import { createInstance, Resource } from "i18next";
 import { initReactI18next } from "react-i18next";
 import resourcesToBackend from "i18next-resources-to-backend";
@@ -38,48 +38,38 @@ export default function TranslationProvider({
                         import(`../../public/locales/${language}/${namespace}.json`)
                 )
             );
+        i18nInstanceLocal.init({
+            lng: lang,
+            resources,
+            fallbackLng: "sv",
+            supportedLngs: ["sv", "en"],
+            defaultNS: namespaces[0],
+            fallbackNS: namespaces[0],
+            ns: namespaces,
+            initImmediate: false,
+            react: {
+                bindI18n: 'languageChanged',
+                useSuspense: false,
+            },
+        });
         return i18nInstanceLocal;
     }, []);
 
-    const [ready, setReady] = useState(false);
-
     useEffect(() => {
-        let mounted = true;
-
         const init = async () => {
-            // Om instansen inte är initierad, gör det nu
-            if (!i18n.isInitialized) {
-                await i18n.init({
-                    lng: lang,
-                    resources,
-                    fallbackLng: "sv",
-                    supportedLngs: ["sv", "en"],
-                    defaultNS: namespaces[0],
-                    fallbackNS: namespaces[0],
-                    ns: namespaces,
-                    react: {
-                        bindI18n: 'languageChanged',
-                        useSuspense: false,
-                    },
+            Object.entries(resources ?? {}).forEach(([language, languageResources]) => {
+                Object.entries(languageResources ?? {}).forEach(([namespace, namespaceResources]) => {
+                    i18n.addResourceBundle(language, namespace, namespaceResources, true, true);
                 });
-            } else if (i18n.language !== lang) {
-                // Om den redan är initierad men språket i URL ändras, byt bara språk
+            });
+
+            if (i18n.language !== lang) {
                 await i18n.changeLanguage(lang);
             }
-
-            if (mounted) setReady(true);
         };
 
         init();
-
-        return () => {
-            mounted = false;
-        };
     }, [i18n, lang, namespaces, resources]);
-
-    // 3. Vänta tills instansen är redo innan vi renderar barnen
-    // Annars kommer komponenten krascha eller visa tomma nycklar
-    if (!ready) return null;
 
     return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
 }

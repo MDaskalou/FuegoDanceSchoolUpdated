@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import React from 'react';
+import React, { FormEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 import { FaMapMarkerAlt, FaEnvelope, FaInstagram, FaFacebook } from 'react-icons/fa';
@@ -9,6 +9,34 @@ export const Footer = () => {
     const { t, i18n } = useTranslation("footerTranslation");
     const currentLang = i18n.language;
     const currentYear = new Date().getFullYear();
+    const [email, setEmail] = useState("");
+    const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+    const handleSubscribe = async (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        setStatus("loading");
+
+        try {
+            const response = await fetch("/api/newsletter", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    email,
+                    language: currentLang,
+                    source: "footer",
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error("Newsletter signup failed");
+            }
+
+            setEmail("");
+            setStatus("success");
+        } catch {
+            setStatus("error");
+        }
+    };
 
     // Uppdaterade länkar för att matcha din sajtstruktur
     const quickLinks = [
@@ -95,10 +123,44 @@ export const Footer = () => {
                         <p className="text-sm">
                             {t('familyCtaText', { defaultValue: 'Prenumerera på vårt nyhetsbrev för att få uppdateringar om nya kurser och sociala events.' })}
                         </p>
-                        {/* Här skulle ett nyhetsbrevformulär ligga */}
-                        <button className="mt-4 bg-orange-500 px-4 py-2 rounded-full text-white font-semibold text-sm hover:bg-orange-600 transition-colors">
-                            {t('subscribeButton', { defaultValue: 'Prenumerera' })}
-                        </button>
+                        <form onSubmit={handleSubscribe} className="mt-4 space-y-3">
+                            <label htmlFor="newsletter-email" className="sr-only">
+                                {t('newsletterEmailLabel', { defaultValue: 'E-postadress' })}
+                            </label>
+                            <div className="flex flex-col gap-2 sm:flex-row md:flex-col lg:flex-row">
+                                <input
+                                    id="newsletter-email"
+                                    type="email"
+                                    required
+                                    value={email}
+                                    onChange={(event) => setEmail(event.target.value)}
+                                    placeholder={t('newsletterEmailPlaceholder', { defaultValue: 'Din e-postadress' })}
+                                    className="min-w-0 flex-1 rounded-full border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-gray-500 outline-none transition-colors focus:border-orange-500"
+                                />
+                                <button
+                                    type="submit"
+                                    disabled={status === "loading"}
+                                    className="rounded-full bg-orange-500 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-orange-600 disabled:cursor-not-allowed disabled:opacity-70"
+                                >
+                                    {status === "loading"
+                                        ? t('subscribeLoading', { defaultValue: 'Skickar...' })
+                                        : t('subscribeButton', { defaultValue: 'Prenumerera' })}
+                                </button>
+                            </div>
+                            <p className="text-xs text-gray-500">
+                                {t('newsletterConsent', { defaultValue: 'Du kan avregistrera dig när som helst.' })}
+                            </p>
+                            {status === "success" && (
+                                <p className="text-sm font-medium text-green-400">
+                                    {t('subscribeSuccess', { defaultValue: 'Tack! Du är nu med på listan.' })}
+                                </p>
+                            )}
+                            {status === "error" && (
+                                <p className="text-sm font-medium text-red-400">
+                                    {t('subscribeError', { defaultValue: 'Något gick fel. Försök igen om en stund.' })}
+                                </p>
+                            )}
+                        </form>
                     </div>
 
                 </div>

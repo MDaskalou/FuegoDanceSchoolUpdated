@@ -1,7 +1,10 @@
-﻿{
-  "heroTitle": "En gemenskap, många minnen.",
-  "heroSubtitle": "LÄR ER BACHATA HOS OSS - KURSER FÖR ALLA NIVÅER.",
+{
+  "heroTitle": "Lär dig Bachata i Göteborg",
+  "heroSubtitle": "En gemenskap, många minnen.",
+  "heroDescription": "Kurser för nybörjare, fortsättare och erfarna dansare.",
+  "heroChoiceHint": "Redo att boka? Välj kurser. Vill du testa först? Kom på öppet hus.",
   "heroCtaButton": "SE VÅRA KURSER",
   "heroCtaSecondary1": "Anmäl till öppet hus",
-  "heroCtaSecondary2": "Vanliga frågor"
+  "exploreLabel": "Utforska",
+  "upcomingEventLabel": "Kommande event"
 }

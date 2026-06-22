@@ -149,12 +149,6 @@ export const PriceSection = () => {
                     <div className="mt-4 mx-auto w-16 h-0.5 bg-gradient-to-r from-transparent via-orange-500 to-transparent" />
                 </div>
 
-                {/* Highlight banner */}
-                <div className="inline-flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 text-orange-400 px-6 py-3 rounded-full mb-16 text-base font-semibold">
-                    <Sparkles className="w-4 h-4" />
-                    {t("priceHighlight")}
-                </div>
-
                 {/* Kort-grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch mb-16">
 
@@ -220,6 +214,10 @@ export const PriceSection = () => {
                                 />
                             ))}
                         </ul>
+                        <div className="mb-4 flex items-center gap-2 rounded-xl border border-orange-500/25 bg-orange-500/10 px-4 py-3 text-left text-sm font-semibold text-orange-300">
+                            <Percent className="h-4 w-4 shrink-0" />
+                            <span>{t("memberDropInDiscount")}</span>
+                        </div>
                         <p className="text-xs italic text-left text-gray-500 border-t border-white/8 pt-4 mt-4 leading-relaxed">
                             {t("dropInNote")}
                         </p>

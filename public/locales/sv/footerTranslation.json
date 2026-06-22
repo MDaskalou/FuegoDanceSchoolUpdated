@@ -23,6 +23,13 @@
   "navLinksTitle": "Snabblänkar",
   "familyCtaTitle": "Bli en del av familjen",
   "familyCtaText": "Prenumerera på vårt nyhetsbrev för att få uppdateringar om nya kurser och sociala event.",
+  "subscribeButton": "Prenumerera",
+  "subscribeLoading": "Skickar...",
+  "subscribeSuccess": "Tack! Du är nu med på listan.",
+  "subscribeError": "Något gick fel. Försök igen om en stund.",
+  "newsletterEmailLabel": "E-postadress",
+  "newsletterEmailPlaceholder": "Din e-postadress",
+  "newsletterConsent": "Du kan avregistrera dig när som helst.",
   "copyright": "© {{year}} Fuego Dance School. Alla rättigheter förbehållna.",
 
   "nav": {

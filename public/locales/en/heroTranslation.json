@@ -1,7 +1,10 @@
-﻿{
-  "heroTitle": "One community, many memories.",
-  "heroSubtitle": "LEARN BACHATA WITH US - COURSES FOR ALL LEVELS.",
+{
+  "heroTitle": "Learn Bachata in Gothenburg",
+  "heroSubtitle": "One community, many memories.",
+  "heroDescription": "Courses for beginners, improvers, and experienced dancers.",
+  "heroChoiceHint": "Ready to book? Choose courses. Want to try first? Come to open house.",
   "heroCtaButton": "VIEW OUR COURSES",
   "heroCtaSecondary1": "Register for open house",
-  "heroCtaSecondary2": "Frequently asked questions"
+  "exploreLabel": "Explore",
+  "upcomingEventLabel": "Upcoming event"
 }

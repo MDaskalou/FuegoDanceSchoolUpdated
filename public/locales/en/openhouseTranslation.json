@@ -1,6 +1,6 @@
 ﻿{
-  "formTitle": "Pre-register for Summer Courses",
-  "formDescription": "Fill out the form below and we will contact you with more information.",
+  "formTitle": "Register for open house",
+  "formDescription": "Unsure about your level or whether bachata is for you? Come try our classes, meet us, and feel the atmosphere before booking a course.",
   "nameLabel": "Name",
   "namePlaceholder": "Your full name",
   "emailLabel": "Email",
@@ -10,18 +10,18 @@
   "roleTitle": "Lead or Follow",
   "referralTitle": "How did you find us?",
   "otherTitle": "Other",
-  "submitButton": "Submit Registration",
+  "submitButton": "Register for open house",
   "submittingButton": "Sending...",
   "disclaimer1": "By submitting this form, you agree to the processing of your personal data.",
   "disclaimer2": "We only use your information to contact you regarding the courses.",
   "formSubmittedMessage": "Thank you for your registration!",
 
   "formSubmittedDescription": [
-    "The summer schedule starts week 19 and runs until week 24.",
-    "Week 18 is our Open House where you can try our classes (Note: Does not apply to Mini Fuego).",
-    "Comfortable clothing is all you need – come as you are!",
-    "Don't miss our Wednesdays with Footwork at 19:05 and Contemporary at 18:00.",
-    "Do you have any questions? Send us a message and we'll help you right away!"
+    "We will contact you with practical information before open house.",
+    "You get to try our classes and feel which level suits you.",
+    "Comfortable clothing is all you need.",
+    "You do not need previous bachata experience.",
+    "Have questions? Add them in the message and we will help you."
   ],
 
   "requiredField": "Please fill in all required fields (*).",

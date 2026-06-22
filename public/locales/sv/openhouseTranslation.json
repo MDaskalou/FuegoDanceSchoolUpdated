@@ -1,6 +1,6 @@
 ﻿{
-  "formTitle": "Föranmäl dig till Sommarkurserna",
-  "formDescription": "Fyll i formuläret nedan så kontaktar vi dig med mer information.",
+  "formTitle": "Anmäl dig till öppet hus",
+  "formDescription": "Osäker på nivå eller om bachata är för dig? Kom och testa våra klasser, träffa oss och känn in stämningen innan du bokar kurs.",
   "nameLabel": "Namn",
   "namePlaceholder": "Ditt fullständiga namn",
   "emailLabel": "E-post",
@@ -10,18 +10,18 @@
   "roleTitle": "Förare eller Följare",
   "referralTitle": "Hur hittade du oss?",
   "otherTitle": "Övrigt",
-  "submitButton": "Skicka Anmälan",
+  "submitButton": "Anmäl till öppet hus",
   "submittingButton": "Skickar...",
   "disclaimer1": "Genom att skicka in detta formulär godkänner du att vi behandlar dina personuppgifter.",
   "disclaimer2": "Vi använder endast din information för att kontakta dig om kurserna.",
   "formSubmittedMessage": "Tack för din anmälan!",
 
   "formSubmittedDescription": [
-    "Sommarschemat drar igång vecka 19 och pågår till vecka 24.",
-    "Vecka 18 har vi Öppet Hus där du kan testa våra klasser (Obs! Ej Mini Fuego).",
-    "Bekväma kläder är allt som behövs",
-    "Missa inte våra onsdagar med Footwork kl. 19:05 och Contemporary kl. 18:00.",
-    "Har du några frågor? Skicka ett meddelande till oss så hjälper vi dig direkt!"
+    "Vi kontaktar dig med praktisk information inför öppet hus.",
+    "Du får testa våra klasser och känna vilken nivå som passar dig.",
+    "Bekväma kläder är allt som behövs.",
+    "Du behöver inte ha dansat bachata tidigare.",
+    "Har du frågor? Skriv dem i meddelandet så hjälper vi dig."
   ],
 
   "requiredField": "Fyll i alla obligatoriska fält (*).",

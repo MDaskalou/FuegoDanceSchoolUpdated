@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import React, { useEffect, useState } from "react";
+import React, { startTransition, useEffect, useState } from "react";
 import { FaBars, FaTimes, FaFacebookF, FaInstagram } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
@@ -10,7 +10,7 @@ import { usePathname, useRouter, useParams } from "next/navigation";
 export const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const [optimisticLang, setOptimisticLang] = useState<string | null>(null);
 
   const { t, i18n } = useTranslation("navbarTranslation");
   const params = useParams();
@@ -19,10 +19,9 @@ export const Navbar: React.FC = () => {
 
   // Säkerställ att språk hanteras korrekt även om params är undefined vid laddning
   const currentLang = params?.lang ? (Array.isArray(params.lang) ? params.lang[0] : params.lang) : "sv";
+  const visibleLang = optimisticLang ?? currentLang;
 
   useEffect(() => {
-    setMounted(true);
-
     const handleScroll = () => {
       // Använd en check för att se till att window finns
       if (typeof window !== "undefined") {
@@ -34,6 +33,10 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    setOptimisticLang(null);
+  }, [currentLang]);
+
   // Hantera body-scroll lås på ett säkert sätt
   useEffect(() => {
     if (typeof document !== "undefined") {
@@ -41,17 +44,16 @@ export const Navbar: React.FC = () => {
     }
   }, [isMenuOpen]);
 
-  // VIKTIGT: Returnera null eller en enkel placeholder tills komponenten är mounted
-  // Detta förhindrar "Client-side exception" pga skillnader mellan server/klient
-  if (!mounted) {
-    return <header className="h-[100px] w-full bg-transparent" />;
-  }
-
   const handleLanguageChange = () => {
-    const newLang = currentLang === "sv" ? "en" : "sv";
+    const newLang = visibleLang === "sv" ? "en" : "sv";
     const segments = pathname.split('/');
     if (segments[1] === currentLang) segments[1] = newLang;
-    router.push(segments.join('/') || `/${newLang}`);
+
+    setOptimisticLang(newLang);
+    i18n.changeLanguage(newLang);
+    startTransition(() => {
+      router.replace(segments.join('/') || `/${newLang}`, { scroll: false });
+    });
     setIsMenuOpen(false);
   };
 
@@ -59,6 +61,7 @@ export const Navbar: React.FC = () => {
     { name: t('nav.home'), href: "/#heroreel" },
     { name: t('nav.schedule'), href: "/#schedule" },
     { name: t('nav.courses'), href: "/courses", isCta: true },
+    { name: t('nav.openHouse'), href: "/openhouse" },
     { name: t('nav.prices'), href: "/#prices" },
     { name: t('nav.events'), href: "/#events" },
     { name: t('nav.instructors'), href: "/instructors" },
@@ -72,7 +75,7 @@ export const Navbar: React.FC = () => {
         }`}>
           <div className="max-w-[1700px] mx-auto h-full px-8 flex items-center justify-between">
 
-            <Link href={`/${currentLang}`} className="flex items-center gap-4 shrink-0">
+            <Link href={`/${visibleLang}`} className="flex items-center gap-4 shrink-0">
               <Image src="/img/Navbar/FuegoLogoimg.png" alt="Fuego" width={55} height={55} priority />
               <div className="flex flex-col leading-none">
                 <span className="font-playfair text-[26px] font-bold text-[#f26722] uppercase tracking-tighter">Fuego</span>
@@ -84,7 +87,7 @@ export const Navbar: React.FC = () => {
               {navLinks.map((link) => (
                   <Link
                       key={link.name}
-                      href={`/${currentLang}${link.href}`}
+                      href={`/${visibleLang}${link.href}`}
                       className={`text-[14px] font-extrabold uppercase tracking-[0.2em] transition-all duration-300 ${
                           link.isCta
                               ? "bg-[#f26722] text-white px-10 py-4 rounded-full hover:scale-105 shadow-lg"
@@ -107,7 +110,7 @@ export const Navbar: React.FC = () => {
               </div>
 
               <button onClick={handleLanguageChange} className="text-white font-black text-sm tracking-widest uppercase">
-                {currentLang === "sv" ? "EN" : "SV"}
+                {visibleLang === "sv" ? "EN" : "SV"}
               </button>
 
               <button onClick={() => setIsMenuOpen(true)} className="xl:hidden text-white p-2">
@@ -130,7 +133,7 @@ export const Navbar: React.FC = () => {
               {navLinks.map((link, i) => (
                   <Link
                       key={link.name}
-                      href={`/${currentLang}${link.href}`}
+                      href={`/${visibleLang}${link.href}`}
                       onClick={() => setIsMenuOpen(false)}
                       className="group flex flex-col items-center"
                   >
@@ -148,7 +151,7 @@ export const Navbar: React.FC = () => {
                 <FaFacebookF size={22} className="text-white/40" />
               </div>
               <button onClick={handleLanguageChange} className="text-[#f26722] font-bold tracking-[0.3em] uppercase text-xs">
-                {currentLang === "sv" ? "English Version" : "Svenska"}
+                {visibleLang === "sv" ? "English Version" : "Svenska"}
               </button>
             </div>
           </div>
