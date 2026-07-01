@@ -1,6 +1,10 @@
 ﻿{
 
   "aboutTitle": "About Fuego Dance School",
+  "aboutEyebrow": "About Fuego Dance School",
+  "aboutHeadline": "A safe place to grow in bachata.",
+  "aboutIntro": "With us, you get clear teaching, personal feedback, and a warm community – whether you are a beginner or want to develop your technique.",
+  "aboutOrigin": "Fuego Dance School was started in 2021 by Mikael Deskalou and Irina Kurochkina with a focus on Bachata Sensual, technique, and teaching for all levels.",
 
   "aboutText1": "Fuego Dance School opened its doors in the autumn of 2021, led by Mikael Deskalou and Irina Kurochkina. Our primary focus is Bachata Sensual, which we teach across several levels – catering to everyone, from complete beginners to experienced dancers.",
 
@@ -11,6 +15,12 @@
   "uniqueTitle": "What makes our school unique:",
   "uniquePoint1": "We use helper instructors in our classes to give you more personal feedback.",
   "uniquePoint2": "We place great importance on technique and understanding the core principles of dance.",
+  "valueCard1Title": "Safe environment",
+  "valueCard1Text": "You should feel welcome, seen, and encouraged from your first class.",
+  "valueCard2Title": "Clear technique",
+  "valueCard2Text": "We build the dance step by step with focus on understanding, musicality, and body control.",
+  "valueCard3Title": "Personal feedback",
+  "valueCard3Text": "With assistant instructors in class, you get more support and feedback at your level.",
 
   "studentGoalTitle": "Our goal is for you as a student to:",
   "goalPoint1": "Feel like part of the Fuego family.",
@@ -18,7 +28,15 @@
   "goalPoint3": "Develop your dance technique and self-confidence.",
   "goalPoint4": "Become a respectful and musical dancer, regardless of role.",
 
-  "ctaInstructor": "Meet Our Instructors"
+  "ctaInstructor": "Meet Our Instructors",
+  "ctaCourses": "View Our Courses",
+  "aboutImgLeftAlt": "Bachata class at Fuego Dance School",
+  "aboutImgMomentAlt": "Dance moment at Fuego",
+  "aboutImgCommunityAlt": "Community at Fuego Dance School",
+  "galleryEyebrow": "Fuego in pictures",
+  "galleryTitle": "Classes, social dance, and community.",
+  "galleryDescription": "A glimpse from our studio, our classes, and the moments that make Fuego more than just dance steps.",
+  "galleryImageAlt": "Photo {{index}} from Fuego Dance School"
 
 
 }

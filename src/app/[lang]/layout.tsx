@@ -1,14 +1,10 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Lato, Great_Vibes } from "next/font/google";
 import '@/app/globals.css';
-import dynamic from "next/dynamic";
 import Script from "next/script";
 import TranslationProvider from "@/i18n/TranslationProvider";
-import { Footer } from "@/components/Footer";
-import ChatBot from "@/components/ChatBot";
-
-import CookieConsent from "@/components/CookieConsent";
 import initTranslations from "@/i18n";
+import SiteChrome from "@/components/SiteChrome";
 
 const playfair = Playfair_Display({
     subsets: ["latin"],
@@ -60,11 +56,6 @@ export const metadata: Metadata = {
         icon: "/icon.png",
     },
 };
-
-const DynamicNavbar = dynamic(() => import("@/components/Navbar").then(mod => mod.Navbar), {
-    ssr: false,
-    loading: () => <div style={{ height: 80, backgroundColor: '#1a1a1a' }}></div>
-});
 
 const i18nNamespaces = [
     'common',
@@ -139,15 +130,9 @@ export default async function RootLayout({
 
         <TranslationProvider namespaces={i18nNamespaces} resources={resources} lang={params.lang}>
 
-            <DynamicNavbar />
-
-            <main className="min-h-screen">
+            <SiteChrome>
                 {children}
-            </main>
-
-            <Footer />
-            {/* <ChatBot /> */}
-            <CookieConsent />
+            </SiteChrome>
 
         </TranslationProvider>
         </body>

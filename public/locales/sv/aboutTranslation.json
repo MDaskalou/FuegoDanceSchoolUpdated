@@ -1,18 +1,36 @@
 ﻿{
 
   "aboutTitle": "Om Fuego Dance School",
+  "aboutEyebrow": "Om Fuego Dance School",
+  "aboutHeadline": "En trygg plats att växa i bachata.",
+  "aboutIntro": "Hos oss får du tydlig undervisning, personlig feedback och en varm gemenskap – oavsett om du är nybörjare eller vill utveckla din teknik.",
+  "aboutOrigin": "Fuego Dance School startades 2021 av Mikael Deskalou och Irina Kurochkina med fokus på Bachata Sensual, teknik och undervisning för alla nivåer.",
   "aboutText1": "Fuego Dance School öppnade sina portar hösten 2021, lett av Mikael Deskalou och Irina Kurochkina. Vårt främsta fokus är Bachata Sensual, som vi undervisar på flera olika nivåer – anpassade för alla, från rena nybörjare till erfarna dansare.",
   "aboutText2": "Skolan drivs av en passion för dansens förmåga att förena människor och uttrycka känslor. För oss är detta mer än bara danssteg; det är en plats för gemenskap, glädje och personlig utveckling. Vi strävar efter att skapa en trygg och inkluderande atmosfär där varje elev känner sig sedd och uppmuntrad.",
   "aboutText3": "Oavsett om du vill lära dig grunderna, finslipa din teknik eller bara hitta en ny gemenskap, så är du varmt välkommen att bli en del av vår Fuego-familj.",
   "uniqueTitle": "Det som gör vår skola unik:",
   "uniquePoint1": "Vi har hjälpeinstruktörer på våra klasser för att ge dig mer personlig feedback.",
   "uniquePoint2": "Vi lägger stor vikt vid teknik och förståelsen för dansens grundprinciper.",
+  "valueCard1Title": "Trygg miljö",
+  "valueCard1Text": "Du ska känna dig välkommen, sedd och uppmuntrad från första lektionen.",
+  "valueCard2Title": "Tydlig teknik",
+  "valueCard2Text": "Vi bygger dansen steg för steg med fokus på förståelse, musikalitet och kroppskontroll.",
+  "valueCard3Title": "Personlig feedback",
+  "valueCard3Text": "Med hjälpinstruktörer i klasserna får du mer stöd och feedback på din nivå.",
   "studentGoalTitle": "Vårt mål är att du som student ska:",
   "goalPoint1": "Känna dig som en del av Fuego-familjen.",
   "goalPoint2": "Uppleva en trygg och välkomnande atmosfär.",
   "goalPoint3": "Utveckla din dansteknik och ditt självförtroende.",
   "goalPoint4": "Bli en respektfull och musikalisk dansare, oavsett roll.",
-  "ctaInstructor": "Möt våra instruktörer"
+  "ctaInstructor": "Möt våra instruktörer",
+  "ctaCourses": "Se våra kurser",
+  "aboutImgLeftAlt": "Bachatalektion hos Fuego Dance School",
+  "aboutImgMomentAlt": "Dansmoment på Fuego",
+  "aboutImgCommunityAlt": "Gemenskap på Fuego Dance School",
+  "galleryEyebrow": "Fuego i bilder",
+  "galleryTitle": "Klasser, socialdans och gemenskap.",
+  "galleryDescription": "En glimt från vår studio, våra klasser och stunderna som gör Fuego till mer än bara danssteg.",
+  "galleryImageAlt": "Bild {{index}} från Fuego Dance School"
 
 
 }

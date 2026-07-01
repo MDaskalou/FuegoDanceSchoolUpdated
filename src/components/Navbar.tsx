@@ -68,6 +68,11 @@ export const Navbar: React.FC = () => {
     { name: t('nav.faq'), href: "/FAQpage" },
   ];
 
+  const devLinks =
+      process.env.NODE_ENV === "development"
+          ? [{ name: "Admin", href: "/admin" }]
+          : [];
+
   return (
       <>
         <header className={`fixed top-0 left-0 w-full h-[100px] z-[5000] transition-all duration-500 ${
@@ -93,6 +98,15 @@ export const Navbar: React.FC = () => {
                               ? "bg-[#f26722] text-white px-10 py-4 rounded-full hover:scale-105 shadow-lg"
                               : "text-white hover:text-[#f26722]"
                       }`}
+                  >
+                    {link.name}
+                  </Link>
+              ))}
+              {devLinks.map((link) => (
+                  <Link
+                      key={link.name}
+                      href={`/${visibleLang}${link.href}`}
+                      className="rounded-md border border-[#f26722]/40 px-4 py-3 text-[12px] font-extrabold uppercase tracking-[0.18em] text-[#f26722] transition-all duration-300 hover:border-[#f26722] hover:bg-[#f26722] hover:text-white"
                   >
                     {link.name}
                   </Link>
@@ -139,6 +153,19 @@ export const Navbar: React.FC = () => {
                   >
                     <span className="text-[10px] text-orange-500 font-mono tracking-[0.5em] mb-2">0{i + 1}</span>
                     <span className="font-playfair text-3xl text-white uppercase tracking-widest group-active:text-[#f26722]">
+                  {link.name}
+                </span>
+                  </Link>
+              ))}
+              {devLinks.map((link) => (
+                  <Link
+                      key={link.name}
+                      href={`/${visibleLang}${link.href}`}
+                      onClick={() => setIsMenuOpen(false)}
+                      className="group flex flex-col items-center"
+                  >
+                    <span className="text-[10px] text-orange-500 font-mono tracking-[0.5em] mb-2">DEV</span>
+                    <span className="font-playfair text-3xl text-[#f26722] uppercase tracking-widest group-active:text-white">
                   {link.name}
                 </span>
                   </Link>
