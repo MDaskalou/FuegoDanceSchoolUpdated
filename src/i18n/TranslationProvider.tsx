@@ -59,7 +59,7 @@ export default function TranslationProvider({
         const init = async () => {
             Object.entries(resources ?? {}).forEach(([language, languageResources]) => {
                 Object.entries(languageResources ?? {}).forEach(([namespace, namespaceResources]) => {
-                    i18n.addResourceBundle(language, namespace, namespaceResources, true, true);
+                    i18n.addResourceBundle(language, namespace, namespaceResources, false, true);
                 });
             });
 

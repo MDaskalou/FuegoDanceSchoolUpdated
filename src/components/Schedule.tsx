@@ -71,7 +71,7 @@ export const ScheduleSection = () => {
 
     const courses: Course[] = t("courses", { returnObjects: true }) as Course[] || [];
 
-    const dayKeys: string[] = ["dayMonday", "dayTuesday", "dayWednesday", "dayThursday","dayFriday", "daySunday"];
+    const dayKeys: string[] = ["dayMonday", "dayTuesday", "dayWednesday", "dayThursday", "daySunday"];
 
     return (
         <section
@@ -114,7 +114,7 @@ export const ScheduleSection = () => {
 
                 {/* === SCHEDULE GRID FÖR DESKTOP/MOBIL === */}
                 <div className="mx-auto max-w-6xl">
-                    <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-6 gap-6 md:gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-6 md:gap-8 justify-center">
 
                         {dayKeys.map((dayKey) => (
                             <div key={dayKey} className="md:col-span-1 space-y-4">

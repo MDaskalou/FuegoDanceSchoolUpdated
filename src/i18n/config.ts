@@ -14,7 +14,7 @@ const options = {
     backend: {
         loadPath: "/locales/{{lng}}/{{ns}}.json",
         requestOptions: {
-            cache: 'force-cache',
+            cache: "no-store",
         },
     },
 

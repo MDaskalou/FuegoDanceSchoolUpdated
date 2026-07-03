@@ -3,19 +3,24 @@
   "priceHighlight": "First time is always free - come try it out!",
   "cardCourseTitle": "Courses",
   "cardDiscountTitle": "Discounts",
-  "cardDropInTitle": "Drop-in on Sundays",
+  "cardDropInTitle": "Guided Social Dance",
   "tagPopular": "MOST POPULAR",
   "discountStudent": "Student discount: 10%",
   "discountCouple": "Couple discount: 15% per person",
   "discountHalfOfSemester": "Half of semester discount: 35%",
   "ctaBookNow": "Book now",
   "bonusIncluded": "Guided Social Dance included",
-  "memberDropInDiscount": "Members get 50% off drop-in",
+  "memberDropInDiscount": "50% discount for Fuego members",
+  "savingPrefix": "save",
 
   "courseLabelSingular": "course",
   "courseLabelPlural": "courses",
-  "dropInNote": "If you book at least one course, the social is always included.",
+  "dropInNote": "Applies to Guided Social Dance. Limited to max 20 couples.",
   "socialDanceLabel": "Social dance",
+  "dropInSolo": "Solo",
+  "dropInCouple": "Couple",
+  "dropInPackageSolo": "Solo package - 12 sessions",
+  "dropInPackageCouple": "Couple package - 12 sessions",
 
   "courses": [
     { "count": 1, "price": 1600, "popular": false },
@@ -25,7 +30,9 @@
     { "count": 5, "price": 6400, "popular": false, "saving": 1600 }
   ],
   "dropInItems": [
-    { "count": 1, "price": 120, "isSocial": false },
-    { "count": 0, "price": 80, "labelKey": "socialDanceLabel", "isSocial": true }
+    { "labelKey": "dropInSolo", "price": 150, "isSocial": false },
+    { "labelKey": "dropInCouple", "price": 200, "isSocial": false },
+    { "labelKey": "dropInPackageSolo", "price": 1300, "saving": 500, "isSocial": false, "highlighted": true },
+    { "labelKey": "dropInPackageCouple", "price": 1900, "saving": 500, "isSocial": false, "highlighted": true }
   ]
 }

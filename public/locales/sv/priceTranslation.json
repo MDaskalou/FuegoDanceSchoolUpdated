@@ -3,19 +3,24 @@
   "priceHighlight": "Första gången är alltid gratis - kom och prova!",
   "cardCourseTitle": "Kurser",
   "cardDiscountTitle": "Rabatter",
-  "cardDropInTitle": "Drop-in",
+  "cardDropInTitle": "Guided Social Dance",
   "tagPopular": "POPULÄRAST",
   "discountStudent": "Studentrabatt: 10%",
   "discountCouple": "Parrabatt: 15%",
   "discountHalfOfSemester": "Halvkursrabatt: 35%",
   "ctaBookNow": "Boka nu",
   "bonusIncluded": "Guided Social Dance ingår",
-  "memberDropInDiscount": "Medlemmar får 50% rabatt på drop-in",
+  "memberDropInDiscount": "50% rabatt till Fuego-medlemmar",
+  "savingPrefix": "du sparar",
 
   "courseLabelSingular": "kurs",
   "courseLabelPlural": "kurser",
-  "dropInNote": "Detta gäller kurser i schemat. Söndags socialdans och workshops har separata drop-in priser.",
+  "dropInNote": "Gäller Guided Social Dance. Begränsat till max 20 par.",
   "socialDanceLabel": "Social dans",
+  "dropInSolo": "Solo",
+  "dropInCouple": "Par",
+  "dropInPackageSolo": "Paket solo - 12 tillfällen",
+  "dropInPackageCouple": "Paket par - 12 tillfällen",
 
   "courses": [
     { "count": 1, "price": 1600, "popular": false },
@@ -25,8 +30,9 @@
     { "count": 5, "price": 6400, "popular": false, "saving": 1600 }
   ],
   "dropInItems": [
-    { "count": 1, "price": 200, "isSocial": false },
-    { "count": 2, "price": 350, "isSocial": false },
-    { "count": 3, "price": 400, "isSocial": false }
+    { "labelKey": "dropInSolo", "price": 150, "isSocial": false },
+    { "labelKey": "dropInCouple", "price": 200, "isSocial": false },
+    { "labelKey": "dropInPackageSolo", "price": 1300, "saving": 500, "isSocial": false, "highlighted": true },
+    { "labelKey": "dropInPackageCouple", "price": 1900, "saving": 500, "isSocial": false, "highlighted": true }
   ]
 }

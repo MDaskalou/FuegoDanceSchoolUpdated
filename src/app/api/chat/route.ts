@@ -14,12 +14,13 @@ const faqData = {
         { "q": "Vad ska jag ha på mig?", "a": "Bekväma kläder du kan röra dig fritt i. Sneakers eller dansskor med glid fungerar bra." }
     ],
     "Kurser och tider": [
-        { "q": "Hur lång är varje kurs?", "a": "Som standard är våra kurser 12 veckor långa, men längden kan variera beroende på specifik kurs. Varje lektion är 1 timme lång." },
-        { "q": "Har ni drop-in?", "a": "Nej, men första lektionen är alltid gratis så att du kan prova på innan du bestämmer dig." }
+        { "q": "Hur lång är varje kurs?", "a": "Våra kurser är 12 veckor långa med 1 lektion i veckan på 1 timme." },
+        { "q": "Har ni drop-in?", "a": "Nej, vi har inga drop-in-klasser just nu." }
     ],
     "Priser och rabatter": [
-        { "q": "Vad kostar kurserna?", "a": "1 kurs = 1600 kr, 2 kurser = 2600 kr, 3 kurser = 3600 kr. Se vår prislista för detaljer." },
+        { "q": "Vad kostar kurserna?", "a": "1 kurs = 1600 kr, 2 kurser = 2800 kr, 3 kurser = 4000 kr, 4 kurser = 5200 kr och 5 kurser = 6400 kr. Se vår prislista för detaljer." },
         { "q": "Erbjuder ni rabatter?", "a": "Ja! Vi har studentrabatt (10%), parrabatt (15%) och rabatt för dig som går varannan vecka (35%). Rabatter kan ej kombineras." },
+        { "q": "Hur får jag halvkursrabatt?", "a": "Mejla info@fuegodanceschool.se, skriv vilken kurs du vill gå och att du vill gå en halvkurs. Då får du en rabattkod som du lägger in när du anmäler dig." },
         {"q": "Hur fungerar parrabatten?", "a": "För att få parrabatten måste ni anmäla er tillsammans i samma kurs. Ni kan inte anmäla er i olika kurser. Kontakta oss för mer information." }
     ],
     "Anmälan": [
@@ -35,6 +36,7 @@ Svara kortfattat och trevligt på svenska.
 VIKTIG INFORMATION OM KURSER:
 - Standardlängden för en kurs är 12 veckor.
 - Varje lektion är 1 timme lång.
+- Vi har inga drop-in-klasser just nu.
 - Notera att kurslängden kan variera under vilken period det är, så be användaren kolla schemat för exakta detaljer.
 
 ANVÄND DENNA FAQ FÖR SVAR:
