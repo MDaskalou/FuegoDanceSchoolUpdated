@@ -12,6 +12,7 @@ import {
   Save,
   StickyNote,
   Users,
+  X,
 } from "lucide-react";
 import type {
   CourseDto,
@@ -166,6 +167,7 @@ export function AdminScheduleWorkspace({
   const [view, setView] = useState<ScheduleView>("week");
   const [scheduleItems, setScheduleItems] = useState(initialScheduleItems);
   const [selectedId, setSelectedId] = useState(initialScheduleItems[0]?.id ?? "");
+  const [isEditorOpen, setIsEditorOpen] = useState(false);
   const selectedItem = scheduleItems.find((item) => item.id === selectedId) ?? scheduleItems[0];
 
   const [draft, setDraft] = useState<ScheduleItemDto>(
@@ -174,8 +176,14 @@ export function AdminScheduleWorkspace({
       title: "",
       type: "course",
       courseId: courses[0]?.id ?? "",
-      instructorId: instructors[0]?.id ?? "",
-      instructorIds: instructors[0] ? [instructors[0].id] : [],
+      instructorId: courses[0]?.instructorIds?.[0] ?? courses[0]?.leadInstructorId ?? instructors[0]?.id ?? "",
+      instructorIds: courses[0]?.instructorIds?.length
+        ? courses[0].instructorIds
+        : courses[0]?.leadInstructorId
+          ? [courses[0].leadInstructorId]
+          : instructors[0]
+            ? [instructors[0].id]
+            : [],
       assistantInstructorIds: [],
       roomId: rooms[0]?.id ?? "",
       level: courses[0]?.level ?? "Beginner",
@@ -219,6 +227,7 @@ export function AdminScheduleWorkspace({
       assistantInstructorIds: item.assistantInstructorIds ?? [],
       recurrenceWeeks: item.recurrenceWeeks ?? 1,
     });
+    setIsEditorOpen(true);
   }
 
   function startNewItem(date?: Date, hour = 18, minute = 0) {
@@ -232,8 +241,14 @@ export function AdminScheduleWorkspace({
       title: "Nytt schemapass",
       type: "course",
       courseId: course?.id ?? "",
-      instructorId: instructors[0]?.id ?? "",
-      instructorIds: instructors[0] ? [instructors[0].id] : [],
+      instructorId: course?.instructorIds?.[0] ?? course?.leadInstructorId ?? instructors[0]?.id ?? "",
+      instructorIds: course?.instructorIds?.length
+        ? course.instructorIds
+        : course?.leadInstructorId
+          ? [course.leadInstructorId]
+          : instructors[0]
+            ? [instructors[0].id]
+            : [],
       assistantInstructorIds: [],
       roomId: rooms[0]?.id ?? "",
       level: course?.level ?? "Beginner",
@@ -243,6 +258,7 @@ export function AdminScheduleWorkspace({
       visibility: "public",
       internalNotes: "Intern anteckning för planering.",
     });
+    setIsEditorOpen(true);
   }
 
   function saveDraft() {
@@ -265,6 +281,7 @@ export function AdminScheduleWorkspace({
       return [...items, ...repeatedItems];
     });
     setSelectedId(draft.id);
+    setIsEditorOpen(false);
   }
 
   function updateDraft<K extends keyof ScheduleItemDto>(key: K, value: ScheduleItemDto[K]) {
@@ -276,7 +293,7 @@ export function AdminScheduleWorkspace({
       const exists = current.instructorIds.includes(instructorId);
       const nextIds = exists
         ? current.instructorIds.filter((id) => id !== instructorId)
-        : [...current.instructorIds, instructorId].slice(0, 2);
+        : [...current.instructorIds, instructorId];
 
       return {
         ...current,
@@ -625,7 +642,7 @@ export function AdminScheduleWorkspace({
   }
 
   return (
-    <div className="grid gap-6 xl:grid-cols-[1fr_380px]">
+    <div>
       <section className="min-w-0">
         <div className="mb-4 flex flex-col gap-3 rounded-md border border-[#231f1c]/10 bg-white p-3 shadow-sm sm:flex-row sm:items-center sm:justify-between">
           <div className="grid grid-cols-3 gap-1 rounded-md bg-[#231f1c]/5 p-1">
@@ -664,18 +681,41 @@ export function AdminScheduleWorkspace({
         {view === "list" && renderListTable()}
       </section>
 
-      <aside className="rounded-md border border-[#231f1c]/10 bg-white p-5 shadow-sm xl:sticky xl:top-6 xl:self-start">
-        <div className="mb-5 flex items-center justify-between gap-4">
+      {isEditorOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#231f1c]/45 px-3 py-6 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="schedule-editor-title"
+          onClick={() => setIsEditorOpen(false)}
+        >
+      <aside
+        className="flex max-h-[calc(100vh-3rem)] w-full max-w-3xl flex-col overflow-hidden rounded-md border border-[#231f1c]/10 bg-white shadow-2xl"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <div className="flex items-center justify-between gap-4 border-b border-[#231f1c]/10 px-5 py-4">
           <div>
             <p className="font-sans text-xs font-bold uppercase tracking-[0.16em] text-[#c2521c]">
               Schemapass
             </p>
-            <h2 className="mt-1 font-playfair text-2xl font-bold">Lägg till / redigera</h2>
+            <h2 id="schedule-editor-title" className="mt-1 font-playfair text-2xl font-bold">
+              Lägg till / redigera
+            </h2>
           </div>
-          <Edit3 size={22} className="text-[#f26722]" />
+          <div className="flex items-center gap-2">
+            <Edit3 size={22} className="hidden text-[#f26722] sm:block" />
+            <button
+              type="button"
+              onClick={() => setIsEditorOpen(false)}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-[#231f1c]/10 text-[#5f5650] transition hover:border-[#f26722]/50 hover:text-[#c2521c]"
+              aria-label="Stäng"
+            >
+              <X size={18} />
+            </button>
+          </div>
         </div>
 
-        <div className="space-y-3">
+        <div className="min-h-0 space-y-3 overflow-y-auto px-5 pb-5">
           <details open className="rounded-md border border-[#231f1c]/10 bg-[#fbf9f6] p-3">
             <summary className="cursor-pointer font-sans text-sm font-bold text-[#4f4742]">Grundinfo</summary>
             <div className="mt-3 space-y-3">
@@ -688,7 +728,7 @@ export function AdminScheduleWorkspace({
                 />
               </label>
 
-              <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-1">
+              <div className="grid gap-3 sm:grid-cols-2">
                 <label className="block">
                   <span className="font-sans text-xs font-bold uppercase tracking-[0.12em] text-[#7b6f67]">Typ</span>
                   <select
@@ -730,6 +770,15 @@ export function AdminScheduleWorkspace({
                     updateDraft("courseId", event.target.value);
                     if (course) {
                       updateDraft("level", course.level);
+                      updateDraft(
+                        "instructorIds",
+                        course.instructorIds?.length
+                          ? course.instructorIds
+                          : course.leadInstructorId
+                            ? [course.leadInstructorId]
+                            : [],
+                      );
+                      updateDraft("instructorId", course.instructorIds?.[0] ?? course.leadInstructorId ?? "");
                     }
                   }}
                   className="mt-1.5 h-10 w-full rounded-md border border-[#231f1c]/15 bg-white px-3 font-sans text-sm outline-none focus:border-[#f26722]"
@@ -757,12 +806,12 @@ export function AdminScheduleWorkspace({
                   <span className="font-sans text-xs font-bold uppercase tracking-[0.12em] text-[#7b6f67]">
                     Huvudansvariga
                   </span>
-                  <span className="font-sans text-xs text-[#7b6f67]">{draft.instructorIds.length}/2</span>
+                  <span className="font-sans text-xs text-[#7b6f67]">{draft.instructorIds.length} valda</span>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {instructors.map((instructor) => {
                     const checked = draft.instructorIds.includes(instructor.id);
-                    const disabled = !checked && draft.instructorIds.length >= 2;
+                    const disabled = false;
 
                     return (
                       <button
@@ -832,7 +881,7 @@ export function AdminScheduleWorkspace({
                 </select>
               </label>
 
-              <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-1">
+              <div className="grid gap-3 sm:grid-cols-2">
                 <label className="block">
                   <span className="flex items-center gap-2 font-sans text-xs font-bold uppercase tracking-[0.12em] text-[#7b6f67]">
                     <Clock size={14} />
@@ -903,6 +952,8 @@ export function AdminScheduleWorkspace({
           </button>
         </div>
       </aside>
+        </div>
+      )}
     </div>
   );
 }

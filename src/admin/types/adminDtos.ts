@@ -16,7 +16,9 @@ export interface CourseDto {
   season: string;
   status: "planning" | "open" | "active" | "completed";
   goal: string;
+  techniques: string;
   leadInstructorId: string;
+  instructorIds: string[];
   plannedLessons: number;
   completedLessons: number;
 }
