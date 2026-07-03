@@ -44,11 +44,11 @@
       "questions": [
         {
           "q": "Hur lång är varje kurs?",
-          "a": "Kurserna är 6 veckor långa med 1 lektion i veckan på 1 timme."
+          "a": "Kurserna är 12 veckor långa med 1 lektion i veckan på 1 timme."
         },
         {
           "q": "Har ni drop-in?",
-          "a": "Vi har drop in kurser på våra solo klasser men inte på våra parklasser."
+          "a": "Nej, vi har inga drop-in-klasser just nu."
         },
         {
           "q": "Kan jag ta igen en missad lektion?",
@@ -61,7 +61,7 @@
       "questions": [
         {
           "q": "Vad kostar kurserna?",
-          "a": "1 kurs = 900 kr, 2 kurser = 1400 kr, 3 kurser = 1900 kr, och så vidare. Se vår prislista för alla nivåer."
+          "a": "1 kurs = 1600 kr, 2 kurser = 2800 kr, 3 kurser = 4000 kr, 4 kurser = 5200 kr och 5 kurser = 6400 kr. Se vår prislista för alla nivåer."
         },
         {
           "q": "Jag är student – får jag rabatt?",
@@ -73,7 +73,7 @@
         },
         {
           "q": "Jag kan bara komma varannan vecka – får jag rabatt?",
-          "a": "Ja, du får 35% rabatt om du bara kan delta varannan vecka."
+          "a": "Ja, du får 35% rabatt om du bara kan delta varannan vecka. Mejla info@fuegodanceschool.se, skriv vilken kurs du vill gå och att du vill gå en halvkurs. Då får du en rabattkod som du lägger in när du anmäler dig."
         },
         {
           "q": "Kan man kombinera rabatter?",

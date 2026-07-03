@@ -1,12 +1,13 @@
-﻿{
-  "schedulePreamble": "Spring Schedule (Week 19-24)",
+{
+  "schedulePreamble": "Autumn Schedule 2026",
   "scheduleTitle": "Weekly Schedule",
-  "openHouseInfo": "WEEK 18 IS OPEN HOUSE! 🎉",
+  "openHouseInfo": "OPEN HOUSE WEEK 35 · 24 Aug - 30 Aug 2026",
   "scheduleImageAlt": "Background image of dancing couples at Fuego Dance School",
   "dayMonday": "Monday",
   "dayTuesday": "Tuesday",
   "dayWednesday": "Wednesday",
   "dayThursday": "Thursday",
+  "dayFriday": "Friday",
   "daySunday": "Sunday",
   "scheduleFooter1": "Join our bachata family",
   "scheduleFooter2": "Train with focus. Dance with freedom.",
@@ -15,28 +16,29 @@
   "noteSocialPrice": "80kr",
   "noteDropIn": "Drop-in available",
   "noteGuidedSocialPrise": "150kr solo, 200kr couple",
+  "noteLevel5Max": "Maximum 8 couples",
   "courses": [
     {
       "dayKey": "dayMonday",
       "time": "18:00 - 19:00",
-      "name": "Level 4 Isolations",
-      "instructors": "Tomas & Jennifer",
-      "isNew": true,
+      "name": "Level 4 Technique",
+      "instructors": "Mikael & Josefine",
+      "isNew": false,
       "isDropIn": false
     },
     {
       "dayKey": "dayMonday",
       "time": "19:05 - 20:05",
       "name": "Level 4",
-      "instructors": "Tomas & Jennifer",
+      "instructors": "Mikael & Josefine",
       "isNew": false,
       "isDropIn": false
     },
     {
       "dayKey": "dayMonday",
       "time": "20:10 - 21:10",
-      "name": "Level 4 Technique",
-      "instructors": "Tomas & Jennifer",
+      "name": "Footwork",
+      "instructors": "Mikael",
       "isNew": false,
       "isDropIn": false
     },
@@ -44,7 +46,7 @@
       "dayKey": "dayTuesday",
       "time": "18:00 - 19:00",
       "name": "Level 1",
-      "instructors": "Mikael & Jennifer",
+      "instructors": "Feras & Josefine",
       "isNew": false,
       "isDropIn": false
     },
@@ -54,53 +56,26 @@
       "name": "Advanced Foundation",
       "instructors": "Mikael",
       "isNew": false,
-      "isDropIn": true,
-      "noteKeyDropIn": "noteDropIn"
+      "isDropIn": false
     },
     {
-        "dayKey": "dayTuesday",
-        "time": "20:10 - 21:10",
-        "name": "Level 2",
-        "instructors": "Andris & Emma",
-        "isNew": false,
-        "isDropIn": false
-    },
-    {
-      "dayKey": "dayWednesday",
-      "time": "18:00 - 19:00",
-      "name": "Contemporary",
-      "instructors": "Johanna",
-      "isNew": true,
-      "isDropIn": true,
-      "noteKeyDropIn": "noteDropIn"
-    },
-    {
-        "dayKey": "dayWednesday",
-        "time": "19:05 - 20:05",
-        "name": "Raminta Styling Feminine Touch ",
-        "instructors": "Raminta",
-        "isNew": true,
-        "isDropIn": true,
-        "noteKeyDropIn": "noteDropIn"
-    },
-    {
-        "dayKey": "dayWednesday",
-        "time": "20:10 - 21:10",
-        "name": "Footwork",
-        "instructors": "Mikael",
-        "isNew": true,
-        "isDropIn": true
-    },
-    {
-      "dayKey": "dayThursday",
-      "time": "18:00 - 19:00",
-      "name": "Level 3",
-      "instructors": "Nora & Sisco",
+      "dayKey": "dayTuesday",
+      "time": "20:10 - 21:10",
+      "name": "Level 2",
+      "instructors": "Mikael & Ines",
       "isNew": false,
       "isDropIn": false
     },
     {
-      "dayKey": "dayThursday",
+      "dayKey": "dayWednesday",
+      "time": "18:00 - 19:00",
+      "name": "Level 3",
+      "instructors": "Andris & Emman",
+      "isNew": false,
+      "isDropIn": false
+    },
+    {
+      "dayKey": "dayWednesday",
       "time": "19:05 - 20:05",
       "name": "Level 3 Technique",
       "instructors": "Nora & Sisco",
@@ -108,48 +83,45 @@
       "isDropIn": false
     },
     {
-      "dayKey": "dayThursday",
+      "dayKey": "dayWednesday",
       "time": "20:10 - 21:10",
-      "name": "RoleRotation",
+      "name": "Rolerotation",
       "instructors": "Nora & Sisco",
       "isNew": false,
       "isDropIn": false
     },
     {
-      "dayKey": "dayFriday",
-      "time": "18:30 - 20:30",
-      "name": "Guided Socialdans",
-      "instructors": "Mikael",
-      "isNew": true,
-      "isDropIn": true,
-      "noteKey": "noteGuidedSocialPrise"
-
+      "dayKey": "dayThursday",
+      "time": "18:00 - 19:00",
+      "name": "Raminta styling feminine touch",
+      "instructors": "Raminta",
+      "isNew": false,
+      "isDropIn": false
     },
     {
-      "dayKey": "daySunday",
-      "time": "9:00 - 10:10",
-      "name": "Mini Fuego",
-      "instructors": "Irina",
-      "isNew": true,
+      "dayKey": "dayThursday",
+      "time": "19:00 - 21:00",
+      "name": "Level 5",
+      "instructors": "Mikael",
+      "noteKey": "noteLevel5Max",
+      "isNew": false,
       "isDropIn": false
     },
     {
       "dayKey": "daySunday",
       "time": "14:00 - 15:00",
-      "name": "Party Workshop",
-      "instructors": "",
+      "name": "Level 5",
+      "instructors": "Mikael",
       "isNew": false,
-      "isDropIn": true,
-      "noteKey": "noteWorkshopPrice"
+      "isDropIn": false
     },
     {
       "dayKey": "daySunday",
       "time": "15:00 - 18:00",
-      "name": "Social Dance",
-      "instructors": "",
+      "name": "Guided Social Dance",
+      "instructors": "100% Bachata",
       "isNew": false,
-      "isDropIn": true,
-      "noteKey": "noteSocialPrice"
+      "isDropIn": false
     }
   ]
 }

@@ -15,9 +15,12 @@ interface Course {
 }
 
 interface DropInItem {
-    count: number;
+    labelKey?: string;
+    count?: number;
     price: number;
     isSocial: boolean;
+    saving?: number;
+    highlighted?: boolean;
 }
 
 // --- Subkomponent: PriceCard ---
@@ -59,11 +62,12 @@ interface PriceRowProps {
     muted?: boolean;
     dashed?: boolean;
     saving?: number;
+    savingPrefix?: string;
     bonusText?: string; // Ny prop för att visa bonus
 }
 
 const PriceRow: React.FC<PriceRowProps> = ({
-                                               label, price, highlighted, popular, popularLabel, muted, dashed, saving, bonusText
+                                               label, price, highlighted, popular, popularLabel, muted, dashed, saving, savingPrefix = "du sparar", bonusText
                                            }) => (
     <li className={`
         flex flex-col py-3 px-4 rounded-xl
@@ -89,7 +93,7 @@ const PriceRow: React.FC<PriceRowProps> = ({
                 </div>
                 {saving && saving > 0 && (
                     <span className="text-[11px] text-green-400 font-semibold mt-0.5">
-                        du sparar {saving} kr
+                        {savingPrefix} {saving} kr
                     </span>
                 )}
             </div>
@@ -122,6 +126,11 @@ export const PriceSection = () => {
         if (count === 0) return t("socialDanceLabel");
         return `${count} ${t(count === 1 ? "courseLabelSingular" : "courseLabelPlural")}`;
     }, [t]);
+
+    const getDropInLabel = (item: DropInItem) => {
+        if (item.labelKey) return t(item.labelKey);
+        return getCourseLabel(item.count ?? 0);
+    };
 
     const animateCard = (index: number) =>
         `${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} transition-all duration-700 ease-out delay-[${index * 150}ms]`;
@@ -169,6 +178,7 @@ export const PriceSection = () => {
                                     popular={course.popular}
                                     popularLabel={t("tagPopular")}
                                     saving={course.saving}
+                                    savingPrefix={t("savingPrefix")}
                                     // Här läggs bonus-texten till automatiskt för 3 kurser och uppåt
                                     bonusText={course.count >= 3 ? t("bonusIncluded") : undefined}
                                 />
@@ -207,10 +217,13 @@ export const PriceSection = () => {
                             {dropInItems.map((item, index) => (
                                 <PriceRow
                                     key={index}
-                                    label={getCourseLabel(item.count)}
+                                    label={getDropInLabel(item)}
                                     price={`${item.price} kr`}
+                                    highlighted={item.highlighted}
                                     dashed={item.isSocial}
                                     muted={item.isSocial}
+                                    saving={item.saving}
+                                    savingPrefix={t("savingPrefix")}
                                 />
                             ))}
                         </ul>
