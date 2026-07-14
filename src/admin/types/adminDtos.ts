@@ -9,6 +9,19 @@ export interface CurrentAdminUserDto {
   email: string;
 }
 
+export interface CourseCurriculumDto {
+  purpose: string;
+  prerequisites: string;
+  durationWeeks: number;
+  lessonDurationMinutes: number;
+  finalGoals: string[];
+  basicPositions: string[];
+  movementPatterns: string[];
+  soloSkills: string[];
+  partnerSkills: string[];
+  progressionCriteria: string;
+}
+
 export interface CourseDto {
   id: string;
   title: string;
@@ -21,6 +34,7 @@ export interface CourseDto {
   instructorIds: string[];
   plannedLessons: number;
   completedLessons: number;
+  curriculum: CourseCurriculumDto;
 }
 
 export interface InstructorDto {

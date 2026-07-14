@@ -47,6 +47,56 @@ export const mockRooms: RoomDto[] = [
   { id: "room_studio", name: "Studion", capacity: 18 },
 ];
 
+const beginnerLevelOneCurriculum = {
+  purpose:
+    "Introducera absoluta nybörjare till grunderna i Bachata Sensual med fokus på musikalitet, kroppsmekanik, trygghet i grundpositioner och kontrollerade rörelsemönster.",
+  prerequisites: "Inga tidigare danserfarenheter krävs. Nivån är anpassad för absoluta nybörjare.",
+  durationWeeks: 12,
+  lessonDurationMinutes: 60,
+  finalGoals: [
+    "Hitta 1:an och 5:an i bachatamusik och starta dansen på rätt takt.",
+    "Hålla grundtakten 1-2-3-tap solo och i par.",
+    "Förstå stabil men flexibel frame samt grundläggande tension.",
+    "Använda små kontrollerade steg med balans och tydlig viktöverföring.",
+    "Förstå raka, diagonala och kvadratiska rörelsemönster.",
+  ],
+  basicPositions: [
+    "Close position",
+    "Social position",
+    "Open position",
+    "Shadow position",
+  ],
+  movementPatterns: [
+    "Raka linjer: fram, bak, vänster och höger.",
+    "Diagonala linjer för positionsbyten och mjukare riktningar.",
+    "Kvadratiska mönster/box patterns för kontroll av tyngdpunkt.",
+  ],
+  soloSkills: [
+    "Grundsteg i sidled",
+    "Rompe adelante",
+    "Cuadrado",
+    "V-step",
+    "Open Basic med höftisolering",
+    "Outside basic",
+    "Paso de Madrid",
+    "Simple turn solo",
+    "Open close-isolering av bröstkorg och höft",
+  ],
+  partnerSkills: [
+    "Close, Social, Open och Shadow position",
+    "Cambio på raka och diagonala linjer",
+    "Completo",
+    "Simple turn i par",
+    "Diagonal Lateral Waves med grundmekanik",
+    "Hip roll med grundläggande isolering",
+    "Pinza och Paseala i geometriska mönster",
+    "Impulso och Slide",
+    "Översiktlig mekanik för Head rolls",
+  ],
+  progressionCriteria:
+    "Eleven är redo för Level 2 när hen visar komfort med isolerade rörelser, kan hålla takten och behärskar grundpositionerna samt rummets axlar. Kontinuerligt flow prioriteras först på senare nivåer.",
+};
+
 export const mockCourses: CourseDto[] = [
   {
     id: "course_beginner_spring",
@@ -60,6 +110,7 @@ export const mockCourses: CourseDto[] = [
     instructorIds: ["inst_sofie", "inst_mikael"],
     plannedLessons: 8,
     completedLessons: 0,
+    curriculum: beginnerLevelOneCurriculum,
   },
   {
     id: "course_improver_spring",
@@ -73,6 +124,12 @@ export const mockCourses: CourseDto[] = [
     instructorIds: ["inst_mikael", "inst_sofie"],
     plannedLessons: 8,
     completedLessons: 0,
+    curriculum: {
+      ...beginnerLevelOneCurriculum,
+      purpose: "Bygga vidare från nybörjarnivån med tydligare partnerwork, connection och enklare variationer.",
+      prerequisites: "Eleven bör vara trygg med grundsteg, takt, enkla positioner och social grunddans.",
+      progressionCriteria: "Eleven går vidare när timing, connection och enkla variationer fungerar stabilt i socialt tempo.",
+    },
   },
   {
     id: "course_intermediate_spring",
@@ -86,6 +143,12 @@ export const mockCourses: CourseDto[] = [
     instructorIds: ["inst_sisco", "inst_mikael"],
     plannedLessons: 10,
     completedLessons: 3,
+    curriculum: {
+      ...beginnerLevelOneCurriculum,
+      purpose: "Utveckla body movement, musicality och tryggare social improvisation.",
+      prerequisites: "Eleven bör behärska beginner- och improver-innehåll med stabil partnerkommunikation.",
+      progressionCriteria: "Eleven utvecklas vidare när isolations, transitions och musikalitet kan användas tryggt i socialdans.",
+    },
   },
 ];
 

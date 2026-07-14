@@ -21,8 +21,8 @@ interface AdminCoursesWorkspaceProps {
   scheduleItems: ScheduleItemDto[];
 }
 
-type CourseFormErrors = Partial<Record<keyof CourseDto, string>>;
-type CourseWizardStep = 1 | 2 | 3;
+type CourseFormErrors = Record<string, string>;
+type CourseWizardStep = 1 | 2 | 3 | 4;
 
 const courseLevels: CourseDto["level"][] = ["Beginner", "Improver", "Intermediate", "Advanced"];
 
@@ -32,6 +32,62 @@ const courseStatuses: Array<{ value: CourseDto["status"]; label: string; descrip
   { value: "active", label: "Aktiv", description: "Kursen pågår." },
   { value: "completed", label: "Avslutad", description: "Kursen är genomförd." },
 ];
+
+const beginnerLevelOneCurriculum: CourseDto["curriculum"] = {
+  purpose:
+    "Introducera absoluta nybörjare till grunderna i Bachata Sensual med fokus på musikalitet, kroppsmekanik, trygghet i grundpositioner och kontrollerade rörelsemönster.",
+  prerequisites: "Inga tidigare danserfarenheter krävs. Nivån är anpassad för absoluta nybörjare.",
+  durationWeeks: 12,
+  lessonDurationMinutes: 60,
+  finalGoals: [
+    "Hitta 1:an och 5:an i bachatamusik och starta dansen på rätt takt.",
+    "Hålla grundtakten 1-2-3-tap solo och i par.",
+    "Förstå stabil men flexibel frame samt grundläggande tension.",
+    "Använda små kontrollerade steg med balans och tydlig viktöverföring.",
+    "Förstå raka, diagonala och kvadratiska rörelsemönster.",
+  ],
+  basicPositions: ["Close position", "Social position", "Open position", "Shadow position"],
+  movementPatterns: [
+    "Raka linjer: fram, bak, vänster och höger.",
+    "Diagonala linjer för positionsbyten och mjukare riktningar.",
+    "Kvadratiska mönster/box patterns för kontroll av tyngdpunkt.",
+  ],
+  soloSkills: [
+    "Grundsteg i sidled",
+    "Rompe adelante",
+    "Cuadrado",
+    "V-step",
+    "Open Basic med höftisolering",
+    "Outside basic",
+    "Paso de Madrid",
+    "Simple turn solo",
+    "Open close-isolering av bröstkorg och höft",
+  ],
+  partnerSkills: [
+    "Close, Social, Open och Shadow position",
+    "Cambio på raka och diagonala linjer",
+    "Completo",
+    "Simple turn i par",
+    "Diagonal Lateral Waves med grundmekanik",
+    "Hip roll med grundläggande isolering",
+    "Pinza och Paseala i geometriska mönster",
+    "Impulso och Slide",
+    "Översiktlig mekanik för Head rolls",
+  ],
+  progressionCriteria:
+    "Eleven är redo för Level 2 när hen visar komfort med isolerade rörelser, kan hålla takten och behärskar grundpositionerna samt rummets axlar.",
+};
+
+function listToText(items: string[]) {
+  return items.join("\n");
+}
+
+function textToList(value: string) {
+  return value
+    .split("\n")
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
 
 function createEmptyCourse(instructors: InstructorDto[]): CourseDto {
   return {
@@ -44,8 +100,9 @@ function createEmptyCourse(instructors: InstructorDto[]): CourseDto {
     techniques: "",
     leadInstructorId: instructors[0]?.id ?? "",
     instructorIds: instructors.slice(0, 2).map((instructor) => instructor.id),
-    plannedLessons: 8,
+    plannedLessons: beginnerLevelOneCurriculum.durationWeeks,
     completedLessons: 0,
+    curriculum: beginnerLevelOneCurriculum,
   };
 }
 
@@ -142,6 +199,46 @@ export function AdminCoursesWorkspace({
       errors.completedLessons = "Genomförda lektioner kan inte vara fler än planerade.";
     }
 
+    if (!draft.curriculum.purpose.trim()) {
+      errors["curriculum.purpose"] = "Huvudsyfte krävs.";
+    }
+
+    if (!draft.curriculum.prerequisites.trim()) {
+      errors["curriculum.prerequisites"] = "Förkunskapskrav krävs.";
+    }
+
+    if (draft.curriculum.durationWeeks < 1) {
+      errors["curriculum.durationWeeks"] = "Kurslängd måste vara minst 1 vecka.";
+    }
+
+    if (draft.curriculum.lessonDurationMinutes < 15) {
+      errors["curriculum.lessonDurationMinutes"] = "Lektionstid måste vara minst 15 minuter.";
+    }
+
+    if (draft.curriculum.finalGoals.length < 1) {
+      errors["curriculum.finalGoals"] = "Lägg till minst ett slutmål.";
+    }
+
+    if (draft.curriculum.basicPositions.length < 1) {
+      errors["curriculum.basicPositions"] = "Lägg till minst en grundposition.";
+    }
+
+    if (draft.curriculum.movementPatterns.length < 1) {
+      errors["curriculum.movementPatterns"] = "Lägg till minst ett rörelsemönster.";
+    }
+
+    if (draft.curriculum.soloSkills.length < 1) {
+      errors["curriculum.soloSkills"] = "Lägg till minst en solo-färdighet.";
+    }
+
+    if (draft.curriculum.partnerSkills.length < 1) {
+      errors["curriculum.partnerSkills"] = "Lägg till minst en par-färdighet.";
+    }
+
+    if (!draft.curriculum.progressionCriteria.trim()) {
+      errors["curriculum.progressionCriteria"] = "Progressionskriterier krävs.";
+    }
+
     return errors;
   }, [draft, instructorById]);
 
@@ -149,9 +246,24 @@ export function AdminCoursesWorkspace({
     1: ["title", "season", "level", "status"],
     2: ["leadInstructorId", "instructorIds"],
     3: ["plannedLessons", "completedLessons", "goal", "techniques"],
+    4: [],
   };
+  const curriculumStepFields = [
+    "curriculum.purpose",
+    "curriculum.prerequisites",
+    "curriculum.durationWeeks",
+    "curriculum.lessonDurationMinutes",
+    "curriculum.finalGoals",
+    "curriculum.basicPositions",
+    "curriculum.movementPatterns",
+    "curriculum.soloSkills",
+    "curriculum.partnerSkills",
+    "curriculum.progressionCriteria",
+  ];
   const isFormValid = Object.keys(formErrors).length === 0;
-  const isCurrentStepValid = stepFields[currentStep].every((field) => !formErrors[field]);
+  const isCurrentStepValid =
+    stepFields[currentStep].every((field) => !formErrors[field]) &&
+    (currentStep !== 4 || curriculumStepFields.every((field) => !formErrors[field]));
   const isEditing = editingCourseId !== null;
   const hasMissingLeadInstructor =
     Boolean(draft.leadInstructorId) && !instructorById.has(draft.leadInstructorId);
@@ -175,6 +287,7 @@ export function AdminCoursesWorkspace({
       ...course,
       instructorIds: getCourseInstructorIds(course),
       techniques: course.techniques ?? "",
+      curriculum: course.curriculum ?? beginnerLevelOneCurriculum,
     });
     setEditingCourseId(course.id);
     setCurrentStep(1);
@@ -203,6 +316,19 @@ export function AdminCoursesWorkspace({
 
   function updateDraft<K extends keyof CourseDto>(key: K, value: CourseDto[K]) {
     setDraft((current) => ({ ...current, [key]: value }));
+  }
+
+  function updateCurriculum<K extends keyof CourseDto["curriculum"]>(
+    key: K,
+    value: CourseDto["curriculum"][K],
+  ) {
+    setDraft((current) => ({
+      ...current,
+      curriculum: {
+        ...current.curriculum,
+        [key]: value,
+      },
+    }));
   }
 
   function updateLeadInstructor(instructorId: string) {
@@ -238,7 +364,7 @@ export function AdminCoursesWorkspace({
 
   function goToNextStep() {
     if (isCurrentStepValid) {
-      setCurrentStep((step) => Math.min(3, step + 1) as CourseWizardStep);
+      setCurrentStep((step) => Math.min(4, step + 1) as CourseWizardStep);
     }
   }
 
@@ -362,6 +488,23 @@ export function AdminCoursesWorkspace({
                 <p className="line-clamp-2 text-[#6c625b]">{course.techniques}</p>
               </div>
 
+              <div className="mt-4 grid grid-cols-3 gap-2 rounded-md bg-[#231f1c]/5 p-3 font-sans text-xs text-[#5f5650]">
+                <div>
+                  <p className="font-bold text-[#231f1c]">{course.curriculum.durationWeeks} veckor</p>
+                  <p className="mt-0.5">Läroplan</p>
+                </div>
+                <div>
+                  <p className="font-bold text-[#231f1c]">{course.curriculum.finalGoals.length} mål</p>
+                  <p className="mt-0.5">Slutmål</p>
+                </div>
+                <div>
+                  <p className="font-bold text-[#231f1c]">
+                    {course.curriculum.soloSkills.length + course.curriculum.partnerSkills.length}
+                  </p>
+                  <p className="mt-0.5">Färdigheter</p>
+                </div>
+              </div>
+
               <div className="mt-4">
                 <div className="mb-2 flex items-center justify-between gap-3 font-sans text-xs font-bold uppercase tracking-[0.12em] text-[#7b6f67]">
                   <span>Lektioner</span>
@@ -432,15 +575,16 @@ export function AdminCoursesWorkspace({
             <div className="min-h-0 space-y-4 overflow-y-auto p-5">
               <div className="rounded-md bg-[#231f1c]/5 p-2">
                 <div className="mb-2 flex items-center justify-between font-sans text-xs font-bold uppercase tracking-[0.14em] text-[#7b6f67]">
-                  <span>Steg {currentStep} av 3</span>
+                  <span>Steg {currentStep} av 4</span>
                   <span>
                     {currentStep === 1 && "Grundinformation"}
                     {currentStep === 2 && "Instruktörer"}
                     {currentStep === 3 && "Kursinnehåll"}
+                    {currentStep === 4 && "Läroplan"}
                   </span>
                 </div>
-                <div className="grid grid-cols-3 gap-2">
-                  {[1, 2, 3].map((step) => (
+                <div className="grid grid-cols-4 gap-2">
+                  {[1, 2, 3, 4].map((step) => (
                     <button
                       key={step}
                       type="button"
@@ -669,6 +813,188 @@ export function AdminCoursesWorkspace({
                   </label>
                 </div>
               )}
+
+              {currentStep === 4 && (
+                <div className="grid gap-4">
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <label className="block">
+                      <span className="font-sans text-xs font-bold uppercase tracking-[0.12em] text-[#7b6f67]">
+                        Kurslängd i veckor
+                      </span>
+                      <input
+                        type="number"
+                        min={1}
+                        value={draft.curriculum.durationWeeks}
+                        onChange={(event) => updateCurriculum("durationWeeks", Number(event.target.value))}
+                        className="mt-1.5 h-10 w-full rounded-md border border-[#231f1c]/15 bg-white px-3 font-sans text-sm outline-none focus:border-[#f26722]"
+                      />
+                      {formErrors["curriculum.durationWeeks"] && (
+                        <p className="mt-1.5 font-sans text-xs font-bold text-red-700">
+                          {formErrors["curriculum.durationWeeks"]}
+                        </p>
+                      )}
+                    </label>
+
+                    <label className="block">
+                      <span className="font-sans text-xs font-bold uppercase tracking-[0.12em] text-[#7b6f67]">
+                        Minuter per lektion
+                      </span>
+                      <input
+                        type="number"
+                        min={15}
+                        value={draft.curriculum.lessonDurationMinutes}
+                        onChange={(event) => updateCurriculum("lessonDurationMinutes", Number(event.target.value))}
+                        className="mt-1.5 h-10 w-full rounded-md border border-[#231f1c]/15 bg-white px-3 font-sans text-sm outline-none focus:border-[#f26722]"
+                      />
+                      {formErrors["curriculum.lessonDurationMinutes"] && (
+                        <p className="mt-1.5 font-sans text-xs font-bold text-red-700">
+                          {formErrors["curriculum.lessonDurationMinutes"]}
+                        </p>
+                      )}
+                    </label>
+                  </div>
+
+                  <label className="block">
+                    <span className="font-sans text-xs font-bold uppercase tracking-[0.12em] text-[#7b6f67]">
+                      Huvudsyfte
+                    </span>
+                    <textarea
+                      value={draft.curriculum.purpose}
+                      onChange={(event) => updateCurriculum("purpose", event.target.value)}
+                      rows={3}
+                      className="mt-1.5 w-full rounded-md border border-[#231f1c]/15 bg-white px-3 py-3 font-sans text-sm leading-6 outline-none focus:border-[#f26722]"
+                    />
+                    {formErrors["curriculum.purpose"] && (
+                      <p className="mt-1.5 font-sans text-xs font-bold text-red-700">
+                        {formErrors["curriculum.purpose"]}
+                      </p>
+                    )}
+                  </label>
+
+                  <label className="block">
+                    <span className="font-sans text-xs font-bold uppercase tracking-[0.12em] text-[#7b6f67]">
+                      Förkunskapskrav
+                    </span>
+                    <textarea
+                      value={draft.curriculum.prerequisites}
+                      onChange={(event) => updateCurriculum("prerequisites", event.target.value)}
+                      rows={2}
+                      className="mt-1.5 w-full rounded-md border border-[#231f1c]/15 bg-white px-3 py-3 font-sans text-sm leading-6 outline-none focus:border-[#f26722]"
+                    />
+                    {formErrors["curriculum.prerequisites"] && (
+                      <p className="mt-1.5 font-sans text-xs font-bold text-red-700">
+                        {formErrors["curriculum.prerequisites"]}
+                      </p>
+                    )}
+                  </label>
+
+                  <div className="grid gap-4 lg:grid-cols-2">
+                    <label className="block">
+                      <span className="font-sans text-xs font-bold uppercase tracking-[0.12em] text-[#7b6f67]">
+                        Slutmål
+                      </span>
+                      <textarea
+                        value={listToText(draft.curriculum.finalGoals)}
+                        onChange={(event) => updateCurriculum("finalGoals", textToList(event.target.value))}
+                        rows={7}
+                        className="mt-1.5 w-full rounded-md border border-[#231f1c]/15 bg-white px-3 py-3 font-sans text-sm leading-6 outline-none focus:border-[#f26722]"
+                      />
+                      {formErrors["curriculum.finalGoals"] && (
+                        <p className="mt-1.5 font-sans text-xs font-bold text-red-700">
+                          {formErrors["curriculum.finalGoals"]}
+                        </p>
+                      )}
+                    </label>
+
+                    <label className="block">
+                      <span className="font-sans text-xs font-bold uppercase tracking-[0.12em] text-[#7b6f67]">
+                        Grundpositioner
+                      </span>
+                      <textarea
+                        value={listToText(draft.curriculum.basicPositions)}
+                        onChange={(event) => updateCurriculum("basicPositions", textToList(event.target.value))}
+                        rows={7}
+                        className="mt-1.5 w-full rounded-md border border-[#231f1c]/15 bg-white px-3 py-3 font-sans text-sm leading-6 outline-none focus:border-[#f26722]"
+                      />
+                      {formErrors["curriculum.basicPositions"] && (
+                        <p className="mt-1.5 font-sans text-xs font-bold text-red-700">
+                          {formErrors["curriculum.basicPositions"]}
+                        </p>
+                      )}
+                    </label>
+                  </div>
+
+                  <label className="block">
+                    <span className="font-sans text-xs font-bold uppercase tracking-[0.12em] text-[#7b6f67]">
+                      Rörelsemönster och geometri
+                    </span>
+                    <textarea
+                      value={listToText(draft.curriculum.movementPatterns)}
+                      onChange={(event) => updateCurriculum("movementPatterns", textToList(event.target.value))}
+                      rows={4}
+                      className="mt-1.5 w-full rounded-md border border-[#231f1c]/15 bg-white px-3 py-3 font-sans text-sm leading-6 outline-none focus:border-[#f26722]"
+                    />
+                    {formErrors["curriculum.movementPatterns"] && (
+                      <p className="mt-1.5 font-sans text-xs font-bold text-red-700">
+                        {formErrors["curriculum.movementPatterns"]}
+                      </p>
+                    )}
+                  </label>
+
+                  <div className="grid gap-4 lg:grid-cols-2">
+                    <label className="block">
+                      <span className="font-sans text-xs font-bold uppercase tracking-[0.12em] text-[#7b6f67]">
+                        Solo-färdigheter
+                      </span>
+                      <textarea
+                        value={listToText(draft.curriculum.soloSkills)}
+                        onChange={(event) => updateCurriculum("soloSkills", textToList(event.target.value))}
+                        rows={9}
+                        className="mt-1.5 w-full rounded-md border border-[#231f1c]/15 bg-white px-3 py-3 font-sans text-sm leading-6 outline-none focus:border-[#f26722]"
+                      />
+                      {formErrors["curriculum.soloSkills"] && (
+                        <p className="mt-1.5 font-sans text-xs font-bold text-red-700">
+                          {formErrors["curriculum.soloSkills"]}
+                        </p>
+                      )}
+                    </label>
+
+                    <label className="block">
+                      <span className="font-sans text-xs font-bold uppercase tracking-[0.12em] text-[#7b6f67]">
+                        Par-färdigheter
+                      </span>
+                      <textarea
+                        value={listToText(draft.curriculum.partnerSkills)}
+                        onChange={(event) => updateCurriculum("partnerSkills", textToList(event.target.value))}
+                        rows={9}
+                        className="mt-1.5 w-full rounded-md border border-[#231f1c]/15 bg-white px-3 py-3 font-sans text-sm leading-6 outline-none focus:border-[#f26722]"
+                      />
+                      {formErrors["curriculum.partnerSkills"] && (
+                        <p className="mt-1.5 font-sans text-xs font-bold text-red-700">
+                          {formErrors["curriculum.partnerSkills"]}
+                        </p>
+                      )}
+                    </label>
+                  </div>
+
+                  <label className="block">
+                    <span className="font-sans text-xs font-bold uppercase tracking-[0.12em] text-[#7b6f67]">
+                      Bedömning och progression
+                    </span>
+                    <textarea
+                      value={draft.curriculum.progressionCriteria}
+                      onChange={(event) => updateCurriculum("progressionCriteria", event.target.value)}
+                      rows={3}
+                      className="mt-1.5 w-full rounded-md border border-[#231f1c]/15 bg-white px-3 py-3 font-sans text-sm leading-6 outline-none focus:border-[#f26722]"
+                    />
+                    {formErrors["curriculum.progressionCriteria"] && (
+                      <p className="mt-1.5 font-sans text-xs font-bold text-red-700">
+                        {formErrors["curriculum.progressionCriteria"]}
+                      </p>
+                    )}
+                  </label>
+                </div>
+              )}
             </div>
 
             <div className="flex flex-col-reverse gap-2 border-t border-[#231f1c]/10 bg-[#fbf9f6] px-5 py-4 sm:flex-row sm:justify-end">
@@ -690,7 +1016,7 @@ export function AdminCoursesWorkspace({
                   Föregående
                 </button>
               )}
-              {currentStep < 3 && (
+              {currentStep < 4 && (
                 <button
                   type="button"
                   onClick={goToNextStep}
@@ -700,7 +1026,7 @@ export function AdminCoursesWorkspace({
                   Nästa
                 </button>
               )}
-              {currentStep === 3 && (
+              {currentStep === 4 && (
                 <button
                   type="button"
                   onClick={saveCourse}
