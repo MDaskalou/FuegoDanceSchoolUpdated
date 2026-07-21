@@ -1,7 +1,7 @@
 {
   "schedulePreamble": "Autumn Schedule 2026",
   "scheduleTitle": "Weekly Schedule",
-  "openHouseInfo": "OPEN HOUSE WEEK 35 · 24 Aug - 30 Aug 2026",
+  "openHouseInfo": "OPEN HOUSE WEEK 36 - COURSE START WEEK 37",
   "scheduleImageAlt": "Background image of dancing couples at Fuego Dance School",
   "dayMonday": "Monday",
   "dayTuesday": "Tuesday",
@@ -18,110 +18,18 @@
   "noteGuidedSocialPrise": "150kr solo, 200kr couple",
   "noteLevel5Max": "Maximum 8 couples",
   "courses": [
-    {
-      "dayKey": "dayMonday",
-      "time": "18:00 - 19:00",
-      "name": "Level 4 Technique",
-      "instructors": "Mikael & Josefine",
-      "isNew": false,
-      "isDropIn": false
-    },
-    {
-      "dayKey": "dayMonday",
-      "time": "19:05 - 20:05",
-      "name": "Level 4",
-      "instructors": "Mikael & Josefine",
-      "isNew": false,
-      "isDropIn": false
-    },
-    {
-      "dayKey": "dayMonday",
-      "time": "20:10 - 21:10",
-      "name": "Footwork",
-      "instructors": "Mikael",
-      "isNew": false,
-      "isDropIn": false
-    },
-    {
-      "dayKey": "dayTuesday",
-      "time": "18:00 - 19:00",
-      "name": "Level 1",
-      "instructors": "Feras & Josefine",
-      "isNew": false,
-      "isDropIn": false
-    },
-    {
-      "dayKey": "dayTuesday",
-      "time": "19:05 - 20:05",
-      "name": "Advanced Foundation",
-      "instructors": "Mikael",
-      "isNew": false,
-      "isDropIn": false
-    },
-    {
-      "dayKey": "dayTuesday",
-      "time": "20:10 - 21:10",
-      "name": "Level 2",
-      "instructors": "Mikael & Ines",
-      "isNew": false,
-      "isDropIn": false
-    },
-    {
-      "dayKey": "dayWednesday",
-      "time": "18:00 - 19:00",
-      "name": "Level 3",
-      "instructors": "Andris & Emman",
-      "isNew": false,
-      "isDropIn": false
-    },
-    {
-      "dayKey": "dayWednesday",
-      "time": "19:05 - 20:05",
-      "name": "Level 3 Technique",
-      "instructors": "Nora & Sisco",
-      "isNew": false,
-      "isDropIn": false
-    },
-    {
-      "dayKey": "dayWednesday",
-      "time": "20:10 - 21:10",
-      "name": "Rolerotation",
-      "instructors": "Nora & Sisco",
-      "isNew": false,
-      "isDropIn": false
-    },
-    {
-      "dayKey": "dayThursday",
-      "time": "18:00 - 19:00",
-      "name": "Raminta styling feminine touch",
-      "instructors": "Raminta",
-      "isNew": false,
-      "isDropIn": false
-    },
-    {
-      "dayKey": "dayThursday",
-      "time": "19:00 - 21:00",
-      "name": "Level 5",
-      "instructors": "Mikael",
-      "noteKey": "noteLevel5Max",
-      "isNew": false,
-      "isDropIn": false
-    },
-    {
-      "dayKey": "daySunday",
-      "time": "14:00 - 15:00",
-      "name": "Level 5",
-      "instructors": "Mikael",
-      "isNew": false,
-      "isDropIn": false
-    },
-    {
-      "dayKey": "daySunday",
-      "time": "15:00 - 18:00",
-      "name": "Guided Social Dance",
-      "instructors": "100% Bachata",
-      "isNew": false,
-      "isDropIn": false
-    }
+    { "dayKey": "dayMonday", "time": "18:00 - 19:00", "name": "Level 4 Technique", "instructors": "Mikael & Josefine", "isNew": false, "isDropIn": false },
+    { "dayKey": "dayMonday", "time": "19:05 - 20:05", "name": "Level 4", "instructors": "Mikael & Josefine", "isNew": false, "isDropIn": false },
+    { "dayKey": "dayMonday", "time": "20:10 - 21:10", "name": "Footwork", "instructors": "Mikael", "isNew": false, "isDropIn": false },
+    { "dayKey": "dayTuesday", "time": "18:00 - 19:00", "name": "Level 1", "instructors": "Feras & Josefine", "isNew": false, "isDropIn": false },
+    { "dayKey": "dayTuesday", "time": "19:05 - 20:05", "name": "Adv.Foundation", "instructors": "Mikael", "isNew": false, "isDropIn": false },
+    { "dayKey": "dayTuesday", "time": "20:10 - 21:10", "name": "Level 2", "instructors": "Mikael & Inés", "isNew": false, "isDropIn": false },
+    { "dayKey": "dayWednesday", "time": "18:00 - 19:00", "name": "Level 3", "instructors": "Andris & Emma", "isNew": false, "isDropIn": false },
+    { "dayKey": "dayWednesday", "time": "19:05 - 20:05", "name": "Level 3 Technique", "instructors": "Nora & Sisco", "isNew": false, "isDropIn": false },
+    { "dayKey": "dayWednesday", "time": "20:10 - 21:10", "name": "Rolerotation", "subtitle": "Beginners", "instructors": "Nora & Sisco", "isNew": false, "isDropIn": false },
+    { "dayKey": "dayThursday", "time": "18:00 - 19:00", "name": "Raminta's Styling", "instructors": "Raminta", "isNew": false, "isDropIn": false },
+    { "dayKey": "dayThursday", "time": "19:00 - 21:00", "name": "Level 5", "subtitle": "Closed group", "instructors": "Mikael", "noteKey": "noteLevel5Max", "isNew": false, "isDropIn": false },
+    { "dayKey": "daySunday", "time": "13:00 - 14:00", "name": "Level 5 Practice", "subtitle": "Closed group", "instructors": "Mikael", "isNew": false, "isDropIn": false },
+    { "dayKey": "daySunday", "time": "15:00 - 18:00", "name": "Guided Social Dance", "instructors": "100% Bachata", "isNew": false, "isDropIn": false }
   ]
 }

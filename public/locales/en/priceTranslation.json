@@ -12,16 +12,13 @@
   "bonusIncluded": "Guided Social Dance included",
   "memberDropInDiscount": "50% discount for Fuego members",
   "savingPrefix": "save",
-
+  "dropInCta": "Buy drop-in",
   "courseLabelSingular": "course",
   "courseLabelPlural": "courses",
   "dropInNote": "Applies to Guided Social Dance. Limited to max 20 couples.",
   "socialDanceLabel": "Social dance",
   "dropInSolo": "Solo",
   "dropInCouple": "Couple",
-  "dropInPackageSolo": "Solo package - 12 sessions",
-  "dropInPackageCouple": "Couple package - 12 sessions",
-
   "courses": [
     { "count": 1, "price": 1600, "popular": false },
     { "count": 2, "price": 2800, "popular": true, "saving": 400 },
@@ -31,8 +28,6 @@
   ],
   "dropInItems": [
     { "labelKey": "dropInSolo", "price": 150, "isSocial": false },
-    { "labelKey": "dropInCouple", "price": 200, "isSocial": false },
-    { "labelKey": "dropInPackageSolo", "price": 1300, "saving": 500, "isSocial": false, "highlighted": true },
-    { "labelKey": "dropInPackageCouple", "price": 1900, "saving": 500, "isSocial": false, "highlighted": true }
+    { "labelKey": "dropInCouple", "price": 200, "isSocial": false }
   ]
 }

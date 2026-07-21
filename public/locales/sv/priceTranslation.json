@@ -12,16 +12,13 @@
   "bonusIncluded": "Guided Social Dance ingår",
   "memberDropInDiscount": "50% rabatt till Fuego-medlemmar",
   "savingPrefix": "du sparar",
-
+  "dropInCta": "Köp drop-in",
   "courseLabelSingular": "kurs",
   "courseLabelPlural": "kurser",
   "dropInNote": "Gäller Guided Social Dance. Begränsat till max 20 par.",
   "socialDanceLabel": "Social dans",
   "dropInSolo": "Solo",
   "dropInCouple": "Par",
-  "dropInPackageSolo": "Paket solo - 12 tillfällen",
-  "dropInPackageCouple": "Paket par - 12 tillfällen",
-
   "courses": [
     { "count": 1, "price": 1600, "popular": false },
     { "count": 2, "price": 2800, "popular": true, "saving": 400 },
@@ -31,8 +28,6 @@
   ],
   "dropInItems": [
     { "labelKey": "dropInSolo", "price": 150, "isSocial": false },
-    { "labelKey": "dropInCouple", "price": 200, "isSocial": false },
-    { "labelKey": "dropInPackageSolo", "price": 1300, "saving": 500, "isSocial": false, "highlighted": true },
-    { "labelKey": "dropInPackageCouple", "price": 1900, "saving": 500, "isSocial": false, "highlighted": true }
+    { "labelKey": "dropInCouple", "price": 200, "isSocial": false }
   ]
 }

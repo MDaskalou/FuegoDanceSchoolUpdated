@@ -28,9 +28,9 @@
 
   "courseOptions": [
     "Level 1", "Level 2", "Level 3", "Level 3 Technique",
-    "Level 4", "Level 4 Technique", "Level 4 Technique (Isolations)",
+    "Level 4", "Level 4 Technique",
     "Ramintas Styling", "Role Rotation", "Advanced Foundation",
-    "Footwork", "Contemporary", "Mini Fuego"
+    "Footwork"
   ],
   "roleOptions": [
     "Select an option", "Lead", "Follow"
