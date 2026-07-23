@@ -58,7 +58,7 @@ export const BootcampFeature = () => {
         ? allEvents.find((event) => event.id === 9)
         : undefined;
     const countdown = useCountdown(
-        `${beginnerEvent?.startDate ?? "2026-06-27"}T12:00:00`
+        `${beginnerEvent?.startDate ?? "2026-08-04"}T18:30:00`
     );
     const isEnglish = i18n.language.startsWith("en");
 
@@ -87,8 +87,8 @@ export const BootcampFeature = () => {
                     <span className="h-px w-10 bg-orange-500" />
                     <span className="text-xs font-bold uppercase tracking-[0.3em] text-orange-500">
                         {isEnglish
-                            ? "Featured event · June 2026"
-                            : "Utvalt event · Juni 2026"}
+                            ? "Featured event · August 2026"
+                            : "Utvalt event · Augusti 2026"}
                     </span>
                 </div>
 
@@ -98,27 +98,15 @@ export const BootcampFeature = () => {
                             inView ? "translate-x-0 opacity-100" : "-translate-x-10 opacity-0"
                         }`}
                     >
-                        <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl bg-[#f8e9d8] shadow-[0_30px_80px_rgba(0,0,0,0.7)]">
+                        <div className="relative aspect-[2/3] w-full overflow-hidden rounded-3xl bg-[#f8e9d8] shadow-[0_30px_80px_rgba(0,0,0,0.7)]">
                             <Image
                                 src={beginnerEvent.imageUrl}
                                 alt={beginnerEvent.title}
                                 fill
                                 sizes="(max-width: 1024px) 100vw, 50vw"
-                                className="object-contain transition-transform duration-700 hover:scale-105"
+                                className="object-cover transition-transform duration-700 hover:scale-105"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
-
-                            <div className="absolute left-5 top-5 rounded-full border border-white/10 bg-black/60 px-4 py-2 backdrop-blur-sm">
-                                <span className="text-xs font-bold uppercase tracking-wider text-white">
-                                    {isEnglish
-                                        ? "No experience required"
-                                        : "Inga förkunskaper krävs"}
-                                </span>
-                            </div>
-
-                            <div className="absolute right-5 top-5 rounded-full bg-orange-500 px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-white shadow-lg">
-                                {isEnglish ? "New" : "Nytt"}
-                            </div>
                         </div>
 
                         <div
@@ -138,8 +126,8 @@ export const BootcampFeature = () => {
                             </h2>
                             <p className="mt-1 font-serif text-3xl italic text-orange-400 sm:text-4xl">
                                 {isEnglish
-                                    ? "Bachata Sensual · 3 hours"
-                                    : "Bachata Sensual · 3 timmar"}
+                                    ? "Bachata Sensual · 2 hours"
+                                    : "Bachata Sensual · 2 timmar"}
                             </p>
                         </div>
 

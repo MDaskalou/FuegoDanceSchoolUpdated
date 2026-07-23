@@ -80,23 +80,22 @@
     },
     {
       "id": 9,
-      "title": "Beginner Workshop",
-      "date": "June 27, 2026",
-      "startDate": "2026-06-27",
-      "location": "Fuego Dance School",
-      "link": "https://app.coursely.se/fuego-dance-school/activity/bachata-beginner",
-      "imageUrl": "/img/Events/BeginnerWorkshopJune.png",
-      "imageFit": "contain",
+      "title": "Bachata Sensual – Beginner Course",
+      "date": "August 4, 2026",
+      "startDate": "2026-08-04",
+      "location": "Guldheden, Gothenburg",
+      "link": "https://app.coursely.se/fuego-dance-school/activity/nyborjarworkshop-bachata",
+      "imageUrl": "/img/Events/BachataSensualBeginnerAugustFeatured.jpg",
+      "imageFit": "cover",
       "isNew": true,
       "priority": 1,
       "price": "199 SEK",
-      "time": "12:00–15:00",
+      "time": "18:30–20:30",
       "description": [
-        "Welcome to our exciting event where the joy of dancing takes center stage!",
-        "What will you learn? During these 3 hours, you will get an introduction to bachata. We focus on the fundamentals and give you the tools to express yourself through movement.",
-        "Who is it for? The event is suitable for all curious dancers, regardless of age or previous experience.",
-        "Practical information: Location: Fuego Dance School. Date and time: June 27, 12:00–15:00. Number of sessions: 1. Price: 199 SEK.",
-        "Please note: Registration is binding."
+        "Learn the fundamentals of Bachata Sensual in this two-hour beginner course.",
+        "No previous experience is required – this course is for anyone who wants to try bachata from the beginning.",
+        "Join us on Tuesday, August 4, from 18:30–20:30 in Guldheden, Gothenburg.",
+        "Price: 199 SEK."
       ]
     }
 
