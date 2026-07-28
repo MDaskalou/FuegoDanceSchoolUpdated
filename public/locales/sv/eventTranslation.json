@@ -95,6 +95,62 @@
         "Vi ses tisdagen den 4 augusti kl. 18:30–20:30 i Guldheden, Göteborg.",
         "Pris: 199 kr."
       ]
+    },
+    {
+      "id": 10,
+      "title": "Summer Bootcamp Level 4",
+      "date": "10 & 23 augusti 2026",
+      "startDate": "2026-08-10",
+      "location": "Doktor Westrings Gata 14D, Göteborg",
+      "link": "https://app.coursely.se/fuego-dance-school/activity/hosttermin-2026-summer-workshop-level-4",
+      "imageUrl": "/img/Events/SummerBootcampLevel4.jpg",
+      "isNew": true,
+      "priority": 4,
+      "price": "199 kr",
+      "time": "10 aug 18:30–20:30 · 23 aug 15:00–17:00",
+      "description": "Fyra timmars Bachata Sensual-bootcamp för level 4 med två timmar kombinationer och två timmar teknik."
+    },
+    {
+      "id": 11,
+      "title": "Summer Bootcamp Level 2",
+      "date": "11 & 18 augusti 2026",
+      "startDate": "2026-08-11",
+      "location": "Doktor Westrings Gata 14D, Göteborg",
+      "link": "https://app.coursely.se/fuego-dance-school/activity/hosttermin-2026-summer-workshop-level-2",
+      "imageUrl": "/img/Events/SummerBootcampLevel2.jpg",
+      "isNew": true,
+      "priority": 2,
+      "price": "199 kr",
+      "time": "18:30–20:30",
+      "description": "Fyra timmars Bachata Sensual-bootcamp för level 2 med två timmar kombinationer och två timmar teknik."
+    },
+    {
+      "id": 12,
+      "title": "Summer Bootcamp Level 3",
+      "date": "12 & 19 augusti 2026",
+      "startDate": "2026-08-12",
+      "location": "Doktor Westrings Gata 14D, Göteborg",
+      "link": "https://app.coursely.se/fuego-dance-school/activity/hosttermin-2026-summer-workshop-level-3",
+      "imageUrl": "/img/Events/SummerBootcampLevel3.jpg",
+      "isNew": true,
+      "priority": 3,
+      "price": "199 kr",
+      "time": "18:30–20:30",
+      "description": "Fyra timmars Bachata Sensual-bootcamp för level 3 med två timmar kombinationer och två timmar teknik."
+    },
+    {
+      "id": 13,
+      "title": "Summer Bootcamp Level Solo",
+      "date": "13 & 20 augusti 2026",
+      "startDate": "2026-08-13",
+      "location": "Doktor Westrings Gata 14D, Göteborg",
+      "link": "https://app.coursely.se/fuego-dance-school/activity/hosttermin-2026-summer-workshop-solo",
+      "imageUrl": "/img/Events/SummerBootcampSolo.jpg",
+      "isNew": true,
+      "priority": 5,
+      "price": "199 kr",
+      "time": "18:30–20:30",
+      "description": "Fyra timmars Bachata Sensual solo-bootcamp med Ramintas styling och footwork."
     }
   ],
   "__MALL_events_SPARA_FOR_SENARE": [
