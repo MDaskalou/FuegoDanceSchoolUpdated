@@ -1,10 +1,19 @@
-﻿{
+{
   "consentTitle": "Vi hanterar data för din upplevelse",
-  "consentDescription1": "Viss datahantering är nödvändig för att säkerställa att vår tjänst fungerar, vilket innebär att vi använder spårningstekniker såsom cookies. Du kan välja att tillåta ytterligare datahantering som används för att förbättra tjänsten med mer relevant innehåll, anpassad efter dig.",
-  "consentDescription2": "Utöver detta kan du välja att tillåta datahantering av partners som vi samarbetar med.",
-  "consentDescription3": "Du har möjlighet att när som helst ändra eller återkalla ditt medgivande. Detta gör du under Inställningar i tjänsten.",
+  "customizeTitle": "Anpassa dina val",
+  "consentDescription1": "Viss datahantering är nödvändig för att säkerställa att vår tjänst fungerar. Vi använder cookies och liknande tekniker. Du kan välja att tillåta ytterligare datahantering för analys och relevant innehåll.",
+  "consentDescription2": "Utöver detta kan du välja att tillåta datahantering av partners som vi samarbetar med för marknadsföring.",
+  "consentDescription3": "Du kan när som helst ändra eller återkalla ditt samtycke via länken Cookie-inställningar i sidfoten.",
   "policyLink": "Vår policy för kakor och spårningstekniker",
   "acceptNecessary": "Tillåt nödvändiga",
   "customize": "Anpassa",
-  "acceptAll": "Tillåt alla"
+  "acceptAll": "Tillåt alla",
+  "back": "Tillbaka",
+  "savePreferences": "Spara mina val",
+  "necessaryTitle": "Nödvändiga",
+  "necessaryDescription": "Krävs för att sidan ska fungera.",
+  "analyticsTitle": "Analys & Statistik",
+  "analyticsDescription": "Hjälper oss förbättra upplevelsen.",
+  "marketingTitle": "Marknadsföring",
+  "marketingDescription": "För relevant annonsering."
 }

@@ -71,7 +71,7 @@ const i18nNamespaces = [
     'navbarTranslation',
     'footerTranslation',
     'bookingCompleteTranslation',
-    'cookieConsentTranslation',
+    'cookieTranslation',
     'aboutTranslation',
     'openhouseTranslation',
     'featureTranslation',];

@@ -1,0 +1,46 @@
+{
+  "title": "Privacy Policy & Cookies",
+  "lastUpdated": "Last updated: 14 August 2026",
+  "sections": {
+    "controller": {
+      "title": "1. Data controller",
+      "body": "The data controller for processing on this website is FuegoDS AB, org. no. 559325-8550, Doktor Allards Gata 68, Gothenburg, Sweden. Contact: info@fuegodanceschool.se."
+    },
+    "cookies": {
+      "title": "2. What are cookies?",
+      "body": "A cookie is a small text file that the website you visit asks to store on your computer, tablet or phone. Cookies and similar technologies are used to provide functionality and, if you consent, for analytics and marketing."
+    },
+    "howWeUse": {
+      "title": "3. How we use cookies",
+      "intro": "We use cookies in three categories:",
+      "necessaryLabel": "Necessary",
+      "necessary": "Required for the website to work technically, for example remembering your consent choice (stored in the browser’s localStorage).",
+      "analyticsLabel": "Analytics & performance",
+      "analytics": "With your consent we use tools such as Google Analytics via Google Tag Manager to understand how visitors use the site and improve content.",
+      "marketingLabel": "Marketing",
+      "marketing": "With your consent, cookies may be used for relevant advertising on other platforms based on your visit to us."
+    },
+    "tools": {
+      "title": "4. Tools and third parties",
+      "body": "We use Google Tag Manager (GTM-5TDBRW66) to load measurement and marketing tools, including Google Analytics and any Google advertising services. The provider is Google Ireland Limited / Google LLC. Data may be transferred outside the EU/EEA; Google then uses appropriate safeguards under applicable rules."
+    },
+    "legalBasis": {
+      "title": "5. Legal basis",
+      "body": "Necessary cookies and storage required for operation are based on our legitimate interest in providing a working website. Analytics and marketing cookies are based on your consent, which you can give, change or withdraw via the cookie banner."
+    },
+    "manage": {
+      "title": "6. Managing your settings",
+      "body": "You can change or withdraw your consent at any time via the Cookie settings link in the footer. This reopens the cookie banner. Your choice is stored locally in your browser (localStorage), not as a regular cookie."
+    },
+    "rights": {
+      "title": "7. Your rights",
+      "body": "Under the GDPR you have rights including access, rectification, erasure, restriction, objection and data portability where applicable. You may also lodge a complaint with the Swedish Authority for Privacy Protection (IMY), www.imy.se."
+    },
+    "contact": {
+      "title": "8. Contact",
+      "body": "If you have questions about cookies or personal data, please contact us.",
+      "email": "Email: info@fuegodanceschool.se",
+      "location": "Location: Gothenburg, Sweden"
+    }
+  }
+}

@@ -4,6 +4,7 @@ import React, { FormEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 import { FaMapMarkerAlt, FaEnvelope, FaInstagram, FaFacebook } from 'react-icons/fa';
+import { openCookieSettings } from '@/components/CookieConsent';
 
 export const Footer = () => {
     const { t, i18n } = useTranslation("footerTranslation");
@@ -165,9 +166,26 @@ export const Footer = () => {
 
                 </div>
 
-                {/* Copyright */}
-                <div className="text-center pt-8 text-sm text-gray-500">
-                    {t('copyright', { year: currentYear, defaultValue: `© ${currentYear} Fuego Dance School. All rights reserved.` })}
+                {/* Copyright + legal links */}
+                <div className="flex flex-col items-center gap-3 pt-8 text-sm text-gray-500 sm:flex-row sm:justify-between">
+                    <p>
+                        {t('copyright', { year: currentYear, defaultValue: `© ${currentYear} Fuego Dance School. All rights reserved.` })}
+                    </p>
+                    <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+                        <Link
+                            href={`/${currentLang}/privacy-policy/`}
+                            className="transition-colors hover:text-white"
+                        >
+                            {t('privacyPolicy', { defaultValue: 'Integritetspolicy' })}
+                        </Link>
+                        <button
+                            type="button"
+                            onClick={() => openCookieSettings()}
+                            className="transition-colors hover:text-white"
+                        >
+                            {t('cookieSettings', { defaultValue: 'Cookie-inställningar' })}
+                        </button>
+                    </div>
                 </div>
 
             </div>

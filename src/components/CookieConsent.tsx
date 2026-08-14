@@ -1,10 +1,9 @@
 ﻿"use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import Link from 'next/link';
+import Link from "next/link";
 
-// Typ-definitioner för TypeScript
 declare global {
     interface Window {
         dataLayer: any[];
@@ -12,240 +11,292 @@ declare global {
     }
 }
 
-export default function CookieConsent() {
-    const { t } = useTranslation("cookieTranslation");
-    const [isVisible, setIsVisible] = useState(false);
+export const OPEN_COOKIE_SETTINGS_EVENT = "open-cookie-settings";
 
-    // State för att visa detaljvyn (Anpassa)
-    const [showDetails, setShowDetails] = useState(false);
+export type CookiePreferences = {
+    analytics: boolean;
+    marketing: boolean;
+};
 
-    // State för användarens val (checkboxar)
-    const [preferences, setPreferences] = useState({
-        analytics: false,
-        marketing: false
+export type ConsentLevel = "all" | "necessary" | "custom";
+
+const CONSENT_KEY = "cookieConsent";
+const PREFERENCES_KEY = "cookiePreferences";
+
+const defaultPreferences: CookiePreferences = {
+    analytics: false,
+    marketing: false,
+};
+
+export function openCookieSettings() {
+    if (typeof window === "undefined") return;
+    window.dispatchEvent(new Event(OPEN_COOKIE_SETTINGS_EVENT));
+}
+
+const readStoredPreferences = (): CookiePreferences => {
+    try {
+        const raw = localStorage.getItem(PREFERENCES_KEY);
+        if (!raw) return { ...defaultPreferences };
+        const parsed = JSON.parse(raw) as Partial<CookiePreferences>;
+        return {
+            analytics: Boolean(parsed.analytics),
+            marketing: Boolean(parsed.marketing),
+        };
+    } catch {
+        return { ...defaultPreferences };
+    }
+};
+
+const preferencesFromLevel = (level: ConsentLevel): CookiePreferences => {
+    if (level === "all") return { analytics: true, marketing: true };
+    if (level === "necessary") return { analytics: false, marketing: false };
+    return readStoredPreferences();
+};
+
+const updateGtm = (
+    adState: "granted" | "denied",
+    analyticsState: "granted" | "denied"
+) => {
+    const gtag =
+        window.gtag ||
+        function (...args: any[]) {
+            (window.dataLayer = window.dataLayer || []).push(args);
+        };
+
+    gtag("consent", "update", {
+        ad_storage: adState,
+        analytics_storage: analyticsState,
+        ad_user_data: adState,
+        ad_personalization: adState,
+        personalization_storage: analyticsState,
+        functionality_storage: "granted",
+        security_storage: "granted",
     });
 
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: "consent_update" });
+};
+
+const applyPreferencesToGtm = (preferences: CookiePreferences) => {
+    updateGtm(
+        preferences.marketing ? "granted" : "denied",
+        preferences.analytics ? "granted" : "denied"
+    );
+};
+
+const persistConsent = (level: ConsentLevel, preferences: CookiePreferences) => {
+    localStorage.setItem(CONSENT_KEY, level);
+    localStorage.setItem(PREFERENCES_KEY, JSON.stringify(preferences));
+};
+
+export default function CookieConsent() {
+    const { t, i18n } = useTranslation("cookieTranslation");
+    const [isVisible, setIsVisible] = useState(false);
+    const [showDetails, setShowDetails] = useState(false);
+    const [preferences, setPreferences] = useState<CookiePreferences>(defaultPreferences);
+
+    const restoreConsent = useCallback(() => {
+        const consent = localStorage.getItem(CONSENT_KEY) as ConsentLevel | null;
+        if (!consent) return false;
+
+        const nextPreferences = preferencesFromLevel(consent);
+        setPreferences(nextPreferences);
+        applyPreferencesToGtm(nextPreferences);
+        return true;
+    }, []);
+
+    const openSettings = useCallback(() => {
+        const consent = localStorage.getItem(CONSENT_KEY) as ConsentLevel | null;
+        const nextPreferences = consent
+            ? preferencesFromLevel(consent)
+            : { ...defaultPreferences };
+        setPreferences(nextPreferences);
+        setShowDetails(true);
+        setIsVisible(true);
+    }, []);
+
     useEffect(() => {
-        const gtag = window.gtag || function(...args: any[]){ (window.dataLayer = window.dataLayer || []).push(args); };
-        const consent = localStorage.getItem('cookieConsent');
+        const consent = localStorage.getItem(CONSENT_KEY);
 
         if (!consent) {
             const timer = setTimeout(() => setIsVisible(true), 0);
             return () => clearTimeout(timer);
-        } else {
-            // Återställ consent vid sidladdning baserat på sparad nivå
-            if (consent === 'all') {
-                gtag('consent', 'update', {
-                    'ad_storage': 'granted',
-                    'analytics_storage': 'granted',
-                    'ad_user_data': 'granted',
-                    'ad_personalization': 'granted',
-                    'personalization_storage': 'granted'
-                });
-            } else if (consent === 'necessary') {
-                gtag('consent', 'update', {
-                    'ad_storage': 'denied',
-                    'analytics_storage': 'denied',
-                    'ad_user_data': 'denied',
-                    'ad_personalization': 'denied',
-                    'personalization_storage': 'denied'
-                });
-            } else if (consent === 'custom') {
-                // Här kan man bygga ut logik för att läsa specifika sparade val från localStorage
-                // För säkerhets skull sätter vi 'denied' som default om ingen specifik logik finns
-            }
         }
-    }, []);
 
-    // Hantera checkbox-klick
-    const togglePreference = (key: keyof typeof preferences) => {
-        setPreferences(prev => ({ ...prev, [key]: !prev[key] }));
+        restoreConsent();
+    }, [restoreConsent]);
+
+    useEffect(() => {
+        const handler = () => openSettings();
+        window.addEventListener(OPEN_COOKIE_SETTINGS_EVENT, handler);
+        return () => window.removeEventListener(OPEN_COOKIE_SETTINGS_EVENT, handler);
+    }, [openSettings]);
+
+    const togglePreference = (key: keyof CookiePreferences) => {
+        setPreferences((prev) => ({ ...prev, [key]: !prev[key] }));
     };
 
     const handleAcceptAll = () => {
-        updateGtm('granted', 'granted');
-        localStorage.setItem('cookieConsent', 'all');
+        const next = { analytics: true, marketing: true };
+        applyPreferencesToGtm(next);
+        persistConsent("all", next);
+        setPreferences(next);
         setIsVisible(false);
+        setShowDetails(false);
     };
 
     const handleAcceptNecessary = () => {
-        updateGtm('denied', 'denied');
-        localStorage.setItem('cookieConsent', 'necessary');
+        const next = { analytics: false, marketing: false };
+        applyPreferencesToGtm(next);
+        persistConsent("necessary", next);
+        setPreferences(next);
         setIsVisible(false);
+        setShowDetails(false);
     };
 
     const handleSaveCustom = () => {
-        // Mappar checkboxar till GTM-signaler
-        const adState = preferences.marketing ? 'granted' : 'denied';
-        const analyticsState = preferences.analytics ? 'granted' : 'denied';
-
-        updateGtm(adState, analyticsState);
-        localStorage.setItem('cookieConsent', 'custom');
+        applyPreferencesToGtm(preferences);
+        persistConsent("custom", preferences);
         setIsVisible(false);
+        setShowDetails(false);
     };
 
-    // Hjälpfunktion för att skicka till GTM
-    const updateGtm = (adState: 'granted' | 'denied', analyticsState: 'granted' | 'denied') => {
-        const gtag = window.gtag || function(...args: any[]){ (window.dataLayer = window.dataLayer || []).push(args); };
-
-        gtag('consent', 'update', {
-            'ad_storage': adState,
-            'analytics_storage': analyticsState,
-            'ad_user_data': adState,
-            'ad_personalization': adState,
-            'personalization_storage': analyticsState,
-            'functionality_storage': 'granted', // Alltid granted för att sidan ska funka
-            'security_storage': 'granted'
-        });
-
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({ event: 'consent_update' });
-    };
+    const lang = i18n.language?.startsWith("en") ? "en" : "sv";
 
     if (!isVisible) return null;
 
     return (
         <>
-            {/* Backdrop */}
-            <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[9998]" />
+            <div className="fixed inset-0 z-[9998] bg-black/80 backdrop-blur-sm" />
 
-            {/* Modal Container */}
             <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
-                <div className="bg-[#262626] border border-orange-500/30 max-w-2xl w-full rounded-3xl p-8 sm:p-10 shadow-2xl relative">
-
-                    {/* --- HEADER --- */}
-                    <div className="text-center mb-6">
-                        <h2 className="text-white text-2xl sm:text-3xl font-bold mb-2">
-                            {showDetails
-                                ? t('customizeTitle', { defaultValue: 'Anpassa dina val' })
-                                : t('consentTitle', { defaultValue: 'Vi hanterar data för din upplevelse' })
-                            }
+                <div className="relative w-full max-w-2xl rounded-3xl border border-orange-500/30 bg-[#262626] p-8 shadow-2xl sm:p-10">
+                    <div className="mb-6 text-center">
+                        <h2 className="mb-2 text-2xl font-bold text-white sm:text-3xl">
+                            {showDetails ? t("customizeTitle") : t("consentTitle")}
                         </h2>
-                        <div className="w-16 h-1 bg-orange-500 mx-auto rounded-full mt-3"></div>
+                        <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-orange-500" />
                     </div>
 
-                    {/* --- VY 1: STANDARDSIDAN --- */}
                     {!showDetails ? (
                         <>
-                            {/* Textinnehåll från din bild */}
-                            <div className="text-gray-300 text-sm sm:text-base leading-relaxed space-y-4 mb-8">
-                                <p>
-                                    {t('consentDescription1', {
-                                        defaultValue: 'Viss datahantering är nödvändig för att säkerställa att vår tjänst fungerar, vilket innebär att vi använder spårningstekniker såsom cookies. Du kan välja att tillåta ytterligare datahantering som används för att förbättra tjänsten med mer relevant innehåll, anpassad efter dig.'
-                                    })}
-                                </p>
-                                <p>
-                                    {t('consentDescription2', {
-                                        defaultValue: 'Utöver detta kan du välja att tillåta datahantering av partners som vi samarbetar med.'
-                                    })}
-                                </p>
-                                <p className="text-gray-400 text-xs italic mt-2">
-                                    {t('consentDescription3', {
-                                        defaultValue: 'Du har möjlighet att när som helst ändra eller återkalla ditt medgivande. Detta gör du under Inställningar i tjänsten.'
-                                    })}
+                            <div className="mb-8 space-y-4 text-sm leading-relaxed text-gray-300 sm:text-base">
+                                <p>{t("consentDescription1")}</p>
+                                <p>{t("consentDescription2")}</p>
+                                <p className="mt-2 text-xs italic text-gray-400">
+                                    {t("consentDescription3")}
                                 </p>
                             </div>
 
-                            {/* Länk till policy */}
                             <div className="mb-8 text-center sm:text-left">
                                 <Link
-                                    href="/privacy-policy"
-                                    className="text-orange-400 underline hover:text-orange-300 transition-colors text-sm"
+                                    href={`/${lang}/privacy-policy/`}
+                                    className="text-sm text-orange-400 underline transition-colors hover:text-orange-300"
                                 >
-                                    {t('policyLink', { defaultValue: 'Vår policy för kakor och spårningstekniker' })}
+                                    {t("policyLink")}
                                 </Link>
                             </div>
 
-                            {/* Knappar */}
-                            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                            <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
                                 <button
                                     onClick={handleAcceptNecessary}
-                                    className="flex-1 bg-transparent border-2 border-gray-500 text-gray-300 font-bold py-3 px-6 rounded-full hover:border-white hover:text-white hover:bg-white/5 uppercase text-xs sm:text-sm tracking-wider transition-all"
+                                    className="flex-1 rounded-full border-2 border-gray-500 bg-transparent px-6 py-3 text-xs font-bold uppercase tracking-wider text-gray-300 transition-all hover:border-white hover:bg-white/5 hover:text-white sm:text-sm"
                                 >
-                                    {t('acceptNecessary', { defaultValue: 'Endast nödvändiga' })}
+                                    {t("acceptNecessary")}
                                 </button>
 
                                 <button
                                     onClick={() => setShowDetails(true)}
-                                    className="flex-1 bg-transparent border-2 border-orange-500 text-orange-500 font-bold py-3 px-6 rounded-full hover:bg-orange-500 hover:text-white uppercase text-xs sm:text-sm tracking-wider transition-all"
+                                    className="flex-1 rounded-full border-2 border-orange-500 bg-transparent px-6 py-3 text-xs font-bold uppercase tracking-wider text-orange-500 transition-all hover:bg-orange-500 hover:text-white sm:text-sm"
                                 >
-                                    {t('customize', { defaultValue: 'Anpassa' })}
+                                    {t("customize")}
                                 </button>
 
                                 <button
                                     onClick={handleAcceptAll}
-                                    className="flex-1 bg-orange-500 border-2 border-orange-500 text-white font-bold py-3 px-6 rounded-full hover:bg-orange-600 hover:scale-[1.02] uppercase text-xs sm:text-sm tracking-wider transition-all"
+                                    className="flex-1 rounded-full border-2 border-orange-500 bg-orange-500 px-6 py-3 text-xs font-bold uppercase tracking-wider text-white transition-all hover:scale-[1.02] hover:bg-orange-600 sm:text-sm"
                                 >
-                                    {t('acceptAll', { defaultValue: 'Tillåt alla' })}
+                                    {t("acceptAll")}
                                 </button>
                             </div>
                         </>
                     ) : (
-
-                        /* --- VY 2: ANPASSA-SIDAN --- */
                         <div className="space-y-6">
                             <div className="space-y-4">
-                                {/* Option 1: Nödvändiga */}
-                                <div className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-gray-700">
+                                <div className="flex items-center justify-between rounded-xl border border-gray-700 bg-white/5 p-4">
                                     <div>
-                                        <h3 className="text-white font-bold text-sm">Nödvändiga</h3>
-                                        <p className="text-gray-400 text-xs">Krävs för att sidan ska fungera.</p>
+                                        <h3 className="text-sm font-bold text-white">
+                                            {t("necessaryTitle")}
+                                        </h3>
+                                        <p className="text-xs text-gray-400">
+                                            {t("necessaryDescription")}
+                                        </p>
                                     </div>
-                                    <input type="checkbox" checked disabled className="w-5 h-5 accent-gray-500 cursor-not-allowed" />
+                                    <input
+                                        type="checkbox"
+                                        checked
+                                        disabled
+                                        className="h-5 w-5 cursor-not-allowed accent-gray-500"
+                                    />
                                 </div>
 
-                                {/* Option 2: Analys */}
                                 <div
-                                    className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-gray-600 hover:border-orange-500/50 transition-colors cursor-pointer"
-                                    onClick={() => togglePreference('analytics')}
+                                    className="flex cursor-pointer items-center justify-between rounded-xl border border-gray-600 bg-white/5 p-4 transition-colors hover:border-orange-500/50"
+                                    onClick={() => togglePreference("analytics")}
                                 >
                                     <div>
-                                        <h3 className="text-white font-bold text-sm">Analys & Statistik</h3>
-                                        <p className="text-gray-400 text-xs">Hjälper oss förbättra upplevelsen.</p>
+                                        <h3 className="text-sm font-bold text-white">
+                                            {t("analyticsTitle")}
+                                        </h3>
+                                        <p className="text-xs text-gray-400">
+                                            {t("analyticsDescription")}
+                                        </p>
                                     </div>
                                     <input
                                         type="checkbox"
                                         checked={preferences.analytics}
-                                        onChange={() => togglePreference('analytics')}
-                                        className="w-5 h-5 accent-orange-500 cursor-pointer"
+                                        onChange={() => togglePreference("analytics")}
+                                        className="h-5 w-5 cursor-pointer accent-orange-500"
                                     />
                                 </div>
 
-                                {/* Option 3: Marknadsföring */}
                                 <div
-                                    className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-gray-600 hover:border-orange-500/50 transition-colors cursor-pointer"
-                                    onClick={() => togglePreference('marketing')}
+                                    className="flex cursor-pointer items-center justify-between rounded-xl border border-gray-600 bg-white/5 p-4 transition-colors hover:border-orange-500/50"
+                                    onClick={() => togglePreference("marketing")}
                                 >
                                     <div>
-                                        <h3 className="text-white font-bold text-sm">Marknadsföring</h3>
-                                        <p className="text-gray-400 text-xs">För relevant annonsering.</p>
+                                        <h3 className="text-sm font-bold text-white">
+                                            {t("marketingTitle")}
+                                        </h3>
+                                        <p className="text-xs text-gray-400">
+                                            {t("marketingDescription")}
+                                        </p>
                                     </div>
                                     <input
                                         type="checkbox"
                                         checked={preferences.marketing}
-                                        onChange={() => togglePreference('marketing')}
-                                        className="w-5 h-5 accent-orange-500 cursor-pointer"
+                                        onChange={() => togglePreference("marketing")}
+                                        className="h-5 w-5 cursor-pointer accent-orange-500"
                                     />
                                 </div>
                             </div>
 
-                            <div className="flex flex-col sm:flex-row gap-3 pt-4">
+                            <div className="flex flex-col gap-3 pt-4 sm:flex-row">
                                 <button
                                     onClick={() => setShowDetails(false)}
-                                    className="px-6 py-3 text-gray-400 hover:text-white font-semibold text-sm transition-colors"
+                                    className="px-6 py-3 text-sm font-semibold text-gray-400 transition-colors hover:text-white"
                                 >
-                                    {t('back', { defaultValue: 'Tillbaka' })}
+                                    {t("back")}
                                 </button>
                                 <button
                                     onClick={handleSaveCustom}
-                                    className="flex-1 bg-orange-500 border-2 border-orange-500 text-white font-bold py-3 px-6 rounded-full hover:bg-orange-600 hover:scale-[1.02] uppercase text-xs sm:text-sm tracking-wider transition-all"
+                                    className="flex-1 rounded-full border-2 border-orange-500 bg-orange-500 px-6 py-3 text-xs font-bold uppercase tracking-wider text-white transition-all hover:scale-[1.02] hover:bg-orange-600 sm:text-sm"
                                 >
-                                    {t('savePreferences', { defaultValue: 'Spara mina val' })}
+                                    {t("savePreferences")}
                                 </button>
                             </div>
                         </div>
                     )}
-
                 </div>
             </div>
         </>

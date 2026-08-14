@@ -11,6 +11,16 @@ const nextConfig = {
                 destination: '/sv/', // Notera snedstrecket i slutet pga trailingSlash: true
                 permanent: true,
             },
+            {
+                source: '/privacy-policy',
+                destination: '/sv/privacy-policy/',
+                permanent: true,
+            },
+            {
+                source: '/privacy-policy/',
+                destination: '/sv/privacy-policy/',
+                permanent: true,
+            },
         ]
     },
 

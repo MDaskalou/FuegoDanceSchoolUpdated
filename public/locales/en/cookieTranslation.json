@@ -1,0 +1,19 @@
+{
+  "consentTitle": "We use data to improve your experience",
+  "customizeTitle": "Customize your choices",
+  "consentDescription1": "Some data processing is necessary for our website to work. We use cookies and similar technologies. You can choose to allow additional processing for analytics and more relevant content.",
+  "consentDescription2": "You can also choose to allow data processing by partners we work with for marketing.",
+  "consentDescription3": "You can change or withdraw your consent at any time via the Cookie settings link in the footer.",
+  "policyLink": "Our cookie and tracking policy",
+  "acceptNecessary": "Necessary only",
+  "customize": "Customize",
+  "acceptAll": "Allow all",
+  "back": "Back",
+  "savePreferences": "Save my choices",
+  "necessaryTitle": "Necessary",
+  "necessaryDescription": "Required for the site to function.",
+  "analyticsTitle": "Analytics & Statistics",
+  "analyticsDescription": "Helps us improve the experience.",
+  "marketingTitle": "Marketing",
+  "marketingDescription": "For relevant advertising."
+}

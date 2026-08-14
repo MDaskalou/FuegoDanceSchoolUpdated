@@ -1,4 +1,4 @@
-﻿{
+{
   "contactTitle": "Kontakta Oss",
   "contactIntroText": "Har du frågor? Fyll i formuläret nedan så återkommer vi till dig snart!",
   "formTitle": "Skicka ett meddelande",
@@ -31,6 +31,8 @@
   "newsletterEmailPlaceholder": "Din e-postadress",
   "newsletterConsent": "Du kan avregistrera dig när som helst.",
   "copyright": "© {{year}} Fuego Dance School. Alla rättigheter förbehållna.",
+  "cookieSettings": "Cookie-inställningar",
+  "privacyPolicy": "Integritetspolicy",
 
   "nav": {
     "home": "Hem",

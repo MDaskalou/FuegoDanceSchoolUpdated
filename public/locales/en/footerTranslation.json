@@ -1,4 +1,4 @@
-﻿{
+{
   "footerTitle": "Fuego Dance School",
   "footerMotto": "Your place for Bachata, community, and growth.",
   "navLinksTitle": "Quick Links",
@@ -16,6 +16,8 @@
   "city": "413 24 Gothenburg",
   "email": "info@fuegoschool.se",
   "copyright": "© {{year}} Fuego Dance School. All rights reserved.",
+  "cookieSettings": "Cookie settings",
+  "privacyPolicy": "Privacy policy",
   "nav": {
     "home": "Home",
     "schedule": "Schedule",

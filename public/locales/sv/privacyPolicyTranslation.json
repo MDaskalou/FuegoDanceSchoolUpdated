@@ -1,0 +1,46 @@
+{
+  "title": "Integritetspolicy & Cookies",
+  "lastUpdated": "Senast uppdaterad: 14 augusti 2026",
+  "sections": {
+    "controller": {
+      "title": "1. Personuppgiftsansvarig",
+      "body": "Personuppgiftsansvarig för behandlingen på denna webbplats är FuegoDS AB, org.nr 559325-8550, Doktor Allards Gata 68, Göteborg, Sverige. Kontakt: info@fuegodanceschool.se."
+    },
+    "cookies": {
+      "title": "2. Vad är cookies?",
+      "body": "En cookie (kaka) är en liten textfil som webbplatsen du besöker begär att få spara på din dator, surfplatta eller mobiltelefon. Cookies och liknande tekniker används för att ge dig tillgång till funktioner och, om du samtycker, för analys och marknadsföring."
+    },
+    "howWeUse": {
+      "title": "3. Hur använder vi cookies?",
+      "intro": "Vi använder cookies i tre kategorier:",
+      "necessaryLabel": "Nödvändiga",
+      "necessary": "Krävs för att webbplatsen ska fungera tekniskt, till exempel för att komma ihåg ditt samtyckesval (sparat i webbläsarens localStorage).",
+      "analyticsLabel": "Analys & prestanda",
+      "analytics": "Med ditt samtycke använder vi verktyg som Google Analytics via Google Tag Manager för att förstå hur besökare använder sidan och förbättra innehållet.",
+      "marketingLabel": "Marknadsföring",
+      "marketing": "Med ditt samtycke kan cookies användas för relevant annonsering på andra plattformar baserat på ditt besök hos oss."
+    },
+    "tools": {
+      "title": "4. Verktyg och tredje parter",
+      "body": "Vi använder Google Tag Manager (GTM-5TDBRW66) för att ladda mät- och marknadsföringsverktyg, inklusive Google Analytics och eventuella annonstjänster från Google. Leverantören är Google Ireland Limited / Google LLC. Uppgifter kan överföras utanför EU/EES; Google använder då lämpliga skyddsåtgärder enligt gällande regler."
+    },
+    "legalBasis": {
+      "title": "5. Rättslig grund",
+      "body": "Nödvändiga cookies och lagring som krävs för drift baseras på vårt berättigade intresse av att tillhandahålla en fungerande webbplats. Analys- och marknadsföringscookies baseras på ditt samtycke, som du kan ge, ändra eller återkalla via cookie-bannern."
+    },
+    "manage": {
+      "title": "6. Hantera dina inställningar",
+      "body": "Du kan när som helst ändra eller återkalla ditt samtycke via länken Cookie-inställningar i sidfoten. Då öppnas cookie-bannern igen. Ditt val sparas lokalt i din webbläsare (localStorage), inte som en vanlig cookie."
+    },
+    "rights": {
+      "title": "7. Dina rättigheter",
+      "body": "Du har enligt GDPR rätt till bland annat tillgång, rättelse, radering, begränsning, invändning och dataportabilitet i tillämpliga fall. Du kan också lämna klagomål till Integritetsskyddsmyndigheten (IMY), www.imy.se."
+    },
+    "contact": {
+      "title": "8. Kontakt",
+      "body": "Har du frågor om cookies eller personuppgifter är du välkommen att kontakta oss.",
+      "email": "E-post: info@fuegodanceschool.se",
+      "location": "Plats: Göteborg, Sverige"
+    }
+  }
+}

@@ -1,4 +1,4 @@
-﻿{
+{
   "eventsTitle": "Kommande Workshops & Events",
   "eventsCta": "Se alla event",
   "eventsCtaButton": "Läs mer & Boka",
@@ -105,7 +105,7 @@
       "link": "https://app.coursely.se/fuego-dance-school/activity/hosttermin-2026-summer-workshop-level-4",
       "imageUrl": "/img/Events/SummerBootcampLevel4.jpg",
       "isNew": true,
-      "priority": 4,
+      "priority": 5,
       "price": "199 kr",
       "time": "10 aug 18:30–20:30 · 23 aug 15:00–17:00",
       "description": "Fyra timmars Bachata Sensual-bootcamp för level 4 med två timmar kombinationer och två timmar teknik."
@@ -119,7 +119,7 @@
       "link": "https://app.coursely.se/fuego-dance-school/activity/hosttermin-2026-summer-workshop-level-2",
       "imageUrl": "/img/Events/SummerBootcampLevel2.jpg",
       "isNew": true,
-      "priority": 2,
+      "priority": 3,
       "price": "199 kr",
       "time": "18:30–20:30",
       "description": "Fyra timmars Bachata Sensual-bootcamp för level 2 med två timmar kombinationer och två timmar teknik."
@@ -133,7 +133,7 @@
       "link": "https://app.coursely.se/fuego-dance-school/activity/hosttermin-2026-summer-workshop-level-3",
       "imageUrl": "/img/Events/SummerBootcampLevel3.jpg",
       "isNew": true,
-      "priority": 3,
+      "priority": 4,
       "price": "199 kr",
       "time": "18:30–20:30",
       "description": "Fyra timmars Bachata Sensual-bootcamp för level 3 med två timmar kombinationer och två timmar teknik."
@@ -147,10 +147,54 @@
       "link": "https://app.coursely.se/fuego-dance-school/activity/hosttermin-2026-summer-workshop-solo",
       "imageUrl": "/img/Events/SummerBootcampSolo.jpg",
       "isNew": true,
-      "priority": 5,
+      "priority": 6,
       "price": "199 kr",
       "time": "18:30–20:30",
       "description": "Fyra timmars Bachata Sensual solo-bootcamp med Ramintas styling och footwork."
+    },
+    {
+      "id": 14,
+      "title": "Role Rotation – Nybörjare",
+      "date": "22 augusti 2026",
+      "startDate": "2026-08-22",
+      "location": "Doktor Westrings Gata 14D, Göteborg",
+      "link": "https://app.coursely.se/fuego-dance-school/activity/hosttermin-2026-rolerotation-workshop",
+      "imageUrl": "/img/Events/RoleRotationBeginners22Aug.jpg",
+      "imageFit": "contain",
+      "isNew": true,
+      "featured": true,
+      "priority": 1,
+      "price": "99 kr",
+      "time": "13:00–15:00",
+      "subtitle": "Role Rotation · 2 timmar",
+      "description": [
+        "Lär dig båda rollerna. Dansa med alla.",
+        "I den här Role Rotation-workshopen för nybörjare tränar du både lead och follow så att du kan dansa med fler och bli en mer mångsidig partner.",
+        "Vi ses lördagen den 22 augusti kl. 13:00–15:00 på Doktor Westrings Gata 14D, Göteborg.",
+        "Pris: 99 kr."
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Bachata Sensual – Nybörjarworkshop",
+      "date": "22 augusti 2026",
+      "startDate": "2026-08-22",
+      "location": "Doktor Westrings Gata 14D, Göteborg",
+      "link": "https://app.coursely.se/fuego-dance-school/activity/hosttermin-2026-beginner-workshop-bachata-sensual",
+      "imageUrl": "/img/Events/BachataSensualBeginnerWorkshop22Aug.jpg",
+      "imageFit": "contain",
+      "isNew": true,
+      "featured": true,
+      "priority": 2,
+      "price": "199 kr",
+      "time": "15:30–18:30",
+      "subtitle": "Bachata Sensual · 3 timmar",
+      "description": [
+        "Lär dig grunderna i Bachata Sensual under en tre timmar lång nybörjarworkshop.",
+        "Inga förkunskaper krävs – passar dig som vill prova bachata från grunden.",
+        "Vi ses lördagen den 22 augusti kl. 15:30–18:30 på Doktor Westrings Gata 14D, Göteborg.",
+        "Pris: 199 kr."
+      ]
     }
   ],
   "__MALL_events_SPARA_FOR_SENARE": [
