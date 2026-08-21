@@ -7,30 +7,8 @@ import { useState, useEffect, useRef } from "react";
 import heroMainImage from "../../public/img/Hero/HeroMain.jpg";
 import heroImage9 from "../../public/img/Hero/Heroimg9.jpg";
 import heroImage11 from "../../public/img/Hero/Heroimg11.jpg";
-import type { EventItem } from "@/components/Event";
+import { filterUpcomingEvents, formatEventDate, type EventItem } from "@/lib/events";
 import { FaGoogle, FaStar } from "react-icons/fa";
-
-// ─── Event helpers ────────────────────────────────────────────────
-const filterUpcomingEvents = (events: EventItem[]): EventItem[] => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    return events
-        .filter((e) => { const d = new Date(e.startDate); return !Number.isNaN(d.getTime()) && d >= today; })
-        .sort((a, b) => {
-            const ap = a.priority ?? Infinity, bp = b.priority ?? Infinity;
-            if (ap !== bp) return ap - bp;
-            return new Date(a.startDate).getTime() - new Date(b.startDate).getTime();
-        });
-};
-
-const formatEventDate = (dateStr: string, locale: string) => {
-    const date = new Date(dateStr);
-    return {
-        day: date.getDate().toString(),
-        month: date.toLocaleString(locale, { month: "short" }),
-        weekday: date.toLocaleString(locale, { weekday: "long" }),
-    };
-};
 
 const heroImages = [heroMainImage, heroImage9, heroImage11];
 
@@ -38,9 +16,8 @@ const heroImages = [heroMainImage, heroImage9, heroImage11];
 export const Hero = () => {
     const { t, i18n } = useTranslation("heroTranslation");
     const { t: tEvent } = useTranslation("eventTranslation");
-    const currentLang = i18n.language;
+    const currentLang = (i18n.language || "sv").startsWith("en") ? "en" : "sv";
 
-    const [mounted, setMounted] = useState(false);
     const [scrollY, setScrollY] = useState(0);
     const [activeImageIndex, setActiveImageIndex] = useState(0);
     const sectionRef = useRef<HTMLElement>(null);
@@ -52,11 +29,6 @@ export const Hero = () => {
     }, []);
 
     useEffect(() => {
-        const timer = setTimeout(() => setMounted(true), 100);
-        return () => clearTimeout(timer);
-    }, []);
-
-    useEffect(() => {
         const interval = window.setInterval(() => {
             setActiveImageIndex((current) => (current + 1) % heroImages.length);
         }, 6500);
@@ -64,10 +36,12 @@ export const Hero = () => {
         return () => window.clearInterval(interval);
     }, []);
 
+    const heroTitle = String(t("heroTitle", { defaultValue: "Lär dig Bachata i Göteborg" }));
+    const titleWords = heroTitle.split(" ").filter(Boolean);
     const allEvents = tEvent("events", { returnObjects: true }) as unknown as EventItem[];
     const upcomingEvents = filterUpcomingEvents(Array.isArray(allEvents) ? allEvents : []);
     const nextEvent = upcomingEvents[0] ?? null;
-    const formatted = nextEvent ? formatEventDate(nextEvent.startDate, currentLang.startsWith("en") ? "en-US" : "sv-SE") : null;
+    const formatted = nextEvent ? formatEventDate(nextEvent.startDate, currentLang === "en" ? "en-US" : "sv-SE") : null;
 
     const parallaxOffset = scrollY * 0.4;
 
@@ -115,11 +89,11 @@ export const Hero = () => {
                         mb-3 sm:mb-4 leading-[1.15] sm:leading-[1.05] max-w-4xl
                         [text-shadow:_0_4px_24px_rgb(0_0_0_/_70%)]
                         transition-all duration-1000 ease-out
-                        ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
+                        opacity-100 translate-y-0
                     `}
                     style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
                 >
-                    {t("heroTitle").split(" ").map((word, i, arr) =>
+                    {titleWords.map((word, i, arr) =>
                         i === arr.length - 1
                             ? <em key={i} style={{ fontStyle: "italic" }}> {word}</em>
                             : <span key={i}>{i === 0 ? word : ` ${word}`}</span>
@@ -130,15 +104,15 @@ export const Hero = () => {
                     mb-3 sm:mb-5 text-lg sm:text-2xl md:text-3xl font-light italic text-orange-200
                     [text-shadow:_0_3px_16px_rgb(0_0_0_/_70%)]
                     transition-all duration-1000 delay-150 ease-out
-                    ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
+                    opacity-100 translate-y-0
                 `}>
-                    {t("heroSubtitle")}
+                    {t("heroSubtitle", { defaultValue: "En gemenskap, många minnen." })}
                 </p>
 
                 <div className={`
                     hidden sm:flex items-center gap-4 mb-5
                     transition-all duration-700 delay-300 ease-out
-                    ${mounted ? 'opacity-100' : 'opacity-0'}
+                    opacity-100 translate-y-0
                 `}>
                     <span className="h-px w-16 bg-orange-500/60" />
                     <span className="text-orange-400 text-base">✦</span>
@@ -150,19 +124,19 @@ export const Hero = () => {
                     tracking-[0.07em] sm:tracking-[0.16em] leading-relaxed uppercase
                     [text-shadow:_0_2px_8px_rgb(0_0_0_/_60%)]
                     transition-all duration-1000 delay-200 ease-out
-                    ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
+                    opacity-100 translate-y-0
                 `}>
-                    {t("heroDescription")}
+                    {t("heroDescription", { defaultValue: "Kurser för nybörjare, fortsättare och erfarna dansare." })}
                 </p>
 
                 <div className={`
                     flex w-full max-w-xl flex-col items-center justify-center gap-3 sm:gap-4
                     pointer-events-auto
                     transition-all duration-1000 delay-500 ease-out
-                    ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
+                    opacity-100 translate-y-0
                 `}>
                     <p className="max-w-sm sm:max-w-xl text-xs sm:text-base font-medium normal-case tracking-normal leading-relaxed text-white/80">
-                        {t("heroChoiceHint")}
+                        {t("heroChoiceHint", { defaultValue: "Redo att boka? Välj kurser. Vill du testa först? Kom på öppet hus." })}
                     </p>
 
                     <div className="flex w-full flex-col items-center justify-center gap-2.5 sm:flex-row sm:gap-3">
@@ -174,7 +148,7 @@ export const Hero = () => {
                                 hover:bg-orange-600 hover:scale-105
                             "
                         >
-                            <span className="relative z-10">{t("heroCtaButton")}</span>
+                            <span className="relative z-10">{t("heroCtaButton", { defaultValue: "SE VÅRA KURSER" })}</span>
                         </Link>
 
                         <Link
@@ -185,7 +159,7 @@ export const Hero = () => {
                                 hover:border-orange-400 hover:bg-orange-500/15 hover:text-orange-200 hover:scale-105
                             "
                         >
-                            {t("heroCtaSecondary1")}
+                            {t("heroCtaSecondary1", { defaultValue: "Anmäl till öppet hus" })}
                         </Link>
                     </div>
                 </div>
@@ -194,7 +168,7 @@ export const Hero = () => {
                     hidden sm:flex absolute bottom-8 left-1/2 -translate-x-1/2
                     flex flex-col items-center gap-2
                     transition-opacity duration-1000 delay-[1200ms]
-                    ${mounted ? 'opacity-100' : 'opacity-0'}
+                    opacity-100 translate-y-0
                 `}>
                     <span className="text-[9px] font-bold uppercase tracking-[0.45em] text-white/35">{t("exploreLabel")}</span>
                 </div>
@@ -206,7 +180,7 @@ export const Hero = () => {
                     hidden sm:flex flex-col gap-3
                     absolute bottom-10 left-6 z-30
                     transition-all duration-700 ease-out
-                    ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}
+                    opacity-100 translate-y-0
                 `}
                 style={{ transitionDelay: '900ms' }}
             >
@@ -276,7 +250,7 @@ export const Hero = () => {
                         backdrop-blur-md bg-black/40
                         transition-all duration-700 ease-out
                         hover:scale-[1.03] hover:shadow-orange-500/20 hover:border-orange-500/40
-                        ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}
+                        opacity-100 translate-y-0
                     `}
                     style={{ transitionDelay: '800ms' }}
                 >
@@ -304,7 +278,7 @@ export const Hero = () => {
                     hidden items-center gap-3
                     absolute bottom-6 left-4 z-30
                     transition-all duration-700 ease-out
-                    ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}
+                    opacity-100 translate-y-0
                 `}
                 style={{ transitionDelay: '900ms' }}
             >
@@ -370,7 +344,7 @@ export const Hero = () => {
                         border border-white/10 backdrop-blur-lg bg-black/60
                         shadow-[0_8px_40px_rgba(0,0,0,0.8)]
                         transition-all duration-700 ease-out pointer-events-auto
-                        ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
+                        opacity-100 translate-y-0
                     `}
                     style={{ transitionDelay: '800ms' }}
                 >

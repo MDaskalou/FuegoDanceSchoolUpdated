@@ -1,34 +1,35 @@
-import HomePageClient from '@/components/HomePageClient';
-import React from 'react';
-import initTranslations from '@/i18n';
-import TranslationProvider from '@/i18n/TranslationProvider';
+import React from "react";
+import Hero from "@/components/Hero";
+import SocialProofStrip from "@/components/SocialProofStrip";
+import BootcampFeature from "@/components/BootcampFeature";
+import About from "@/components/About";
+import ScheduleSection from "@/components/Schedule";
+import PriceSection from "@/components/Price";
+import EventSection from "@/components/Event";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import InstagramFeed from "@/components/InstagramFeeds";
 
 export async function generateStaticParams() {
     return [
-        { lang: 'sv' },
-        { lang: 'en' },
+        { lang: "sv" },
+        { lang: "en" },
     ];
 }
 
-// Expanded namespaces to include all translations used on the homepage
-const i18nNamespaces = [
-    'common',
-    'heroTranslation',
-    'aboutTranslation',
-    'scheduleTranslation',
-    'testimonialsTranslation',
-    'footerTranslation',
-    'priceTranslation',
-    'eventTranslation',
-    'eventsTranslation',
-];
-
 export default async function Home({ params }: { params: { lang: string } }) {
-    const { resources } = await initTranslations(params.lang, i18nNamespaces);
+    const { lang } = params;
 
     return (
-        <TranslationProvider namespaces={i18nNamespaces} resources={resources} lang={params.lang}>
-            <HomePageClient params={params} />
-        </TranslationProvider>
+        <>
+            <Hero />
+            <SocialProofStrip lang={lang} />
+            <BootcampFeature />
+            <About lang={lang} />
+            <ScheduleSection lang={lang} />
+            <PriceSection lang={lang} />
+            <EventSection showSeeAllButton lang={lang} />
+            <TestimonialsSection lang={lang} />
+            <InstagramFeed />
+        </>
     );
 }

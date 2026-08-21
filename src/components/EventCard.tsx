@@ -6,22 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FaCalendarAlt, FaClock, FaMapMarkerAlt, FaTag } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
-
-// --- Typdefinitioner (Hämtad från EventsSection) ---
-interface EventItem {
-    id: number;
-    title: string;
-    date: string; // Visningsdatum
-    startDate: string; // YYYY-MM-DD för filtrering
-    location: string;
-    link: string; // URL för bokning (kan vara intern eller extern)
-    description: string | string[];
-    imageUrl: string;
-    imageFit?: "cover" | "contain";
-    isNew?: boolean;
-    price?: string;
-    time?: string;
-}
+import type { EventItem } from '@/lib/events';
 
 interface EventCardProps {
     event: EventItem;

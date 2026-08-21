@@ -14,18 +14,17 @@ import {
     FaChevronRight,
     FaArrowRight,
 } from "react-icons/fa";
-import { useTranslation } from "react-i18next";
-import { EventItem } from "@/components/Event";
+import type { EventItem } from "@/lib/events";
 
 interface EventCarouselProps {
     events: EventItem[];
+    ctaLabel?: string;
 }
 
 // ─────────────────────────────────────────────
 // Portrait Event Card  (tall, image-first)
 // ─────────────────────────────────────────────
-const PortraitEventCard: React.FC<{ event: EventItem }> = ({ event }) => {
-    const { t } = useTranslation("eventTranslation");
+const PortraitEventCard: React.FC<{ event: EventItem; ctaLabel: string }> = ({ event, ctaLabel }) => {
     const isExternal =
         event.link &&
         (event.link.startsWith("http://") || event.link.startsWith("https://"));
@@ -115,7 +114,7 @@ const PortraitEventCard: React.FC<{ event: EventItem }> = ({ event }) => {
             group/btn
           "
                 >
-                    {t("eventsCtaButton", { defaultValue: "Läs mer & Boka" })}
+                    {ctaLabel}
                     <FaArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/btn:translate-x-1" />
                 </Link>
             </div>
@@ -126,8 +125,13 @@ const PortraitEventCard: React.FC<{ event: EventItem }> = ({ event }) => {
 // ─────────────────────────────────────────────
 // Main Carousel
 // ─────────────────────────────────────────────
-const EventCarousel: React.FC<EventCarouselProps> = ({ events }) => {
-    const autoplay = Autoplay({ delay: 5000, stopOnInteraction: true });
+const EventCarousel: React.FC<EventCarouselProps> = ({
+    events,
+    ctaLabel = "Läs mer & Boka",
+}) => {
+    const autoplay = React.useRef(
+        Autoplay({ delay: 5000, stopOnInteraction: true })
+    );
 
     const [emblaRef, emblaApi] = useEmblaCarousel(
         {
@@ -135,7 +139,7 @@ const EventCarousel: React.FC<EventCarouselProps> = ({ events }) => {
             align: "start",
             slidesToScroll: 1,
         },
-        [autoplay]
+        [autoplay.current]
     );
 
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -168,7 +172,7 @@ const EventCarousel: React.FC<EventCarouselProps> = ({ events }) => {
         return (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-3xl mx-auto">
                 {events.map((event) => (
-                    <PortraitEventCard key={event.id} event={event} />
+                    <PortraitEventCard key={event.id} event={event} ctaLabel={ctaLabel} />
                 ))}
             </div>
         );
@@ -220,7 +224,7 @@ const EventCarousel: React.FC<EventCarouselProps> = ({ events }) => {
                                 key={event.id}
                                 className="flex-none w-[75%] sm:w-[42%] lg:w-[38%] min-w-0"
                             >
-                                <PortraitEventCard event={event} />
+                                <PortraitEventCard event={event} ctaLabel={ctaLabel} />
                             </div>
                         ))}
                     </div>

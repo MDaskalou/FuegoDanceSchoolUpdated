@@ -7,25 +7,7 @@ import { useTranslation } from "react-i18next";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { useInView } from "@/hooks/useInView";
-
-interface FeaturedEvent {
-    id: number;
-    title: string;
-    date: string;
-    startDate: string;
-    location: string;
-    link: string;
-    description: string | string[];
-    imageUrl: string;
-    imageFit?: "cover" | "contain";
-    price?: string;
-    time?: string;
-    subtitle?: string;
-    featured?: boolean;
-}
-
-const FEATURED_FALLBACK_IDS = [14, 15];
+import { getUpcomingFeaturedEvents, type EventItem } from "@/lib/events";
 
 const parseStartTime = (time?: string) => {
     if (!time) return "18:00:00";
@@ -65,36 +47,21 @@ const useCountdown = (targetDate: string) => {
     return timeLeft;
 };
 
-const getUpcomingFeaturedEvents = (events: FeaturedEvent[]) => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    const upcoming = events.filter((event) => {
-        const eventDate = new Date(event.startDate);
-        return !Number.isNaN(eventDate.getTime()) && eventDate >= today;
-    });
-
-    const flagged = upcoming.filter((event) => event.featured);
-    if (flagged.length > 0) return flagged;
-
-    return upcoming.filter((event) => FEATURED_FALLBACK_IDS.includes(event.id));
-};
-
 export const BootcampFeature = () => {
     const { t, i18n } = useTranslation("eventTranslation");
-    const { ref, inView } = useInView(0.15);
-    const allEvents = t("events", { returnObjects: true }) as unknown as FeaturedEvent[];
+    const allEvents = t("events", { returnObjects: true }) as unknown as EventItem[];
     const featuredEvents = Array.isArray(allEvents)
         ? getUpcomingFeaturedEvents(allEvents)
         : [];
-    const isEnglish = i18n.language.startsWith("en");
+    const isEnglish = (i18n.language || "sv").startsWith("en");
     const [selectedIndex, setSelectedIndex] = useState(0);
+    const autoplay = React.useRef(
+        Autoplay({ delay: 7000, stopOnInteraction: true, stopOnMouseEnter: true })
+    );
 
     const [emblaRef, emblaApi] = useEmblaCarousel(
         { loop: featuredEvents.length > 1, align: "start" },
-        featuredEvents.length > 1
-            ? [Autoplay({ delay: 7000, stopOnInteraction: true, stopOnMouseEnter: true })]
-            : []
+        featuredEvents.length > 1 ? [autoplay.current] : []
     );
 
     const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
@@ -120,21 +87,14 @@ export const BootcampFeature = () => {
     if (featuredEvents.length === 0) return null;
 
     return (
-        <section
-            ref={ref}
-            className="relative w-full overflow-hidden bg-transparent py-14 sm:py-20"
-        >
+        <section className="relative w-full overflow-hidden bg-transparent py-14 sm:py-20">
             <div
                 aria-hidden
                 className="pointer-events-none absolute -top-32 right-0 h-[360px] w-[360px] rounded-full bg-orange-500/10 blur-[100px]"
             />
 
             <div className="container relative mx-auto max-w-5xl px-4">
-                <div
-                    className={`mb-6 flex flex-wrap items-center justify-between gap-3 transition-all duration-700 ${
-                        inView ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
-                    }`}
-                >
+                <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
                     <div className="flex items-center gap-3">
                         <span className="h-px w-8 bg-orange-500" />
                         <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-orange-500 sm:text-xs">
@@ -164,12 +124,7 @@ export const BootcampFeature = () => {
                     )}
                 </div>
 
-                <div
-                    className={`overflow-hidden transition-all duration-1000 ${
-                        inView ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-                    }`}
-                    ref={emblaRef}
-                >
+                <div className="overflow-hidden" ref={emblaRef}>
                     <div className="flex">
                         {featuredEvents.map((event) => (
                             <div key={event.id} className="min-w-0 flex-[0_0_100%]">
@@ -226,7 +181,7 @@ const FeaturedSlide = ({
     event,
     isEnglish,
 }: {
-    event: FeaturedEvent;
+    event: EventItem;
     isEnglish: boolean;
 }) => {
     const countdown = useCountdown(

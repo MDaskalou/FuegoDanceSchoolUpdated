@@ -122,7 +122,7 @@ export const Navbar: React.FC = () => {
 
         {/* MOBILE OVERLAY */}
         <div className={`fixed inset-0 z-[6000] bg-[#0c0c0c] transition-all duration-500 ${
-            isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+            isMenuOpen ? "opacity-100 visible pointer-events-auto" : "opacity-0 invisible pointer-events-none"
         }`}>
           <div className="relative flex flex-col h-full px-10 py-12 overflow-y-auto">
             <button onClick={() => setIsMenuOpen(false)} className="absolute top-10 right-10 text-white/50">

@@ -8,7 +8,7 @@ import { openCookieSettings } from '@/components/CookieConsent';
 
 export const Footer = () => {
     const { t, i18n } = useTranslation("footerTranslation");
-    const currentLang = i18n.language;
+    const currentLang = (i18n.language || "sv").startsWith("en") ? "en" : "sv";
     const currentYear = new Date().getFullYear();
     const [email, setEmail] = useState("");
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");

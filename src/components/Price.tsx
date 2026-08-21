@@ -1,9 +1,5 @@
-"use client";
-
-import { useMemo } from "react";
-import { useTranslation } from "react-i18next";
 import Link from "next/link";
-import { useInView } from "@/hooks/useInView";
+import { getServerT } from "@/i18n";
 import { Sparkles, Percent, Calendar, CheckCircle2, Gift, ShoppingCart } from "lucide-react";
 
 interface Course {
@@ -27,11 +23,10 @@ interface PriceCardProps {
     icon: React.ReactNode;
     accentTop?: boolean;
     children: React.ReactNode;
-    animateClass: string;
 }
 
-const PriceCard: React.FC<PriceCardProps> = ({ title, icon, accentTop = false, children, animateClass }) => (
-    <div className={`w-full ${animateClass}`}>
+const PriceCard: React.FC<PriceCardProps> = ({ title, icon, accentTop = false, children }) => (
+    <div className="w-full">
         <div className={`
             h-full p-8 rounded-3xl bg-[#262626] shadow-2xl flex flex-col
             border border-white/5
@@ -64,17 +59,17 @@ interface PriceRowProps {
 }
 
 const PriceRow: React.FC<PriceRowProps> = ({
-                                               label,
-                                               price,
-                                               highlighted,
-                                               popular,
-                                               popularLabel,
-                                               muted,
-                                               dashed,
-                                               saving,
-                                               savingPrefix = "du sparar",
-                                               bonusText,
-                                           }) => (
+    label,
+    price,
+    highlighted,
+    popular,
+    popularLabel,
+    muted,
+    dashed,
+    saving,
+    savingPrefix = "du sparar",
+    bonusText,
+}) => (
     <li className={`
         flex flex-col py-3 px-4 rounded-xl
         transition-all duration-300 hover:scale-[1.01]
@@ -114,10 +109,12 @@ const PriceRow: React.FC<PriceRowProps> = ({
     </li>
 );
 
-export const PriceSection = () => {
-    const { t, i18n } = useTranslation("priceTranslation");
-    const { ref: sectionRef, inView } = useInView(0.15);
-    const currentLang = i18n.language;
+interface PriceSectionProps {
+    lang: string;
+}
+
+export default async function PriceSection({ lang }: PriceSectionProps) {
+    const t = await getServerT(lang, "priceTranslation");
     const dropInCheckoutUrl = "https://app.coursely.se/checkout/FuegoDance/dropinPackages";
 
     const coursesRaw = t("courses", { returnObjects: true });
@@ -126,23 +123,19 @@ export const PriceSection = () => {
     const courses: Course[] = Array.isArray(coursesRaw) ? coursesRaw : [];
     const dropInItems: DropInItem[] = Array.isArray(dropInItemsRaw) ? dropInItemsRaw : [];
 
-    const getCourseLabel = useMemo(() => (count: number) => {
+    const getCourseLabel = (count: number) => {
         if (count === 0) return t("socialDanceLabel");
         return `${count} ${t(count === 1 ? "courseLabelSingular" : "courseLabelPlural")}`;
-    }, [t]);
+    };
 
     const getDropInLabel = (item: DropInItem) => {
         if (item.labelKey) return t(item.labelKey);
         return getCourseLabel(item.count ?? 0);
     };
 
-    const animateCard = (index: number) =>
-        `${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700 ease-out delay-[${index * 150}ms]`;
-
     return (
         <section
             id="prices"
-            ref={sectionRef}
             className="relative py-20 sm:py-32 bg-transparent text-white overflow-hidden"
         >
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[1px] bg-gradient-to-r from-transparent via-orange-500/30 to-transparent" />
@@ -164,7 +157,6 @@ export const PriceSection = () => {
                         title={t("cardCourseTitle")}
                         icon={<Sparkles className="w-5 h-5" />}
                         accentTop
-                        animateClass={animateCard(0)}
                     >
                         <ul className="space-y-3 flex-grow">
                             {courses.map((course, index) => (
@@ -186,7 +178,6 @@ export const PriceSection = () => {
                     <PriceCard
                         title={t("cardDiscountTitle")}
                         icon={<Percent className="w-5 h-5" />}
-                        animateClass={animateCard(1)}
                     >
                         <ul className="space-y-4 flex-grow">
                             {[
@@ -206,7 +197,6 @@ export const PriceSection = () => {
                         title={t("cardDropInTitle")}
                         icon={<Calendar className="w-5 h-5" />}
                         accentTop
-                        animateClass={animateCard(2)}
                     >
                         <ul className="space-y-3 flex-grow mb-4">
                             {dropInItems.map((item, index) => (
@@ -234,8 +224,7 @@ export const PriceSection = () => {
                         >
                             <ShoppingCart className="h-4 w-4" />
                             {t("dropInCta", {
-                                ns: "priceTranslation",
-                                defaultValue: currentLang === "sv" ? "Köp drop-in" : "Buy drop-in",
+                                defaultValue: lang === "sv" ? "Köp drop-in" : "Buy drop-in",
                             })}
                         </a>
                         <p className="text-xs italic text-left text-gray-500 border-t border-white/8 pt-4 mt-4 leading-relaxed">
@@ -245,7 +234,7 @@ export const PriceSection = () => {
                 </div>
 
                 <Link
-                    href={`/${currentLang}/courses`}
+                    href={`/${lang}/courses`}
                     className="inline-flex items-center gap-2 rounded-full bg-orange-500 px-12 py-4 text-base font-bold uppercase tracking-wider text-white shadow-xl shadow-orange-500/20 transition-all duration-300 hover:bg-orange-400 hover:shadow-orange-500/40 hover:scale-105 active:scale-95"
                 >
                     {t("ctaBookNow")}
@@ -255,6 +244,4 @@ export const PriceSection = () => {
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[1px] bg-gradient-to-r from-transparent via-orange-500/30 to-transparent" />
         </section>
     );
-};
-
-export default PriceSection;
+}

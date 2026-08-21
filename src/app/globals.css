@@ -4,10 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* *** Här skulle Swiper CSS ligga (via en separat @import) om den inte togs bort: ***
-   @import url('@/styles/swiper-imports.css');
-*/
-
 :root {
   --foreground-rgb: 255, 255, 255; /* Vit text som standard */
 

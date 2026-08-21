@@ -13,13 +13,10 @@
   },
   "dependencies": {
     "@ai-sdk/google": "^0.0.52",
-    "@google/generative-ai": "^0.24.1",
     "ai": "^3.4.33",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
-    "framer-motion": "^12.34.0",
     "i18next": "^25.6.1",
-    "i18next-http-backend": "^3.0.2",
     "i18next-resources-to-backend": "^1.2.1",
     "lucide-react": "^0.555.0",
     "next": "^14.2.5",
@@ -28,15 +25,13 @@
     "react-dom": "^18.3.1",
     "react-i18next": "^16.2.4",
     "react-icons": "^5.5.0",
-    "sharp": "^0.34.5",
-    "swiper": "^12.0.3"
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.22",
-    "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "postcss": "^8.5.6",

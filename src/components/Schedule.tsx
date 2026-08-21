@@ -1,9 +1,7 @@
-// src/components/ScheduleSection.tsx
-"use client";
-
-import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import Image from "next/image";
+import { getServerT } from "@/i18n";
+import scheduleBg from "../../public/img/Schedule/Scheduleimg.jpg";
 
 interface Course {
     dayKey: string;
@@ -57,11 +55,15 @@ const ScheduleItem = ({ time, name, instructors, note, isNew = false, isDropIn =
     </div>
 );
 
-export const ScheduleSection = () => {
-    const { t, i18n } = useTranslation("scheduleTranslation");
-    const currentLang = i18n.language;
+interface ScheduleSectionProps {
+    lang: string;
+}
 
-    const courses: Course[] = t("courses", { returnObjects: true }) as Course[] || [];
+export default async function ScheduleSection({ lang }: ScheduleSectionProps) {
+    const t = await getServerT(lang, "scheduleTranslation");
+
+    const coursesRaw = t("courses", { returnObjects: true });
+    const courses: Course[] = Array.isArray(coursesRaw) ? coursesRaw : [];
     const dayKeys: string[] = ["dayMonday", "dayTuesday", "dayWednesday", "dayThursday", "daySunday"];
 
     return (
@@ -69,14 +71,15 @@ export const ScheduleSection = () => {
             id="schedule"
             className="relative py-16 sm:py-24 bg-[#1a1a1a] text-white"
         >
-            <div className="absolute inset-0">
+            <div className="absolute inset-0 overflow-hidden">
                 <Image
-                    src="/img/Schedule/Scheduleimg.jpg"
+                    src={scheduleBg}
                     alt={t("scheduleImageAlt", { defaultValue: "Bakgrundsbild av dansande par" })}
                     fill
                     sizes="100vw"
                     priority={false}
                     className="object-cover opacity-10"
+                    placeholder="blur"
                 />
             </div>
 
@@ -103,8 +106,8 @@ export const ScheduleSection = () => {
                                     {t(dayKey)}
                                 </h3>
 
-                                {Array.isArray(courses) && courses
-                                    .filter(course => course.dayKey === dayKey)
+                                {courses
+                                    .filter((course) => course.dayKey === dayKey)
                                     .map((course, index) => (
                                         <ScheduleItem
                                             key={index}
@@ -116,8 +119,7 @@ export const ScheduleSection = () => {
                                             isNew={course.isNew}
                                             isDropIn={course.isDropIn}
                                         />
-                                    ))
-                                }
+                                    ))}
                             </div>
                         ))}
                     </div>
@@ -132,7 +134,7 @@ export const ScheduleSection = () => {
 
                 <div className="text-center">
                     <Link
-                        href={`/${currentLang}/courses`}
+                        href={`/${lang}/courses`}
                         className="
                             inline-block rounded-full bg-orange-500 px-10 py-4 text-lg sm:text-xl font-bold uppercase
                             tracking-wider text-white shadow-xl transition-all duration-300
@@ -145,6 +147,4 @@ export const ScheduleSection = () => {
             </div>
         </section>
     );
-};
-
-export default ScheduleSection;
+}

@@ -1,8 +1,6 @@
-"use client";
-
-import { useTranslation } from "react-i18next";
 import { FaStar } from "react-icons/fa";
 import { CheckCircle2 } from "lucide-react";
+import { getServerT } from "@/i18n";
 
 interface Testimonial {
     id: number;
@@ -10,10 +8,15 @@ interface Testimonial {
     text: string;
 }
 
-export default function SocialProofStrip() {
-    const { t } = useTranslation("testimonialsTranslation");
+interface SocialProofStripProps {
+    lang: string;
+}
+
+export default async function SocialProofStrip({ lang }: SocialProofStripProps) {
+    const t = await getServerT(lang, "testimonialsTranslation");
+
     const testimonials = t("testimonials", { returnObjects: true });
-    const items = Array.isArray(testimonials) ? testimonials as Testimonial[] : [];
+    const items = Array.isArray(testimonials) ? (testimonials as Testimonial[]) : [];
     const featured = items.find((item) => item.id === 2) ?? items[0];
 
     if (!featured) return null;

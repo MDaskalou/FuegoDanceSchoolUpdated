@@ -1,6 +1,18 @@
 ﻿// src/app/api/chat/route.ts
 import { google } from '@ai-sdk/google';
-import { streamText } from 'ai';
+import { streamText, type CoreMessage } from 'ai';
+
+const RATE_LIMIT_MAX = 10;
+const RATE_LIMIT_WINDOW_MS = 60_000;
+const MAX_MESSAGES = 20;
+const MAX_CONTENT_LENGTH = 1000;
+
+type RateLimitEntry = {
+    count: number;
+    resetAt: number;
+};
+
+const rateLimitStore = new Map<string, RateLimitEntry>();
 
 // Uppdaterad FAQ med dina nya standardvärden
 const faqData = {
@@ -46,24 +58,96 @@ INSTRUKTIONER:
 - Om användaren frågar om kurslängd, nämna att standarden är 12 veckor (1 timme/lektion) men att det kan variera.
 - Om information saknas, be dem kontakta info@fuegodanceschool.se.`;
 
+function jsonError(message: string, status: number) {
+    return new Response(JSON.stringify({ error: message }), {
+        status,
+        headers: { 'Content-Type': 'application/json' },
+    });
+}
+
+function getClientIp(req: Request): string {
+    const forwarded = req.headers.get('x-forwarded-for');
+    if (forwarded) {
+        return forwarded.split(',')[0]?.trim() || 'unknown';
+    }
+    return req.headers.get('x-real-ip') || 'unknown';
+}
+
+function isRateLimited(ip: string): boolean {
+    const now = Date.now();
+    const entry = rateLimitStore.get(ip);
+
+    if (!entry || now >= entry.resetAt) {
+        rateLimitStore.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+        return false;
+    }
+
+    if (entry.count >= RATE_LIMIT_MAX) {
+        return true;
+    }
+
+    entry.count += 1;
+    return false;
+}
+
+function parseMessages(raw: unknown): CoreMessage[] | null {
+    if (!Array.isArray(raw) || raw.length === 0 || raw.length > MAX_MESSAGES) {
+        return null;
+    }
+
+    const messages: CoreMessage[] = [];
+
+    for (const item of raw) {
+        if (!item || typeof item !== 'object') return null;
+
+        const role = (item as { role?: unknown }).role;
+        const content = (item as { content?: unknown }).content;
+
+        if (role !== 'user' && role !== 'assistant') return null;
+        if (typeof content !== 'string') return null;
+        if (content.length === 0 || content.length > MAX_CONTENT_LENGTH) return null;
+
+        messages.push({ role, content });
+    }
+
+    return messages;
+}
+
 export async function POST(req: Request) {
     try {
-        const body = await req.json();
-        const messages = body.messages || [];
+        if (!process.env.GOOGLE_GENERATIVE_AI_API_KEY) {
+            return jsonError('Chat is not configured', 503);
+        }
 
-        if (messages.length === 0) {
-            return new Response(JSON.stringify({ error: 'No messages' }), { status: 400 });
+        const ip = getClientIp(req);
+        if (isRateLimited(ip)) {
+            return jsonError('Too many requests. Please try again later.', 429);
+        }
+
+        let body: unknown;
+        try {
+            body = await req.json();
+        } catch {
+            return jsonError('Invalid JSON body', 400);
+        }
+
+        const messages = parseMessages(
+            body && typeof body === 'object' ? (body as { messages?: unknown }).messages : undefined
+        );
+
+        if (!messages) {
+            return jsonError('Invalid messages', 400);
         }
 
         const result = await streamText({
             model: google('gemini-2.0-flash'),
             system: systemPrompt,
-            messages: messages,
+            messages,
         });
 
         return result.toDataStreamResponse();
     } catch (error) {
         console.error('[/api/chat] Error:', error);
-        return new Response(JSON.stringify({ error: 'Internal server error' }), { status: 500 });
+        return jsonError('Internal server error', 500);
     }
 }
