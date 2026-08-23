@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getServerT } from "@/i18n";
 import { Sparkles, Percent, Calendar, CheckCircle2, Gift, ShoppingCart } from "lucide-react";
 
@@ -231,6 +232,22 @@ export default async function PriceSection({ lang }: PriceSectionProps) {
                             {t("dropInNote")}
                         </p>
                     </PriceCard>
+                </div>
+
+                <div className="mb-10 flex flex-col items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-6 py-5">
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-orange-500/70">
+                        {t("epassiPartner")}
+                    </p>
+                    <Image
+                        src="/img/Partners/epassi-logo.svg"
+                        alt="Epassi"
+                        width={160}
+                        height={25}
+                        className="h-auto w-[140px] sm:w-[160px]"
+                    />
+                    <p className="max-w-md text-sm text-gray-400">
+                        {t("epassiDescription")}
+                    </p>
                 </div>
 
                 <Link

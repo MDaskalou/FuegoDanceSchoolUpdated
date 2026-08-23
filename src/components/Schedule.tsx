@@ -12,9 +12,10 @@ interface Course {
     isNew: boolean;
     isDropIn: boolean;
     subtitle?: string;
+    fillLabel?: string;
 }
 
-const ScheduleItem = ({ time, name, instructors, note, isNew = false, isDropIn = false, subtitle }: {
+const ScheduleItem = ({ time, name, instructors, note, isNew = false, isDropIn = false, subtitle, fillLabel }: {
     time: string;
     name: string;
     instructors: string;
@@ -22,6 +23,7 @@ const ScheduleItem = ({ time, name, instructors, note, isNew = false, isDropIn =
     isNew?: boolean;
     isDropIn?: boolean;
     subtitle?: string;
+    fillLabel?: string;
 }) => (
     <div className="
         bg-white/5 border-orange-500/30 p-4 rounded-xl text-center relative shadow-lg backdrop-blur-sm border
@@ -37,6 +39,12 @@ const ScheduleItem = ({ time, name, instructors, note, isNew = false, isDropIn =
         {isDropIn && (
             <span className="absolute -top-2 -left-2 bg-orange-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full z-20 shadow-md">
                 DROP-IN
+            </span>
+        )}
+
+        {fillLabel && !isNew && (
+            <span className="absolute -top-2 -right-2 bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full z-20 shadow-md">
+                {fillLabel}
             </span>
         )}
 
@@ -118,6 +126,7 @@ export default async function ScheduleSection({ lang }: ScheduleSectionProps) {
                                             note={course.noteKey ? t(course.noteKey) : undefined}
                                             isNew={course.isNew}
                                             isDropIn={course.isDropIn}
+                                            fillLabel={course.fillLabel}
                                         />
                                     ))}
                             </div>
