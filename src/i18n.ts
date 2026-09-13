@@ -11,6 +11,7 @@ export const APP_NAMESPACES = [
     "aboutTranslation",
     "openhouseTranslation",
     "heroTranslation",
+    "featureTranslation",
     "eventTranslation",
     "instructorTranslation",
     "faqTranslation",
@@ -55,6 +56,10 @@ export default async function initTranslations(
         ns: [...namespaces],
         preload: resources ? [] : [locale],
     });
+
+    if (!resources) {
+        await i18nInstance.loadNamespaces([...namespaces]);
+    }
 
     return {
         i18n: i18nInstance,

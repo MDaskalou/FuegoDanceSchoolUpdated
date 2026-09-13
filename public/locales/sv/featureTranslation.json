@@ -1,33 +1,22 @@
 ﻿{
   "title": "Våra Stående Events",
   "guidedSocial": {
-    "title": "Guidad Socialdans",
-    "subtitle": "Practice with intention & build confidence.",
-    "when": "Varje Fredag",
-    "time": "18:30 – 20:30",
-    "price": "150kr / 200kr",
-    "cta": "Mer Info",
+    "title": "Sunday Social Dance",
+    "subtitle": "Enkel socialdans på söndagar – inga lektioner, inget krav. Bara kom och ha kul på golvet.",
+    "focus": "100% Bachata · Socialdans · Gemenskap",
+    "when": "Varje söndag",
+    "time": "15:00 – 18:00",
+    "price": "80 kr",
+    "memberDiscount": "50% rabatt för alla medlemmar",
+    "courseBonus": "Gratis vid köp av 3+ kurser",
+    "timeLabel": "Tid",
+    "priceLabel": "Pris",
+    "cta": "Mer info & boka",
     "benefits": [
-      "Få personlig feedback på din teknik",
-      "Korrigera vanor i realtid på socialgolvet",
-      "En trygg miljö för alla nivåer"
-    ],
-    "soloParLabel": "Solo / Par",
-    "workshopLabel": "Workshop",
-    "socialLabel": "Bachata Social",
-    "priceLabel": "Pris:"
-  },
-  "sundayFunday": {
-    "title": "Sunday Funday",
-    "subtitle": "100% Bachata",
-    "when": "Varje Söndag",
-    "workshopTime": "14:00 – 15:00",
-    "socialTime": "15:00 – 18:00",
-    "price": "80kr Social / 120kr All-in",
-    "cta": "Mer Info",
-    "workshopLabel": "Workshop",
-    "socialLabel": "Bachata Social",
-    "priceLabel": "Pris:"
+      "Avslappnad stämning – öppet för alla nivåer",
+      "100% Bachata hela eftermiddagen",
+      "Kom solo eller med partner och dansa för att ha roligt"
+    ]
   },
   "comingSoon": "Kommer snart",
   "seeAllEvents": "Se alla events"

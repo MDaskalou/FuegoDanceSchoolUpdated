@@ -5,6 +5,7 @@ import BootcampFeature from "@/components/BootcampFeature";
 import About from "@/components/About";
 import ScheduleSection from "@/components/Schedule";
 import PriceSection from "@/components/Price";
+import FeatureSection from "@/components/FeatureSection";
 import EventSection from "@/components/Event";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import InstagramFeed from "@/components/InstagramFeeds";
@@ -27,6 +28,7 @@ export default async function Home({ params }: { params: { lang: string } }) {
             <About lang={lang} />
             <ScheduleSection lang={lang} />
             <PriceSection lang={lang} />
+            <FeatureSection />
             <EventSection showSeeAllButton lang={lang} />
             <TestimonialsSection lang={lang} />
             <InstagramFeed />

@@ -15,21 +15,19 @@
   "noteWorkshopPrice": "120kr inkl. social",
   "noteSocialPrice": "80kr",
   "noteDropIn": "Drop-in tillgängligt",
-  "noteGuidedSocialPrise": "150kr singel, 200kr par",
+  "noteGuidedSocialPrise": "80kr",
   "noteLevel5Max": "Maximum 8 par",
   "courses": [
-    { "dayKey": "dayMonday", "time": "18:00 - 19:00", "name": "Level 4 Teknik", "instructors": "Mikael & Josefine", "isNew": false, "isDropIn": false },
-    { "dayKey": "dayMonday", "time": "19:05 - 20:05", "name": "Level 4", "instructors": "Mikael & Josefine", "isNew": false, "isDropIn": false },
-    { "dayKey": "dayMonday", "time": "20:10 - 21:10", "name": "Footwork", "instructors": "Mikael", "isNew": false, "isDropIn": false },
-    { "dayKey": "dayTuesday", "time": "18:00 - 19:00", "name": "Level 1", "instructors": "Feras & Josefine", "isNew": false, "isDropIn": false, "fillLabel": "30% fylld" },
-    { "dayKey": "dayTuesday", "time": "19:05 - 20:05", "name": "Adv.Foundation", "instructors": "Mikael", "isNew": false, "isDropIn": false },
+    { "dayKey": "dayMonday", "time": "18:00 - 19:00", "name": "Level 4 Teknik", "instructors": "Mikael & Josefine", "isNew": false, "isDropIn": false, "fillLabel": "50% fylld" },
+    { "dayKey": "dayMonday", "time": "19:05 - 20:05", "name": "Level 4", "instructors": "Mikael & Josefine", "isNew": false, "isDropIn": false, "fillLabel": "50% fylld" },
+    { "dayKey": "dayMonday", "time": "20:10 - 21:10", "name": "Footwork", "instructors": "Mikael", "isNew": false, "isDropIn": false, "fillLabel": "30% fylld" },
+    { "dayKey": "dayTuesday", "time": "18:00 - 19:00", "name": "Level 1", "instructors": "Feras & Josefine", "isNew": false, "isDropIn": false, "fillLabel": "50% fylld" },
+    { "dayKey": "dayTuesday", "time": "19:05 - 20:05", "name": "Adv.Foundation", "instructors": "Mikael", "isNew": false, "isDropIn": false, "fillLabel": "30% fylld" },
     { "dayKey": "dayTuesday", "time": "20:10 - 21:10", "name": "Level 2", "instructors": "Mikael & Inés", "isNew": false, "isDropIn": false, "fillLabel": "30% fylld" },
     { "dayKey": "dayWednesday", "time": "18:00 - 19:00", "name": "Level 3", "instructors": "Andris & Emma", "isNew": false, "isDropIn": false, "fillLabel": "30% fylld" },
     { "dayKey": "dayWednesday", "time": "19:05 - 20:05", "name": "Level 3 Teknik", "instructors": "Nora & Sisco", "isNew": false, "isDropIn": false, "fillLabel": "30% fylld" },
-    { "dayKey": "dayWednesday", "time": "20:10 - 21:10", "name": "Rolerotation", "subtitle": "Beginners", "instructors": "Nora & Sisco", "isNew": false, "isDropIn": false },
-    { "dayKey": "dayThursday", "time": "18:00 - 19:00", "name": "Raminta's Styling", "instructors": "Raminta", "isNew": false, "isDropIn": false },
     { "dayKey": "dayThursday", "time": "19:00 - 21:00", "name": "Level 5", "subtitle": "Closed group", "instructors": "Mikael", "noteKey": "noteLevel5Max", "isNew": false, "isDropIn": false },
     { "dayKey": "daySunday", "time": "13:00 - 14:00", "name": "Level 5 Practice", "subtitle": "Closed group", "instructors": "Mikael", "isNew": false, "isDropIn": false },
-    { "dayKey": "daySunday", "time": "15:00 - 18:00", "name": "Guided Social Dance", "instructors": "100% Bachata", "isNew": false, "isDropIn": false }
+    { "dayKey": "daySunday", "time": "15:00 - 18:00", "name": "Sunday Social Dance", "instructors": "100% Bachata", "isNew": false, "isDropIn": false }
   ]
 }

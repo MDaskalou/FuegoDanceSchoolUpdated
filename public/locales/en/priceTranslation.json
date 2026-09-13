@@ -3,7 +3,7 @@
   "priceHighlight": "First time is always free - come try it out!",
   "cardCourseTitle": "Courses",
   "cardDiscountTitle": "Discounts",
-  "cardDropInTitle": "Guided Social Dance",
+  "cardDropInTitle": "Sunday Social Dance",
   "tagPopular": "MOST POPULAR",
   "discountStudent": "Student discount: 10%",
   "discountCouple": "Couple discount: 15% per person",
@@ -11,16 +11,15 @@
   "ctaBookNow": "Book now",
   "epassiPartner": "Epassi at checkout",
   "epassiDescription": "Use your wellness benefit seamlessly – pay directly in our booking system.",
-  "bonusIncluded": "Guided Social Dance included",
-  "memberDropInDiscount": "50% discount for Fuego members",
+  "bonusIncluded": "Sunday Social Dance included free",
+  "memberDropInDiscount": "50% discount for all members",
   "savingPrefix": "save",
   "dropInCta": "Buy drop-in",
   "courseLabelSingular": "course",
   "courseLabelPlural": "courses",
-  "dropInNote": "Applies to Guided Social Dance. Limited to max 20 couples.",
+  "dropInNote": "Sunday Social Dance costs 80 SEK. Members get 50% off. Free when buying 3+ courses.",
   "socialDanceLabel": "Social dance",
-  "dropInSolo": "Solo",
-  "dropInCouple": "Couple",
+  "dropInStandard": "Drop-in",
   "courses": [
     { "count": 1, "price": 1600, "popular": false },
     { "count": 2, "price": 2800, "popular": true, "saving": 400 },
@@ -29,7 +28,6 @@
     { "count": 5, "price": 6400, "popular": false, "saving": 1600 }
   ],
   "dropInItems": [
-    { "labelKey": "dropInSolo", "price": 150, "isSocial": false },
-    { "labelKey": "dropInCouple", "price": 200, "isSocial": false }
+    { "labelKey": "dropInStandard", "price": 80, "isSocial": false }
   ]
 }

@@ -25,15 +25,13 @@ export default function TranslationProvider({
         const instance = createInstance();
         instance.use(initReactI18next);
 
-        // Prefer preloaded resources from the server; keep backend as fallback for missing ns
-        if (!resources) {
-            instance.use(
-                resourcesToBackend(
-                    (language: string, namespace: string) =>
-                        import(`../../public/locales/${language}/${namespace}.json`)
-                )
-            );
-        }
+        // Preloaded server resources are used first; backend lazy-loads any missing namespaces
+        instance.use(
+            resourcesToBackend(
+                (language: string, namespace: string) =>
+                    import(`../../public/locales/${language}/${namespace}.json`)
+            )
+        );
 
         instance.init({
             lng: lang,
@@ -45,7 +43,7 @@ export default function TranslationProvider({
             ns: [...namespaces],
             initImmediate: true,
             react: {
-                bindI18n: "languageChanged",
+                bindI18n: "languageChanged loaded",
                 useSuspense: false,
             },
         });
@@ -57,7 +55,7 @@ export default function TranslationProvider({
     useEffect(() => {
         Object.entries(resources ?? {}).forEach(([language, languageResources]) => {
             Object.entries(languageResources ?? {}).forEach(([namespace, namespaceResources]) => {
-                i18n.addResourceBundle(language, namespace, namespaceResources, false, true);
+                i18n.addResourceBundle(language, namespace, namespaceResources, true, true);
             });
         });
 
