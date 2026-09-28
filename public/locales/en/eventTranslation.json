@@ -175,6 +175,24 @@
         "Join us on Saturday, August 22, from 15:30–18:30 at Doktor Westrings Gata 14D, Gothenburg.",
         "Price: 199 SEK."
       ]
+    },
+    {
+      "id": 16,
+      "title": "Fuego Night X RA Latin Night – Halloween Edition",
+      "date": "October 23, 2026",
+      "startDate": "2026-10-23",
+      "location": "Blanche Brasserie, Gothenburg",
+      "link": "https://tickets.casaluna.se/event/FNxRALN",
+      "imageUrl": "/img/Events/FuegoNightHalloween2026.png",
+      "imageFit": "contain",
+      "isNew": true,
+      "featured": true,
+      "priority": 1,
+      "description": [
+        "Fuego Night meets RA Latin Night for a spooktacular Halloween Edition!",
+        "Featuring DJ Base and DJ Sivan – a night full of rhythm, dance, and party vibes.",
+        "Friday, October 23 at Blanche Brasserie – dress up and dance the night away!"
+      ]
     }
   ],
   "__MALL_events_SPARA_FOR_SENARE": [
