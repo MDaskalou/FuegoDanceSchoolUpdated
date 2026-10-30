@@ -8,6 +8,7 @@ import { Footer } from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
 import { Navbar } from "@/components/Navbar";
 import initTranslations, { APP_NAMESPACES } from "@/i18n";
+import { CONSENT_MODE_BOOTSTRAP } from "@/lib/consentBootstrap.mjs";
 import { GTM_ID } from "@/lib/gtm";
 import { buildRootMetadata } from "@/lib/seo";
 
@@ -58,25 +59,9 @@ export default async function RootLayout({
             <body
                 className={`${playfair.variable} ${lato.variable} ${greatVibes.variable} font-sans bg-[#121212] text-white antialiased`}
             >
-                {/* Default consent måste sättas innan GTM. beforeInteractive körs före afterInteractive i GoogleTagManager. */}
+                {/* beforeInteractive körs före GoogleTagManager (afterInteractive), inklusive återställning från localStorage. */}
                 <Script id="google-consent-mode" strategy="beforeInteractive">
-                    {`
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-
-                    gtag('consent', 'default', {
-                        'ad_storage': 'denied',
-                        'analytics_storage': 'denied',
-                        'ad_user_data': 'denied',
-                        'ad_personalization': 'denied',
-                        'personalization_storage': 'denied',
-                        'functionality_storage': 'granted',
-                        'security_storage': 'granted',
-                        'wait_for_update': 500
-                    });
-
-                    gtag('js', new Date());
-                `}
+                    {CONSENT_MODE_BOOTSTRAP}
                 </Script>
 
                 {/*

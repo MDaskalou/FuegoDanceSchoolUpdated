@@ -32,18 +32,19 @@ const readStoredPreferences = (): CookiePreferences => {
         if (!raw) return { ...defaultPreferences };
         const parsed = JSON.parse(raw) as Partial<CookiePreferences>;
         return {
-            analytics: Boolean(parsed.analytics),
-            marketing: Boolean(parsed.marketing),
+            analytics: parsed.analytics === true,
+            marketing: parsed.marketing === true,
         };
     } catch {
         return { ...defaultPreferences };
     }
 };
 
-const preferencesFromLevel = (level: ConsentLevel): CookiePreferences => {
+const preferencesFromLevel = (level: string | null): CookiePreferences => {
     if (level === "all") return { analytics: true, marketing: true };
     if (level === "necessary") return { analytics: false, marketing: false };
-    return readStoredPreferences();
+    if (level === "custom") return readStoredPreferences();
+    return { ...defaultPreferences };
 };
 
 const updateGtm = (
@@ -89,12 +90,16 @@ export default function CookieConsent() {
     const [preferences, setPreferences] = useState<CookiePreferences>(defaultPreferences);
 
     const restoreConsent = useCallback(() => {
-        const consent = localStorage.getItem(CONSENT_KEY) as ConsentLevel | null;
-        if (!consent) return false;
+        const consent = localStorage.getItem(CONSENT_KEY);
+        if (consent !== "all" && consent !== "necessary" && consent !== "custom") {
+            return false;
+        }
 
         const nextPreferences = preferencesFromLevel(consent);
         setPreferences(nextPreferences);
-        applyPreferencesToGtm(nextPreferences);
+        if (!window.__fuegoConsentBootstrapped) {
+            applyPreferencesToGtm(nextPreferences);
+        }
         return true;
     }, []);
 
@@ -109,14 +114,10 @@ export default function CookieConsent() {
     }, []);
 
     useEffect(() => {
-        const consent = localStorage.getItem(CONSENT_KEY);
+        if (restoreConsent()) return;
 
-        if (!consent) {
-            const timer = setTimeout(() => setIsVisible(true), 0);
-            return () => clearTimeout(timer);
-        }
-
-        restoreConsent();
+        const timer = setTimeout(() => setIsVisible(true), 0);
+        return () => clearTimeout(timer);
     }, [restoreConsent]);
 
     useEffect(() => {

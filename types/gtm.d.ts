@@ -5,4 +5,6 @@ interface Window {
      */
     dataLayer?: Object[];
     gtag?: (...args: unknown[]) => void;
+    /** Set when the beforeInteractive script already replayed a stored choice. */
+    __fuegoConsentBootstrapped?: boolean;
 }
