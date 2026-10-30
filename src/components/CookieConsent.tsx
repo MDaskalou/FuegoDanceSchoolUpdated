@@ -4,13 +4,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 
-declare global {
-    interface Window {
-        dataLayer: any[];
-        gtag: (...args: any[]) => void;
-    }
-}
-
 export const OPEN_COOKIE_SETTINGS_EVENT = "open-cookie-settings";
 
 export type CookiePreferences = {
@@ -59,7 +52,7 @@ const updateGtm = (
 ) => {
     const gtag =
         window.gtag ||
-        function (...args: any[]) {
+        function (...args: unknown[]) {
             (window.dataLayer = window.dataLayer || []).push(args);
         };
 
@@ -73,8 +66,8 @@ const updateGtm = (
         security_storage: "granted",
     });
 
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: "consent_update" });
+    const dataLayer = (window.dataLayer = window.dataLayer || []);
+    dataLayer.push({ event: "consent_update" });
 };
 
 const applyPreferencesToGtm = (preferences: CookiePreferences) => {

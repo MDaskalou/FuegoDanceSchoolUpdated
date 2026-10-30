@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Lato, Great_Vibes } from "next/font/google";
+import { GoogleTagManager } from "@next/third-parties/google";
 import "@/app/globals.css";
 import Script from "next/script";
 import TranslationProvider from "@/i18n/TranslationProvider";
@@ -7,6 +8,7 @@ import { Footer } from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
 import { Navbar } from "@/components/Navbar";
 import initTranslations, { APP_NAMESPACES } from "@/i18n";
+import { GTM_ID } from "@/lib/gtm";
 import { buildRootMetadata } from "@/lib/seo";
 
 const playfair = Playfair_Display({
@@ -48,56 +50,45 @@ export default async function RootLayout({
     children,
     params,
 }: RootLayoutProps) {
-    const GTM_ID = "GTM-5TDBRW66";
-
     const { resources } = await initTranslations(params.lang, APP_NAMESPACES);
 
     return (
         <html lang={params.lang} className="scroll-smooth">
+            <GoogleTagManager gtmId={GTM_ID} />
             <body
                 className={`${playfair.variable} ${lato.variable} ${greatVibes.variable} font-sans bg-[#121212] text-white antialiased`}
             >
-                {/* VIKTIGT: Detta script sätter Default Consent till 'denied'.
-              strategy="beforeInteractive" garanterar att detta körs INNAN GTM laddas.
-            */}
+                {/* Default consent måste sättas innan GTM. beforeInteractive körs före afterInteractive i GoogleTagManager. */}
                 <Script id="google-consent-mode" strategy="beforeInteractive">
                     {`
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}
-                    
-                    // Sätt default till 'denied' för att blockera cookies tills godkännande sker
+
                     gtag('consent', 'default', {
                         'ad_storage': 'denied',
                         'analytics_storage': 'denied',
                         'ad_user_data': 'denied',
                         'ad_personalization': 'denied',
                         'personalization_storage': 'denied',
-                        'functionality_storage': 'granted', // Nödvändiga cookies tillåts
-                        'security_storage': 'granted',      // Säkerhetscookies tillåts
+                        'functionality_storage': 'granted',
+                        'security_storage': 'granted',
                         'wait_for_update': 500
                     });
+
+                    gtag('js', new Date());
                 `}
                 </Script>
 
-                <noscript>
-                    <iframe
-                        src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
-                        height="0"
-                        width="0"
-                        style={{ display: "none", visibility: "hidden" }}
-                    />
-                </noscript>
-
-                {/* Google Tag Manager - Main Script */}
-                <Script id="google-tag-manager" strategy="afterInteractive">
-                    {`
-                    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-                    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-                    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                    })(window,document,'script','dataLayer','${GTM_ID}');
-                `}
-                </Script>
+                {/*
+                  Noscript-innehåll parsas inte som DOM när JS är på.
+                  dangerouslySetInnerHTML gör att server och klient renderar samma sträng
+                  och undviker hydration mismatch på iframe-elementet.
+                */}
+                <noscript
+                    dangerouslySetInnerHTML={{
+                        __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
+                    }}
+                />
 
                 <TranslationProvider
                     namespaces={APP_NAMESPACES}
