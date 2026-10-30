@@ -1,0 +1,51 @@
+{
+  "eyebrow": "Samarbetspartner",
+  "title": "Något extra när du dansar hos oss",
+  "intro": "Appar, klädbutiker och liknande. Vissa ger en promokod till Fuego-elever.",
+  "copy": "Kopiera",
+  "copied": "Kopierad",
+  "visit": "Besök",
+  "codeLabel": "Promokod",
+  "previous": "Föregående partner",
+  "next": "Nästa partner",
+  "goTo": "Gå till partner",
+  "partners": [
+    {
+      "name": "Bailamigos",
+      "category": "Kläder",
+      "offer": "10 % rabatt på kläder i webbutiken.",
+      "code": "FUEGO10",
+      "href": "https://www.bailamigos.se/shop",
+      "logo": "/img/Partners/bailamigos.png",
+      "logoSurface": "dark"
+    },
+    {
+      "name": "La Luna Festival",
+      "category": "Festival",
+      "offer": "Partnerfestival. Använd koden FUEGO.",
+      "code": "FUEGO",
+      "href": "https://www.goandance.com/en/event/8997/la-luna-festival?promoter=FUEGO",
+      "logo": "/img/Partners/la-luna-festival.jpg",
+      "logoSurface": "light"
+    },
+    {
+      "name": "Panamio",
+      "category": "Butik",
+      "offer": "10 % rabatt på samtliga produkter.",
+      "code": "Fuego10",
+      "href": "https://www.panamiodance.com/FUEGO10",
+      "logo": "/img/Partners/panamio.png",
+      "logoSurface": "dark",
+      "showName": true
+    },
+    {
+      "name": "Dancing Feet",
+      "category": "App",
+      "offer": "App som hjälper dig träna mellan klasserna.",
+      "href": "https://dancingfeet.app/",
+      "logo": "/img/Partners/dancing-feet.jpg",
+      "logoSurface": "dark",
+      "showName": true
+    }
+  ]
+}
