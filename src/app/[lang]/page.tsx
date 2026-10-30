@@ -8,6 +8,7 @@ import PriceSection from "@/components/Price";
 import FeatureSection from "@/components/FeatureSection";
 import EventSection from "@/components/Event";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import PartnersSection from "@/components/PartnersSection";
 import InstagramFeed from "@/components/InstagramFeeds";
 
 export async function generateStaticParams() {
@@ -31,6 +32,7 @@ export default async function Home({ params }: { params: { lang: string } }) {
             <FeatureSection />
             <EventSection showSeeAllButton lang={lang} />
             <TestimonialsSection lang={lang} />
+            <PartnersSection lang={lang} />
             <InstagramFeed />
         </>
     );

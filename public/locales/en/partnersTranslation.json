@@ -1,0 +1,51 @@
+{
+  "eyebrow": "Partners",
+  "title": "A little extra when you dance with us",
+  "intro": "Apps, clothing shops and similar. Some offer a promo code for Fuego students.",
+  "copy": "Copy",
+  "copied": "Copied",
+  "visit": "Visit",
+  "codeLabel": "Promo code",
+  "previous": "Previous partner",
+  "next": "Next partner",
+  "goTo": "Go to partner",
+  "partners": [
+    {
+      "name": "Bailamigos",
+      "category": "Clothing",
+      "offer": "10% off clothes in the online shop.",
+      "code": "FUEGO10",
+      "href": "https://www.bailamigos.se/shop",
+      "logo": "/img/Partners/bailamigos.png",
+      "logoSurface": "dark"
+    },
+    {
+      "name": "La Luna Festival",
+      "category": "Festival",
+      "offer": "Partner festival. Use the code FUEGO.",
+      "code": "FUEGO",
+      "href": "https://www.goandance.com/en/event/8997/la-luna-festival?promoter=FUEGO",
+      "logo": "/img/Partners/la-luna-festival.jpg",
+      "logoSurface": "light"
+    },
+    {
+      "name": "Panamio",
+      "category": "Shop",
+      "offer": "10% off all products.",
+      "code": "Fuego10",
+      "href": "https://www.panamiodance.com/FUEGO10",
+      "logo": "/img/Partners/panamio.png",
+      "logoSurface": "dark",
+      "showName": true
+    },
+    {
+      "name": "Dancing Feet",
+      "category": "App",
+      "offer": "An app that helps you practise between classes.",
+      "href": "https://dancingfeet.app/",
+      "logo": "/img/Partners/dancing-feet.jpg",
+      "logoSurface": "dark",
+      "showName": true
+    }
+  ]
+}
