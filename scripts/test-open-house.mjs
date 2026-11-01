@@ -537,12 +537,67 @@ const cloudflareNetwork = await turnstileOutcome("valid-token", new Error("netwo
 assert.equal(cloudflareNetwork.result.status, 502);
 assert.equal(cloudflareNetwork.calls.length, 1);
 
-const wrongHost = await turnstileOutcome(
+async function acceptedHostname(hostname) {
+    const calls = [];
+    const result = await handleOpenHousePost(registration(), TEST_ENV, async (url, init) => {
+        calls.push(String(url));
+        if (String(url).startsWith("https://challenges.cloudflare.com/")) {
+            return httpResult(200, { success: true, hostname, action: "open_house" });
+        }
+        if (init && init.method === "POST") {
+            return httpResult(302, "", { location: echoUrl });
+        }
+        return httpResult(200, { result: "success", alreadyRegistered: false, payloadHash: hash });
+    });
+    return { result, calls };
+}
+
+for (const hostname of ["localhost", "127.0.0.1", "charming-platypus-787e76.netlify.app"]) {
+    const accepted = await acceptedHostname(hostname);
+    assert.equal(accepted.result.status, 200);
+    assert.equal(accepted.result.body.leadRecorded, true);
+    assert.equal(accepted.calls[1], TEST_URL);
+}
+
+for (const hostname of [
+    "example.com",
+    "other-site.netlify.app",
+    "charming-platypus-787e76.netlify.app.evil.com",
+    "not-charming-platypus-787e76.netlify.app",
+    "localhost.localdomain",
+    "127.0.0.1.nip.io",
+]) {
+    const denied = await turnstileOutcome(
+        "valid-token",
+        httpResult(200, { success: true, hostname, action: "open_house" })
+    );
+    assert.equal(denied.result.status, 400);
+    assert.equal(denied.calls.length, 1);
+}
+
+const previewWithoutSuccess = await turnstileOutcome(
     "valid-token",
-    httpResult(200, { success: true, hostname: "example.com", action: "open_house" })
+    httpResult(200, {
+        success: false,
+        hostname: "charming-platypus-787e76.netlify.app",
+        action: "open_house",
+    })
 );
-assert.equal(wrongHost.result.status, 400);
-assert.equal(wrongHost.calls.length, 1);
+assert.equal(previewWithoutSuccess.result.status, 400);
+assert.equal(previewWithoutSuccess.calls.length, 1);
+
+const notTestMode = await handleOpenHousePost(
+    registration(),
+    { ...TEST_ENV, OPEN_HOUSE_ENV: "production" },
+    async () => {
+        throw new Error("non-test mode made an external call");
+    }
+);
+assert.equal(notTestMode.status, 503);
+
+const turnstileSource = readFileSync("src/lib/turnstile.mjs", "utf8");
+assert.ok(turnstileSource.includes('"charming-platypus-787e76.netlify.app"'));
+assert.equal(turnstileSource.includes(".includes("), false);
 
 const wrongAction = await turnstileOutcome(
     "valid-token",

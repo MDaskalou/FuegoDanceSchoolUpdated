@@ -2,7 +2,11 @@ const SITEVERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverif
 
 export const TURNSTILE_ACTION = "open_house";
 
-const TEST_HOSTS = new Set(["localhost", "127.0.0.1"]);
+const TEST_HOSTS = new Set([
+    "localhost",
+    "127.0.0.1",
+    "charming-platypus-787e76.netlify.app",
+]);
 
 export async function verifyTurnstileToken({ fetchImpl, secret, token }) {
     if (typeof secret !== "string" || secret.trim() === "") {
