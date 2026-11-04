@@ -1,4 +1,4 @@
-﻿{
+{
   "formTitle": "Register for open house",
   "formDescription": "Unsure about your level or whether bachata is for you? Come try our classes, meet us, and feel the atmosphere before booking a course.",
   "nameLabel": "Name",
@@ -25,17 +25,36 @@
   ],
 
   "requiredField": "Please fill in all required fields (*).",
+  "nameError": "Enter your name.",
+  "emailError": "Enter a valid email address.",
+  "roleError": "Select lead or follow.",
+  "referralError": "Select how you found us.",
+  "submitError": "The registration could not be sent. Please try again.",
+  "rateLimitError": "Too many attempts right now. Wait a few minutes and try again.",
 
-  "courseOptions": [
-    "Level 1", "Level 2", "Level 3", "Level 3 Technique",
-    "Level 4", "Level 4 Technique",
-    "Ramintas Styling", "Role Rotation", "Advanced Foundation",
-    "Footwork"
-  ],
-  "roleOptions": [
-    "Select an option", "Lead", "Follow"
-  ],
-  "referralOptions": [
-    "Select an option", "Facebook", "Instagram", "Google", "Friend", "Other"
-  ]
+  "rolePlaceholder": "Select an option",
+  "referralPlaceholder": "Select an option",
+  "courseLabels": {
+    "level-1": "Level 1",
+    "level-2": "Level 2",
+    "level-3": "Level 3",
+    "level-3-technique": "Level 3 Technique",
+    "level-4": "Level 4",
+    "level-4-technique": "Level 4 Technique",
+    "ramintas-styling": "Ramintas Styling",
+    "role-rotation": "Role Rotation",
+    "advanced-foundation": "Advanced Foundation",
+    "footwork": "Footwork"
+  },
+  "roleLabels": {
+    "lead": "Lead",
+    "follow": "Follow"
+  },
+  "referralLabels": {
+    "facebook": "Facebook",
+    "instagram": "Instagram",
+    "google": "Google",
+    "friend": "Friend",
+    "other": "Other"
+  }
 }

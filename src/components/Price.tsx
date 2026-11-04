@@ -4,10 +4,11 @@ import { getServerT } from "@/i18n";
 import { Sparkles, Percent, Calendar, CheckCircle2, Gift, ShoppingCart } from "lucide-react";
 
 interface Course {
-    count: number;
+    count?: number;
     price: number;
     popular: boolean;
     saving?: number;
+    labelKey?: string;
 }
 
 interface DropInItem {
@@ -120,18 +121,24 @@ export default async function PriceSection({ lang }: PriceSectionProps) {
 
     const coursesRaw = t("courses", { returnObjects: true });
     const dropInItemsRaw = t("dropInItems", { returnObjects: true });
+    const discountsRaw = t("discounts", { returnObjects: true });
 
     const courses: Course[] = Array.isArray(coursesRaw) ? coursesRaw : [];
     const dropInItems: DropInItem[] = Array.isArray(dropInItemsRaw) ? dropInItemsRaw : [];
+    const discounts: string[] = Array.isArray(discountsRaw)
+        ? discountsRaw
+        : [t("discountStudent"), t("discountCouple"), t("discountHalfOfSemester")];
 
-    const getCourseLabel = (count: number) => {
+    const getCourseLabel = (course: Course) => {
+        if (course.labelKey) return t(course.labelKey);
+        const count = course.count ?? 0;
         if (count === 0) return t("socialDanceLabel");
         return `${count} ${t(count === 1 ? "courseLabelSingular" : "courseLabelPlural")}`;
     };
 
     const getDropInLabel = (item: DropInItem) => {
         if (item.labelKey) return t(item.labelKey);
-        return getCourseLabel(item.count ?? 0);
+        return getCourseLabel({ count: item.count ?? 0, price: item.price, popular: false });
     };
 
     return (
@@ -163,14 +170,14 @@ export default async function PriceSection({ lang }: PriceSectionProps) {
                             {courses.map((course, index) => (
                                 <PriceRow
                                     key={index}
-                                    label={getCourseLabel(course.count)}
+                                    label={getCourseLabel(course)}
                                     price={`${course.price} kr`}
                                     highlighted={course.popular}
                                     popular={course.popular}
                                     popularLabel={t("tagPopular")}
                                     saving={course.saving}
                                     savingPrefix={t("savingPrefix")}
-                                    bonusText={course.count >= 3 ? t("bonusIncluded") : undefined}
+                                    bonusText={(course.count ?? 0) >= 3 ? t("bonusIncluded") : undefined}
                                 />
                             ))}
                         </ul>
@@ -181,11 +188,7 @@ export default async function PriceSection({ lang }: PriceSectionProps) {
                         icon={<Percent className="w-5 h-5" />}
                     >
                         <ul className="space-y-4 flex-grow">
-                            {[
-                                t("discountStudent"),
-                                t("discountCouple"),
-                                t("discountHalfOfSemester"),
-                            ].map((text, i) => (
+                            {discounts.map((text, i) => (
                                 <li key={i} className="flex items-start gap-3 p-4 rounded-xl bg-white/[0.03] border border-white/8 text-sm text-gray-300 text-left transition-all duration-300 hover:bg-white/[0.06] hover:scale-[1.02]">
                                     <CheckCircle2 className="w-4 h-4 text-orange-500 mt-0.5 shrink-0" />
                                     <span>{text}</span>

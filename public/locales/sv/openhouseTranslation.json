@@ -1,4 +1,4 @@
-﻿{
+{
   "formTitle": "Anmäl dig till öppet hus",
   "formDescription": "Osäker på nivå eller om bachata är för dig? Kom och testa våra klasser, träffa oss och känn in stämningen innan du bokar kurs.",
   "nameLabel": "Namn",
@@ -25,17 +25,36 @@
   ],
 
   "requiredField": "Fyll i alla obligatoriska fält (*).",
+  "nameError": "Ange ditt namn.",
+  "emailError": "Ange en giltig e-postadress.",
+  "roleError": "Välj förare eller följare.",
+  "referralError": "Välj hur du hittade oss.",
+  "submitError": "Anmälan kunde inte skickas. Försök igen.",
+  "rateLimitError": "För många försök just nu. Vänta några minuter och försök igen.",
 
-  "courseOptions": [
-    "Nivå 1", "Nivå 2", "Nivå 3", "Nivå 3 Teknik",
-    "Nivå 4", "Nivå 4 Teknik",
-    "Ramintas Styling", "Rolerotation", "Advanced Fundation",
-    "Footwork"
-  ],
-  "roleOptions": [
-    "Välj ett alternativ", "Förare", "Följare"
-  ],
-  "referralOptions": [
-    "Välj ett alternativ", "Facebook", "Instagram", "Google", "Vän", "Annat"
-  ]
+  "rolePlaceholder": "Välj ett alternativ",
+  "referralPlaceholder": "Välj ett alternativ",
+  "courseLabels": {
+    "level-1": "Nivå 1",
+    "level-2": "Nivå 2",
+    "level-3": "Nivå 3",
+    "level-3-technique": "Nivå 3 Teknik",
+    "level-4": "Nivå 4",
+    "level-4-technique": "Nivå 4 Teknik",
+    "ramintas-styling": "Ramintas Styling",
+    "role-rotation": "Rolerotation",
+    "advanced-foundation": "Advanced Fundation",
+    "footwork": "Footwork"
+  },
+  "roleLabels": {
+    "lead": "Förare",
+    "follow": "Följare"
+  },
+  "referralLabels": {
+    "facebook": "Facebook",
+    "instagram": "Instagram",
+    "google": "Google",
+    "friend": "Vän",
+    "other": "Annat"
+  }
 }
