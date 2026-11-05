@@ -20,7 +20,7 @@
   "courses": [
     { "dayKey": "dayMonday", "time": "18:30 - 20:30", "name": "Level 4", "instructors": "Mikael & Josefine", "isNew": false, "isDropIn": false },
     { "dayKey": "dayTuesday", "time": "18:30 - 20:30", "name": "Level 2", "instructors": "Mikael & Ines", "isNew": false, "isDropIn": false },
-    { "dayKey": "dayWednesday", "time": "18:30 - 20:30", "name": "Level 3", "instructors": "Sisco & Nora", "isNew": false, "isDropIn": false },
+    { "dayKey": "dayWednesday", "time": "18:30 - 20:30", "name": "Level 3", "instructors": "Andris & Emma", "isNew": false, "isDropIn": false },
     { "dayKey": "dayThursday", "time": "18:30 - 20:30", "name": "Level 5", "instructors": "Mikael & Irina", "isNew": false, "isDropIn": false }
   ]
 }
