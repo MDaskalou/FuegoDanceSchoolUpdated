@@ -27,7 +27,7 @@ const faqData = {
     ],
     "Kurser och tider": [
         { "q": "Hur lång är varje kurs?", "a": "Just nu kör vi en workshop vecka 49 och 50. Varje nivå är 2 veckor, måndag till torsdag kl 18:30–20:30." },
-        { "q": "Har ni drop-in?", "a": "Nej, vi har inga drop-in-klasser just nu." }
+        { "q": "Har ni drop-in?", "a": "Inte på våra kurser, där anmäler du dig till hela perioden. Sunday Social Dance på söndagar kl. 15–18 köps som ett eget tillfälle för 80 kr, och medlemmar får 50 % rabatt." }
     ],
     "Priser och rabatter": [
         { "q": "Vad kostar kurserna?", "a": "Workshopen vecka 49 och 50 kostar 500 kr för 2 veckor. Par betalar 900 kr. Studenter får 10% rabatt." },
@@ -49,7 +49,7 @@ VIKTIG INFORMATION OM KURSER:
 - Just nu kör vi en workshop vecka 49 och 50.
 - Varje nivå är 2 veckor, måndag till torsdag kl 18:30–20:30.
 - Pris: 500 kr för 2 veckor. Par: 900 kr. Studentrabatt: 10%.
-- Vi har inga drop-in-klasser just nu.
+- Inte på våra kurser, där anmäler du dig till hela perioden. Sunday Social Dance på söndagar kl. 15–18 köps som ett eget tillfälle för 80 kr, och medlemmar får 50 % rabatt.
 - Be användaren kolla schemat för dagar och nivåer.
 
 ANVÄND DENNA FAQ FÖR SVAR:
