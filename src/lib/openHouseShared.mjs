@@ -30,12 +30,22 @@ export function isUuid(value) {
     return typeof value === "string" && UUID_PATTERN.test(value);
 }
 
-export function isHoneypotTripped(body) {
-    if (!body || typeof body !== "object") return false;
-    const value = body.company_website;
+function honeypotValueFilled(value) {
     if (value == null) return false;
     if (typeof value === "string") return value.trim() !== "";
     return true;
+}
+
+export function isHoneypotTripped(body) {
+    if (!body || typeof body !== "object") return false;
+    return honeypotValueFilled(body.oh_hp) || honeypotValueFilled(body.company_website);
+}
+
+export function openHouseSubmissionState(data) {
+    if (!data || data.ok !== true) return "rejected";
+    if (data.leadRecorded === true && data.alreadyRegistered !== true) return "created";
+    if (data.alreadyRegistered === true && data.leadRecorded === false) return "duplicate";
+    return "rejected";
 }
 
 export function getOpenHouseFieldErrors(fields) {

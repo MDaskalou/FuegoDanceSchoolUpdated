@@ -5,6 +5,7 @@ import {
     buildGenerateLeadEvent,
     clearRegistrationAttempt,
     getOpenHouseFieldErrors,
+    openHouseSubmissionState,
     payloadFingerprint,
     rememberRegistrationId,
     shouldTrackLead,
@@ -57,6 +58,7 @@ function registration(overrides = {}) {
         message: "First time",
         language: "sv",
         company_website: "",
+        oh_hp: "",
         turnstileToken: "valid-token",
         ...overrides,
     };
@@ -152,6 +154,26 @@ assert.equal(honeypot.status, 200);
 assert.deepEqual(honeypot.body, { ok: true });
 assert.equal("leadRecorded" in honeypot.body, false);
 
+const autofilledHoneypot = await handleOpenHousePost(
+    registration({ oh_hp: "https://saved-company.example" }),
+    TEST_ENV,
+    async () => {
+        throw new Error("autofilled honeypot called Apps Script");
+    }
+);
+assert.equal(autofilledHoneypot.status, 200);
+assert.deepEqual(autofilledHoneypot.body, { ok: true });
+assert.equal("leadRecorded" in autofilledHoneypot.body, false);
+
+const blankHoneypot = await handleOpenHousePost(
+    registration({ oh_hp: "   ", company_website: "   " }),
+    TEST_ENV,
+    allowTurnstile(async () => {
+        throw new Error("blank honeypot should reach Apps Script");
+    })
+);
+assert.equal(blankHoneypot.status, 502);
+
 const invalid = await handleOpenHousePost(
     registration({ email: "not-an-email" }),
     TEST_ENV,
@@ -208,6 +230,8 @@ assert.equal(successFetch.calls[0].init.method, "POST");
 assert.equal(successFetch.calls[0].init.redirect, "manual");
 const posted = JSON.parse(successFetch.calls[0].init.body);
 assert.equal(posted.turnstileToken, undefined);
+assert.equal(posted.oh_hp, undefined);
+assert.equal(posted.company_website, undefined);
 assert.equal(posted.secret, "test-secret");
 assert.equal(posted.payloadHash, hash);
 assert.equal(posted.eventId, "open-house-test");
@@ -353,7 +377,15 @@ assert.ok(validationReturn > 0);
 assert.ok(postCall > validationReturn);
 assert.ok(formSource.includes('focus({ preventScroll: true })'));
 assert.ok(formSource.includes('aria-describedby={fieldErrors.name ? "name-error" : undefined}'));
-assert.ok(formSource.includes("data.leadRecorded === true"));
+assert.ok(formSource.includes("openHouseSubmissionState"));
+assert.ok(formSource.includes('submissionState === "created"'));
+assert.ok(formSource.includes('name="oh_hp"'));
+assert.ok(formSource.includes('id="oh_hp"'));
+assert.ok(formSource.includes("Leave blank"));
+assert.ok(formSource.includes('autoComplete="oh-hp"'));
+assert.equal(formSource.includes("readOnly"), false);
+assert.equal(formSource.includes("company_website"), false);
+assert.equal(formSource.includes("Company website"), false);
 assert.equal(formSource.includes("alreadyRegistered"), false);
 assert.ok(formSource.includes('action: "open_house"'));
 assert.ok(formSource.includes("turnstileToken"));
@@ -900,6 +932,13 @@ const productionInvalid = await handleOpenHousePost(
     }
 );
 assert.equal(productionInvalid.status, 400);
+
+assert.equal(openHouseSubmissionState({ ok: true }), "rejected");
+assert.equal(openHouseSubmissionState({ ok: true, leadRecorded: true, alreadyRegistered: false }), "created");
+assert.equal(openHouseSubmissionState({ ok: true, alreadyRegistered: true, leadRecorded: false }), "duplicate");
+assert.equal(openHouseSubmissionState({ ok: true, leadRecorded: true, alreadyRegistered: true }), "rejected");
+assert.equal(openHouseSubmissionState({ ok: false, leadRecorded: true }), "rejected");
+assert.equal(openHouseSubmissionState(null), "rejected");
 
 const siteKeys = {
     testSiteKey: "test-site-key",
