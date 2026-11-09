@@ -48,7 +48,7 @@
         },
         {
           "q": "Har ni drop-in?",
-          "a": "Nej, vi har inga drop-in-klasser just nu."
+          "a": "Inte på våra kurser, där anmäler du dig till hela perioden. Sunday Social Dance på söndagar kl. 15–18 köps som ett eget tillfälle för 80 kr, och medlemmar får 50 % rabatt."
         },
         {
           "q": "Kan jag ta igen en missad lektion?",
@@ -62,6 +62,10 @@
         {
           "q": "Vad kostar kurserna?",
           "a": "Workshopen vecka 49 och 50 kostar 500 kr för 2 veckor. Par betalar 900 kr. Studenter får 10% rabatt."
+        },
+        {
+          "q": "Har ni presentkort?",
+          "a": "Ja. Presentkort är ett tillgodohavande du väljer själv: 1 000, 2 000 eller 3 000 kr, eller ett eget belopp. Du köper det under Priser på startsidan."
         },
         {
           "q": "Jag är student – får jag rabatt?",

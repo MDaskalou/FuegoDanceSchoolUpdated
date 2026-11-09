@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import React, { startTransition, useEffect, useState } from "react";
-import { FaBars, FaTimes, FaFacebookF, FaInstagram } from "react-icons/fa";
+import { FaBars, FaTimes } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import Image from "next/image";
@@ -58,7 +58,6 @@ export const Navbar: React.FC = () => {
   };
 
   const navLinks = [
-    { name: t('nav.home'), href: "/#heroreel" },
     { name: t('nav.schedule'), href: "/#schedule" },
     { name: t('nav.courses'), href: "/courses", isCta: true },
     { name: t('nav.openHouse'), href: "/openhouse" },
@@ -100,15 +99,6 @@ export const Navbar: React.FC = () => {
             </nav>
 
             <div className="flex items-center gap-8">
-              <div className="hidden md:flex items-center gap-5 border-r border-white/10 pr-8">
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-white/60">
-                  <FaInstagram size={22} />
-                </a>
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-white/60">
-                  <FaFacebookF size={20} />
-                </a>
-              </div>
-
               <button onClick={handleLanguageChange} className="text-white font-black text-sm tracking-widest uppercase">
                 {visibleLang === "sv" ? "EN" : "SV"}
               </button>
@@ -146,10 +136,6 @@ export const Navbar: React.FC = () => {
             </nav>
 
             <div className="flex flex-col items-center gap-8 pt-10 mt-auto">
-              <div className="flex gap-10">
-                <FaInstagram size={24} className="text-white/40" />
-                <FaFacebookF size={22} className="text-white/40" />
-              </div>
               <button onClick={handleLanguageChange} className="text-[#f26722] font-bold tracking-[0.3em] uppercase text-xs">
                 {visibleLang === "sv" ? "English Version" : "Svenska"}
               </button>
