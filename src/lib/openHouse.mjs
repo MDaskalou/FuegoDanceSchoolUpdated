@@ -14,19 +14,20 @@ const TRUSTED_REDIRECT_HOSTS = new Set([
     "script.googleusercontent.com",
 ]);
 
-export function resolveTestTarget(env) {
-    if (env.OPEN_HOUSE_ENV !== "test") {
-        return { ok: false, reason: "test_mode_required" };
-    }
+const APPS_SCRIPT_PATH = /^\/macros\/s\/([^/]+)\/exec$/;
+const DEPLOYMENT_ID_PATTERN = /^[A-Za-z0-9_-]{20,}$/;
 
-    const urlValue = env.OPEN_HOUSE_APPS_SCRIPT_URL;
-    const secret = env.OPEN_HOUSE_APPS_SCRIPT_SECRET;
-    const eventId = typeof env.OPEN_HOUSE_EVENT_ID === "string" ? env.OPEN_HOUSE_EVENT_ID.trim() : "";
-    if (typeof urlValue !== "string" || typeof secret !== "string" || secret.trim() === "" || !isOpenHouseEventId(eventId)) {
+function configuredSecret(value) {
+    if (typeof value !== "string" || value.trim() === "") return null;
+    return value;
+}
+
+function parseAppsScriptUrl(urlValue) {
+    if (typeof urlValue !== "string" || urlValue.trim() === "") {
         return { ok: false, reason: "missing_config" };
     }
     if (urlValue.includes(PRODUCTION_DEPLOYMENT_ID)) {
-        return { ok: false, reason: "production_blocked" };
+        return { ok: false, reason: "legacy_production_blocked" };
     }
 
     let url;
@@ -42,14 +43,118 @@ export function resolveTestTarget(env) {
     if (url.hostname !== "script.google.com") {
         return { ok: false, reason: "untrusted_host" };
     }
-    if (!/^\/macros\/s\/[^/]+\/exec$/.test(url.pathname)) {
-        return { ok: false, reason: "invalid_url" };
+
+    const match = APPS_SCRIPT_PATH.exec(url.pathname);
+    if (!match || match[1] === PRODUCTION_DEPLOYMENT_ID) {
+        return { ok: false, reason: match ? "legacy_production_blocked" : "invalid_url" };
     }
 
-    return { ok: true, url: url.toString(), secret, eventId };
+    return { ok: true, url: url.toString(), deploymentId: match[1] };
 }
 
-function trustedRedirect(location, baseUrl) {
+function readDeploymentId(value) {
+    if (typeof value !== "string" || value.trim() === "") return { state: "absent" };
+    const id = value.trim();
+    if (!DEPLOYMENT_ID_PATTERN.test(id) || id === PRODUCTION_DEPLOYMENT_ID) return { state: "invalid" };
+    return { state: "present", id };
+}
+
+export function resolveOpenHouseTarget(env) {
+    const mode = env.OPEN_HOUSE_ENV;
+    if (mode !== "test" && mode !== "production") {
+        return { ok: false, reason: "invalid_env" };
+    }
+
+    const eventId = typeof env.OPEN_HOUSE_EVENT_ID === "string" ? env.OPEN_HOUSE_EVENT_ID.trim() : "";
+    if (!isOpenHouseEventId(eventId)) {
+        return { ok: false, reason: "missing_config" };
+    }
+
+    const testAllowlist = readDeploymentId(env.OPEN_HOUSE_TEST_DEPLOYMENT_ID);
+    const productionAllowlist = readDeploymentId(env.OPEN_HOUSE_PRODUCTION_DEPLOYMENT_ID);
+    if (testAllowlist.state === "invalid" || productionAllowlist.state === "invalid") {
+        return { ok: false, reason: "invalid_deployment" };
+    }
+    if (
+        testAllowlist.state === "present" &&
+        productionAllowlist.state === "present" &&
+        testAllowlist.id === productionAllowlist.id
+    ) {
+        return { ok: false, reason: "environment_collision" };
+    }
+
+    const ownAllowlist = mode === "test" ? testAllowlist : productionAllowlist;
+    const otherAllowlist = mode === "test" ? productionAllowlist : testAllowlist;
+    if (ownAllowlist.state !== "present") {
+        return { ok: false, reason: "missing_config" };
+    }
+
+    const testSecret = configuredSecret(env.OPEN_HOUSE_APPS_SCRIPT_SECRET);
+    const productionSecret = configuredSecret(env.OPEN_HOUSE_PRODUCTION_APPS_SCRIPT_SECRET);
+    const testTurnstileSecret = configuredSecret(env.TURNSTILE_SECRET_KEY);
+    const productionTurnstileSecret = configuredSecret(env.TURNSTILE_PRODUCTION_SECRET_KEY);
+    const selectedSecret = mode === "test" ? testSecret : productionSecret;
+    const selectedTurnstileSecret = mode === "test" ? testTurnstileSecret : productionTurnstileSecret;
+    const otherSecret = mode === "test" ? productionSecret : testSecret;
+    const otherTurnstileSecret = mode === "test" ? productionTurnstileSecret : testTurnstileSecret;
+
+    if (!selectedSecret || !selectedTurnstileSecret) {
+        return { ok: false, reason: "missing_config" };
+    }
+    if (
+        (otherSecret && otherSecret.trim() === selectedSecret.trim()) ||
+        (otherTurnstileSecret && otherTurnstileSecret.trim() === selectedTurnstileSecret.trim())
+    ) {
+        return { ok: false, reason: "environment_collision" };
+    }
+
+    const selected = parseAppsScriptUrl(
+        mode === "test" ? env.OPEN_HOUSE_APPS_SCRIPT_URL : env.OPEN_HOUSE_PRODUCTION_APPS_SCRIPT_URL
+    );
+    if (!selected.ok) return selected;
+    if (selected.deploymentId !== ownAllowlist.id) {
+        return { ok: false, reason: "unlisted_deployment" };
+    }
+    if (otherAllowlist.state === "present" && selected.url.includes(otherAllowlist.id)) {
+        return { ok: false, reason: "environment_collision" };
+    }
+
+    const otherUrlValue = mode === "test"
+        ? env.OPEN_HOUSE_PRODUCTION_APPS_SCRIPT_URL
+        : env.OPEN_HOUSE_APPS_SCRIPT_URL;
+    let otherDeploymentId = "";
+    if (typeof otherUrlValue === "string" && otherUrlValue.trim() !== "") {
+        if (otherAllowlist.state !== "present") {
+            return { ok: false, reason: "missing_config" };
+        }
+        const other = parseAppsScriptUrl(otherUrlValue);
+        if (!other.ok) return { ok: false, reason: "invalid_config" };
+        if (other.deploymentId !== otherAllowlist.id) {
+            return { ok: false, reason: "unlisted_deployment" };
+        }
+        if (other.deploymentId === selected.deploymentId || selected.url.includes(other.deploymentId)) {
+            return { ok: false, reason: "environment_collision" };
+        }
+        otherDeploymentId = other.deploymentId;
+    }
+
+    return {
+        ok: true,
+        mode,
+        url: selected.url,
+        secret: selectedSecret,
+        turnstileSecret: selectedTurnstileSecret,
+        eventId,
+        deploymentId: selected.deploymentId,
+        deniedDeploymentIds: [
+            PRODUCTION_DEPLOYMENT_ID,
+            otherDeploymentId,
+            otherAllowlist.state === "present" ? otherAllowlist.id : "",
+        ].filter(Boolean),
+    };
+}
+
+function trustedRedirect(location, baseUrl, deniedDeploymentIds, allowedDeploymentId) {
     if (typeof location !== "string" || location.trim() === "") return null;
     let url;
     try {
@@ -59,7 +164,14 @@ function trustedRedirect(location, baseUrl) {
     }
     if (url.protocol !== "https:" || url.username || url.password) return null;
     if (!TRUSTED_REDIRECT_HOSTS.has(url.hostname)) return null;
-    if (url.toString().includes(PRODUCTION_DEPLOYMENT_ID)) return null;
+    const value = url.toString();
+    for (const deploymentId of deniedDeploymentIds) {
+        if (deploymentId && value.includes(deploymentId)) return null;
+    }
+    if (url.hostname === "script.google.com") {
+        const match = APPS_SCRIPT_PATH.exec(url.pathname);
+        if (!match || match[1] !== allowedDeploymentId) return null;
+    }
     return url;
 }
 
@@ -103,6 +215,8 @@ export async function submitToAppsScript({
     secret,
     eventId,
     registration,
+    deniedDeploymentIds = [PRODUCTION_DEPLOYMENT_ID],
+    allowedDeploymentId = "",
     timeoutMs = 12000,
 }) {
     const payloadHash = await payloadFingerprint(registration);
@@ -132,7 +246,12 @@ export async function submitToAppsScript({
 
         let resultResponse = posted;
         if (posted.status >= 300 && posted.status < 400) {
-            const nextUrl = trustedRedirect(posted.headers.get("location"), url);
+            const nextUrl = trustedRedirect(
+                posted.headers.get("location"),
+                url,
+                deniedDeploymentIds,
+                allowedDeploymentId
+            );
             if (!nextUrl) {
                 return { status: 502, body: { ok: false } };
             }
@@ -172,15 +291,16 @@ export async function handleOpenHousePost(body, env, fetchImpl) {
         return { status: 400, body: { ok: false } };
     }
 
-    const target = resolveTestTarget(env);
+    const target = resolveOpenHouseTarget(env);
     if (!target.ok) {
         return { status: 503, body: { ok: false } };
     }
 
     const turnstile = await verifyTurnstileToken({
         fetchImpl,
-        secret: env.TURNSTILE_SECRET_KEY,
+        secret: target.turnstileSecret,
         token: typeof body.turnstileToken === "string" ? body.turnstileToken : "",
+        mode: target.mode,
     });
     if (!turnstile.ok) {
         return { status: turnstile.status, body: { ok: false } };
@@ -192,5 +312,7 @@ export async function handleOpenHousePost(body, env, fetchImpl) {
         secret: target.secret,
         eventId: target.eventId,
         registration: validated.value,
+        deniedDeploymentIds: target.deniedDeploymentIds,
+        allowedDeploymentId: target.deploymentId,
     });
 }

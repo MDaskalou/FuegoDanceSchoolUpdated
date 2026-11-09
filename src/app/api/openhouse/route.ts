@@ -5,22 +5,31 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 /**
- * Test phase only.
+ * Open House registration. Test and production use different variables.
  *
- * Required before any call leaves the server:
- * - OPEN_HOUSE_ENV=test
- * - OPEN_HOUSE_APPS_SCRIPT_URL=https://script.google.com/macros/s/<TEST_DEPLOYMENT>/exec
- * - OPEN_HOUSE_APPS_SCRIPT_SECRET=<shared secret with the test Apps Script>
- * - OPEN_HOUSE_EVENT_ID=<current open-house occasion, chosen by the server>
- * - TURNSTILE_SECRET_KEY=<server-side Turnstile secret for this environment>
+ * OPEN_HOUSE_ENV=test requires:
+ * - OPEN_HOUSE_TEST_DEPLOYMENT_ID
+ * - OPEN_HOUSE_APPS_SCRIPT_URL=https://script.google.com/macros/s/<that id>/exec
+ * - OPEN_HOUSE_APPS_SCRIPT_SECRET
+ * - OPEN_HOUSE_EVENT_ID
+ * - TURNSTILE_SECRET_KEY
+ * Turnstile hostnames are localhost, 127.0.0.1, and the Netlify test site.
+ * The public test site key is NEXT_PUBLIC_TURNSTILE_SITE_KEY.
  *
- * Set those in .env.local and in Netlify Deploy Previews. Leave them unset in
- * Netlify Production. The route returns 503 and does not call Apps Script when
- * the test mode or the test URL is missing. The current production deployment
- * id is refused even if it is placed in OPEN_HOUSE_APPS_SCRIPT_URL.
+ * OPEN_HOUSE_ENV=production requires:
+ * - OPEN_HOUSE_PRODUCTION_DEPLOYMENT_ID
+ * - OPEN_HOUSE_PRODUCTION_APPS_SCRIPT_URL=https://script.google.com/macros/s/<that id>/exec
+ * - OPEN_HOUSE_PRODUCTION_APPS_SCRIPT_SECRET
+ * - OPEN_HOUSE_EVENT_ID
+ * - TURNSTILE_PRODUCTION_SECRET_KEY
+ * Turnstile hostnames are fuegodanceschool.se and www.fuegodanceschool.se.
+ * The public production site key is NEXT_PUBLIC_TURNSTILE_PRODUCTION_SITE_KEY.
  *
- * A future production publish needs a separate Apps Script deployment and a
- * reviewed code change. Do not point these variables at the production sheet.
+ * Each mode calls only its own allowlisted deployment. There is no fallback
+ * to the other URL or secret. The two deployment ids and the two pairs of
+ * secrets must differ. The legacy production deployment cannot be allowlisted.
+ * Missing, unknown, or conflicting configuration returns 503 and does not
+ * call Apps Script. Secrets stay on the server.
  */
 export async function POST(request: Request) {
     let body: unknown;
