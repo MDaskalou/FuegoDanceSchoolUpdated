@@ -64,6 +64,10 @@
           "a": "Workshopen vecka 49 och 50 kostar 500 kr för 2 veckor. Par betalar 900 kr. Studenter får 10% rabatt."
         },
         {
+          "q": "Har ni presentkort?",
+          "a": "Ja. Presentkort är ett tillgodohavande du väljer själv: 1 000, 2 000 eller 3 000 kr, eller ett eget belopp. Du köper det under Priser på startsidan."
+        },
+        {
           "q": "Jag är student – får jag rabatt?",
           "a": "Ja! Vi erbjuder 10% rabatt för studenter. Ta med giltigt student-ID."
         },

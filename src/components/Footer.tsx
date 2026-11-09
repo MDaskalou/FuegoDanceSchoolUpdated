@@ -40,11 +40,16 @@ export const Footer = () => {
     };
 
     // Uppdaterade länkar för att matcha din sajtstruktur
-    const quickLinks = [
+    const quickLinks: { href: string; label: string; external?: boolean }[] = [
         { href: `/`, label: t('nav.home', { defaultValue: 'Hem' }) },
         { href: `/#schedule`, label: t('nav.schedule', { defaultValue: 'Schema' }) }, // Antar ankarlänk på startsidan
         { href: `/courses`, label: t('nav.courses', { defaultValue: 'Kurser' }) },
         { href: `/#prices`, label: t('nav.prices', { defaultValue: 'Priser' }) }, // Antar ankarlänk på startsidan
+        {
+            href: "https://app.coursely.se/checkout/FuegoDance/giftCards",
+            label: t('nav.giftCard', { defaultValue: currentLang === "en" ? "Gift card" : "Presentkort" }),
+            external: true,
+        },
         { href: `/instructors`, label: t('nav.instructors', { defaultValue: 'Instruktörer' }) },
         { href: `/FAQpage`, label: t('nav.faq', { defaultValue: 'FAQ' }) },
     ];
@@ -82,13 +87,23 @@ export const Footer = () => {
                         <ul className="space-y-2">
                             {quickLinks.map((link, index) => (
                                 <li key={index}>
-                                    {/* Notera: Om länken börjar med /#, använd bara länken. Annars lägg till språk-prefix. */}
-                                    <Link
-                                        href={link.href.startsWith('/#') || link.href === '/' ? `/${currentLang}${link.href === '/' ? '' : link.href}` : `/${currentLang}${link.href}`}
-                                        className="hover:text-white transition-colors text-sm"
-                                    >
-                                        {link.label}
-                                    </Link>
+                                    {link.external ? (
+                                        <a
+                                            href={link.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="hover:text-white transition-colors text-sm"
+                                        >
+                                            {link.label}
+                                        </a>
+                                    ) : (
+                                        <Link
+                                            href={link.href.startsWith('/#') || link.href === '/' ? `/${currentLang}${link.href === '/' ? '' : link.href}` : `/${currentLang}${link.href}`}
+                                            className="hover:text-white transition-colors text-sm"
+                                        >
+                                            {link.label}
+                                        </Link>
+                                    )}
                                 </li>
                             ))}
                         </ul>

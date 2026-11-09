@@ -64,6 +64,10 @@
           "a": "The workshop in weeks 49 and 50 costs 500 SEK for 2 weeks. Couples pay 900 SEK. Students get a 10% discount."
         },
         {
+          "q": "Do you sell gift cards?",
+          "a": "Yes. A gift card is a balance you choose yourself: 1,000, 2,000 or 3,000 SEK, or your own amount. You buy it under Prices on the home page."
+        },
+        {
           "q": "I am a student – do I get a discount?",
           "a": "Yes! We offer a 10% discount for students upon presentation of a valid student ID."
         },
