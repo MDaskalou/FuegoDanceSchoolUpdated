@@ -1,11 +1,9 @@
 import type { Config } from "@netlify/edge-functions";
 
 /**
- * Temporary Open House rate limit, matching Netlify's simplest edge
- * example while we isolate why the limit is not applying.
- *
- * The HTTP method filter is omitted on purpose. Other methods are counted
- * during this test. This is not the final production configuration.
+ * Limits POST requests to the Open House API before Next.js runs.
+ * The path is a single string because that is the form Netlify applied
+ * during the rate-limit test.
  *
  * An empty return leaves the original request, including its body, on
  * the chain. This file does not read or rewrite that request.
@@ -23,6 +21,7 @@ export default async () => {
 
 export const config: Config = {
     path: "/api/openhouse",
+    method: "POST",
     onError: "bypass",
     rateLimit: {
         windowLimit: 40,

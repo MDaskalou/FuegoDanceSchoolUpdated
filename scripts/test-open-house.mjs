@@ -317,7 +317,7 @@ assert.equal(existsSync("netlify.toml"), false);
 const rateLimitSource = readFileSync("netlify/edge-functions/open-house-rate-limit.ts", "utf8");
 assert.ok(rateLimitSource.includes('path: "/api/openhouse"'));
 assert.equal(rateLimitSource.includes('"/api/openhouse/"'), false);
-assert.equal(rateLimitSource.includes("method:"), false);
+assert.ok(rateLimitSource.includes('method: "POST"'));
 assert.equal(rateLimitSource.includes("action:"), false);
 assert.ok(rateLimitSource.includes("windowLimit: 40"));
 assert.ok(rateLimitSource.includes("windowSize: 180"));
