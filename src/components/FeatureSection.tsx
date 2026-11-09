@@ -2,7 +2,6 @@
 
 import React, { useEffect, useMemo } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { ArrowRight, CheckCircle2, Clock, Sparkles, Ticket } from "lucide-react";
 
@@ -99,14 +98,16 @@ export const FeatureSection: React.FC<Props> = ({ id = "feature" }) => {
                                 </div>
                             </div>
 
-                            <Link
+                            <a
                                 href={SUNDAY_SOCIAL_LINK}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-orange-500 px-8 py-3.5 text-sm font-bold uppercase tracking-wider text-white shadow-lg shadow-orange-500/20 transition-all duration-300 hover:bg-orange-400 hover:shadow-orange-500/35"
                             >
                                 <Sparkles className="h-4 w-4" />
                                 {guided.cta}
                                 <ArrowRight className="h-4 w-4" />
-                            </Link>
+                            </a>
                         </div>
                     </div>
                 </div>

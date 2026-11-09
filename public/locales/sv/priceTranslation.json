@@ -1,31 +1,38 @@
 {
   "priceTitle": "Priser & Rabatter",
   "priceHighlight": "Första gången är alltid gratis - kom och prova!",
-  "cardCourseTitle": "Kurser",
+  "cardCourseTitle": "Workshop",
+  "workshopTwoWeeks": "2 veckor",
+  "workshopCouple": "Par",
   "cardDiscountTitle": "Rabatter",
   "cardDropInTitle": "Sunday Social Dance",
   "tagPopular": "POPULÄRAST",
   "discountStudent": "Studentrabatt: 10%",
-  "discountCouple": "Parrabatt: 15%",
-  "discountHalfOfSemester": "Halvkursrabatt: 35%",
+  "discountCouple": "Par: 900 kr för 2 veckor",
+  "discountHalfOfSemester": "Halvkursrabatt gäller inte workshopen",
   "ctaBookNow": "Boka nu",
   "epassiPartner": "Epassi vid bokning",
   "epassiDescription": "Använd ditt friskvårdsbidrag smidigt – betala direkt i vårt bokningssystem.",
+  "giftCardTitle": "Presentkort",
+  "giftCardLead": "Ett tillgodohavande du väljer själv.",
+  "giftCardCustom": "Eget belopp",
+  "giftCardCta": "Köp presentkort",
+  "giftCardAmounts": ["1 000 kr", "2 000 kr", "3 000 kr"],
   "bonusIncluded": "Sunday Social Dance gratis",
   "memberDropInDiscount": "50% rabatt för alla medlemmar",
   "savingPrefix": "du sparar",
   "dropInCta": "Köp drop-in",
   "courseLabelSingular": "kurs",
   "courseLabelPlural": "kurser",
-  "dropInNote": "Sunday Social Dance kostar 80 kr. Medlemmar får 50% rabatt. Gratis vid köp av 3+ kurser.",
+  "dropInNote": "Sunday Social Dance kostar 80 kr. Medlemmar får 50% rabatt.",
   "socialDanceLabel": "Social dans",
   "dropInStandard": "Drop-in",
+  "discounts": [
+    "Studentrabatt: 10%"
+  ],
   "courses": [
-    { "count": 1, "price": 1600, "popular": false },
-    { "count": 2, "price": 2800, "popular": true, "saving": 400 },
-    { "count": 3, "price": 4000, "popular": false, "saving": 800 },
-    { "count": 4, "price": 5200, "popular": false, "saving": 1200 },
-    { "count": 5, "price": 6400, "popular": false, "saving": 1600 }
+    { "labelKey": "workshopTwoWeeks", "price": 500, "popular": false },
+    { "labelKey": "workshopCouple", "price": 900, "popular": false }
   ],
   "dropInItems": [
     { "labelKey": "dropInStandard", "price": 80, "isSocial": false }

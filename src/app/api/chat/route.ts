@@ -26,14 +26,15 @@ const faqData = {
         { "q": "Vad ska jag ha på mig?", "a": "Bekväma kläder du kan röra dig fritt i. Sneakers eller dansskor med glid fungerar bra." }
     ],
     "Kurser och tider": [
-        { "q": "Hur lång är varje kurs?", "a": "Våra kurser är 12 veckor långa med 1 lektion i veckan på 1 timme." },
-        { "q": "Har ni drop-in?", "a": "Nej, vi har inga drop-in-klasser just nu." }
+        { "q": "Hur lång är varje kurs?", "a": "Just nu kör vi en workshop vecka 49 och 50. Varje nivå är 2 veckor, måndag till torsdag kl 18:30–20:30." },
+        { "q": "Har ni drop-in?", "a": "Inte på våra kurser, där anmäler du dig till hela perioden. Sunday Social Dance på söndagar kl. 15–18 köps som ett eget tillfälle för 80 kr, och medlemmar får 50 % rabatt." }
     ],
     "Priser och rabatter": [
-        { "q": "Vad kostar kurserna?", "a": "1 kurs = 1600 kr, 2 kurser = 2800 kr, 3 kurser = 4000 kr, 4 kurser = 5200 kr och 5 kurser = 6400 kr. Se vår prislista för detaljer." },
-        { "q": "Erbjuder ni rabatter?", "a": "Ja! Vi har studentrabatt (10%), parrabatt (15%) och rabatt för dig som går varannan vecka (35%). Rabatter kan ej kombineras." },
-        { "q": "Hur får jag halvkursrabatt?", "a": "Mejla info@fuegodanceschool.se, skriv vilken kurs du vill gå och att du vill gå en halvkurs. Då får du en rabattkod som du lägger in när du anmäler dig." },
-        {"q": "Hur fungerar parrabatten?", "a": "För att få parrabatten måste ni anmäla er tillsammans i samma kurs. Ni kan inte anmäla er i olika kurser. Kontakta oss för mer information." }
+        { "q": "Vad kostar kurserna?", "a": "Workshopen vecka 49 och 50 kostar 500 kr för 2 veckor. Par betalar 900 kr. Studenter får 10% rabatt." },
+        { "q": "Har ni presentkort?", "a": "Ja. Presentkort är ett tillgodohavande du väljer själv. Välj 1 000, 2 000 eller 3 000 kr, eller ange ett eget belopp. Köp här: https://app.coursely.se/checkout/FuegoDance/giftCards" },
+        { "q": "Erbjuder ni rabatter?", "a": "Ja! Studentrabatt 10%. Par betalar 900 kr för 2 veckor istället för 500 kr per person. Rabatter kan ej kombineras." },
+        { "q": "Hur får jag halvkursrabatt?", "a": "Halvkursrabatten gäller inte workshopen vecka 49 och 50. Den har fast pris: 500 kr för 2 veckor, eller 900 kr för par." },
+        {"q": "Hur fungerar parrabatten?", "a": "Par betalar 900 kr för 2 veckor, istället för 500 kr per person." }
     ],
     "Anmälan": [
         { "q": "Hur anmäler jag mig?", "a": "Du kan anmäla dig via vår 'Kurs'-sida (klicka på 'Boka nu') eller via sidan 'Våra Kurser'." }
@@ -46,16 +47,18 @@ const systemPrompt = `Du är en hjälpsam och entusiastisk assistent för Fuego 
 Svara kortfattat och trevligt på svenska.
 
 VIKTIG INFORMATION OM KURSER:
-- Standardlängden för en kurs är 12 veckor.
-- Varje lektion är 1 timme lång.
-- Vi har inga drop-in-klasser just nu.
-- Notera att kurslängden kan variera under vilken period det är, så be användaren kolla schemat för exakta detaljer.
+- Just nu kör vi en workshop vecka 49 och 50.
+- Varje nivå är 2 veckor, måndag till torsdag kl 18:30–20:30.
+- Pris: 500 kr för 2 veckor. Par: 900 kr. Studentrabatt: 10%.
+- Presentkort är ett tillgodohavande man väljer själv: 1 000, 2 000 eller 3 000 kr, eller ett eget belopp. Länk: https://app.coursely.se/checkout/FuegoDance/giftCards
+- Inte på våra kurser, där anmäler du dig till hela perioden. Sunday Social Dance på söndagar kl. 15–18 köps som ett eget tillfälle för 80 kr, och medlemmar får 50 % rabatt.
+- Be användaren kolla schemat för dagar och nivåer.
 
 ANVÄND DENNA FAQ FÖR SVAR:
 ${faqString}
 
 INSTRUKTIONER:
-- Om användaren frågar om kurslängd, nämna att standarden är 12 veckor (1 timme/lektion) men att det kan variera.
+- Om användaren frågar om kurslängd, nämn workshopen vecka 49 och 50: 2 veckor, kl 18:30–20:30.
 - Om information saknas, be dem kontakta info@fuegodanceschool.se.`;
 
 function jsonError(message: string, status: number) {

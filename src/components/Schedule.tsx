@@ -53,7 +53,9 @@ const ScheduleItem = ({ time, name, instructors, note, isNew = false, isDropIn =
         {subtitle && (
             <p className="text-xs sm:text-sm font-medium text-orange-300/80 -mt-1 mb-1">{subtitle}</p>
         )}
-        <p className="text-xs sm:text-sm text-gray-300">{instructors}</p>
+        {instructors ? (
+            <p className="text-xs sm:text-sm text-gray-300">{instructors}</p>
+        ) : null}
 
         {note && (
             <p className="text-[10px] sm:text-xs italic text-orange-200/70 mt-2 leading-tight">
@@ -72,7 +74,7 @@ export default async function ScheduleSection({ lang }: ScheduleSectionProps) {
 
     const coursesRaw = t("courses", { returnObjects: true });
     const courses: Course[] = Array.isArray(coursesRaw) ? coursesRaw : [];
-    const dayKeys: string[] = ["dayMonday", "dayTuesday", "dayWednesday", "dayThursday", "daySunday"];
+    const dayKeys: string[] = ["dayMonday", "dayTuesday", "dayWednesday", "dayThursday"];
 
     return (
         <section
@@ -107,7 +109,7 @@ export default async function ScheduleSection({ lang }: ScheduleSectionProps) {
                 </div>
 
                 <div className="mx-auto max-w-6xl">
-                    <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-6 md:gap-8 justify-center">
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-8 justify-center">
                         {dayKeys.map((dayKey) => (
                             <div key={dayKey} className="md:col-span-1 space-y-4">
                                 <h3 className="text-xl sm:text-2xl font-bold text-orange-500 mb-6 pb-2 border-b-2 border-orange-500/30">

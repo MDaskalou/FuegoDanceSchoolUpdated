@@ -4,10 +4,11 @@ import { getServerT } from "@/i18n";
 import { Sparkles, Percent, Calendar, CheckCircle2, Gift, ShoppingCart } from "lucide-react";
 
 interface Course {
-    count: number;
+    count?: number;
     price: number;
     popular: boolean;
     saving?: number;
+    labelKey?: string;
 }
 
 interface DropInItem {
@@ -117,21 +118,32 @@ interface PriceSectionProps {
 export default async function PriceSection({ lang }: PriceSectionProps) {
     const t = await getServerT(lang, "priceTranslation");
     const dropInCheckoutUrl = "https://app.coursely.se/checkout/FuegoDance/dropinPackages";
+    const giftCardCheckoutUrl = "https://app.coursely.se/checkout/FuegoDance/giftCards";
 
     const coursesRaw = t("courses", { returnObjects: true });
     const dropInItemsRaw = t("dropInItems", { returnObjects: true });
+    const discountsRaw = t("discounts", { returnObjects: true });
+    const giftCardAmountsRaw = t("giftCardAmounts", { returnObjects: true });
 
     const courses: Course[] = Array.isArray(coursesRaw) ? coursesRaw : [];
     const dropInItems: DropInItem[] = Array.isArray(dropInItemsRaw) ? dropInItemsRaw : [];
+    const giftCardAmounts: string[] = Array.isArray(giftCardAmountsRaw)
+        ? giftCardAmountsRaw.filter((amount): amount is string => typeof amount === "string")
+        : [];
+    const discounts: string[] = Array.isArray(discountsRaw)
+        ? discountsRaw
+        : [t("discountStudent"), t("discountCouple"), t("discountHalfOfSemester")];
 
-    const getCourseLabel = (count: number) => {
+    const getCourseLabel = (course: Course) => {
+        if (course.labelKey) return t(course.labelKey);
+        const count = course.count ?? 0;
         if (count === 0) return t("socialDanceLabel");
         return `${count} ${t(count === 1 ? "courseLabelSingular" : "courseLabelPlural")}`;
     };
 
     const getDropInLabel = (item: DropInItem) => {
         if (item.labelKey) return t(item.labelKey);
-        return getCourseLabel(item.count ?? 0);
+        return getCourseLabel({ count: item.count ?? 0, price: item.price, popular: false });
     };
 
     return (
@@ -153,7 +165,7 @@ export default async function PriceSection({ lang }: PriceSectionProps) {
                     <div className="mt-4 mx-auto w-16 h-0.5 bg-gradient-to-r from-transparent via-orange-500 to-transparent" />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch mb-16">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch mb-8">
                     <PriceCard
                         title={t("cardCourseTitle")}
                         icon={<Sparkles className="w-5 h-5" />}
@@ -163,14 +175,14 @@ export default async function PriceSection({ lang }: PriceSectionProps) {
                             {courses.map((course, index) => (
                                 <PriceRow
                                     key={index}
-                                    label={getCourseLabel(course.count)}
+                                    label={getCourseLabel(course)}
                                     price={`${course.price} kr`}
                                     highlighted={course.popular}
                                     popular={course.popular}
                                     popularLabel={t("tagPopular")}
                                     saving={course.saving}
                                     savingPrefix={t("savingPrefix")}
-                                    bonusText={course.count >= 3 ? t("bonusIncluded") : undefined}
+                                    bonusText={(course.count ?? 0) >= 3 ? t("bonusIncluded") : undefined}
                                 />
                             ))}
                         </ul>
@@ -181,11 +193,7 @@ export default async function PriceSection({ lang }: PriceSectionProps) {
                         icon={<Percent className="w-5 h-5" />}
                     >
                         <ul className="space-y-4 flex-grow">
-                            {[
-                                t("discountStudent"),
-                                t("discountCouple"),
-                                t("discountHalfOfSemester"),
-                            ].map((text, i) => (
+                            {discounts.map((text, i) => (
                                 <li key={i} className="flex items-start gap-3 p-4 rounded-xl bg-white/[0.03] border border-white/8 text-sm text-gray-300 text-left transition-all duration-300 hover:bg-white/[0.06] hover:scale-[1.02]">
                                     <CheckCircle2 className="w-4 h-4 text-orange-500 mt-0.5 shrink-0" />
                                     <span>{text}</span>
@@ -232,6 +240,40 @@ export default async function PriceSection({ lang }: PriceSectionProps) {
                             {t("dropInNote")}
                         </p>
                     </PriceCard>
+                </div>
+
+                <div className="mb-16 flex flex-col gap-5 rounded-3xl border border-white/5 border-t-2 border-t-orange-500 bg-[#262626] px-6 py-6 shadow-2xl sm:px-8 lg:flex-row lg:items-center lg:justify-between">
+                    <div className="text-left">
+                        <h3 className="flex items-center gap-2.5 text-xl font-bold text-white">
+                            <Gift className="h-5 w-5 text-orange-500" />
+                            {t("giftCardTitle")}
+                        </h3>
+                        <p className="mt-1 text-sm text-gray-400">
+                            {t("giftCardLead")}
+                        </p>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-2 lg:justify-center">
+                        {giftCardAmounts.map((amount) => (
+                            <span
+                                key={amount}
+                                className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-bold text-white"
+                            >
+                                {amount}
+                            </span>
+                        ))}
+                        <span className="rounded-full border border-dashed border-white/20 px-4 py-2 text-sm font-medium text-gray-300">
+                            {t("giftCardCustom")}
+                        </span>
+                    </div>
+                    <a
+                        href={giftCardCheckoutUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-orange-500 px-6 py-3 text-sm font-bold uppercase tracking-wider text-white shadow-lg shadow-orange-500/20 transition-all duration-300 hover:bg-orange-400 hover:shadow-orange-500/35 hover:scale-[1.02] active:scale-95"
+                    >
+                        <ShoppingCart className="h-4 w-4" />
+                        {t("giftCardCta")}
+                    </a>
                 </div>
 
                 <div className="mb-10 flex flex-col items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-6 py-5">

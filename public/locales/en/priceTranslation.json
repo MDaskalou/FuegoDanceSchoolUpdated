@@ -1,31 +1,38 @@
 {
   "priceTitle": "Prices & Discounts",
   "priceHighlight": "First time is always free - come try it out!",
-  "cardCourseTitle": "Courses",
+  "cardCourseTitle": "Workshop",
+  "workshopTwoWeeks": "2 weeks",
+  "workshopCouple": "Couple",
   "cardDiscountTitle": "Discounts",
   "cardDropInTitle": "Sunday Social Dance",
   "tagPopular": "MOST POPULAR",
   "discountStudent": "Student discount: 10%",
-  "discountCouple": "Couple discount: 15% per person",
-  "discountHalfOfSemester": "Half of semester discount: 35%",
+  "discountCouple": "Couple: 900 SEK for 2 weeks",
+  "discountHalfOfSemester": "The every-other-week discount does not apply to the workshop",
   "ctaBookNow": "Book now",
   "epassiPartner": "Epassi at checkout",
   "epassiDescription": "Use your wellness benefit seamlessly – pay directly in our booking system.",
+  "giftCardTitle": "Gift card",
+  "giftCardLead": "A balance you choose yourself.",
+  "giftCardCustom": "Your own amount",
+  "giftCardCta": "Buy gift card",
+  "giftCardAmounts": ["1,000 SEK", "2,000 SEK", "3,000 SEK"],
   "bonusIncluded": "Sunday Social Dance included free",
   "memberDropInDiscount": "50% discount for all members",
   "savingPrefix": "save",
   "dropInCta": "Buy drop-in",
   "courseLabelSingular": "course",
   "courseLabelPlural": "courses",
-  "dropInNote": "Sunday Social Dance costs 80 SEK. Members get 50% off. Free when buying 3+ courses.",
+  "dropInNote": "Sunday Social Dance costs 80 SEK. Members get 50% off.",
   "socialDanceLabel": "Social dance",
   "dropInStandard": "Drop-in",
+  "discounts": [
+    "Student discount: 10%"
+  ],
   "courses": [
-    { "count": 1, "price": 1600, "popular": false },
-    { "count": 2, "price": 2800, "popular": true, "saving": 400 },
-    { "count": 3, "price": 4000, "popular": false, "saving": 800 },
-    { "count": 4, "price": 5200, "popular": false, "saving": 1200 },
-    { "count": 5, "price": 6400, "popular": false, "saving": 1600 }
+    { "labelKey": "workshopTwoWeeks", "price": 500, "popular": false },
+    { "labelKey": "workshopCouple", "price": 900, "popular": false }
   ],
   "dropInItems": [
     { "labelKey": "dropInStandard", "price": 80, "isSocial": false }
