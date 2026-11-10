@@ -5,31 +5,26 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 /**
- * Open House registration. Test and production use different variables.
+ * Open House registration. Test and production Netlify projects use the same
+ * variable names with different values.
  *
- * OPEN_HOUSE_ENV=test requires:
- * - OPEN_HOUSE_TEST_DEPLOYMENT_ID
+ * Required:
+ * - OPEN_HOUSE_ENV=test or production
+ * - OPEN_HOUSE_DEPLOYMENT_ID
  * - OPEN_HOUSE_APPS_SCRIPT_URL=https://script.google.com/macros/s/<that id>/exec
  * - OPEN_HOUSE_APPS_SCRIPT_SECRET
  * - OPEN_HOUSE_EVENT_ID
  * - TURNSTILE_SECRET_KEY
- * Turnstile hostnames are localhost, 127.0.0.1, and the Netlify test site.
- * The public test site key is NEXT_PUBLIC_TURNSTILE_SITE_KEY.
+ * - NEXT_PUBLIC_TURNSTILE_SITE_KEY at build time
  *
- * OPEN_HOUSE_ENV=production requires:
- * - OPEN_HOUSE_PRODUCTION_DEPLOYMENT_ID
- * - OPEN_HOUSE_PRODUCTION_APPS_SCRIPT_URL=https://script.google.com/macros/s/<that id>/exec
- * - OPEN_HOUSE_PRODUCTION_APPS_SCRIPT_SECRET
- * - OPEN_HOUSE_EVENT_ID
- * - TURNSTILE_PRODUCTION_SECRET_KEY
- * Turnstile hostnames are fuegodanceschool.se and www.fuegodanceschool.se.
- * The public production site key is NEXT_PUBLIC_TURNSTILE_PRODUCTION_SITE_KEY.
+ * OPEN_HOUSE_ENV selects the allowed Turnstile hostnames. Test allows
+ * localhost, 127.0.0.1, and the Netlify test site. Production allows
+ * fuegodanceschool.se and www.fuegodanceschool.se.
  *
- * Each mode calls only its own allowlisted deployment. There is no fallback
- * to the other URL or secret. The two deployment ids and the two pairs of
- * secrets must differ. The legacy production deployment cannot be allowlisted.
- * Missing, unknown, or conflicting configuration returns 503 and does not
- * call Apps Script. Secrets stay on the server.
+ * The URL deployment id must equal OPEN_HOUSE_DEPLOYMENT_ID. The legacy
+ * production deployment is refused. There is no second URL or secret to
+ * fall back to. Missing or invalid configuration returns 503 and does not
+ * call Apps Script.
  */
 export async function POST(request: Request) {
     let body: unknown;

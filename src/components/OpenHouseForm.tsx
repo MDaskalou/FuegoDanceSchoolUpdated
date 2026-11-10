@@ -16,7 +16,6 @@ import {
     rememberRegistrationId,
     shouldTrackLead,
 } from "@/lib/openHouseShared.mjs";
-import { selectTurnstileSiteKey } from "@/lib/turnstile.mjs";
 
 declare global {
     interface Window {
@@ -72,12 +71,7 @@ export default function OpenHouseForm() {
     const pendingFocus = useRef<FieldKey | null>(null);
     const turnstileRef = useRef<HTMLDivElement>(null);
     const widgetIdRef = useRef<string | null>(null);
-    const siteKey = typeof window === "undefined"
-        ? ""
-        : selectTurnstileSiteKey(window.location.hostname, {
-            testSiteKey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "",
-            productionSiteKey: process.env.NEXT_PUBLIC_TURNSTILE_PRODUCTION_SITE_KEY || "",
-        });
+    const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
     const nameRef = useRef<HTMLInputElement>(null);
     const emailRef = useRef<HTMLInputElement>(null);
     const roleRef = useRef<HTMLSelectElement>(null);

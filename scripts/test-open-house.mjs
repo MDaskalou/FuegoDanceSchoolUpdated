@@ -17,7 +17,6 @@ import {
 import {
     PRODUCTION_TURNSTILE_HOSTS,
     TEST_TURNSTILE_HOSTS,
-    selectTurnstileSiteKey,
 } from "../src/lib/turnstile.mjs";
 import {
     applyRegistration,
@@ -30,7 +29,7 @@ const TEST_URL = `https://script.google.com/macros/s/${TEST_DEPLOYMENT_ID}/exec`
 const PRODUCTION_URL = `https://script.google.com/macros/s/${PRODUCTION_DEPLOYMENT_ONLY_ID}/exec`;
 const TEST_ENV = {
     OPEN_HOUSE_ENV: "test",
-    OPEN_HOUSE_TEST_DEPLOYMENT_ID: TEST_DEPLOYMENT_ID,
+    OPEN_HOUSE_DEPLOYMENT_ID: TEST_DEPLOYMENT_ID,
     OPEN_HOUSE_APPS_SCRIPT_URL: TEST_URL,
     OPEN_HOUSE_APPS_SCRIPT_SECRET: "test-secret",
     OPEN_HOUSE_EVENT_ID: "open-house-test",
@@ -38,11 +37,11 @@ const TEST_ENV = {
 };
 const PRODUCTION_ENV = {
     OPEN_HOUSE_ENV: "production",
-    OPEN_HOUSE_PRODUCTION_DEPLOYMENT_ID: PRODUCTION_DEPLOYMENT_ONLY_ID,
-    OPEN_HOUSE_PRODUCTION_APPS_SCRIPT_URL: PRODUCTION_URL,
-    OPEN_HOUSE_PRODUCTION_APPS_SCRIPT_SECRET: "production-secret",
+    OPEN_HOUSE_DEPLOYMENT_ID: PRODUCTION_DEPLOYMENT_ONLY_ID,
+    OPEN_HOUSE_APPS_SCRIPT_URL: PRODUCTION_URL,
+    OPEN_HOUSE_APPS_SCRIPT_SECRET: "production-secret",
     OPEN_HOUSE_EVENT_ID: "open-house-prod",
-    TURNSTILE_PRODUCTION_SECRET_KEY: "turnstile-production-secret",
+    TURNSTILE_SECRET_KEY: "turnstile-production-secret",
 };
 
 const registrationId = "8b6f5c2e-1a4d-4f8b-9c3e-123456789abc";
@@ -394,13 +393,13 @@ assert.ok(formSource.includes("response.status === 429"));
 assert.ok(formSource.includes('t("rateLimitError")'));
 assert.equal(formSource.split("clearRegistrationAttempt(").length - 1, 1);
 assert.ok(formSource.includes("NEXT_PUBLIC_TURNSTILE_SITE_KEY"));
-assert.ok(formSource.includes("NEXT_PUBLIC_TURNSTILE_PRODUCTION_SITE_KEY"));
-assert.ok(formSource.includes("selectTurnstileSiteKey"));
+assert.equal(formSource.includes("NEXT_PUBLIC_TURNSTILE_PRODUCTION_SITE_KEY"), false);
+assert.equal(formSource.includes("selectTurnstileSiteKey"), false);
 assert.equal(formSource.includes("TURNSTILE_SECRET_KEY"), false);
 assert.equal(formSource.includes("TURNSTILE_PRODUCTION_SECRET_KEY"), false);
 assert.equal(formSource.includes("APPS_SCRIPT_SECRET"), false);
 assert.equal(formSource.includes("OPEN_HOUSE_APPS_SCRIPT_URL"), false);
-assert.equal(formSource.includes("OPEN_HOUSE_PRODUCTION_APPS_SCRIPT_URL"), false);
+assert.equal(formSource.includes("OPEN_HOUSE_PRODUCTION_"), false);
 
 const { OPEN_HOUSE_EVENT_ID, ...envWithoutEvent } = TEST_ENV;
 const missingEvent = await handleOpenHousePost(registration(), envWithoutEvent, async () => {
@@ -541,10 +540,7 @@ async function turnstileOutcome(token, siteverify, env = TEST_ENV) {
             calls.push(String(url));
             if (String(url).startsWith("https://challenges.cloudflare.com/")) {
                 const params = new URLSearchParams(init.body);
-                const expectedSecret = env.OPEN_HOUSE_ENV === "production"
-                    ? env.TURNSTILE_PRODUCTION_SECRET_KEY
-                    : env.TURNSTILE_SECRET_KEY;
-                assert.equal(params.get("secret"), expectedSecret);
+                assert.equal(params.get("secret"), env.TURNSTILE_SECRET_KEY);
                 assert.equal(params.get("response"), token);
                 if (siteverify instanceof Error) throw siteverify;
                 return siteverify;
@@ -650,14 +646,13 @@ const previewWithoutSuccess = await turnstileOutcome(
 assert.equal(previewWithoutSuccess.result.status, 400);
 assert.equal(previewWithoutSuccess.calls.length, 1);
 
-const notTestMode = await handleOpenHousePost(
-    registration(),
-    { ...TEST_ENV, OPEN_HOUSE_ENV: "production" },
-    async () => {
-        throw new Error("non-test mode made an external call");
-    }
+const notTestMode = await turnstileOutcome(
+    "valid-token",
+    httpResult(200, { success: true, hostname: "localhost", action: "open_house" }),
+    { ...TEST_ENV, OPEN_HOUSE_ENV: "production" }
 );
-assert.equal(notTestMode.status, 503);
+assert.equal(notTestMode.result.status, 400);
+assert.equal(notTestMode.calls.length, 1);
 
 const turnstileSource = readFileSync("src/lib/turnstile.mjs", "utf8");
 assert.ok(turnstileSource.includes('"charming-platypus-787e76.netlify.app"'));
@@ -780,10 +775,7 @@ async function submitWithHostname(env, hostname, scriptResponses) {
         calls.push({ url: String(url), init });
         if (String(url).startsWith("https://challenges.cloudflare.com/")) {
             const params = new URLSearchParams(init.body);
-            const expectedSecret = env.OPEN_HOUSE_ENV === "production"
-                ? env.TURNSTILE_PRODUCTION_SECRET_KEY
-                : env.TURNSTILE_SECRET_KEY;
-            assert.equal(params.get("secret"), expectedSecret);
+            assert.equal(params.get("secret"), env.TURNSTILE_SECRET_KEY);
             return httpResult(200, { success: true, hostname, action: "open_house" });
         }
         const next = scriptResponses.shift();
@@ -836,30 +828,21 @@ assert.equal(productionWrongAction.result.status, 400);
 assert.equal(productionWrongAction.calls.length, 1);
 
 for (const env of [
-    { ...PRODUCTION_ENV, OPEN_HOUSE_PRODUCTION_APPS_SCRIPT_URL: undefined },
-    { ...PRODUCTION_ENV, OPEN_HOUSE_PRODUCTION_APPS_SCRIPT_SECRET: "" },
-    { ...PRODUCTION_ENV, TURNSTILE_PRODUCTION_SECRET_KEY: "" },
+    { ...PRODUCTION_ENV, OPEN_HOUSE_APPS_SCRIPT_URL: undefined },
+    { ...PRODUCTION_ENV, OPEN_HOUSE_APPS_SCRIPT_SECRET: "" },
+    { ...PRODUCTION_ENV, TURNSTILE_SECRET_KEY: "" },
+    { ...PRODUCTION_ENV, OPEN_HOUSE_DEPLOYMENT_ID: "" },
     { ...PRODUCTION_ENV, OPEN_HOUSE_EVENT_ID: "" },
     { ...PRODUCTION_ENV, OPEN_HOUSE_ENV: "staging" },
     {
         ...PRODUCTION_ENV,
-        OPEN_HOUSE_PRODUCTION_APPS_SCRIPT_URL: `https://script.google.com/macros/s/${PRODUCTION_DEPLOYMENT_ID}/exec`,
+        OPEN_HOUSE_APPS_SCRIPT_URL: `https://script.google.com/macros/s/${PRODUCTION_DEPLOYMENT_ID}/exec`,
     },
+    { ...TEST_ENV, OPEN_HOUSE_DEPLOYMENT_ID: PRODUCTION_DEPLOYMENT_ID },
+    { ...TEST_ENV, OPEN_HOUSE_APPS_SCRIPT_URL: PRODUCTION_URL },
     {
         ...TEST_ENV,
-        OPEN_HOUSE_PRODUCTION_APPS_SCRIPT_URL: TEST_URL,
-        OPEN_HOUSE_PRODUCTION_APPS_SCRIPT_SECRET: "production-secret",
-    },
-    {
-        ...TEST_ENV,
-        OPEN_HOUSE_PRODUCTION_APPS_SCRIPT_URL: PRODUCTION_URL,
-        OPEN_HOUSE_PRODUCTION_APPS_SCRIPT_SECRET: "test-secret",
-    },
-    { ...PRODUCTION_ENV, TURNSTILE_SECRET_KEY: "turnstile-production-secret" },
-    {
-        ...PRODUCTION_ENV,
-        OPEN_HOUSE_APPS_SCRIPT_URL: PRODUCTION_URL,
-        OPEN_HOUSE_APPS_SCRIPT_SECRET: "other-secret",
+        OPEN_HOUSE_APPS_SCRIPT_URL: `https://script.google.com/macros/s/${TEST_DEPLOYMENT_ID}extra/exec`,
     },
 ]) {
     const stopped = await handleOpenHousePost(registration(), env, async () => {
@@ -868,14 +851,14 @@ for (const env of [
     assert.equal(stopped.status, 503);
 }
 
-const separatedTest = {
+const ignoredProductionVariables = {
     ...TEST_ENV,
     OPEN_HOUSE_PRODUCTION_DEPLOYMENT_ID: PRODUCTION_DEPLOYMENT_ONLY_ID,
     OPEN_HOUSE_PRODUCTION_APPS_SCRIPT_URL: PRODUCTION_URL,
     OPEN_HOUSE_PRODUCTION_APPS_SCRIPT_SECRET: "production-secret",
     TURNSTILE_PRODUCTION_SECRET_KEY: "turnstile-production-secret",
 };
-const testWrite = await submitWithHostname(separatedTest, "localhost", [
+const testWrite = await submitWithHostname(ignoredProductionVariables, "localhost", [
     httpResult(302, "", { location: echoUrl }),
     httpResult(200, { result: "success", alreadyRegistered: false, payloadHash: hash }),
 ]);
@@ -884,30 +867,14 @@ assert.equal(testWrite.calls[1].url, TEST_URL);
 assert.equal(JSON.parse(testWrite.calls[1].init.body).secret, "test-secret");
 assert.equal(testWrite.calls.some((call) => call.url === PRODUCTION_URL), false);
 
-const separatedProduction = {
-    ...PRODUCTION_ENV,
-    OPEN_HOUSE_TEST_DEPLOYMENT_ID: TEST_DEPLOYMENT_ID,
-    OPEN_HOUSE_APPS_SCRIPT_URL: TEST_URL,
-    OPEN_HOUSE_APPS_SCRIPT_SECRET: "test-secret",
-    TURNSTILE_SECRET_KEY: "turnstile-test-secret",
-};
-const productionWrite = await submitWithHostname(separatedProduction, "www.fuegodanceschool.se", [
-    httpResult(302, "", { location: echoUrl }),
-    httpResult(200, { result: "success", alreadyRegistered: false, payloadHash: hash }),
-]);
-assert.equal(productionWrite.result.status, 200);
-assert.equal(productionWrite.calls[1].url, PRODUCTION_URL);
-assert.equal(JSON.parse(productionWrite.calls[1].init.body).secret, "production-secret");
-assert.equal(productionWrite.calls.some((call) => call.url === TEST_URL), false);
-
-const testCrossRedirect = await submitWithHostname(separatedTest, "localhost", [
+const testCrossRedirect = await submitWithHostname(TEST_ENV, "localhost", [
     httpResult(302, "", { location: PRODUCTION_URL }),
 ]);
 assert.equal(testCrossRedirect.result.status, 502);
 assert.equal(testCrossRedirect.calls.length, 2);
 assert.equal(testCrossRedirect.calls[1].url, TEST_URL);
 
-const productionCrossRedirect = await submitWithHostname(separatedProduction, "fuegodanceschool.se", [
+const productionCrossRedirect = await submitWithHostname(PRODUCTION_ENV, "fuegodanceschool.se", [
     httpResult(302, "", { location: TEST_URL }),
 ]);
 assert.equal(productionCrossRedirect.result.status, 502);
@@ -940,42 +907,11 @@ assert.equal(openHouseSubmissionState({ ok: true, leadRecorded: true, alreadyReg
 assert.equal(openHouseSubmissionState({ ok: false, leadRecorded: true }), "rejected");
 assert.equal(openHouseSubmissionState(null), "rejected");
 
-const siteKeys = {
-    testSiteKey: "test-site-key",
-    productionSiteKey: "production-site-key",
-};
-for (const hostname of TEST_TURNSTILE_HOSTS) {
-    assert.equal(selectTurnstileSiteKey(hostname, siteKeys), "test-site-key");
-}
-for (const hostname of PRODUCTION_TURNSTILE_HOSTS) {
-    assert.equal(selectTurnstileSiteKey(hostname, siteKeys), "production-site-key");
-}
-assert.equal(selectTurnstileSiteKey("fuegodanceschool.se", { testSiteKey: "test-site-key" }), "");
-assert.equal(selectTurnstileSiteKey("localhost", { productionSiteKey: "production-site-key" }), "");
-assert.equal(selectTurnstileSiteKey("example.com", siteKeys), "");
-
-for (const env of [
-    { ...TEST_ENV, OPEN_HOUSE_APPS_SCRIPT_URL: PRODUCTION_URL },
-    {
-        ...TEST_ENV,
-        OPEN_HOUSE_APPS_SCRIPT_URL: PRODUCTION_URL,
-        OPEN_HOUSE_TEST_DEPLOYMENT_ID: PRODUCTION_DEPLOYMENT_ONLY_ID,
-        OPEN_HOUSE_PRODUCTION_DEPLOYMENT_ID: PRODUCTION_DEPLOYMENT_ONLY_ID,
-    },
-    { ...TEST_ENV, OPEN_HOUSE_TEST_DEPLOYMENT_ID: undefined },
-    { ...PRODUCTION_ENV, OPEN_HOUSE_PRODUCTION_APPS_SCRIPT_URL: TEST_URL },
-    { ...PRODUCTION_ENV, OPEN_HOUSE_PRODUCTION_APPS_SCRIPT_URL: undefined, OPEN_HOUSE_APPS_SCRIPT_URL: TEST_URL, OPEN_HOUSE_APPS_SCRIPT_SECRET: "test-secret", TURNSTILE_SECRET_KEY: "turnstile-test-secret", OPEN_HOUSE_TEST_DEPLOYMENT_ID: TEST_DEPLOYMENT_ID },
-    { ...TEST_ENV, OPEN_HOUSE_APPS_SCRIPT_URL: undefined, OPEN_HOUSE_PRODUCTION_APPS_SCRIPT_URL: PRODUCTION_URL, OPEN_HOUSE_PRODUCTION_APPS_SCRIPT_SECRET: "production-secret", TURNSTILE_PRODUCTION_SECRET_KEY: "turnstile-production-secret", OPEN_HOUSE_PRODUCTION_DEPLOYMENT_ID: PRODUCTION_DEPLOYMENT_ONLY_ID },
-    { ...TEST_ENV, OPEN_HOUSE_TEST_DEPLOYMENT_ID: PRODUCTION_DEPLOYMENT_ID },
-    {
-        ...TEST_ENV,
-        OPEN_HOUSE_APPS_SCRIPT_URL: `https://script.google.com/macros/s/${TEST_DEPLOYMENT_ID}extra/exec`,
-    },
-]) {
-    const mixed = await handleOpenHousePost(registration(), env, async () => {
-        throw new Error("mixed configuration called a service");
-    });
-    assert.equal(mixed.status, 503);
-}
+const openHouseSource = readFileSync("src/lib/openHouse.mjs", "utf8");
+assert.equal(openHouseSource.includes("OPEN_HOUSE_TEST_DEPLOYMENT_ID"), false);
+assert.equal(openHouseSource.includes("OPEN_HOUSE_PRODUCTION_"), false);
+assert.equal(openHouseSource.includes("TURNSTILE_PRODUCTION_SECRET_KEY"), false);
+assert.ok(openHouseSource.includes("OPEN_HOUSE_DEPLOYMENT_ID"));
+assert.ok(openHouseSource.includes("TURNSTILE_SECRET_KEY"));
 
 console.log("open house tests passed");

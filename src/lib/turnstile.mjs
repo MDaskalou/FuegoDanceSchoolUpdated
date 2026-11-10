@@ -13,14 +13,6 @@ export const PRODUCTION_TURNSTILE_HOSTS = new Set([
     "www.fuegodanceschool.se",
 ]);
 
-export function selectTurnstileSiteKey(hostname, keys) {
-    const testSiteKey = typeof keys.testSiteKey === "string" ? keys.testSiteKey : "";
-    const productionSiteKey = typeof keys.productionSiteKey === "string" ? keys.productionSiteKey : "";
-    if (TEST_TURNSTILE_HOSTS.has(hostname)) return testSiteKey;
-    if (PRODUCTION_TURNSTILE_HOSTS.has(hostname)) return productionSiteKey;
-    return "";
-}
-
 function hostsForMode(mode) {
     if (mode === "test") return TEST_TURNSTILE_HOSTS;
     if (mode === "production") return PRODUCTION_TURNSTILE_HOSTS;

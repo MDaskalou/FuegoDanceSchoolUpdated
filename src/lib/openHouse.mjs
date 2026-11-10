@@ -70,87 +70,35 @@ export function resolveOpenHouseTarget(env) {
         return { ok: false, reason: "missing_config" };
     }
 
-    const testAllowlist = readDeploymentId(env.OPEN_HOUSE_TEST_DEPLOYMENT_ID);
-    const productionAllowlist = readDeploymentId(env.OPEN_HOUSE_PRODUCTION_DEPLOYMENT_ID);
-    if (testAllowlist.state === "invalid" || productionAllowlist.state === "invalid") {
+    const allowlist = readDeploymentId(env.OPEN_HOUSE_DEPLOYMENT_ID);
+    if (allowlist.state === "invalid") {
         return { ok: false, reason: "invalid_deployment" };
     }
-    if (
-        testAllowlist.state === "present" &&
-        productionAllowlist.state === "present" &&
-        testAllowlist.id === productionAllowlist.id
-    ) {
-        return { ok: false, reason: "environment_collision" };
-    }
-
-    const ownAllowlist = mode === "test" ? testAllowlist : productionAllowlist;
-    const otherAllowlist = mode === "test" ? productionAllowlist : testAllowlist;
-    if (ownAllowlist.state !== "present") {
+    if (allowlist.state !== "present") {
         return { ok: false, reason: "missing_config" };
     }
 
-    const testSecret = configuredSecret(env.OPEN_HOUSE_APPS_SCRIPT_SECRET);
-    const productionSecret = configuredSecret(env.OPEN_HOUSE_PRODUCTION_APPS_SCRIPT_SECRET);
-    const testTurnstileSecret = configuredSecret(env.TURNSTILE_SECRET_KEY);
-    const productionTurnstileSecret = configuredSecret(env.TURNSTILE_PRODUCTION_SECRET_KEY);
-    const selectedSecret = mode === "test" ? testSecret : productionSecret;
-    const selectedTurnstileSecret = mode === "test" ? testTurnstileSecret : productionTurnstileSecret;
-    const otherSecret = mode === "test" ? productionSecret : testSecret;
-    const otherTurnstileSecret = mode === "test" ? productionTurnstileSecret : testTurnstileSecret;
-
-    if (!selectedSecret || !selectedTurnstileSecret) {
+    const secret = configuredSecret(env.OPEN_HOUSE_APPS_SCRIPT_SECRET);
+    const turnstileSecret = configuredSecret(env.TURNSTILE_SECRET_KEY);
+    if (!secret || !turnstileSecret) {
         return { ok: false, reason: "missing_config" };
     }
-    if (
-        (otherSecret && otherSecret.trim() === selectedSecret.trim()) ||
-        (otherTurnstileSecret && otherTurnstileSecret.trim() === selectedTurnstileSecret.trim())
-    ) {
-        return { ok: false, reason: "environment_collision" };
-    }
 
-    const selected = parseAppsScriptUrl(
-        mode === "test" ? env.OPEN_HOUSE_APPS_SCRIPT_URL : env.OPEN_HOUSE_PRODUCTION_APPS_SCRIPT_URL
-    );
+    const selected = parseAppsScriptUrl(env.OPEN_HOUSE_APPS_SCRIPT_URL);
     if (!selected.ok) return selected;
-    if (selected.deploymentId !== ownAllowlist.id) {
+    if (selected.deploymentId !== allowlist.id) {
         return { ok: false, reason: "unlisted_deployment" };
-    }
-    if (otherAllowlist.state === "present" && selected.url.includes(otherAllowlist.id)) {
-        return { ok: false, reason: "environment_collision" };
-    }
-
-    const otherUrlValue = mode === "test"
-        ? env.OPEN_HOUSE_PRODUCTION_APPS_SCRIPT_URL
-        : env.OPEN_HOUSE_APPS_SCRIPT_URL;
-    let otherDeploymentId = "";
-    if (typeof otherUrlValue === "string" && otherUrlValue.trim() !== "") {
-        if (otherAllowlist.state !== "present") {
-            return { ok: false, reason: "missing_config" };
-        }
-        const other = parseAppsScriptUrl(otherUrlValue);
-        if (!other.ok) return { ok: false, reason: "invalid_config" };
-        if (other.deploymentId !== otherAllowlist.id) {
-            return { ok: false, reason: "unlisted_deployment" };
-        }
-        if (other.deploymentId === selected.deploymentId || selected.url.includes(other.deploymentId)) {
-            return { ok: false, reason: "environment_collision" };
-        }
-        otherDeploymentId = other.deploymentId;
     }
 
     return {
         ok: true,
         mode,
         url: selected.url,
-        secret: selectedSecret,
-        turnstileSecret: selectedTurnstileSecret,
+        secret,
+        turnstileSecret,
         eventId,
         deploymentId: selected.deploymentId,
-        deniedDeploymentIds: [
-            PRODUCTION_DEPLOYMENT_ID,
-            otherDeploymentId,
-            otherAllowlist.state === "present" ? otherAllowlist.id : "",
-        ].filter(Boolean),
+        deniedDeploymentIds: [PRODUCTION_DEPLOYMENT_ID],
     };
 }
 
