@@ -3,6 +3,12 @@ declare module "@/lib/openHouseShared.mjs" {
     export const ROLE_KEYS: readonly string[];
     export const REFERRAL_KEYS: readonly string[];
 
+    export function openHouseSubmissionState(data: {
+        ok?: boolean;
+        leadRecorded?: boolean;
+        alreadyRegistered?: boolean;
+    } | null | undefined): "rejected" | "created" | "duplicate";
+
     export function getOpenHouseFieldErrors(fields: {
         name?: string;
         email?: string;

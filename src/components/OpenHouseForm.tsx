@@ -11,6 +11,7 @@ import {
     buildGenerateLeadEvent,
     clearRegistrationAttempt,
     getOpenHouseFieldErrors,
+    openHouseSubmissionState,
     payloadFingerprint,
     rememberRegistrationId,
     shouldTrackLead,
@@ -61,7 +62,7 @@ export default function OpenHouseForm() {
         message: "",
         courses: [],
     });
-    const [companyWebsite, setCompanyWebsite] = useState("");
+    const [ohHp, setOhHp] = useState("");
     const [fieldErrors, setFieldErrors] = useState<FieldErrorMap>({});
     const [formError, setFormError] = useState("");
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -202,7 +203,7 @@ export default function OpenHouseForm() {
                 body: JSON.stringify({
                     ...draft,
                     registrationId,
-                    company_website: companyWebsite,
+                    oh_hp: ohHp,
                     turnstileToken,
                 }),
             });
@@ -227,14 +228,15 @@ export default function OpenHouseForm() {
                 return;
             }
 
-            if (!response.ok || data.ok !== true) {
+            const submissionState = openHouseSubmissionState(data);
+            if (!response.ok || submissionState === "rejected") {
                 resetTurnstile();
                 setFormError(t("submitError"));
                 return;
             }
 
             if (
-                data.leadRecorded === true &&
+                submissionState === "created" &&
                 analyticsConsentGranted(
                     localStorage.getItem("cookieConsent"),
                     localStorage.getItem("cookiePreferences")
@@ -322,15 +324,21 @@ export default function OpenHouseForm() {
                 <div className="bg-[#262626] p-6 sm:p-10 rounded-2xl shadow-2xl border border-orange-500/20">
                     <form onSubmit={handleSubmit} noValidate className="space-y-6">
                         <div aria-hidden="true" className="absolute -left-[10000px] h-0 overflow-hidden">
-                            <label htmlFor="company_website">Company website</label>
+                            <label htmlFor="oh_hp">Leave blank</label>
                             <input
                                 type="text"
-                                id="company_website"
-                                name="company_website"
+                                id="oh_hp"
+                                name="oh_hp"
                                 tabIndex={-1}
-                                autoComplete="off"
-                                value={companyWebsite}
-                                onChange={(event) => setCompanyWebsite(event.target.value)}
+                                autoComplete="oh-hp"
+                                autoCorrect="off"
+                                autoCapitalize="none"
+                                spellCheck={false}
+                                data-1p-ignore="true"
+                                data-lpignore="true"
+                                data-bwignore="true"
+                                value={ohHp}
+                                onChange={(event) => setOhHp(event.target.value)}
                             />
                         </div>
 

@@ -2,6 +2,9 @@ import type { Config } from "@netlify/edge-functions";
 
 /**
  * Limits POST requests to the Open House API before Next.js runs.
+ * The path is a single string because that is the form Netlify applied
+ * during the rate-limit test.
+ *
  * An empty return leaves the original request, including its body, on
  * the chain. This file does not read or rewrite that request.
  *
@@ -10,18 +13,17 @@ import type { Config } from "@netlify/edge-functions";
  * serving its generic error page. rateLimit is applied by the platform
  * before the function runs, so a 429 is not a function error and is not
  * bypassed. If the function fails to execute, an under-limit registration
- * can still reach /api/openhouse/.
+ * can still reach the Open House API.
  */
 export default async () => {
     return;
 };
 
 export const config: Config = {
-    path: ["/api/openhouse", "/api/openhouse/"],
+    path: "/api/openhouse",
     method: "POST",
     onError: "bypass",
     rateLimit: {
-        action: "rate_limit",
         windowLimit: 40,
         windowSize: 180,
         aggregateBy: ["ip", "domain"],

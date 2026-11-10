@@ -5,6 +5,7 @@ import {
     buildGenerateLeadEvent,
     clearRegistrationAttempt,
     getOpenHouseFieldErrors,
+    openHouseSubmissionState,
     payloadFingerprint,
     rememberRegistrationId,
     shouldTrackLead,
@@ -14,17 +15,33 @@ import {
     handleOpenHousePost,
 } from "../src/lib/openHouse.mjs";
 import {
+    PRODUCTION_TURNSTILE_HOSTS,
+    TEST_TURNSTILE_HOSTS,
+} from "../src/lib/turnstile.mjs";
+import {
     applyRegistration,
     createRegistrationLock,
 } from "../src/lib/openHouseRegistry.mjs";
 
-const TEST_URL = "https://script.google.com/macros/s/AKfycbTESTONLYopenHouseDeployment/exec";
+const TEST_DEPLOYMENT_ID = "AKfycbTESTONLYopenHouseDeployment";
+const PRODUCTION_DEPLOYMENT_ONLY_ID = "AKfycbPRODUCTIONONLYopenHouseDeployment";
+const TEST_URL = `https://script.google.com/macros/s/${TEST_DEPLOYMENT_ID}/exec`;
+const PRODUCTION_URL = `https://script.google.com/macros/s/${PRODUCTION_DEPLOYMENT_ONLY_ID}/exec`;
 const TEST_ENV = {
     OPEN_HOUSE_ENV: "test",
+    OPEN_HOUSE_DEPLOYMENT_ID: TEST_DEPLOYMENT_ID,
     OPEN_HOUSE_APPS_SCRIPT_URL: TEST_URL,
     OPEN_HOUSE_APPS_SCRIPT_SECRET: "test-secret",
     OPEN_HOUSE_EVENT_ID: "open-house-test",
     TURNSTILE_SECRET_KEY: "turnstile-test-secret",
+};
+const PRODUCTION_ENV = {
+    OPEN_HOUSE_ENV: "production",
+    OPEN_HOUSE_DEPLOYMENT_ID: PRODUCTION_DEPLOYMENT_ONLY_ID,
+    OPEN_HOUSE_APPS_SCRIPT_URL: PRODUCTION_URL,
+    OPEN_HOUSE_APPS_SCRIPT_SECRET: "production-secret",
+    OPEN_HOUSE_EVENT_ID: "open-house-prod",
+    TURNSTILE_SECRET_KEY: "turnstile-production-secret",
 };
 
 const registrationId = "8b6f5c2e-1a4d-4f8b-9c3e-123456789abc";
@@ -40,6 +57,7 @@ function registration(overrides = {}) {
         message: "First time",
         language: "sv",
         company_website: "",
+        oh_hp: "",
         turnstileToken: "valid-token",
         ...overrides,
     };
@@ -135,6 +153,26 @@ assert.equal(honeypot.status, 200);
 assert.deepEqual(honeypot.body, { ok: true });
 assert.equal("leadRecorded" in honeypot.body, false);
 
+const autofilledHoneypot = await handleOpenHousePost(
+    registration({ oh_hp: "https://saved-company.example" }),
+    TEST_ENV,
+    async () => {
+        throw new Error("autofilled honeypot called Apps Script");
+    }
+);
+assert.equal(autofilledHoneypot.status, 200);
+assert.deepEqual(autofilledHoneypot.body, { ok: true });
+assert.equal("leadRecorded" in autofilledHoneypot.body, false);
+
+const blankHoneypot = await handleOpenHousePost(
+    registration({ oh_hp: "   ", company_website: "   " }),
+    TEST_ENV,
+    allowTurnstile(async () => {
+        throw new Error("blank honeypot should reach Apps Script");
+    })
+);
+assert.equal(blankHoneypot.status, 502);
+
 const invalid = await handleOpenHousePost(
     registration({ email: "not-an-email" }),
     TEST_ENV,
@@ -191,6 +229,8 @@ assert.equal(successFetch.calls[0].init.method, "POST");
 assert.equal(successFetch.calls[0].init.redirect, "manual");
 const posted = JSON.parse(successFetch.calls[0].init.body);
 assert.equal(posted.turnstileToken, undefined);
+assert.equal(posted.oh_hp, undefined);
+assert.equal(posted.company_website, undefined);
 assert.equal(posted.secret, "test-secret");
 assert.equal(posted.payloadHash, hash);
 assert.equal(posted.eventId, "open-house-test");
@@ -315,10 +355,10 @@ assert.notEqual(swedish.rateLimitError, english.rateLimitError);
 
 assert.equal(existsSync("netlify.toml"), false);
 const rateLimitSource = readFileSync("netlify/edge-functions/open-house-rate-limit.ts", "utf8");
-assert.ok(rateLimitSource.includes('"/api/openhouse"'));
-assert.ok(rateLimitSource.includes('"/api/openhouse/"'));
+assert.ok(rateLimitSource.includes('path: "/api/openhouse"'));
+assert.equal(rateLimitSource.includes('"/api/openhouse/"'), false);
 assert.ok(rateLimitSource.includes('method: "POST"'));
-assert.ok(rateLimitSource.includes('action: "rate_limit"'));
+assert.equal(rateLimitSource.includes("action:"), false);
 assert.ok(rateLimitSource.includes("windowLimit: 40"));
 assert.ok(rateLimitSource.includes("windowSize: 180"));
 assert.ok(rateLimitSource.includes('aggregateBy: ["ip", "domain"]'));
@@ -336,7 +376,15 @@ assert.ok(validationReturn > 0);
 assert.ok(postCall > validationReturn);
 assert.ok(formSource.includes('focus({ preventScroll: true })'));
 assert.ok(formSource.includes('aria-describedby={fieldErrors.name ? "name-error" : undefined}'));
-assert.ok(formSource.includes("data.leadRecorded === true"));
+assert.ok(formSource.includes("openHouseSubmissionState"));
+assert.ok(formSource.includes('submissionState === "created"'));
+assert.ok(formSource.includes('name="oh_hp"'));
+assert.ok(formSource.includes('id="oh_hp"'));
+assert.ok(formSource.includes("Leave blank"));
+assert.ok(formSource.includes('autoComplete="oh-hp"'));
+assert.equal(formSource.includes("readOnly"), false);
+assert.equal(formSource.includes("company_website"), false);
+assert.equal(formSource.includes("Company website"), false);
 assert.equal(formSource.includes("alreadyRegistered"), false);
 assert.ok(formSource.includes('action: "open_house"'));
 assert.ok(formSource.includes("turnstileToken"));
@@ -344,6 +392,14 @@ assert.ok(formSource.includes("resetTurnstile()"));
 assert.ok(formSource.includes("response.status === 429"));
 assert.ok(formSource.includes('t("rateLimitError")'));
 assert.equal(formSource.split("clearRegistrationAttempt(").length - 1, 1);
+assert.ok(formSource.includes("NEXT_PUBLIC_TURNSTILE_SITE_KEY"));
+assert.equal(formSource.includes("NEXT_PUBLIC_TURNSTILE_PRODUCTION_SITE_KEY"), false);
+assert.equal(formSource.includes("selectTurnstileSiteKey"), false);
+assert.equal(formSource.includes("TURNSTILE_SECRET_KEY"), false);
+assert.equal(formSource.includes("TURNSTILE_PRODUCTION_SECRET_KEY"), false);
+assert.equal(formSource.includes("APPS_SCRIPT_SECRET"), false);
+assert.equal(formSource.includes("OPEN_HOUSE_APPS_SCRIPT_URL"), false);
+assert.equal(formSource.includes("OPEN_HOUSE_PRODUCTION_"), false);
 
 const { OPEN_HOUSE_EVENT_ID, ...envWithoutEvent } = TEST_ENV;
 const missingEvent = await handleOpenHousePost(registration(), envWithoutEvent, async () => {
@@ -566,6 +622,10 @@ for (const hostname of [
     "not-charming-platypus-787e76.netlify.app",
     "localhost.localdomain",
     "127.0.0.1.nip.io",
+    "fuegodanceschool.se",
+    "www.fuegodanceschool.se",
+    "fuegodanceschool.se.evil.com",
+    "www.fuegodanceschool.se.evil.com",
 ]) {
     const denied = await turnstileOutcome(
         "valid-token",
@@ -586,18 +646,22 @@ const previewWithoutSuccess = await turnstileOutcome(
 assert.equal(previewWithoutSuccess.result.status, 400);
 assert.equal(previewWithoutSuccess.calls.length, 1);
 
-const notTestMode = await handleOpenHousePost(
-    registration(),
-    { ...TEST_ENV, OPEN_HOUSE_ENV: "production" },
-    async () => {
-        throw new Error("non-test mode made an external call");
-    }
+const notTestMode = await turnstileOutcome(
+    "valid-token",
+    httpResult(200, { success: true, hostname: "localhost", action: "open_house" }),
+    { ...TEST_ENV, OPEN_HOUSE_ENV: "production" }
 );
-assert.equal(notTestMode.status, 503);
+assert.equal(notTestMode.result.status, 400);
+assert.equal(notTestMode.calls.length, 1);
 
 const turnstileSource = readFileSync("src/lib/turnstile.mjs", "utf8");
 assert.ok(turnstileSource.includes('"charming-platypus-787e76.netlify.app"'));
+assert.ok(turnstileSource.includes('"fuegodanceschool.se"'));
+assert.ok(turnstileSource.includes('"www.fuegodanceschool.se"'));
 assert.equal(turnstileSource.includes(".includes("), false);
+for (const host of PRODUCTION_TURNSTILE_HOSTS) {
+    assert.equal(TEST_TURNSTILE_HOSTS.has(host), false);
+}
 
 const wrongAction = await turnstileOutcome(
     "valid-token",
@@ -644,5 +708,236 @@ assert.equal(failedRetry.status, 502);
 const repeatedAttempt = rememberRegistrationId(retryStorage, retryFingerprint);
 assert.equal(repeatedAttempt.reused, true);
 assert.equal(repeatedAttempt.registrationId, retryAttempt.registrationId);
+
+const productionSource = readFileSync("scripts/open-house-production/Code.gs", "utf8");
+const productionHeaders = [
+    "timestamp",
+    "registrationId",
+    "name",
+    "email",
+    "role",
+    "referral",
+    "courses",
+    "message",
+    "language",
+    "payloadHash",
+    "eventId",
+];
+assert.equal(existsSync("scripts/open-house-production/Code.gs"), true);
+assert.ok(productionSource.includes('var PRODUCTION_SPREADSHEET_NAME = "Fuego Open House – Registrations"'));
+assert.ok(productionSource.includes('var PRODUCTION_SHEET_NAME = "Registrations"'));
+assert.ok(productionSource.includes('scriptProperty("PRODUCTION_SPREADSHEET_ID")'));
+assert.ok(productionSource.includes('scriptProperty("OPEN_HOUSE_SECRET")'));
+assert.ok(productionSource.includes("function openProductionSheet()"));
+assert.ok(productionSource.includes("spreadsheet.getId() !== spreadsheetId"));
+assert.ok(productionSource.includes("parent.getId() !== spreadsheetId"));
+assert.ok(productionSource.includes("function validateRegistration("));
+assert.ok(productionSource.includes("LockService.getScriptLock()"));
+assert.ok(productionSource.includes("function sha256Hex("));
+assert.ok(productionSource.includes("function findByRegistrationId("));
+assert.ok(productionSource.includes("function findByEmail("));
+assert.ok(productionSource.includes('result: "success"'));
+assert.ok(productionSource.includes("alreadyRegistered: true"));
+assert.ok(productionSource.includes("alreadyRegistered: false"));
+assert.ok(productionSource.includes('result: "error"'));
+assert.ok(productionSource.includes("payloadHash: registration.payloadHash"));
+assert.equal(productionSource.includes("getActiveSpreadsheet"), false);
+assert.equal(productionSource.includes("openByUrl"), false);
+assert.equal(productionSource.includes("openTestSheet"), false);
+assert.equal(productionSource.includes("TEST_SPREADSHEET"), false);
+assert.equal(productionSource.includes("Open House TEST"), false);
+assert.equal(productionSource.includes('OPEN_HOUSE_SECRET = "'), false);
+assert.equal(productionSource.includes('PRODUCTION_SPREADSHEET_ID = "'), false);
+const headerBlock = productionSource.slice(
+    productionSource.indexOf("var HEADERS = ["),
+    productionSource.indexOf("];", productionSource.indexOf("var HEADERS = ["))
+);
+for (let index = 0; index < productionHeaders.length; index += 1) {
+    const header = `"${productionHeaders[index]}"`;
+    assert.ok(headerBlock.includes(header));
+    if (index > 0) {
+        assert.ok(headerBlock.indexOf(`"${productionHeaders[index - 1]}"`) < headerBlock.indexOf(header));
+    }
+}
+assert.equal(headerBlock.split("\n").filter((line) => line.includes('"')).length, productionHeaders.length);
+
+const testAppsScript = readFileSync("scripts/open-house-test/Code.gs", "utf8");
+assert.ok(testAppsScript.includes('var TEST_SPREADSHEET_NAME = "Open House TEST"'));
+assert.ok(testAppsScript.includes('var TEST_SHEET_NAME = "Open House TEST"'));
+assert.ok(testAppsScript.includes("function openTestSheet()"));
+assert.ok(testAppsScript.includes('scriptProperty("TEST_SPREADSHEET_ID")'));
+assert.equal(testAppsScript.includes("PRODUCTION_SPREADSHEET_NAME"), false);
+assert.equal(testAppsScript.includes("openProductionSheet"), false);
+
+async function submitWithHostname(env, hostname, scriptResponses) {
+    const calls = [];
+    const result = await handleOpenHousePost(registration(), env, async (url, init) => {
+        calls.push({ url: String(url), init });
+        if (String(url).startsWith("https://challenges.cloudflare.com/")) {
+            const params = new URLSearchParams(init.body);
+            assert.equal(params.get("secret"), env.TURNSTILE_SECRET_KEY);
+            return httpResult(200, { success: true, hostname, action: "open_house" });
+        }
+        const next = scriptResponses.shift();
+        if (!next) throw new Error("unexpected Apps Script call");
+        return next;
+    });
+    return { result, calls };
+}
+
+for (const hostname of ["fuegodanceschool.se", "www.fuegodanceschool.se"]) {
+    const accepted = await submitWithHostname(PRODUCTION_ENV, hostname, [
+        httpResult(302, "", { location: echoUrl }),
+        httpResult(200, { result: "success", alreadyRegistered: false, payloadHash: hash }),
+    ]);
+    assert.equal(accepted.result.status, 200);
+    assert.equal(accepted.result.body.leadRecorded, true);
+    assert.equal(accepted.calls[1].url, PRODUCTION_URL);
+    const posted = JSON.parse(accepted.calls[1].init.body);
+    assert.equal(posted.secret, "production-secret");
+    assert.equal(posted.eventId, "open-house-prod");
+    assert.equal(posted.turnstileToken, undefined);
+    assert.equal(posted.payloadHash, hash);
+    assert.equal(accepted.calls.some((call) => call.url === TEST_URL), false);
+}
+
+for (const hostname of ["localhost", "127.0.0.1", "charming-platypus-787e76.netlify.app", "example.com"]) {
+    const denied = await turnstileOutcome(
+        "valid-token",
+        httpResult(200, { success: true, hostname, action: "open_house" }),
+        PRODUCTION_ENV
+    );
+    assert.equal(denied.result.status, 400);
+    assert.equal(denied.calls.length, 1);
+}
+
+const productionWithoutSuccess = await turnstileOutcome(
+    "valid-token",
+    httpResult(200, { success: false, hostname: "fuegodanceschool.se", action: "open_house" }),
+    PRODUCTION_ENV
+);
+assert.equal(productionWithoutSuccess.result.status, 400);
+assert.equal(productionWithoutSuccess.calls.length, 1);
+
+const productionWrongAction = await turnstileOutcome(
+    "valid-token",
+    httpResult(200, { success: true, hostname: "www.fuegodanceschool.se", action: "other" }),
+    PRODUCTION_ENV
+);
+assert.equal(productionWrongAction.result.status, 400);
+assert.equal(productionWrongAction.calls.length, 1);
+
+for (const env of [
+    { ...PRODUCTION_ENV, OPEN_HOUSE_APPS_SCRIPT_URL: undefined },
+    { ...PRODUCTION_ENV, OPEN_HOUSE_APPS_SCRIPT_SECRET: "" },
+    { ...PRODUCTION_ENV, TURNSTILE_SECRET_KEY: "" },
+    { ...PRODUCTION_ENV, OPEN_HOUSE_DEPLOYMENT_ID: "" },
+    { ...PRODUCTION_ENV, OPEN_HOUSE_EVENT_ID: "" },
+    { ...PRODUCTION_ENV, OPEN_HOUSE_ENV: "staging" },
+    {
+        ...PRODUCTION_ENV,
+        OPEN_HOUSE_APPS_SCRIPT_URL: `https://script.google.com/macros/s/${PRODUCTION_DEPLOYMENT_ID}/exec`,
+    },
+    { ...TEST_ENV, OPEN_HOUSE_DEPLOYMENT_ID: PRODUCTION_DEPLOYMENT_ID },
+    { ...TEST_ENV, OPEN_HOUSE_APPS_SCRIPT_URL: PRODUCTION_URL },
+    {
+        ...TEST_ENV,
+        OPEN_HOUSE_APPS_SCRIPT_URL: `https://script.google.com/macros/s/${TEST_DEPLOYMENT_ID}extra/exec`,
+    },
+]) {
+    const stopped = await handleOpenHousePost(registration(), env, async () => {
+        throw new Error("invalid configuration called a service");
+    });
+    assert.equal(stopped.status, 503);
+}
+
+const ignoredProductionVariables = {
+    ...TEST_ENV,
+    OPEN_HOUSE_PRODUCTION_DEPLOYMENT_ID: PRODUCTION_DEPLOYMENT_ONLY_ID,
+    OPEN_HOUSE_PRODUCTION_APPS_SCRIPT_URL: PRODUCTION_URL,
+    OPEN_HOUSE_PRODUCTION_APPS_SCRIPT_SECRET: "production-secret",
+    TURNSTILE_PRODUCTION_SECRET_KEY: "turnstile-production-secret",
+};
+const testWrite = await submitWithHostname(ignoredProductionVariables, "localhost", [
+    httpResult(302, "", { location: echoUrl }),
+    httpResult(200, { result: "success", alreadyRegistered: false, payloadHash: hash }),
+]);
+assert.equal(testWrite.result.status, 200);
+assert.equal(testWrite.calls[1].url, TEST_URL);
+assert.equal(JSON.parse(testWrite.calls[1].init.body).secret, "test-secret");
+assert.equal(testWrite.calls.some((call) => call.url === PRODUCTION_URL), false);
+
+const testCrossRedirect = await submitWithHostname(TEST_ENV, "localhost", [
+    httpResult(302, "", { location: PRODUCTION_URL }),
+]);
+assert.equal(testCrossRedirect.result.status, 502);
+assert.equal(testCrossRedirect.calls.length, 2);
+assert.equal(testCrossRedirect.calls[1].url, TEST_URL);
+
+const productionCrossRedirect = await submitWithHostname(PRODUCTION_ENV, "fuegodanceschool.se", [
+    httpResult(302, "", { location: TEST_URL }),
+]);
+assert.equal(productionCrossRedirect.result.status, 502);
+assert.equal(productionCrossRedirect.calls.length, 2);
+assert.equal(productionCrossRedirect.calls[1].url, PRODUCTION_URL);
+
+const productionHoneypot = await handleOpenHousePost(
+    registration({ company_website: "https://spam.example" }),
+    PRODUCTION_ENV,
+    async () => {
+        throw new Error("production honeypot made an external call");
+    }
+);
+assert.equal(productionHoneypot.status, 200);
+assert.equal("leadRecorded" in productionHoneypot.body, false);
+
+const productionInvalid = await handleOpenHousePost(
+    registration({ email: "not-an-email" }),
+    PRODUCTION_ENV,
+    async () => {
+        throw new Error("invalid production registration made an external call");
+    }
+);
+assert.equal(productionInvalid.status, 400);
+
+assert.equal(openHouseSubmissionState({ ok: true }), "rejected");
+assert.equal(openHouseSubmissionState({ ok: true, leadRecorded: true, alreadyRegistered: false }), "created");
+assert.equal(openHouseSubmissionState({ ok: true, alreadyRegistered: true, leadRecorded: false }), "duplicate");
+assert.equal(openHouseSubmissionState({ ok: true, leadRecorded: true, alreadyRegistered: true }), "rejected");
+assert.equal(openHouseSubmissionState({ ok: false, leadRecorded: true }), "rejected");
+assert.equal(openHouseSubmissionState(null), "rejected");
+
+const openHouseSource = readFileSync("src/lib/openHouse.mjs", "utf8");
+assert.equal(openHouseSource.includes("OPEN_HOUSE_TEST_DEPLOYMENT_ID"), false);
+assert.equal(openHouseSource.includes("OPEN_HOUSE_PRODUCTION_"), false);
+assert.equal(openHouseSource.includes("TURNSTILE_PRODUCTION_SECRET_KEY"), false);
+assert.ok(openHouseSource.includes("OPEN_HOUSE_DEPLOYMENT_ID"));
+assert.ok(openHouseSource.includes("TURNSTILE_SECRET_KEY"));
+assert.equal(openHouseSource.includes("open_house_config"), false);
+assert.equal(openHouseSource.includes("console."), false);
+
+const routeSource = readFileSync("src/app/api/openhouse/route.ts", "utf8");
+assert.equal(routeSource.includes("console."), false);
+assert.equal(routeSource.includes("open_house_config"), false);
+
+for (const env of [
+    { ...TEST_ENV, OPEN_HOUSE_ENV: "Test" },
+    { ...TEST_ENV, OPEN_HOUSE_EVENT_ID: "Open_House" },
+    { ...TEST_ENV, OPEN_HOUSE_DEPLOYMENT_ID: "" },
+    { ...TEST_ENV, OPEN_HOUSE_DEPLOYMENT_ID: PRODUCTION_DEPLOYMENT_ID },
+    { ...TEST_ENV, OPEN_HOUSE_APPS_SCRIPT_SECRET: "" },
+    { ...TEST_ENV, TURNSTILE_SECRET_KEY: "" },
+    { ...TEST_ENV, OPEN_HOUSE_APPS_SCRIPT_URL: "" },
+    { ...TEST_ENV, OPEN_HOUSE_APPS_SCRIPT_URL: `${TEST_URL}/` },
+    { ...TEST_ENV, OPEN_HOUSE_APPS_SCRIPT_URL: `https://script.googleusercontent.com/macros/s/${TEST_DEPLOYMENT_ID}/exec` },
+    { ...TEST_ENV, OPEN_HOUSE_APPS_SCRIPT_URL: `https://script.google.com/macros/s/${PRODUCTION_DEPLOYMENT_ID}/exec` },
+    { ...PRODUCTION_ENV, OPEN_HOUSE_APPS_SCRIPT_URL: TEST_URL },
+]) {
+    const stopped = await handleOpenHousePost(registration(), env, async () => {
+        throw new Error("invalid configuration called a service");
+    });
+    assert.equal(stopped.status, 503);
+    assert.deepEqual(stopped.body, { ok: false });
+}
 
 console.log("open house tests passed");
