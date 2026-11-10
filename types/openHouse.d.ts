@@ -58,7 +58,6 @@ declare module "@/lib/openHouse.mjs" {
     export function handleOpenHousePost(
         body: unknown,
         env: Record<string, string | undefined>,
-        fetchImpl: typeof fetch,
-        hostname?: string
+        fetchImpl: typeof fetch
     ): Promise<{ status: number; body: Record<string, unknown> }>;
 }

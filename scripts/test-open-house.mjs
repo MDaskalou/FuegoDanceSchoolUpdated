@@ -913,104 +913,31 @@ assert.equal(openHouseSource.includes("OPEN_HOUSE_PRODUCTION_"), false);
 assert.equal(openHouseSource.includes("TURNSTILE_PRODUCTION_SECRET_KEY"), false);
 assert.ok(openHouseSource.includes("OPEN_HOUSE_DEPLOYMENT_ID"));
 assert.ok(openHouseSource.includes("TURNSTILE_SECRET_KEY"));
-assert.ok(openHouseSource.includes("open_house_config reason="));
+assert.equal(openHouseSource.includes("open_house_config"), false);
+assert.equal(openHouseSource.includes("console."), false);
 
 const routeSource = readFileSync("src/app/api/openhouse/route.ts", "utf8");
-assert.ok(routeSource.includes('request.headers.get("host")'));
-assert.equal(routeSource.includes("x-forwarded-host"), false);
 assert.equal(routeSource.includes("console."), false);
+assert.equal(routeSource.includes("open_house_config"), false);
 
-const TEST_DIAGNOSTIC_HOST = "charming-platypus-787e76.netlify.app";
-
-async function configDiagnostic(env, hostname) {
-    const lines = [];
-    const original = console.error;
-    console.error = (line) => {
-        lines.push(String(line));
-    };
-    try {
-        const result = await handleOpenHousePost(
-            registration(),
-            env,
-            async () => {
-                throw new Error("diagnostic called a service");
-            },
-            hostname
-        );
-        return { result, lines };
-    } finally {
-        console.error = original;
-    }
-}
-
-function assertReason(diagnostic, reason) {
-    assert.equal(diagnostic.result.status, 503);
-    assert.deepEqual(diagnostic.result.body, { ok: false });
-    assert.equal("reason" in diagnostic.result.body, false);
-    assert.deepEqual(diagnostic.lines, [`open_house_config reason=${reason}`]);
-    const line = diagnostic.lines[0];
-    assert.equal(line.includes("test-secret"), false);
-    assert.equal(line.includes("turnstile-test-secret"), false);
-    assert.equal(line.includes(TEST_URL), false);
-    assert.equal(line.includes(TEST_DEPLOYMENT_ID), false);
-    assert.equal(line.includes(PRODUCTION_DEPLOYMENT_ID), false);
-    assert.equal(line.includes("turnstileToken"), false);
-}
-
-const diagnosticCases = [
-    [{ ...TEST_ENV, OPEN_HOUSE_ENV: "Test" }, "invalid_env"],
-    [{ ...TEST_ENV, OPEN_HOUSE_EVENT_ID: "Open_House" }, "invalid_event_id"],
-    [{ ...TEST_ENV, OPEN_HOUSE_DEPLOYMENT_ID: "" }, "missing_deployment_id"],
-    [{ ...TEST_ENV, OPEN_HOUSE_DEPLOYMENT_ID: PRODUCTION_DEPLOYMENT_ID }, "invalid_deployment"],
-    [{ ...TEST_ENV, OPEN_HOUSE_APPS_SCRIPT_SECRET: "" }, "missing_apps_script_secret"],
-    [{ ...TEST_ENV, TURNSTILE_SECRET_KEY: "" }, "missing_turnstile_secret"],
-    [{ ...TEST_ENV, OPEN_HOUSE_APPS_SCRIPT_URL: "" }, "missing_apps_script_url"],
-    [{ ...TEST_ENV, OPEN_HOUSE_APPS_SCRIPT_URL: `${TEST_URL}/` }, "invalid_url"],
-    [{ ...TEST_ENV, OPEN_HOUSE_APPS_SCRIPT_URL: "https://script.googleusercontent.com/macros/s/AKfycbTESTONLYopenHouseDeployment/exec" }, "untrusted_host"],
-    [{ ...TEST_ENV, OPEN_HOUSE_APPS_SCRIPT_URL: `https://script.google.com/macros/s/${PRODUCTION_DEPLOYMENT_ID}/exec` }, "legacy_production_blocked"],
-    [{ ...TEST_ENV, OPEN_HOUSE_APPS_SCRIPT_URL: PRODUCTION_URL }, "unlisted_deployment"],
-];
-
-for (const [env, reason] of diagnosticCases) {
-    assertReason(await configDiagnostic(env, TEST_DIAGNOSTIC_HOST), reason);
-}
-
-const silentProductionHost = await configDiagnostic(
-    { ...TEST_ENV, OPEN_HOUSE_EVENT_ID: "" },
-    "fuegodanceschool.se"
-);
-assert.equal(silentProductionHost.result.status, 503);
-assert.deepEqual(silentProductionHost.result.body, { ok: false });
-assert.deepEqual(silentProductionHost.lines, []);
-
-const silentWithoutHost = await configDiagnostic({ ...TEST_ENV, OPEN_HOUSE_EVENT_ID: "" });
-assert.deepEqual(silentWithoutHost.lines, []);
-
-const portHost = await configDiagnostic(
-    { ...TEST_ENV, OPEN_HOUSE_EVENT_ID: "" },
-    `${TEST_DIAGNOSTIC_HOST}:443`
-);
-assert.equal(portHost.result.status, 503);
-assert.deepEqual(portHost.lines, ["open_house_config reason=invalid_event_id"]);
-
-const validationLines = [];
-const originalError = console.error;
-console.error = (line) => {
-    validationLines.push(String(line));
-};
-try {
-    const rejected = await handleOpenHousePost(
-        registration({ email: "not-an-email" }),
-        TEST_ENV,
-        async () => {
-            throw new Error("validation called a service");
-        },
-        TEST_DIAGNOSTIC_HOST
-    );
-    assert.equal(rejected.status, 400);
-    assert.deepEqual(validationLines, []);
-} finally {
-    console.error = originalError;
+for (const env of [
+    { ...TEST_ENV, OPEN_HOUSE_ENV: "Test" },
+    { ...TEST_ENV, OPEN_HOUSE_EVENT_ID: "Open_House" },
+    { ...TEST_ENV, OPEN_HOUSE_DEPLOYMENT_ID: "" },
+    { ...TEST_ENV, OPEN_HOUSE_DEPLOYMENT_ID: PRODUCTION_DEPLOYMENT_ID },
+    { ...TEST_ENV, OPEN_HOUSE_APPS_SCRIPT_SECRET: "" },
+    { ...TEST_ENV, TURNSTILE_SECRET_KEY: "" },
+    { ...TEST_ENV, OPEN_HOUSE_APPS_SCRIPT_URL: "" },
+    { ...TEST_ENV, OPEN_HOUSE_APPS_SCRIPT_URL: `${TEST_URL}/` },
+    { ...TEST_ENV, OPEN_HOUSE_APPS_SCRIPT_URL: `https://script.googleusercontent.com/macros/s/${TEST_DEPLOYMENT_ID}/exec` },
+    { ...TEST_ENV, OPEN_HOUSE_APPS_SCRIPT_URL: `https://script.google.com/macros/s/${PRODUCTION_DEPLOYMENT_ID}/exec` },
+    { ...PRODUCTION_ENV, OPEN_HOUSE_APPS_SCRIPT_URL: TEST_URL },
+]) {
+    const stopped = await handleOpenHousePost(registration(), env, async () => {
+        throw new Error("invalid configuration called a service");
+    });
+    assert.equal(stopped.status, 503);
+    assert.deepEqual(stopped.body, { ok: false });
 }
 
 console.log("open house tests passed");

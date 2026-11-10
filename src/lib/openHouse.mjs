@@ -4,7 +4,7 @@ import {
     validateRegistration,
 } from "./openHouseShared.mjs";
 import { isOpenHouseEventId } from "./openHouseRegistry.mjs";
-import { TEST_TURNSTILE_HOSTS, verifyTurnstileToken } from "./turnstile.mjs";
+import { verifyTurnstileToken } from "./turnstile.mjs";
 
 export const PRODUCTION_DEPLOYMENT_ID =
     "AKfycbyz1pVbPGyUNspPhDZ0nMTeeenNsBk4o4ZrpN8tcQZTtacTt4CPwGBtb9il3KzKPbM5ig";
@@ -16,34 +16,10 @@ const TRUSTED_REDIRECT_HOSTS = new Set([
 
 const APPS_SCRIPT_PATH = /^\/macros\/s\/([^/]+)\/exec$/;
 const DEPLOYMENT_ID_PATTERN = /^[A-Za-z0-9_-]{20,}$/;
-const CONFIG_REASONS = new Set([
-    "invalid_env",
-    "invalid_event_id",
-    "missing_deployment_id",
-    "invalid_deployment",
-    "missing_apps_script_secret",
-    "missing_turnstile_secret",
-    "missing_apps_script_url",
-    "invalid_url",
-    "untrusted_host",
-    "legacy_production_blocked",
-    "unlisted_deployment",
-]);
 
 function configuredSecret(value) {
     if (typeof value !== "string" || value.trim() === "") return null;
     return value;
-}
-
-function diagnosticHostname(hostname) {
-    if (typeof hostname !== "string") return "";
-    const host = hostname.trim().toLowerCase().replace(/:\d+$/, "");
-    return TEST_TURNSTILE_HOSTS.has(host) ? host : "";
-}
-
-function logTestConfigFailure(reason, hostname) {
-    if (diagnosticHostname(hostname) === "" || !CONFIG_REASONS.has(reason)) return;
-    console.error(`open_house_config reason=${reason}`);
 }
 
 function parseAppsScriptUrl(urlValue) {
@@ -256,7 +232,7 @@ export async function submitToAppsScript({
     }
 }
 
-export async function handleOpenHousePost(body, env, fetchImpl, hostname) {
+export async function handleOpenHousePost(body, env, fetchImpl) {
     if (isHoneypotTripped(body)) {
         return { status: 200, body: { ok: true } };
     }
@@ -268,7 +244,6 @@ export async function handleOpenHousePost(body, env, fetchImpl, hostname) {
 
     const target = resolveOpenHouseTarget(env);
     if (!target.ok) {
-        logTestConfigFailure(target.reason, hostname);
         return { status: 503, body: { ok: false } };
     }
 
@@ -279,13 +254,6 @@ export async function handleOpenHousePost(body, env, fetchImpl, hostname) {
         mode: target.mode,
     });
     if (!turnstile.ok) {
-        if (turnstile.status === 503) {
-            const mode = env.OPEN_HOUSE_ENV;
-            logTestConfigFailure(
-                mode === "test" || mode === "production" ? "missing_turnstile_secret" : "invalid_env",
-                hostname
-            );
-        }
         return { status: turnstile.status, body: { ok: false } };
     }
 

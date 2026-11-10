@@ -25,14 +25,7 @@ export const dynamic = "force-dynamic";
  * production deployment is refused. There is no second URL or secret to
  * fall back to. Missing or invalid configuration returns 503 and does not
  * call Apps Script.
- *
- * A failed configuration check on the separate test hosts logs one fixed
- * reason code. The browser response stays { ok: false }.
  */
-function requestHostname(request: Request): string {
-    return request.headers.get("host") ?? "";
-}
-
 export async function POST(request: Request) {
     let body: unknown;
     try {
@@ -41,6 +34,6 @@ export async function POST(request: Request) {
         return NextResponse.json({ ok: false }, { status: 400 });
     }
 
-    const result = await handleOpenHousePost(body, process.env, fetch, requestHostname(request));
+    const result = await handleOpenHousePost(body, process.env, fetch);
     return NextResponse.json(result.body, { status: result.status });
 }
