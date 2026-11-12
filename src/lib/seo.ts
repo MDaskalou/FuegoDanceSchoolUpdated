@@ -59,12 +59,12 @@ export function buildRootMetadata({
         : "Fuego Dance School | Bachata i Göteborg";
 
     const description = isEnglish
-        ? "Learn Bachata at Fuego Dance School in Gothenburg. Courses for all levels."
-        : "Lär dig dansa Bachata hos Fuego Dance School i Göteborg. Vi erbjuder kurser för alla nivåer.";
+        ? "Learn Bachata at Fuego Dance School in Gothenburg. Courses for all levels, workshops, and gift cards."
+        : "Lär dig dansa Bachata hos Fuego Dance School i Göteborg. Kurser för alla nivåer, workshops och presentkort.";
 
     const ogDescription = isEnglish
-        ? "Join our dance family! Bachata courses for all levels in the heart of Gothenburg."
-        : "Gå med i vår dansfamilj! Bachatakurser för alla nivåer i hjärtat av Göteborg.";
+        ? "Join our dance family! Bachata courses for all levels in the heart of Gothenburg. Gift cards available."
+        : "Gå med i vår dansfamilj! Bachatakurser för alla nivåer i hjärtat av Göteborg. Köp presentkort till kurs eller workshop.";
 
     return {
         metadataBase: new URL(SITE_URL),
@@ -74,8 +74,28 @@ export function buildRootMetadata({
         },
         description,
         keywords: isEnglish
-            ? ["Bachata", "Dance school", "Gothenburg", "Dance courses", "Bachata Sensual", "Dance", "Fuego"]
-            : ["Bachata", "Dansskola", "Göteborg", "Danskurser", "Bachata Sensual", "Dans", "Fuego"],
+            ? [
+                  "Bachata",
+                  "Dance school",
+                  "Gothenburg",
+                  "Dance courses",
+                  "Bachata Sensual",
+                  "Gift card",
+                  "Dance gift card Gothenburg",
+                  "Fuego",
+              ]
+            : [
+                  "Bachata",
+                  "Dansskola",
+                  "Göteborg",
+                  "Danskurser",
+                  "Bachata Sensual",
+                  "Presentkort",
+                  "Presentkort dans Göteborg",
+                  "Presentkort Bachata",
+                  "Presentkort danskurs",
+                  "Fuego",
+              ],
         authors: [{ name: "Fuego Dance School" }],
         creator: "Fuego Dance School",
         ...withLangAlternates(siteLang, pathAfterLang),

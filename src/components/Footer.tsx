@@ -46,9 +46,8 @@ export const Footer = () => {
         { href: `/courses`, label: t('nav.courses', { defaultValue: 'Kurser' }) },
         { href: `/#prices`, label: t('nav.prices', { defaultValue: 'Priser' }) }, // Antar ankarlänk på startsidan
         {
-            href: "https://app.coursely.se/checkout/FuegoDance/giftCards",
+            href: `/gift-card`,
             label: t('nav.giftCard', { defaultValue: currentLang === "en" ? "Gift card" : "Presentkort" }),
-            external: true,
         },
         { href: `/instructors`, label: t('nav.instructors', { defaultValue: 'Instruktörer' }) },
         { href: `/FAQpage`, label: t('nav.faq', { defaultValue: 'FAQ' }) },
