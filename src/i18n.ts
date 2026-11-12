@@ -15,6 +15,7 @@ export const APP_NAMESPACES = [
     "eventTranslation",
     "instructorTranslation",
     "faqTranslation",
+    "giftCardTranslation",
     "valuesTranslation",
     "privacyPolicyTranslation",
     "courselyWidgetTranslation",

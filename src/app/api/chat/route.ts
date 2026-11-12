@@ -31,7 +31,7 @@ const faqData = {
     ],
     "Priser och rabatter": [
         { "q": "Vad kostar kurserna?", "a": "Workshopen vecka 49 och 50 kostar 500 kr för 2 veckor. Par betalar 900 kr. Studenter får 10% rabatt." },
-        { "q": "Har ni presentkort?", "a": "Ja. Presentkort är ett tillgodohavande du väljer själv. Välj 1 000, 2 000 eller 3 000 kr, eller ange ett eget belopp. Köp här: https://app.coursely.se/checkout/FuegoDance/giftCards" },
+        { "q": "Har ni presentkort?", "a": "Ja. Presentkort är ett tillgodohavande du väljer själv. Välj 1 000, 2 000 eller 3 000 kr, eller ange ett eget belopp. Läs mer på https://www.fuegodanceschool.se/sv/gift-card/ och köp via https://app.coursely.se/checkout/FuegoDance/giftCards" },
         { "q": "Erbjuder ni rabatter?", "a": "Ja! Studentrabatt 10%. Par betalar 900 kr för 2 veckor istället för 500 kr per person. Rabatter kan ej kombineras." },
         { "q": "Hur får jag halvkursrabatt?", "a": "Halvkursrabatten gäller inte workshopen vecka 49 och 50. Den har fast pris: 500 kr för 2 veckor, eller 900 kr för par." },
         {"q": "Hur fungerar parrabatten?", "a": "Par betalar 900 kr för 2 veckor, istället för 500 kr per person." }
@@ -50,7 +50,7 @@ VIKTIG INFORMATION OM KURSER:
 - Just nu kör vi en workshop vecka 49 och 50.
 - Varje nivå är 2 veckor, måndag till torsdag kl 18:30–20:30.
 - Pris: 500 kr för 2 veckor. Par: 900 kr. Studentrabatt: 10%.
-- Presentkort är ett tillgodohavande man väljer själv: 1 000, 2 000 eller 3 000 kr, eller ett eget belopp. Länk: https://app.coursely.se/checkout/FuegoDance/giftCards
+- Presentkort är ett tillgodohavande man väljer själv: 1 000, 2 000 eller 3 000 kr, eller ett eget belopp. Info: https://www.fuegodanceschool.se/sv/gift-card/ Köp: https://app.coursely.se/checkout/FuegoDance/giftCards
 - Inte på våra kurser, där anmäler du dig till hela perioden. Sunday Social Dance på söndagar kl. 15–18 köps som ett eget tillfälle för 80 kr, och medlemmar får 50 % rabatt.
 - Be användaren kolla schemat för dagar och nivåer.
 

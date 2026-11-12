@@ -119,6 +119,7 @@ export default async function PriceSection({ lang }: PriceSectionProps) {
     const t = await getServerT(lang, "priceTranslation");
     const dropInCheckoutUrl = "https://app.coursely.se/checkout/FuegoDance/dropinPackages";
     const giftCardCheckoutUrl = "https://app.coursely.se/checkout/FuegoDance/giftCards";
+    const giftCardPageHref = `/${lang}/gift-card`;
 
     const coursesRaw = t("courses", { returnObjects: true });
     const dropInItemsRaw = t("dropInItems", { returnObjects: true });
@@ -249,7 +250,13 @@ export default async function PriceSection({ lang }: PriceSectionProps) {
                             {t("giftCardTitle")}
                         </h3>
                         <p className="mt-1 text-sm text-gray-400">
-                            {t("giftCardLead")}
+                            {t("giftCardLead")}{" "}
+                            <Link
+                                href={giftCardPageHref}
+                                className="font-semibold text-orange-400 transition-colors hover:text-orange-300"
+                            >
+                                {lang === "sv" ? "Läs mer om presentkort" : "Learn more about gift cards"}
+                            </Link>
                         </p>
                     </div>
                     <div className="flex flex-wrap items-center gap-2 lg:justify-center">
