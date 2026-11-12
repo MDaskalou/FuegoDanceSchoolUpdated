@@ -193,6 +193,28 @@
         "Featuring DJ Base and DJ Sivan – a night full of rhythm, dance, and party vibes.",
         "Friday, October 23 at Blanche Brasserie – dress up and dance the night away!"
       ]
+    },
+    {
+      "id": 17,
+      "title": "Bachata Beginner Workshop",
+      "date": "December 5, 2026",
+      "startDate": "2026-12-05",
+      "location": "Fuego Dance School",
+      "link": "https://app.coursely.se/fuego-dance-school/activity/bachata-beginner-workshop",
+      "imageUrl": "/img/Events/BachataBeginnerWorkshop5Dec.jpg",
+      "imageFit": "contain",
+      "isNew": true,
+      "featured": true,
+      "priority": 1,
+      "price": "199 SEK",
+      "time": "13:00–15:00 (2 hours)",
+      "subtitle": "Perfect for you who want to get started!",
+      "description": [
+        "Perfect for you who want to get started!",
+        "A two-hour beginner workshop in bachata – no previous experience needed.",
+        "Join us on Saturday, December 5, from 13:00–15:00.",
+        "Price: 199 SEK."
+      ]
     }
   ],
   "__MALL_events_SPARA_FOR_SENARE": [
