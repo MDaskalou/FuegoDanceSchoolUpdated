@@ -3,6 +3,9 @@
 import { FaWhatsapp } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 
+/** School WhatsApp number (intl, no +). Override with NEXT_PUBLIC_WHATSAPP_NUMBER. */
+const DEFAULT_WHATSAPP_NUMBER = "46739598665";
+
 type Props = {
     /** Phone in international format without +, spaces, or leading 0, e.g. "46739598665" */
     phone?: string;
@@ -13,7 +16,7 @@ type Props = {
 };
 
 export default function WhatsAppButton({
-    phone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "",
+    phone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || DEFAULT_WHATSAPP_NUMBER,
     message,
     label,
 }: Props) {
