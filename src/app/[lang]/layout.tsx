@@ -6,6 +6,7 @@ import Script from "next/script";
 import TranslationProvider from "@/i18n/TranslationProvider";
 import { Footer } from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { Navbar } from "@/components/Navbar";
 import initTranslations, { APP_NAMESPACES } from "@/i18n";
 import { CONSENT_MODE_BOOTSTRAP } from "@/lib/consentBootstrap.mjs";
@@ -86,6 +87,7 @@ export default async function RootLayout({
 
                     <Footer />
                     <CookieConsent />
+                    <WhatsAppButton />
                 </TranslationProvider>
             </body>
         </html>

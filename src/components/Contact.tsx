@@ -195,8 +195,8 @@ export const ContactSection = () => {
                             </div>
                             <div className="flex items-center text-lg text-gray-300">
                                 <FaPhone className="text-orange-500 mr-4 flex-shrink-0" />
-                                <a href="tel:+46701234567" className="hover:text-white transition-colors">
-                                    {t('phone', { defaultValue: '+46 70 123 45 67' })}
+                                <a href="tel:+46739598665" className="hover:text-white transition-colors">
+                                    {t('phone', { defaultValue: '+46 73 959 86 65' })}
                                 </a>
                             </div>
                         </div>
