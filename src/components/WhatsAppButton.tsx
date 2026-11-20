@@ -36,7 +36,7 @@ export default function WhatsAppButton({
             target="_blank"
             rel="noopener noreferrer"
             aria-label={resolvedLabel}
-            className="group fixed bottom-6 right-6 z-50 flex items-center gap-2"
+            className="group fixed bottom-24 right-4 z-50 flex items-center gap-2 sm:bottom-44 sm:right-6"
         >
             <span className="pointer-events-none hidden rounded-full border border-white/10 bg-[#1a1a1a] px-3 py-1.5 text-sm font-medium text-white opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100 sm:inline-block">
                 {resolvedLabel}
